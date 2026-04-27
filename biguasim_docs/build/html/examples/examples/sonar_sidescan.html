@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,24 +8,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Visualizing Sidescan Sonar &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -42,9 +40,6 @@
           <a href="../../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -61,13 +56,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../packages/packages.html">BiguaSim Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../agents/agents.html">BiguaSim Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="camera.html">Visualizing RGBCamera Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controller.html">Manually Controlling an Agent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom-dynamics.html">Manually Defining Dynamics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multi-agent.html">Multi Agent Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multi-coms.html">Multi-Agent Communications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pd-controllers.html">Example: PD Controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sonar_imaging.html">Visualizing Imaging Sonar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sonar_profiling.html">Visualizing Profiling Sonar</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Visualizing Sidescan Sonar</a></li>
@@ -90,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/weather.html">Weather Controller</a></li>
@@ -130,12 +126,59 @@ that, plotting each time sonar data is received.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="c1">#### GET SONAR CONFIG</span>
-<span class="n">scenario</span> <span class="o">=</span> <span class="s2">&quot;OpenWater-TorpedoSidescanSonar&quot;</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">biguasim</span><span class="o">.</span><span class="n">packagemanager</span><span class="o">.</span><span class="n">get_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;agents&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;sensors&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span>
-<span class="n">maxR</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;RangeMax&#39;</span><span class="p">]</span>
-<span class="n">binsR</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;RangeBins&#39;</span><span class="p">]</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;package_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyDive&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;world&quot;</span><span class="p">:</span> <span class="s2">&quot;Bridge&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;main_agent&quot;</span> <span class="p">:</span> <span class="s2">&quot;auv0&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;agent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;auv0&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;agent_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TorpedoAUV&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DynamicsSensor&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;IMUSocket&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;UseCOM&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                            <span class="s2">&quot;UseRPY&quot;</span><span class="p">:</span> <span class="kc">False</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;SidescanSonar&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;SonarSocket&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;Hz&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+                        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;Azimuth&quot;</span><span class="p">:</span> <span class="mi">170</span><span class="p">,</span>
+                            <span class="s2">&quot;Elevation&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
+                            <span class="s2">&quot;RangeMin&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+                            <span class="s2">&quot;RangeMax&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+                            <span class="s2">&quot;RangeBins&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span>
+                            <span class="s2">&quot;AddSigma&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+                            <span class="s2">&quot;MultSigma&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+                            <span class="s2">&quot;ShowWarning&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                            <span class="s2">&quot;InitOctreeRange&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+                            <span class="s2">&quot;ViewRegion&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                            <span class="s2">&quot;ViewOctree&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span>
+                            <span class="s2">&quot;WaterDensity&quot;</span><span class="p">:</span> <span class="mi">997</span><span class="p">,</span>
+                            <span class="s2">&quot;WaterSpeedSound&quot;</span><span class="p">:</span> <span class="mi">1480</span><span class="p">,</span>
+                            <span class="s2">&quot;UseApprox&quot;</span><span class="p">:</span> <span class="kc">True</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;dynamics&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;batch_size&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;control_abstraction&quot;</span><span class="p">:</span> <span class="s2">&quot;cmd_rudders_sterns_motor_speed&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+
+
+
+<span class="n">config_</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;agents&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;sensors&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;configuration&quot;</span><span class="p">]</span>
+<span class="n">maxR</span> <span class="o">=</span> <span class="n">config_</span><span class="p">[</span><span class="s1">&#39;RangeMax&#39;</span><span class="p">]</span>
+<span class="n">binsR</span> <span class="o">=</span> <span class="n">config_</span><span class="p">[</span><span class="s1">&#39;RangeBins&#39;</span><span class="p">]</span>
 
 <span class="c1">#### GET PLOT READY</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
@@ -151,12 +194,11 @@ that, plotting each time sonar data is received.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">flush_events</span><span class="p">()</span>
 
-<span class="c1">#### RUN SIMULATION</span>
-<span class="n">command</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
-<span class="k">with</span> <span class="n">biguasim</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span> <span class="k">as</span> <span class="n">env</span><span class="p">:</span>
+<span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="n">biguasim</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">scenario_cfg</span><span class="o">=</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">env</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-        <span class="n">env</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="s2">&quot;auv0&quot;</span><span class="p">,</span> <span class="n">command</span><span class="p">)</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">command</span><span class="p">)[</span><span class="s2">&quot;auv0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="s1">&#39;SidescanSonar&#39;</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -185,7 +227,7 @@ that, plotting each time sonar data is received.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

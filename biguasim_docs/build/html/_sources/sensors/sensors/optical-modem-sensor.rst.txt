@@ -1,6 +1,6 @@
-===============
+=============
 Optical Modem
-===============
+=============
 
 An optical modem for communications for aerial or surface agents.
 

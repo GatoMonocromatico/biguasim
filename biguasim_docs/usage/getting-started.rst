@@ -3,19 +3,46 @@ Getting Started
 ===============
 
 First, see :ref:`installation` to get the ``biguasim`` package and 
-``Ocean`` installed.
+``SkyDive`` installed.
 
 A minimal BiguaSim usage example is below:
 
 ::
 
    import biguasim
-   import numpy as np
 
-   env = biguasim.make("PierHarbor-Hovering")
+   config = {
+    "package_name": "SkyDive",
+    "world": "Pier-Harbor",                            
+    "main_agent": "uav0",                                                           
+    "agents":[                                          
+        {                                               
+            "agent_name": "uav0",                       
+            "agent_type": "DjiMatrice",                
+            "sensors": [                               
+                  {
+                    "sensor_type": "DynamicsSensor",
+                    "socket": "IMUSocket",
+                    "configuration": {
+                        "UseCOM": True,
+                        "UseRPY": False  
+                     }
+                  },
+            ],                    
+            "dynamics" : {
+                "batch_size" : 1,
+            },                                        
+            "control_abstraction": 'cmd_vel',                    
+            "location" : [ -150, -125, 50], 
+            "rotation": [0.0, 40.0, 0]               
+        }
+      ],
+   }
 
-   # The hovering AUV takes a command for each thruster
-   command = np.array([10,10,10,10,0,0,0,0])
+   env = biguasim.make(scenario_cfg = config)
+
+   # The agent in cmd_vel configuration takes a command for each cartesian position (X,Y,Z)
+   command = [15, 0, 0]
 
    for _ in range(2000):
       state = env.step(command)

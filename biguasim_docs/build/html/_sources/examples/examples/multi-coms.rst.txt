@@ -26,15 +26,23 @@ Further, a few helper functions exist if needed,
 
     cfg = {
         "name": "test_acou_coms",
-        "world": "SimpleUnderwater",
-        "package_name": "Ocean",
+        "world": "Pier-Harbor",
+        "package_name": "SkyDive",
         "main_agent": "auv0",
         "ticks_per_sec": 200,
         "agents": [
             {
                 "agent_name": "auv0",
-                "agent_type": "HoveringAUV",
+                "agent_type": "BlueROV2",
                 "sensors": [
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
                     {
                         "sensor_type": "AcousticBeaconSensor",
                         "location": [0,0,0],
@@ -43,13 +51,24 @@ Further, a few helper functions exist if needed,
                         }
                     },
                 ],
-                "control_scheme": 0,
+                "dynamics" : { 
+                    "batch_size" : 1
+                    },
+                "control_abstraction": "cmd_vel",
                 "location": [0, 0, -5]
             },
             {
                 "agent_name": "auv1",
-                "agent_type": "HoveringAUV",
+                "agent_type": "BlueROV2",
                 "sensors": [
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
                     {
                         "sensor_type": "AcousticBeaconSensor",
                         "location": [0,0,0],
@@ -58,7 +77,10 @@ Further, a few helper functions exist if needed,
                         }
                     },
                 ],
-                "control_scheme": 0,
+                "dynamics" : { 
+                    "batch_size" : 1
+                    },
+                "control_abstraction": "cmd_vel",
                 "location": [0, 100, -5]
             }
         ]
@@ -72,11 +94,12 @@ Further, a few helper functions exist if needed,
     # with message type "OWAY" and data "my_data_payload"
     env.send_acoustic_message(0, 1, "OWAY", "my_data_payload")
 
-    for i in range(300):
+    for i in range(500):
         states = env.tick()
-        if "AcousticBeaconSensor" in states['auv1']:
+
+        if "AcousticBeaconSensor" in states['auv1'][0]:
             # For this message, should receive back [message_type, from_sensor, data_payload]
-            print(i, "Received:", states['auv1']["AcousticBeaconSensor"])
+            print(i, "Received:", states['auv1'][0]["AcousticBeaconSensor"])
             break
         else:
             print(i, "No message received")
@@ -100,43 +123,64 @@ Further, a few helper functions exist if needed,
 
     cfg = {
         "name": "test_acou_coms",
-        "world": "SimpleUnderwater",
-        "package_name": "Ocean",
+        "world": "Pier-Harbor",
+        "package_name": "SkyDive",
         "main_agent": "auv0",
         "ticks_per_sec": 200,
         "agents": [
             {
                 "agent_name": "auv0",
-                "agent_type": "HoveringAUV",
+                "agent_type": "BlueROV2",
                 "sensors": [
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
                     {
                         "sensor_type": "OpticalModemSensor",
                         "location": [0,0,0],
-                        "socket": "SonarSocket",
+                        "socket": "COM",
                         "configuration": {
                             "id": 0
                         }
                     },
                 ],
-                "control_scheme": 0,
-                "location": [25, 0, -5],
-                "rotation": [0, 0, 180]
+                "dynamics" : { 
+                    "batch_size" : 1
+                    },
+                "control_abstraction": "cmd_vel",
+                "location": [0, 0, -5]
             },
             {
                 "agent_name": "auv1",
-                "agent_type": "HoveringAUV",
+                "agent_type": "BlueROV2",
                 "sensors": [
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
                     {
                         "sensor_type": "OpticalModemSensor",
                         "location": [0,0,0],
-                        "socket": "SonarSocket",
+                        "socket": "COM",
                         "configuration": {
                             "id": 1
                         }
                     },
                 ],
-                "control_scheme": 0,
-                "location": [0, 0, -5]
+                "dynamics" : { 
+                    "batch_size" : 1
+                    },
+                "control_abstraction": "cmd_vel",
+                "location": [0, 100, -5]
             }
         ]
     }
@@ -149,10 +193,11 @@ Further, a few helper functions exist if needed,
     # with data "my_data_payload"
     env.send_optical_message(0, 1, "my_data_payload")
 
-    for i in range(300):
+    for i in range(500):
         states = env.tick()
-        if "OpticalModemSensor" in states['auv1']:
-            print(i, "Received:", states['auv1']["OpticalModemSensor"])
+
+        if "OpticalModemSensor" in states['auv1'][0]:
+            print(i, "Received:", states['auv1'][0]["OpticalModemSensor"])
             break
         else:
             print(i, "No message received")

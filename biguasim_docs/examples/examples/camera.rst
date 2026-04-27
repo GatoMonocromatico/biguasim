@@ -12,16 +12,58 @@ next window.
 ::
 
     import biguasim, cv2
+    import numpy as np
 
-    env = biguasim.make("Dam-HoveringCamera")
-    env.act('auv0', [10,10,10,10,0,0,0,0])
+    config = {
+        "package_name": "SkyDive",
+        "world": "Pier-Harbor",                            
+        "main_agent": "uav0",                                                           
+        "agents":[                                          
+            {                                               
+                "agent_name": "uav0",                       
+                "agent_type": "DjiMatrice",                
+                "sensors": [                               
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
+                    {
+                        "sensor_type": "RGBCamera",
+                        "sensor_name": "RGBCamera",
+                        "socket": "CameraSocket",
+                        "Hz": 5,
+                        "configuration": {
+                            "CaptureWidth": 512,
+                            "CaptureHeight": 512
+                        }
+                    }
+                ],                    
+                "dynamics" : {
+                    "batch_size" : 1,
+                },                                        
+                "control_abstraction": 'cmd_vel',                    
+                "location" : [ -21, -136, 15], 
+                "rotation": [0.0, 0.0, 0.0]               
+            }
+        ],
+    }
+
+    env = biguasim.make(scenario_cfg = config)
+    command = [0, 0, 10]
 
     for _ in range(200):
-        state = env.tick()
+        state = env.step(command)["uav0"][0]
+        if "RGBCamera" in state:
+            pixels = state["RGBCamera"]
+            frame = pixels[:, :, 0:3].astype(np.uint8)
+            
+            cv2.imshow("Camera Output", frame)
 
-        if "LeftCamera" in state:
-            pixels = state["LeftCamera"]
-            cv2.namedWindow("Camera Output")
-            cv2.imshow("Camera Output", pixels[:, :, 0:3])
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+    cv2.destroyAllWindows()

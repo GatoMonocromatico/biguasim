@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bridge &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.svg"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Large-Cave" href="../LargeCave/large.html" />
+    <link rel="prev" title="SkyDive Package" href="../SkyDive.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../packages.html">BiguaSim Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../packages.html#package-documentation">Package Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../packages.html#all-packages">BiguaSim Packages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../SkyDive.html">SkyDive Package</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Bridge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../LargeCave/large.html">Large-Cave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pier-Harbor/Pier-Harbor.html">Pier-Harbor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../SmallCave/small.html">Small-Cave</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../packages.html">BiguaSim Packages</a></li>
+          <li class="breadcrumb-item"><a href="../SkyDive.html">SkyDive Package</a></li>
+      <li class="breadcrumb-item active">Bridge</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/packages/SkyDive/Bridge/Bridge.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="bridge">
+<span id="id1"></span><h1>Bridge<a class="headerlink" href="#bridge" title="Link to this heading"></a></h1>
+<img alt="Bridge Environment Overview" class="align-center" src="../../../_images/bridge_far.png" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <strong>Bridge</strong> environment is a technical simulation space designed for infrastructure inspection and aerial-to-underwater transitions. It features a central suspension bridge crossing a straight channel. This environment is ideal for testing autonomous navigation, multi-agent coordination, and sensor fusion in coastal settings.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="environment-dimensions-coordinates">
+<h2>Environment Dimensions &amp; Coordinates<a class="headerlink" href="#environment-dimensions-coordinates" title="Link to this heading"></a></h2>
+<p>BiguaSim uses a coordinate system where <strong>Z=0</strong> represents the water surface. The maps below provide the exact spatial constraints required for mission planning.</p>
+<section id="water-area-and-operational-freedom">
+<h3>Water Area and Operational Freedom<a class="headerlink" href="#water-area-and-operational-freedom" title="Link to this heading"></a></h3>
+<img alt="Coordinate Grid Top View" class="align-center" src="../../../_images/bridge_boundaries.png" />
+<p>The coordinates above define the <strong>water surface boundaries</strong> (the main channel). However, the environment is fully open-world; agents (especially UAVs and ground vehicles) are free to operate across the entire landscape, including the banks and bridge structures, without artificial constraints.</p>
+<ul class="simple">
+<li><p><strong>Water Zone:</strong> Defined by the coordinates (-1.255, 235) to (1.240, -235).</p></li>
+<li><p><strong>Extended Map:</strong> The simulation continues beyond the water, allowing for complex multi-domain missions (Sea-Air-Land).</p></li>
+</ul>
+</section>
+<section id="coordinate-grid-top-view">
+<h3>Coordinate Grid (Top View)<a class="headerlink" href="#coordinate-grid-top-view" title="Link to this heading"></a></h3>
+<img alt="../../../_images/bridge_water_level.png" class="align-center" src="../../../_images/bridge_water_level.png" />
+<p>The top-down view shows the channel’s axial alignment. The longitudinal axis spans from <strong>-1350 to 1350 units</strong>, while the lateral axis ranges from <strong>-1005 to 1005 units</strong>. The bridge is centered at the origin, providing a consistent reference point for global positioning.</p>
+</section>
+<section id="depth-and-altitude-profile">
+<h3>Depth and Altitude Profile<a class="headerlink" href="#depth-and-altitude-profile" title="Link to this heading"></a></h3>
+<img alt="../../../_images/bridge_depth.png" class="align-center" src="../../../_images/bridge_depth.png" />
+<dl class="simple">
+<dt>This cross-section view illustrates the vertical operational envelope:</dt><dd><p><strong>Maximum Altitude:</strong> Up to <strong>80 meters</strong> above sea level (ideal for UAV bridge inspection).
+<strong>Maximum Depth:</strong> The channel bed reaches down to <strong>-20 meters</strong>, allowing for ROV sub-surface maneuvers.
+<strong>Vertical Reference:</strong> The green line indicates the water surface (<strong>Z=0</strong>).</p>
+</dd>
+</dl>
+</section>
+<section id="landmarks-and-waypoints">
+<h3>Landmarks and Waypoints<a class="headerlink" href="#landmarks-and-waypoints" title="Link to this heading"></a></h3>
+<img alt="../../../_images/bridge_landmarks.png" class="align-center" src="../../../_images/bridge_landmarks.png" />
+<dl class="simple">
+<dt>To assist in automated docking or station-keeping, several key landmarks have been mapped:</dt><dd><p><strong>Pillar Bases (1-4):</strong> Structural supports located between -136 and 136 on the Y-axis.
+<strong>Bridge Deck (5-7):</strong> Elevated points at <strong>Z=15 meters</strong>, useful for drone landing or proximity sensing tests.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="semantic-segmentation-labels">
+<h2>Semantic Segmentation Labels<a class="headerlink" href="#semantic-segmentation-labels" title="Link to this heading"></a></h2>
+<p>The following table defines the semantic segmentation IDs and their corresponding RGB values, mapped to represent each mesh type realistically within the simulation.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 22.2%" />
+<col style="width: 44.4%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Folder Title</p></th>
+<th class="head"><p>Stencil Value</p></th>
+<th class="head"><p>RGB Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>None</p></td>
+<td><p>0</p></td>
+<td><p>{0, 0, 0}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sky</p></td>
+<td><p>19</p></td>
+<td><p>{0, 53, 65}</p></td>
+</tr>
+<tr class="row-even"><td><p>Water</p></td>
+<td><p>38</p></td>
+<td><p>{35, 196, 244}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Landscape</p></td>
+<td><p>48</p></td>
+<td><p>{85, 152, 34}</p></td>
+</tr>
+<tr class="row-even"><td><p>Road/Asphalt</p></td>
+<td><p>6</p></td>
+<td><p>{81, 13, 36}</p></td>
+</tr>
+<tr class="row-odd"><td><p>HolodeckAgent</p></td>
+<td><p>1</p></td>
+<td><p>{153, 108, 6}</p></td>
+</tr>
+<tr class="row-even"><td><p>Truck</p></td>
+<td><p>5</p></td>
+<td><p>{206, 190, 59}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bus</p></td>
+<td><p>7</p></td>
+<td><p>{115, 176, 195}</p></td>
+</tr>
+<tr class="row-even"><td><p>Car0</p></td>
+<td><p>10</p></td>
+<td><p>{29, 26, 199}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Car1</p></td>
+<td><p>11</p></td>
+<td><p>{102, 16, 239}</p></td>
+</tr>
+<tr class="row-even"><td><p>StaticMeshActor</p></td>
+<td><p>2</p></td>
+<td><p>{112, 105, 191}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Generic/Structure</p></td>
+<td><p>9</p></td>
+<td><p>{135, 169, 180}</p></td>
+</tr>
+<tr class="row-even"><td><p>PostProcessVolume</p></td>
+<td><p>13</p></td>
+<td><p>{156, 198, 23}</p></td>
+</tr>
+<tr class="row-odd"><td><p>Any</p></td>
+<td><p>255</p></td>
+<td><p>{255, 255, 255}</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../SkyDive.html" class="btn btn-neutral float-left" title="SkyDive Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../LargeCave/large.html" class="btn btn-neutral float-right" title="Large-Cave" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

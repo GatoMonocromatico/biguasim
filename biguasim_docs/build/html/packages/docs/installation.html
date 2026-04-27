@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,28 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installing &amp; Managing Packages &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Ocean Package" href="../Ocean/Ocean.html" />
+    <link rel="next" title="SkyDive Package" href="../SkyDive/SkyDive.html" />
     <link rel="prev" title="Package Structure" href="package-structure.html" /> 
 </head>
 
@@ -42,9 +40,6 @@
           <a href="../../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -73,6 +68,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../agents/agents.html">BiguaSim Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../develop/develop.html">Developing BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog/changelog.html">Changelog</a></li>
@@ -90,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/weather.html">Weather Controller</a></li>
@@ -163,7 +161,7 @@ packages that are compatible with your version of BiguaSim.</p>
 <h2>Managing World Packages<a class="headerlink" href="#managing-world-packages" title="Link to this heading"></a></h2>
 <p>The default option for managing packages is to use <code class="docutils literal notranslate"><span class="pre">biguasim.install()</span></code> and
 <code class="docutils literal notranslate"><span class="pre">biguasim.remove()</span></code>. These functions can be used to install and remove any packages
-managed by the BiguaSim team (currently only the Ocean package).</p>
+managed by the BiguaSim team (currently only the SkyDive package).</p>
 <section id="install-a-package-automatically">
 <h3>Install a Package Automatically<a class="headerlink" href="#install-a-package-automatically" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">biguasim</span></code> Python package includes a <a class="reference internal" href="../../biguasim/packagemanager.html#packagemanager"><span class="std std-ref">Package Manager</span></a> that can be used independently.
@@ -172,15 +170,15 @@ Below are some example usages, but see <a class="reference internal" href="../..
 <span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">installed_packages</span><span class="p">()</span>
 <span class="go">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">available_packages</span><span class="p">()</span>
-<span class="go">[&#39;Ocean&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s2">&quot;Ocean&quot;</span><span class="p">)</span>
-<span class="go">Installing Ocean ver. 0.1.0 from https://robots.et.byu.edu/holo/Ocean/v0.1.0/Linux.zip</span>
+<span class="go">[&#39;SkyDive&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s2">&quot;SkyDive&quot;</span><span class="p">)</span>
+<span class="go">Installing SkyDive ver. 0.1.0 from https://robots.et.byu.edu/holo/Ocean/v0.1.0/Linux.zip #TODO</span>
 <span class="go">File size: 1.55 GB</span>
 <span class="go">|â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 100%</span>
 <span class="go">Unpacking worlds...</span>
 <span class="go">Finished.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">installed_packages</span><span class="p">()</span>
-<span class="go">[&#39;Ocean&#39;]</span>
+<span class="go">[&#39;SkyDive&#39;]</span>
 </pre></div>
 </div>
 </section>
@@ -218,18 +216,18 @@ in your BiguaSim installation location.</p>
 <h3>Print Information<a class="headerlink" href="#print-information" title="Link to this heading"></a></h3>
 <p>There are several convenience functions provided to allow packages, worlds,
 and scenarios to be easily inspected.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">package_info</span><span class="p">(</span><span class="s2">&quot;Ocean&quot;</span><span class="p">)</span>
-<span class="go">Package: Ocean</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">packagemanager</span><span class="o">.</span><span class="n">package_info</span><span class="p">(</span><span class="s2">&quot;SkyDive&quot;</span><span class="p">)</span>
+<span class="go">Package: SkyDive</span>
 <span class="go">   Platform: Linux</span>
-<span class="go">   Version: 0.1.0</span>
-<span class="go">   Path: Linux/Holodeck/Binaries/Linux/Holodeck</span>
+<span class="go">   Version: 1.0.0</span>
+<span class="go">   Path: Linux/Biguasim/Binaries/Linux/Holodeck</span>
 <span class="go">   Worlds:</span>
-<span class="go">   Rooms</span>
+<span class="go">   Pier-Harbor:</span>
 <span class="go">         Scenarios:</span>
-<span class="go">         Rooms-DataGen:</span>
+<span class="go">         Pier-Harbor:</span>
 <span class="go">            Agents:</span>
 <span class="go">               Name: turtle0</span>
-<span class="go">               Type: TurtleAgent</span>
+<span class="go">               Type: DjiMatrice</span>
 <span class="go">               Sensors:</span>
 <span class="go">                  LocationSensor</span>
 <span class="go">                     lcm_channel: POSITION</span>
@@ -250,12 +248,12 @@ and scenarios to be easily inspected.</p>
 <span class="go">                  PoseSensor</span>
 <span class="go">                  VelocitySensor</span>
 <span class="go">                  IMUSensor</span>
-<span class="go">   SimpleUnderwater</span>
+<span class="go">   Bridge:</span>
 <span class="go">         Scenarios:</span>
-<span class="go">         SimpleUnderwater-AUV:</span>
+<span class="go">         Bridge-AUV:</span>
 <span class="go">            Agents:</span>
 <span class="go">               Name: auv0</span>
-<span class="go">               Type: HoveringAUV</span>
+<span class="go">               Type: BlueROV2</span>
 <span class="go">               Sensors:</span>
 <span class="go">                  PoseSensor</span>
 <span class="go">                     socket: IMUSocket</span>
@@ -268,8 +266,8 @@ and scenarios to be easily inspected.</p>
 </pre></div>
 </div>
 <p>You can also look for information for a specific world or scenario</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">packagemanager</span><span class="o">.</span><span class="n">world_info</span><span class="p">(</span><span class="s2">&quot;SimpleUnderwater&quot;</span><span class="p">)</span>
-<span class="n">packagemanager</span><span class="o">.</span><span class="n">scenario_info</span><span class="p">(</span><span class="s2">&quot;Rooms-DataGen&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">packagemanager</span><span class="o">.</span><span class="n">world_info</span><span class="p">(</span><span class="s2">&quot;Bridge&quot;</span><span class="p">)</span>
+<span class="n">packagemanager</span><span class="o">.</span><span class="n">scenario_info</span><span class="p">(</span><span class="s2">&quot;Pier-Harbor&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -281,13 +279,13 @@ and scenarios to be easily inspected.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="package-structure.html" class="btn btn-neutral float-left" title="Package Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Ocean/Ocean.html" class="btn btn-neutral float-right" title="Ocean Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../SkyDive/SkyDive.html" class="btn btn-neutral float-right" title="SkyDive Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

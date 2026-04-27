@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,28 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Semantic Segmentation Raycast Lidar &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Examples" href="../../examples/examples.html" />
+    <link rel="next" title="Acoustic Beacon" href="acoustic-beacon-sensor.html" />
     <link rel="prev" title="Raycast LIDAR" href="raycast-lidar-sensor.html" /> 
 </head>
 
@@ -42,9 +40,6 @@
           <a href="../../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -63,20 +58,33 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../sensors.html">BiguaSim Sensors</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../sensors.html#using-sensors">Using Sensors</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../sensors.html#id1">BiguaSim Sensors</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../sensors.html#perception-sensors">Perception Sensors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../sensors.html#communication-sensors">Communication Sensors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../sensors.html#state-sensors">State Sensors</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../sensors.html#not-finished-sensors">Not Finished Sensors</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../sensors.html#perception-sensors">Perception Sensors</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="singlebeam-sonar-sensor.html">Single-Beam Sonar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sidescan-sonar-sensor.html">Sidescan Sonar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imaging-sonar-sensor.html">Imaging Sonar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="profiling-sonar-sensor.html">Profiling Sonar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dvl-sensor.html">Doppler Velocity Log (DVL)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="depth-sensor.html">Depth Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rgb-camera-sensor.html">RGB Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="camera-sensor.html">Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imu-sensor.html">Inertial Measurement Unit (IMU)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gps-sensor.html">Global Positioning System (GPS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnetometer-sensor.html">Magnetometer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="range-finder-sensor.html">Range Finder Sensor</a></li>
 <li class="toctree-l4"><a class="reference internal" href="rgbd-camera-sensor.html">RGBD (Depth) Camera</a></li>
 <li class="toctree-l4"><a class="reference internal" href="semantic-segmentation-camera-sensor.html">Semantic Secmentation Camera</a></li>
 <li class="toctree-l4"><a class="reference internal" href="raycast-lidar-sensor.html">Raycast LIDAR</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Semantic Segmentation Raycast Lidar</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors.html#communication-sensors">Communication Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors.html#state-sensors">State Sensors</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../develop/develop.html">Developing BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog/changelog.html">Changelog</a></li>
@@ -94,6 +102,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/weather.html">Weather Controller</a></li>
@@ -134,13 +143,13 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="raycast-lidar-sensor.html" class="btn btn-neutral float-left" title="Raycast LIDAR" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../examples/examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="acoustic-beacon-sensor.html" class="btn btn-neutral float-right" title="Acoustic Beacon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

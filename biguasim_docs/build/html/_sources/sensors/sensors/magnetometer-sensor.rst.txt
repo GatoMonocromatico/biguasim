@@ -1,6 +1,6 @@
-===============
+============
 Magnetometer
-===============
+============
 
 Returns the global x-axis (or configuration vector) in the local frame.
 

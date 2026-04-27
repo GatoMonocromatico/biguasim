@@ -8,7 +8,7 @@ BiguaSim uses **meters** for units and a **right-handed coordinate system** for 
 distances, and offsets.
 
 BiguaSim coordinates differ from coordinates within the Unreal Engine Editor. To see specific 
-coordinates for BiguaSim levels, please refer to the :ref:`ocean` page.
+coordinates for BiguaSim levels, please refer to the :ref:`skydive` page.
 
 
 .. _`coordinate-system`:

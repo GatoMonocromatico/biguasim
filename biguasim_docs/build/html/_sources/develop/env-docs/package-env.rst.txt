@@ -1,4 +1,5 @@
 .. _packaging-environments:
+
 ======================
 Packaging Environments
 ======================
@@ -66,6 +67,7 @@ Otherwise, you can continue to** :ref:`package-biguasim`.
 With these changes, you should be able to compile for Linux from Windows.
 
 .. _`package-biguasim`:
+
 Packaging
 ---------
 

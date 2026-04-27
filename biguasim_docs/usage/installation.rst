@@ -27,16 +27,11 @@ Cloning BiguaSim
 For all installation methods the first step is to clone the repository.
 
 To get the most recent stable release of the BiguaSim library, download or clone our repo at: 
-https://github.com/byu-biguasim/BiguaSim. We suggest cloning it with lowercase naming, as our
+https://github.com/hydrone-furg/biguasim.git. We suggest cloning it with lowercase naming, as our
 example code uses, like so:
 ::
 
-   git clone git@github.com:byu-biguasim/BiguaSim.git biguasim
-
-.. note::
-   
-   If you get a Page Not Found Error when trying to access the repository, it means you have not 
-   linked your GitHub account to your Epic Games account. Please refer to the instructions above.
+   git clone git@github.com:hydrone-furg/biguasim.git biguasim
 
 
 Installation Options
@@ -67,6 +62,7 @@ Additional Requirements
 - Python >= 3.7
 - pip3
 - For Linux: OpenGL 3+, gcc (minimum build-essential package) 
+
 .. TODO i think you dont need open gl anymore?? vulkan? mention that pip will install numpy, scipy.. etc?
 
 For the build-essential package for Linux, you can run the following console command:
@@ -79,17 +75,17 @@ Python Library
 From the cloned repository, install the Python package by doing the following:
 ::
 
-   cd biguasim/client
+   cd biguasim
    pip install .
 
 Worlds Packages
 ---------------
 .. note::
 
-   The Ocean package is the only package currently available. Users can create custom worlds and 
+   The SkyDive package is the only package currently available. Users can create custom worlds and 
    packages if desired. 
 
-To install the most recent version of the Ocean worlds package, open a Python shell by typing the 
+To install the most recent version of the SkyDive worlds package, open a Python shell by typing the 
 following and hit enter:
 ::
 
@@ -99,12 +95,12 @@ Install the package by running the following Python commands:
 ::
 
    import biguasim
-   biguasim.install("Ocean")
+   biguasim.install("SkyDive")
 
 To do these steps in a single console command, use:
 ::
 
-   python -c "import biguasim; biguasim.install('Ocean')"
+   python -c "import biguasim; biguasim.install('SkyDive')"
 
 
 .. _install-dev:
@@ -120,7 +116,7 @@ This can be done in multiple ways:
 - Packaged Custom Worlds - After developing BiguaSim using these tools, you can then package your own worlds for later use.
 
 For more detailed instructions on installation for development, see :ref:`develop`.
-
+.. Linkar documentacao engine.
 
 .. _install-docker:
 
@@ -320,8 +316,10 @@ Troubleshooting
 - **CUDA Version:**
 
   - Ensure that the CUDA version used in the Docker container is:
+  
    - Lower than or equal to your host CUDA installation
    - Compatible with your NVIDIA Driver
+
   - Change CUDA versions by modifying the Dockerfiles
 
 - **Verify GPU Access:**
@@ -335,50 +333,3 @@ Troubleshooting
 - **Docker Not Found:**
 
   - Ensure Docker is properly installed and the daemon is running.
-
-
-
-Develop Branch
-==============
-
-Both the Python library and the available worlds of BiguaSim are actively being developed. 
-These instructions describe how to access the latest development updates. 
-You can apply these steps to any of the installation methods described above.
-
-Python Library
---------------
-The "release" branch of the GitHub repository contains the latest stable release of the client 
-library, while the "develop" branch contains the latest features and bug fixes but may not be 
-stable. To install the develop branch, clone the repository as described above, then check out 
-the develop branch and reinstall the biguasim package via pip using the commands below:
-::
-
-   git checkout develop
-   cd biguasim/client
-   pip install .
-
-World Packages
---------------
-.. note::
-
-   Development versions of the BiguaSim worlds are auto-generated for Linux. 
-   On Windows, binaries are compiled manually and may not always reflect the latest updates.
-   To get development versions of the Windows worlds, please reach out to the 
-   BiguaSim team.
-
-It is advised that you use the development versions of the Ocean package when on the develop branch 
-of the library. These will contain the latest updates to the worlds that may be necessary to use 
-some features on the develop branch. Using the develop branch with the release version of the worlds 
-may result in unexpected behavior. 
-
-To install the development version of the Ocean package, open a Python shell and remove any previous 
-versions of the binaries by running the following command:
-::
-
-   import biguasim
-   biguasim.remove("Ocean")
-
-Then install the development version:
-::
-
-   biguasim.install("Ocean", branch="develop")

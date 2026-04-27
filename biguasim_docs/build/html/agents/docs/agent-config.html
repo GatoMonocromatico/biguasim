@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,28 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agent Configuration &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Control Schemes" href="control-schemes.html" />
+    <link rel="next" title="Control Abstractions" href="control-abstractions.html" />
     <link rel="prev" title="BiguaSim Agents" href="../agents.html" /> 
 </head>
 
@@ -42,9 +40,6 @@
           <a href="../../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -60,24 +55,27 @@
 <li class="toctree-l1"><a class="reference internal" href="../../usage/usage.html">Using BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/packages.html">BiguaSim Packages</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../agents.html">BiguaSim Agents</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../agents.html#using-agents">Using Agents</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../agents.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../agents.html#core-fleet">Core Fleet</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Agent Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#agent-name">Agent Name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#agent-type">Agent Type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sensors">Sensors</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#location-and-rotation">Location and Rotation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#location-randomization">Location Randomization</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#control-scheme">Control Scheme</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#control-abstraction">Control Abstraction</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="control-schemes.html">Control Schemes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="fossen-based-dynamics.html">Fossen-Based Dynamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control-abstractions.html">Control Abstractions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../agents.html#agent-pages">BiguaSim Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agents.html#available-agents-library">Available Agents Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agents.html#custom-development">Custom Development</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../develop/develop.html">Developing BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog/changelog.html">Changelog</a></li>
@@ -95,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/weather.html">Weather Controller</a></li>
@@ -144,10 +143,13 @@ new dictionary in the list.</p>
 <span class="w">      </span><span class="nt">&quot;rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">],</span>
 <span class="w">      </span><span class="nt">&quot;location_randomization&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span>
 <span class="w">      </span><span class="nt">&quot;rotation_randomization&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span>
-<span class="w">      </span><span class="nt">&quot;control_scheme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{control scheme type}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;control_abstraction&quot;</span><span class="p">:</span><span class="w"> </span><span class="nt">&quot;{control abstraction type}&quot;</span>
+<span class="w">      </span><span class="nt">&quot;dynamics&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nt">&quot;batch_size&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="p">},</span>
 <span class="w">   </span><span class="p">},</span>
 <span class="w">   </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;agent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uav1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;agent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uav1&quot;</span>
 <span class="w">      </span><span class="err">...</span>
 <span class="w">   </span><span class="p">}</span>
 <span class="p">]</span>
@@ -170,32 +172,20 @@ arguments for <code class="docutils literal notranslate"><span class="pre">agent
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="../agents/hovering-auv-agent.html#hovering-auv-agent"><span class="std std-ref">HoveringAUV</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">HoveringAUV</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../agents/blue-boat-agent.html#blue-boat-agent"><span class="std std-ref">BlueBoat</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BlueBoat</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../agents/surface-vessel-agent.html#surface-vessel-agent"><span class="std std-ref">SurfaceVessel</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SurfaceVessel</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../agents/torpedo-auv-agent.html#torpedo-auv-agent"><span class="std std-ref">TorpedoAUV</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../agents/torpedo-auv-agent.html#torpedo-auv-agent"><span class="std std-ref">TorpedoAUV</span></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../agents/coug-uv-agent.html#coug-uv-agent"><span class="std std-ref">CougUV</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">CougUV</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="../agents/blue-rov-agent.html#blue-rov-agent"><span class="std std-ref">BlueROV2</span></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">BlueROV2</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../agents/sphere-agent.html#sphere-agent"><span class="std std-ref">SphereAgent</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Sphere</span></code></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../agents/blue-rov-heavy-agent.html#blue-rov-heavy-agent"><span class="std std-ref">BlueROV2 Heavy</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BlueROV2</span> <span class="pre">Heavy</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../agents/turtle-agent.html#turtle-agent"><span class="std std-ref">TurtleAgent</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">TurtleAgent</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="../agents/fixed-wing-agent.html#fixed-wing-agent"><span class="std std-ref">FixedWing</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">FixedWing</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../agents/uav-agent.html#uav-agent"><span class="std std-ref">UAV Agent</span></a></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">UAV</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../agents/djimatrice-agent.html#djimatrice-agent"><span class="std std-ref">DJI Matrice</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DjiMatrice</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -231,15 +221,34 @@ range. Randomization in each direction is sampled independently.</p>
 randomization is in the format <code class="docutils literal notranslate"><span class="pre">[roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code>, rotated about the XYZ fixed axes (i.e.
 R_z*R_y*R_x).</p>
 </section>
-<section id="control-scheme">
-<h2>Control Scheme<a class="headerlink" href="#control-scheme" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">control_scheme</span></code> is a string that specifies the control scheme (represented as an integer) used
-by the agent.</p>
-<p>Control schemes determine how commands sent to the agent are interpreted. Most agents have a control
-scheme that exposes their thrusters, fins, and so forth to direct commands. Other control schemes
-implement convenient features, such as position PID controllers. A Custom Dynamics control scheme
-is available for users to fine-tune the motion of the vehicle.</p>
-<p>For more details on control schemes, see <a class="reference internal" href="control-schemes.html#control-schemes"><span class="std std-ref">Control Schemes</span></a>.</p>
+<section id="control-abstraction">
+<h2>Control Abstraction<a class="headerlink" href="#control-abstraction" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">control_abstraction</span></code> string defines how the simulator interprets commands sent to an agent via the <code class="docutils literal notranslate"><span class="pre">step</span></code> or <code class="docutils literal notranslate"><span class="pre">tick</span></code> methods. It acts as the interface layer between high-level autonomous logic and low-level physics.</p>
+<section id="standardized-agents">
+<h3>Standardized Agents<a class="headerlink" href="#standardized-agents" title="Link to this heading"></a></h3>
+<p>In BiguaSim, most agents (such as the <strong>BlueROV2</strong> and <strong>HoveringAUV</strong>) share a unified set of control abstractions. These allow for seamless switching between different levels of autonomy:</p>
+<ul class="simple">
+<li><p><strong>``cmd_vel``</strong>: Controls linear velocity <span class="math">(v_x, v_y, v_z)</span>.</p></li>
+<li><p><strong>``cmd_vel_yaw``</strong>: Similar to <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code>, but maintains a specific target yaw heading during maneuvers.</p></li>
+<li><p><strong>``cmd_pos_yaw``</strong>: A high-level abstraction where the user provides target coordinates <span class="math">[x, y, z]</span> and a target yaw. An internal PID controller handles the trajectory.</p></li>
+<li><p><strong>``accel``</strong>: Provides direct acceleration commands along the agent’s axes.</p></li>
+<li><p><strong>``cmd_motor_speeds``</strong>: The lowest level of control for standard agents, allowing users to send individual thrust values to each motor (e.g., 8 independent thrusters for the BlueROV2).</p></li>
+</ul>
+</section>
+<section id="the-torpedoauv-exception">
+<h3>The TorpedoAUV Exception<a class="headerlink" href="#the-torpedoauv-exception" title="Link to this heading"></a></h3>
+<p>The <strong>TorpedoAUV</strong> does not follow the standard multi-thruster abstractions due to its unique underactuated physical design (single rear propeller and control surfaces). It uses a specialized abstraction:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>``cmd_rudders_sterns_motor_speed``</strong>: Requires a specific vector to control the main motor RPM and the deflection angles of the rudders and stern planes.</dt><dd><ul>
+<li><p><strong>Input Vector</strong>: <code class="docutils literal notranslate"><span class="pre">[Motor_RPM,</span> <span class="pre">Rudder1,</span> <span class="pre">Rudder2,</span> <span class="pre">Stern1,</span> <span class="pre">Stern2]</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>For more details on specific control implementation and PID tuning, see <a class="reference internal" href="control-abstractions.html#control-abstractions"><span class="std std-ref">Control Abstractions</span></a>.</p>
+</section>
 </section>
 </section>
 
@@ -248,13 +257,13 @@ is available for users to fine-tune the motion of the vehicle.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../agents.html" class="btn btn-neutral float-left" title="BiguaSim Agents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="control-schemes.html" class="btn btn-neutral float-right" title="Control Schemes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="control-abstractions.html" class="btn btn-neutral float-right" title="Control Abstractions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

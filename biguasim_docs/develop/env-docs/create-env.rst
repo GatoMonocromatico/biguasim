@@ -63,18 +63,6 @@ Obtaining Assets
 
 To populate your level with assets, you will either need to import your own assets or find assets on `Fab <https://www.fab.com/>`_. 
 
-To replicate similar levels as BiguaSim, we use the following asset packs:
-
-* :ref:`dam`: 
-    * `Ocean Floor Environment <https://www.fab.com/listings/0c40a773-c71b-4c51-9286-721126fd9b0f>`_ 
-* :ref:`openwater`: 
-    * `Modular Dam Environment <https://www.fab.com/listings/f6ff3c58-7fcd-43b8-bc0a-55ab6c405e1b>`_
-* :ref:`pierharbor`: 
-    * `Container Ships <https://www.fab.com/listings/d15bb4d9-e292-4bc0-a058-14aee645f69e>`_ 
-    * `Boat Pack Vol_1 <https://www.fab.com/listings/7e671469-af0a-4516-88a4-dfffefdbc640>`_
-    * `Pier Set <https://www.fab.com/listings/4a89aaec-7b13-46b6-957e-667262149c12>`_
-    * `Modular Harbor Building Kit <https://www.fab.com/listings/aeed2616-24b1-4bb9-8fde-cd268602dfcc>`_
-
 Importing Assets
 ----------------
 If you have purchased or obtained free assets from Fab, you can view them in the Epic Games Launcher under the Unreal Engine Library tab. 
@@ -105,9 +93,7 @@ It is simple to move, rotate, and scale objects within your level. You can eithe
    * - R
      - Selects the Scale tool
 
-::
-
-For more information please reference `Unreal Engine's Documentation <https://dev.epicgames.com/documentation/en-us/unreal-engine/transforming-actors-in-unreal-engine>`_.
+For more information please reference `Unreal Engine's Actors Documentation <https://dev.epicgames.com/documentation/en-us/unreal-engine/transforming-actors-in-unreal-engine>`_.
 
 .. _object-collision:
 

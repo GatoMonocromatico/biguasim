@@ -12,12 +12,11 @@ Press tab to switch the viewport between agents. See :ref:`hotkeys` for more.
 ::
 
     import biguasim
-    import numpy as np
 
     cfg = {
         "name": "test_rgb_camera",
-        "world": "SimpleUnderwater",
-        "package_name": "Ocean",
+        "world": "Bridge",
+        "package_name": "SkyDive",
         "main_agent": "auv0",
         "ticks_per_sec": 60,
         "agents": [
@@ -26,35 +25,54 @@ Press tab to switch the viewport between agents. See :ref:`hotkeys` for more.
                 "agent_type": "TorpedoAUV",
                 "sensors": [
                     {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
+                    {
                         "sensor_type": "IMUSensor"
                     }
                 ],
-                "control_scheme": 0,
-                "location": [0, 0, -5]
+                "dynamics" : {
+                        "batch_size" : 1,
+                    },
+                "control_abstraction": "cmd_rudders_sterns_motor_speed",
+                "location": [0, 5, -5]
             },
             {
                 "agent_name": "auv1",
-                "agent_type": "HoveringAUV",
+                "agent_type": "BlueROV2",
                 "sensors": [
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    },
                     {
                         "sensor_type": "DVLSensor"
                     }
                 ],
-                "control_scheme": 0,
+                "dynamics" : {
+                        "batch_size" : 1,
+                    },
+                "control_abstraction": "cmd_vel",
                 "location": [0, 2, -5]
             }
         ]
     }
 
     env = biguasim.make(scenario_cfg=cfg)
-    env.reset()
 
-    env.act('auv0', np.array([0,0,0,0,75]))
-    env.act('auv1', np.array([0,0,0,0,20,20,20,20]))
-    for i in range(300):
-        states = env.tick()
 
-        # states is a dictionary
-        imu = states["auv0"]["IMUSensor"]
+    while True:
+        states = env.step({'auv0': [0,0,0,0,75], "auv1" : [12, 0, 0]})
 
-        vel = states["auv1"]["DVLSensor"]
+        imu = states["auv0"][0]["IMUSensor"]
+
+        vel = states["auv1"][0]["DVLSensor"]

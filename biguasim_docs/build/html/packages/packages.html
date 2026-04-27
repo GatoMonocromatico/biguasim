@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -6,24 +8,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BiguaSim Packages &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script src="../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -42,9 +40,6 @@
           <a href="../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -65,13 +60,15 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#all-packages">BiguaSim Packages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/Ocean.html">Ocean Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/SkyDive.html">SkyDive Package</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
@@ -89,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/weather.html">Weather Controller</a></li>
@@ -124,7 +122,7 @@
 A scenario is a specific configuration of a world, including agents, sensors, and other settings.
 Packages contain predefined scenarios for convenience, but worlds can be used with user-defined
 scenarios as well.</p>
-<p>The Oceans package is the default package installed with BiguaSim. It contains three primary worlds,
+<p>The SkyDive package is the default package installed with BiguaSim. It contains four primary worlds,
 each with several scenarios for convenient use.</p>
 <section id="package-documentation">
 <h2>Package Documentation<a class="headerlink" href="#package-documentation" title="Link to this heading"></a></h2>
@@ -139,37 +137,27 @@ each with several scenarios for convenient use.</p>
 <span id="id1"></span><h2>BiguaSim Packages<a class="headerlink" href="#all-packages" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Ocean/Ocean.html">Ocean Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Ocean/Dam/dam.html">Dam</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/Dam/Dam-Hovering.html">Dam-Hovering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/Dam/Dam-HoveringCamera.html">Dam-HoveringCamera</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/Dam/Dam-HoveringImagingSonar.html">Dam-HoveringImagingSonar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SkyDive/SkyDive.html">SkyDive Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SkyDive/Bridge/Bridge.html">Bridge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/Bridge/Bridge.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/Bridge/Bridge.html#environment-dimensions-coordinates">Environment Dimensions &amp; Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/Bridge/Bridge.html#semantic-segmentation-labels">Semantic Segmentation Labels</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Ocean/OpenWater/openwater.html">OpenWater</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-Hovering.html">OpenWater-Hovering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-HoveringCamera.html">OpenWater-HoveringCamera</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-HoveringImagingSonar.html">OpenWater-HoveringImagingSonar</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-Torpedo.html">OpenWater-Torpedo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-TorpedoProfilingSonar.html">OpenWater-TorpedoProfilingSonar</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-TorpedoSidescanSonar.html">OpenWater-TorpedoSidescanSonar</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/OpenWater/OpenWater-TorpedoSinglebeamSonar.html">OpenWater-TorpedoSinglebeamSonar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SkyDive/LargeCave/large.html">Large-Cave</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/LargeCave/large.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/LargeCave/large.html#environment-dimensions-coordinates">Environment Dimensions &amp; Coordinates</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Ocean/PierHarbor/pierharbor.html">PierHarbor</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/PierHarbor/PierHarbor-Hovering.html">PierHarbor-Hovering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/PierHarbor/PierHarbor-HoveringCamera.html">PierHarbor-HoveringCamera</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/PierHarbor/PierHarbor-HoveringImagingSonar.html">PierHarbor-HoveringImagingSonar</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/PierHarbor/PierHarbor-Torpedo.html">PierHarbor-Torpedo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SkyDive/Pier-Harbor/Pier-Harbor.html">Pier-Harbor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/Pier-Harbor/Pier-Harbor.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/Pier-Harbor/Pier-Harbor.html#environment-dimensions-coordinates">Environment Dimensions &amp; Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/Pier-Harbor/Pier-Harbor.html#semantic-segmentation-labels">Semantic Segmentation Labels</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Ocean/Rooms/rooms.html">Rooms</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/Rooms/Rooms-DataGen.html">Rooms-DataGen</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="Ocean/SimpleUnderwater/simpleunderwater.html">SimpleUnderwater</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/SimpleUnderwater/SimpleUnderwater-Hovering.html">SimpleUnderwater-Hovering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Ocean/SimpleUnderwater/SimpleUnderwater-Torpedo.html">SimpleUnderwater-Torpedo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SkyDive/SmallCave/small.html">Small-Cave</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/SmallCave/small.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SkyDive/SmallCave/small.html#environment-dimensions-coordinates">Environment Dimensions &amp; Coordinates</a></li>
 </ul>
 </li>
 </ul>
@@ -190,7 +178,7 @@ each with several scenarios for convenient use.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

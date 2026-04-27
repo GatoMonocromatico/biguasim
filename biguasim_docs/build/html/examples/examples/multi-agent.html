@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
@@ -6,29 +8,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multi Agent Example &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../../_static/copybutton.js?v=f281be69"></script>
-        <script src="../../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Multi-Agent Communications" href="multi-coms.html" />
-    <link rel="prev" title="Manually Defining Dynamics" href="custom-dynamics.html" /> 
+    <link rel="prev" title="Manually Controlling an Agent" href="controller.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,9 +40,6 @@
           <a href="../../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -61,13 +56,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../packages/packages.html">BiguaSim Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../agents/agents.html">BiguaSim Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="camera.html">Visualizing RGBCamera Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="controller.html">Manually Controlling an Agent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom-dynamics.html">Manually Defining Dynamics</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Multi Agent Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multi-coms.html">Multi-Agent Communications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pd-controllers.html">Example: PD Controller</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sonar_imaging.html">Visualizing Imaging Sonar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sonar_profiling.html">Visualizing Profiling Sonar</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sonar_sidescan.html">Visualizing Sidescan Sonar</a></li>
@@ -90,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../biguasim/weather.html">Weather Controller</a></li>
@@ -127,12 +123,11 @@ the user needs to use the <code class="docutils literal notranslate"><span class
 the <code class="docutils literal notranslate"><span class="pre">env.step()</span></code> method.</p>
 <p>Press tab to switch the viewport between agents. See <a class="reference internal" href="../../usage/viewport.html#hotkeys"><span class="std std-ref">Hotkeys</span></a> for more.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">biguasim</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">cfg</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test_rgb_camera&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;world&quot;</span><span class="p">:</span> <span class="s2">&quot;SimpleUnderwater&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Ocean&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;world&quot;</span><span class="p">:</span> <span class="s2">&quot;Bridge&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyDive&quot;</span><span class="p">,</span>
     <span class="s2">&quot;main_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;auv0&quot;</span><span class="p">,</span>
     <span class="s2">&quot;ticks_per_sec&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
     <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -141,38 +136,57 @@ the <code class="docutils literal notranslate"><span class="pre">env.step()</spa
             <span class="s2">&quot;agent_type&quot;</span><span class="p">:</span> <span class="s2">&quot;TorpedoAUV&quot;</span><span class="p">,</span>
             <span class="s2">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="p">{</span>
+                    <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DynamicsSensor&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;IMUSocket&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;UseCOM&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s2">&quot;UseRPY&quot;</span><span class="p">:</span> <span class="kc">False</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
                     <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IMUSensor&quot;</span>
                 <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;control_scheme&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
+            <span class="s2">&quot;dynamics&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;batch_size&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="s2">&quot;control_abstraction&quot;</span><span class="p">:</span> <span class="s2">&quot;cmd_rudders_sterns_motor_speed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">&quot;agent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;auv1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;agent_type&quot;</span><span class="p">:</span> <span class="s2">&quot;HoveringAUV&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;agent_type&quot;</span><span class="p">:</span> <span class="s2">&quot;BlueROV2&quot;</span><span class="p">,</span>
             <span class="s2">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DynamicsSensor&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;IMUSocket&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;UseCOM&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s2">&quot;UseRPY&quot;</span><span class="p">:</span> <span class="kc">False</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
                 <span class="p">{</span>
                     <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DVLSensor&quot;</span>
                 <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;control_scheme&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;dynamics&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;batch_size&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="s2">&quot;control_abstraction&quot;</span><span class="p">:</span> <span class="s2">&quot;cmd_vel&quot;</span><span class="p">,</span>
             <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">]</span>
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
 
 <span class="n">env</span> <span class="o">=</span> <span class="n">biguasim</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">scenario_cfg</span><span class="o">=</span><span class="n">cfg</span><span class="p">)</span>
-<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-<span class="n">env</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="s1">&#39;auv0&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">75</span><span class="p">]))</span>
-<span class="n">env</span><span class="o">.</span><span class="n">act</span><span class="p">(</span><span class="s1">&#39;auv1&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">]))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">300</span><span class="p">):</span>
-    <span class="n">states</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
 
-    <span class="c1"># states is a dictionary</span>
-    <span class="n">imu</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;auv0&quot;</span><span class="p">][</span><span class="s2">&quot;IMUSensor&quot;</span><span class="p">]</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">({</span><span class="s1">&#39;auv0&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">75</span><span class="p">],</span> <span class="s2">&quot;auv1&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]})</span>
 
-    <span class="n">vel</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;auv1&quot;</span><span class="p">][</span><span class="s2">&quot;DVLSensor&quot;</span><span class="p">]</span>
+    <span class="n">imu</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;auv0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;IMUSensor&quot;</span><span class="p">]</span>
+
+    <span class="n">vel</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;auv1&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;DVLSensor&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -181,14 +195,14 @@ the <code class="docutils literal notranslate"><span class="pre">env.step()</spa
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="custom-dynamics.html" class="btn btn-neutral float-left" title="Manually Defining Dynamics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="controller.html" class="btn btn-neutral float-left" title="Manually Controlling an Agent" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="multi-coms.html" class="btn btn-neutral float-right" title="Multi-Agent Communications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

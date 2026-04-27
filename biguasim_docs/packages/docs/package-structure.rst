@@ -81,10 +81,6 @@ of the environment, used when an octree is made for a sonar sensor.
 materials.csv
 =============
 
-.. warning::
-
-   In BiguaSim 2.0, material dependency is temporarily unavailable.
-
 This file contains acoustic properties of the materials found in the environments, 
 used for computation of the sonar images. Below is the format the config file is 
 expected to follow:

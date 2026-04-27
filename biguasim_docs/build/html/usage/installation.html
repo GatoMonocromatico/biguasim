@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -6,24 +8,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script src="../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -42,9 +40,6 @@
           <a href="../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -78,11 +73,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#develop-branch">Develop Branch</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Python Library</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#world-packages">World Packages</a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
@@ -90,6 +80,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
@@ -107,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../biguasim/weather.html">Weather Controller</a></li>
@@ -158,15 +151,10 @@
 <h3>Cloning BiguaSim<a class="headerlink" href="#cloning-biguasim" title="Link to this heading"></a></h3>
 <p>For all installation methods the first step is to clone the repository.</p>
 <p>To get the most recent stable release of the BiguaSim library, download or clone our repo at:
-<a class="reference external" href="https://github.com/byu-biguasim/BiguaSim">https://github.com/byu-biguasim/BiguaSim</a>. We suggest cloning it with lowercase naming, as our
+<a class="reference external" href="https://github.com/hydrone-furg/biguasim.git">https://github.com/hydrone-furg/biguasim.git</a>. We suggest cloning it with lowercase naming, as our
 example code uses, like so:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">byu</span><span class="o">-</span><span class="n">biguasim</span><span class="o">/</span><span class="n">BiguaSim</span><span class="o">.</span><span class="n">git</span> <span class="n">biguasim</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">hydrone</span><span class="o">-</span><span class="n">furg</span><span class="o">/</span><span class="n">biguasim</span><span class="o">.</span><span class="n">git</span> <span class="n">biguasim</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you get a Page Not Found Error when trying to access the repository, it means you have not
-linked your GitHub account to your Epic Games account. Please refer to the instructions above.</p>
 </div>
 </section>
 <section id="installation-options">
@@ -203,7 +191,7 @@ the instructions that are most appropriate for your purposes.</p>
 <section id="python-library">
 <h3>Python Library<a class="headerlink" href="#python-library" title="Link to this heading"></a></h3>
 <p>From the cloned repository, install the Python package by doing the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">biguasim</span><span class="o">/</span><span class="n">client</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">biguasim</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
 </pre></div>
 </div>
@@ -212,21 +200,21 @@ the instructions that are most appropriate for your purposes.</p>
 <h3>Worlds Packages<a class="headerlink" href="#worlds-packages" title="Link to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Ocean package is the only package currently available. Users can create custom worlds and
+<p>The SkyDive package is the only package currently available. Users can create custom worlds and
 packages if desired.</p>
 </div>
-<p>To install the most recent version of the Ocean worlds package, open a Python shell by typing the
+<p>To install the most recent version of the SkyDive worlds package, open a Python shell by typing the
 following and hit enter:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span>
 </pre></div>
 </div>
 <p>Install the package by running the following Python commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">biguasim</span>
-<span class="n">biguasim</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s2">&quot;Ocean&quot;</span><span class="p">)</span>
+<span class="n">biguasim</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s2">&quot;SkyDive&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To do these steps in a single console command, use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import biguasim; biguasim.install(&#39;Ocean&#39;)&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import biguasim; biguasim.install(&#39;SkyDive&#39;)&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -240,7 +228,8 @@ This can be done in multiple ways:</p>
 <li><p>Standalone Live Editing using Unreal Editor Tools - Unreal provides tools that enable you to edit your own worlds and modify C++ engine code and then build and test your worlds in real-time.</p></li>
 <li><p>Packaged Custom Worlds - After developing BiguaSim using these tools, you can then package your own worlds for later use.</p></li>
 </ul>
-<p>For more detailed instructions on installation for development, see <a class="reference internal" href="../develop/develop.html#develop"><span class="std std-ref">Developing BiguaSim</span></a>.</p>
+<p>For more detailed instructions on installation for development, see <a class="reference internal" href="../develop/develop.html#develop"><span class="std std-ref">Developing BiguaSim</span></a>.
+.. Linkar documentacao engine.</p>
 </section>
 <section id="installation-with-docker">
 <span id="install-docker"></span><h2>Installation with Docker<a class="headerlink" href="#installation-with-docker" title="Link to this heading"></a></h2>
@@ -458,48 +447,6 @@ python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;
 </ul>
 </section>
 </section>
-<section id="develop-branch">
-<h2>Develop Branch<a class="headerlink" href="#develop-branch" title="Link to this heading"></a></h2>
-<p>Both the Python library and the available worlds of BiguaSim are actively being developed.
-These instructions describe how to access the latest development updates.
-You can apply these steps to any of the installation methods described above.</p>
-<section id="id3">
-<h3>Python Library<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<p>The “release” branch of the GitHub repository contains the latest stable release of the client
-library, while the “develop” branch contains the latest features and bug fixes but may not be
-stable. To install the develop branch, clone the repository as described above, then check out
-the develop branch and reinstall the biguasim package via pip using the commands below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">develop</span>
-<span class="n">cd</span> <span class="n">biguasim</span><span class="o">/</span><span class="n">client</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
-</pre></div>
-</div>
-</section>
-<section id="world-packages">
-<h3>World Packages<a class="headerlink" href="#world-packages" title="Link to this heading"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Development versions of the BiguaSim worlds are auto-generated for Linux.
-On Windows, binaries are compiled manually and may not always reflect the latest updates.
-To get development versions of the Windows worlds, please reach out to the
-BiguaSim team.</p>
-</div>
-<p>It is advised that you use the development versions of the Ocean package when on the develop branch
-of the library. These will contain the latest updates to the worlds that may be necessary to use
-some features on the develop branch. Using the develop branch with the release version of the worlds
-may result in unexpected behavior.</p>
-<p>To install the development version of the Ocean package, open a Python shell and remove any previous
-versions of the binaries by running the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">biguasim</span>
-<span class="n">biguasim</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;Ocean&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Then install the development version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">biguasim</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="s2">&quot;Ocean&quot;</span><span class="p">,</span> <span class="n">branch</span><span class="o">=</span><span class="s2">&quot;develop&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
 </section>
 
 
@@ -513,7 +460,7 @@ versions of the binaries by running the following command:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

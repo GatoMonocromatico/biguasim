@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -6,24 +8,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agents &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=88f29eac" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.svg"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=8d563738"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-        <script src="../_static/darkmode.js?v=3994c1fa"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -42,9 +40,6 @@
           <a href="../index.html" class="icon icon-home">
             BiguaSim
           </a>
-              <div class="version">
-                1.0.0
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -61,6 +56,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html#one-of-the-most-critical-roles-of-the-frame-py-ardubridge-architecture">One of the most critical roles of the <code class="docutils literal notranslate"><span class="pre">frame.py</span></code> ArduBridge Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
@@ -82,7 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.action_space"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.action_space</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.add_sensors"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.add_sensors()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.clear_action"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.clear_action()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.control_schemes"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.control_schemes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.control_abstractions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.get_joint_constraints()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.get_ocean_current_velocity"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.get_ocean_current_velocity()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.has_camera"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.has_camera()</span></code></a></li>
@@ -92,92 +89,24 @@
 <li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.teleport"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.teleport()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.BlueBoat"><code class="docutils literal notranslate"><span class="pre">BlueBoat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BlueBoat.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BlueBoat.control_abstractions</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.BlueROV2"><code class="docutils literal notranslate"><span class="pre">BlueROV2</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BlueROV2.control_schemes"><code class="docutils literal notranslate"><span class="pre">BlueROV2.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BlueROV2.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">BlueROV2.get_joint_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BlueROV2.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BlueROV2.control_abstractions</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.ControlSchemes"><code class="docutils literal notranslate"><span class="pre">ControlSchemes</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.ANDROID_TORQUES"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.ANDROID_TORQUES</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.CONTINUOUS_SPHERE_DEFAULT"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.CONTINUOUS_SPHERE_DEFAULT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.DISCRETE_SPHERE_DEFAULT"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.DISCRETE_SPHERE_DEFAULT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.NAV_TARGET_LOCATION"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.NAV_TARGET_LOCATION</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.UAV_TORQUES"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.UAV_TORQUES</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.UAV_ROLL_PITCH_YAW_RATE_ALT"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.UAV_ROLL_PITCH_YAW_RATE_ALT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.HAND_AGENT_MAX_TORQUES"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.HAND_AGENT_MAX_TORQUES</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.AUV_THRUSTERS"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.AUV_THRUSTERS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.AUV_CONTROL"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.AUV_CONTROL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.AUV_FORCES"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.AUV_FORCES</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.TAUV_FINS"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.TAUV_FINS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.TAUV_FORCES"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.TAUV_FORCES</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.SV_THRUSTERS"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.SV_THRUSTERS</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.SV_CONTROL"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.SV_CONTROL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ControlSchemes.SV_FORCES"><code class="docutils literal notranslate"><span class="pre">ControlSchemes.SV_FORCES</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.CougUV"><code class="docutils literal notranslate"><span class="pre">CougUV</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.CougUV.control_schemes"><code class="docutils literal notranslate"><span class="pre">CougUV.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.CougUV.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">CougUV.get_joint_constraints()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.BlueROVHeavy"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.BlueROVHeavy.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy.control_abstractions</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.DjiMatrice"><code class="docutils literal notranslate"><span class="pre">DjiMatrice</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.DjiMatrice.control_schemes"><code class="docutils literal notranslate"><span class="pre">DjiMatrice.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.DjiMatrice.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">DjiMatrice.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.FixedWing"><code class="docutils literal notranslate"><span class="pre">FixedWing</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.FixedWing.control_schemes"><code class="docutils literal notranslate"><span class="pre">FixedWing.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.FixedWing.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">FixedWing.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.HoveringAUV"><code class="docutils literal notranslate"><span class="pre">HoveringAUV</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.HoveringAUV.control_schemes"><code class="docutils literal notranslate"><span class="pre">HoveringAUV.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.HoveringAUV.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">HoveringAUV.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.Huauv"><code class="docutils literal notranslate"><span class="pre">Huauv</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.Huauv.control_schemes"><code class="docutils literal notranslate"><span class="pre">Huauv.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.Huauv.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">Huauv.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.HydroneClassic"><code class="docutils literal notranslate"><span class="pre">HydroneClassic</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.HydroneClassic.control_schemes"><code class="docutils literal notranslate"><span class="pre">HydroneClassic.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.HydroneClassic.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">HydroneClassic.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.HydroneV0"><code class="docutils literal notranslate"><span class="pre">HydroneV0</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.HydroneV0.control_schemes"><code class="docutils literal notranslate"><span class="pre">HydroneV0.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.HydroneV0.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">HydroneV0.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.ScubaDiver"><code class="docutils literal notranslate"><span class="pre">ScubaDiver</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ScubaDiver.control_schemes"><code class="docutils literal notranslate"><span class="pre">ScubaDiver.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.ScubaDiver.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">ScubaDiver.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.SphereAgent"><code class="docutils literal notranslate"><span class="pre">SphereAgent</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.SphereAgent.control_schemes"><code class="docutils literal notranslate"><span class="pre">SphereAgent.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.SphereAgent.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">SphereAgent.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.SurfaceVessel"><code class="docutils literal notranslate"><span class="pre">SurfaceVessel</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.SurfaceVessel.control_schemes"><code class="docutils literal notranslate"><span class="pre">SurfaceVessel.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.SurfaceVessel.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">SurfaceVessel.get_joint_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.DjiMatrice.control_abstractions"><code class="docutils literal notranslate"><span class="pre">DjiMatrice.control_abstractions</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.TorpedoAUV"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.TorpedoAUV.control_schemes"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.TorpedoAUV.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.TurtleAgent"><code class="docutils literal notranslate"><span class="pre">TurtleAgent</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.TurtleAgent.control_schemes"><code class="docutils literal notranslate"><span class="pre">TurtleAgent.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.TurtleAgent.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">TurtleAgent.get_joint_constraints()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#biguasim.agents.UavAgent"><code class="docutils literal notranslate"><span class="pre">UavAgent</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.UavAgent.control_schemes"><code class="docutils literal notranslate"><span class="pre">UavAgent.control_schemes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.UavAgent.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">UavAgent.get_joint_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.agents.TorpedoAUV.control_abstractions"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.control_abstractions</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -191,6 +120,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lcm.html">LCM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamics.html">BiguaSim Dynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ardubridge.html">ArduPilot Bridge</a></li>
 <li class="toctree-l1"><a class="reference internal" href="util.html">Util</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weather.html">Weather Controller</a></li>
@@ -236,56 +166,26 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>(client[, name])</p></td>
 <td><p>A learning agent in BiguaSim</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.BlueROV2" title="biguasim.agents.BlueROV2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueROV2</span></code></a>(client[, name])</p></td>
-<td><p>BlueROV2 import based on HoveringAUV A simple autonomous underwater vehicle.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.BlueBoat" title="biguasim.agents.BlueBoat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueBoat</span></code></a>(client[, name])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.ControlSchemes" title="biguasim.agents.ControlSchemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ControlSchemes</span></code></a>()</p></td>
-<td><p>All allowed control schemes.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BlueROV2" title="biguasim.agents.BlueROV2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueROV2</span></code></a>(client[, name])</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.CougUV" title="biguasim.agents.CougUV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CougUV</span></code></a>(client[, name])</p></td>
-<td><p>CougUV is based off the torpedo, a simple foward motion autonomous underwater vehicle.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.BlueROVHeavy" title="biguasim.agents.BlueROVHeavy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueROVHeavy</span></code></a>(client[, name])</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.DjiMatrice" title="biguasim.agents.DjiMatrice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DjiMatrice</span></code></a>(client[, name])</p></td>
-<td><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.FixedWing" title="biguasim.agents.FixedWing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixedWing</span></code></a>(client[, name])</p></td>
-<td><p>Fixed Wing agent</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HoveringAUV" title="biguasim.agents.HoveringAUV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HoveringAUV</span></code></a>(client[, name])</p></td>
-<td><p>A simple autonomous underwater vehicle.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.Huauv" title="biguasim.agents.Huauv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Huauv</span></code></a>(client[, name])</p></td>
-<td><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HydroneClassic" title="biguasim.agents.HydroneClassic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HydroneClassic</span></code></a>(client[, name])</p></td>
-<td><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.HydroneV0" title="biguasim.agents.HydroneV0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HydroneV0</span></code></a>(client[, name])</p></td>
-<td><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.ScubaDiver" title="biguasim.agents.ScubaDiver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScubaDiver</span></code></a>(client[, name])</p></td>
-<td><p>A copy of HoveringAUV with scuba diver mesh</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.SphereAgent" title="biguasim.agents.SphereAgent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SphereAgent</span></code></a>(client[, name])</p></td>
-<td><p>A basic sphere robot.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.SurfaceVessel" title="biguasim.agents.SurfaceVessel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceVessel</span></code></a>(client[, name])</p></td>
-<td><p>A simple surface vessel.</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.TorpedoAUV" title="biguasim.agents.TorpedoAUV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a>(client[, name])</p></td>
-<td><p>A simple foward motion autonomous underwater vehicle.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.TurtleAgent" title="biguasim.agents.TurtleAgent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TurtleAgent</span></code></a>(client[, name])</p></td>
-<td><p>A simple turtle bot.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.UavAgent" title="biguasim.agents.UavAgent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UavAgent</span></code></a>(client[, name])</p></td>
-<td><p>A UAV (quadcopter) agent</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.agents.AgentDefinition">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">AgentDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_rot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_main_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.AgentDefinition" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">AgentDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starting_rot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_main_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.AgentDefinition" title="Link to this definition"></a></dt>
 <dd><p>Represents information needed to initialize agent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -307,7 +207,7 @@ BiguaSimSensors to read from this agent.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.agents.AgentFactory">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">AgentFactory</span></span><a class="headerlink" href="#biguasim.agents.AgentFactory" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">AgentFactory</span></span><a class="headerlink" href="#biguasim.agents.AgentFactory" title="Link to this definition"></a></dt>
 <dd><p>Creates an agent object</p>
 <p><strong>Methods:</strong></p>
 <table class="autosummary longtable docutils align-default">
@@ -319,7 +219,7 @@ BiguaSimSensors to read from this agent.</p></li>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="biguasim.agents.AgentFactory.build_agent">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_def</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.AgentFactory.build_agent" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_agent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_def</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.AgentFactory.build_agent" title="Link to this definition"></a></dt>
 <dd><p>Constructs an agent</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -337,7 +237,7 @@ associated with</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.agents.BiguaSimAgent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">BiguaSimAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">BiguaSimAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent" title="Link to this definition"></a></dt>
 <dd><p>A learning agent in BiguaSim</p>
 <p>Agents can act, receive rewards, and receive observations from their sensors.
 Examples include the Android, UAV, and SphereRobot.</p>
@@ -428,7 +328,7 @@ BiguaSimSensors on this agent.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.action_space" title="biguasim.agents.BiguaSimAgent.action_space"><code class="xref py py-obj docutils literal notranslate"><span class="pre">action_space</span></code></a></p></td>
 <td><p>Gets the action space for the current agent and control scheme.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.control_schemes" title="biguasim.agents.BiguaSimAgent.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.agents.BiguaSimAgent.control_abstractions" title="biguasim.agents.BiguaSimAgent.control_abstractions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstractions</span></code></a></p></td>
 <td><p>A list of all control schemes for the agent.</p></td>
 </tr>
 </tbody>
@@ -447,7 +347,7 @@ scheme.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="biguasim.agents.BiguaSimAgent.action_space">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action_space</span></span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent.action_space" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action_space</span></span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent.action_space" title="Link to this definition"></a></dt>
 <dd><p>Gets the action space for the current agent and control scheme.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -481,8 +381,8 @@ agent in the world.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.BiguaSimAgent.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent.control_schemes" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="biguasim.agents.BiguaSimAgent.control_abstractions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_abstractions</span></span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent.control_abstractions" title="Link to this definition"></a></dt>
 <dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
 first element containing a short description of the control scheme, and the second
 element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
@@ -537,11 +437,10 @@ world.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="biguasim.agents.BiguaSimAgent.set_control_scheme">
 <span class="sig-name descname"><span class="pre">set_control_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BiguaSimAgent.set_control_scheme" title="Link to this definition"></a></dt>
-<dd><p>Sets the control scheme for the agent. See <a class="reference internal" href="#biguasim.agents.ControlSchemes" title="biguasim.agents.ControlSchemes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlSchemes</span></code></a>.</p>
+<dd><p>Sets the control scheme for the agent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>) – The control scheme to use. Should be set with an enum from
-<a class="reference internal" href="#biguasim.agents.ControlSchemes" title="biguasim.agents.ControlSchemes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlSchemes</span></code></a>.</p>
+<dd class="field-odd"><p><strong>index</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>) – The control scheme to use. Should be set with an enum from</p>
 </dd>
 </dl>
 </dd></dl>
@@ -586,52 +485,48 @@ and yaw in degrees of the agent.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="biguasim.agents.BlueBoat">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">BlueBoat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BlueBoat" title="Link to this definition"></a></dt>
+<dd><p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BlueBoat.control_abstractions" title="biguasim.agents.BlueBoat.control_abstractions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstractions</span></code></a></p></td>
+<td><p>A list of all control schemes for the agent.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.agents.BlueBoat.control_abstractions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_abstractions</span></span><a class="headerlink" href="#biguasim.agents.BlueBoat.control_abstractions" title="Link to this definition"></a></dt>
+<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
+first element containing a short description of the control scheme, and the second
+element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="biguasim.agents.BlueROV2">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">BlueROV2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BlueROV2" title="Link to this definition"></a></dt>
-<dd><p>BlueROV2 import based on HoveringAUV A simple autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.
-<strong>Action Space</strong>
-Has three possible control schemes, as follows
-#. Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code>
-#. PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code>
-#. Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code>
-Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">BlueROV2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BlueROV2" title="Link to this definition"></a></dt>
+<dd><p><strong>Attributes:</strong></p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BlueROV2.control_schemes" title="biguasim.agents.BlueROV2.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BlueROV2.control_abstractions" title="biguasim.agents.BlueROV2.control_abstractions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstractions</span></code></a></p></td>
 <td><p>A list of all control schemes for the agent.</p></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BlueROV2.get_joint_constraints" title="biguasim.agents.BlueROV2.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
 <dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.BlueROV2.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.BlueROV2.control_schemes" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="biguasim.agents.BlueROV2.control_abstractions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_abstractions</span></span><a class="headerlink" href="#biguasim.agents.BlueROV2.control_abstractions" title="Link to this definition"></a></dt>
 <dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
 first element containing a short description of the control scheme, and the second
 element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
@@ -645,241 +540,22 @@ element containing the <code class="xref py py-obj docutils literal notranslate"
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.BlueROV2.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BlueROV2.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">ControlSchemes</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes" title="Link to this definition"></a></dt>
-<dd><p>All allowed control schemes.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.ANDROID_TORQUES">
-<span class="sig-name descname"><span class="pre">ANDROID_TORQUES</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.ANDROID_TORQUES" title="Link to this definition"></a></dt>
-<dd><p>Default Android control scheme. Specify a torque for each joint.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.CONTINUOUS_SPHERE_DEFAULT">
-<span class="sig-name descname"><span class="pre">CONTINUOUS_SPHERE_DEFAULT</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.CONTINUOUS_SPHERE_DEFAULT" title="Link to this definition"></a></dt>
-<dd><p>Default ContinuousSphere control scheme.
-Takes two commands, [forward_delta, turn_delta].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.DISCRETE_SPHERE_DEFAULT">
-<span class="sig-name descname"><span class="pre">DISCRETE_SPHERE_DEFAULT</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.DISCRETE_SPHERE_DEFAULT" title="Link to this definition"></a></dt>
-<dd><p>Default DiscreteSphere control scheme. Takes a value, 0-4,
-which corresponds with forward, backward, right, and left.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.NAV_TARGET_LOCATION">
-<span class="sig-name descname"><span class="pre">NAV_TARGET_LOCATION</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.NAV_TARGET_LOCATION" title="Link to this definition"></a></dt>
-<dd><p>Default NavAgent control scheme. Takes a target xyz coordinate.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.UAV_TORQUES">
-<span class="sig-name descname"><span class="pre">UAV_TORQUES</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.UAV_TORQUES" title="Link to this definition"></a></dt>
-<dd><p>Default UAV control scheme. Takes torques for roll, pitch, and yaw, as
-well as thrust.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.UAV_ROLL_PITCH_YAW_RATE_ALT">
-<span class="sig-name descname"><span class="pre">UAV_ROLL_PITCH_YAW_RATE_ALT</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.UAV_ROLL_PITCH_YAW_RATE_ALT" title="Link to this definition"></a></dt>
-<dd><p>Control scheme for UAV. Takes roll, pitch, yaw rate, and
-altitude targets.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.HAND_AGENT_MAX_TORQUES">
-<span class="sig-name descname"><span class="pre">HAND_AGENT_MAX_TORQUES</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.HAND_AGENT_MAX_TORQUES" title="Link to this definition"></a></dt>
-<dd><p>Default Android control scheme. Specify a torque for each joint.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.AUV_THRUSTERS">
-<span class="sig-name descname"><span class="pre">AUV_THRUSTERS</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.AUV_THRUSTERS" title="Link to this definition"></a></dt>
-<dd><p>Default HoveringAUV control scheme. Specify 8-vector of forces for each thruster.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.AUV_CONTROL">
-<span class="sig-name descname"><span class="pre">AUV_CONTROL</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.AUV_CONTROL" title="Link to this definition"></a></dt>
-<dd><p>Implemented PD controller. Specify 6-vector of position and roll,pitch,yaw to go too.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.AUV_FORCES">
-<span class="sig-name descname"><span class="pre">AUV_FORCES</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.AUV_FORCES" title="Link to this definition"></a></dt>
-<dd><p>Used for custom dynamics. All internal dynamics (except collisions) are turned off including
-buoyancy, gravity, and damping. Specify 6-vector of linear and angular acceleration in the global frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.TAUV_FINS">
-<span class="sig-name descname"><span class="pre">TAUV_FINS</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.TAUV_FINS" title="Link to this definition"></a></dt>
-<dd><p>Default TorpedoAUV control scheme. Specify 5-vector of fin rotations in degrees and propeller value in Newtons.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.TAUV_FORCES">
-<span class="sig-name descname"><span class="pre">TAUV_FORCES</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.TAUV_FORCES" title="Link to this definition"></a></dt>
-<dd><p>Used for custom dynamics. All internal dynamics (except collisions) are turned off including
-buoyancy, gravity, and damping. Specify 6-vector of linear and angular acceleration in the global frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.SV_THRUSTERS">
-<span class="sig-name descname"><span class="pre">SV_THRUSTERS</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.SV_THRUSTERS" title="Link to this definition"></a></dt>
-<dd><p>Default SurfaceVessel control scheme. Specify 2-vector of forces for left and right thruster.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.SV_CONTROL">
-<span class="sig-name descname"><span class="pre">SV_CONTROL</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.SV_CONTROL" title="Link to this definition"></a></dt>
-<dd><p>Implemented PD controller. Specify 2-vector of x and y position to go too.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="biguasim.agents.ControlSchemes.SV_FORCES">
-<span class="sig-name descname"><span class="pre">SV_FORCES</span></span><a class="headerlink" href="#biguasim.agents.ControlSchemes.SV_FORCES" title="Link to this definition"></a></dt>
-<dd><p>Used for custom dynamics. All internal dynamics (except collisions) are turned off including
-buoyancy, gravity, and damping. Specify 6-vector of linear and angular acceleration in the global frame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.CougUV">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">CougUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.CougUV" title="Link to this definition"></a></dt>
-<dd><p>CougUV is based off the torpedo, a simple foward motion autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.</p>
-<p><strong>Action Space</strong></p>
-<p>Has two possible action spaces, as follows:</p>
-<ol class="arabic simple">
-<li><p>Fins &amp; Propeller: <code class="docutils literal notranslate"><span class="pre">[left_fin,</span> <span class="pre">top_fin,</span> <span class="pre">right_fin,</span> <span class="pre">bottom_fin,</span> <span class="pre">thrust]</span></code></p></li>
-<li><p>Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code></p></li>
-</ol>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3 matrix of positions in local frame of propeller position in m.</p></li>
-<li><p><strong>fin_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 4x3 matrix of positions in local frame of fin positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
+<dt class="sig sig-object py" id="biguasim.agents.BlueROVHeavy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">BlueROVHeavy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.BlueROVHeavy" title="Link to this definition"></a></dt>
+<dd><p><strong>Attributes:</strong></p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.CougUV.control_schemes" title="biguasim.agents.CougUV.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.BlueROVHeavy.control_abstractions" title="biguasim.agents.BlueROVHeavy.control_abstractions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstractions</span></code></a></p></td>
 <td><p>A list of all control schemes for the agent.</p></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.CougUV.get_joint_constraints" title="biguasim.agents.CougUV.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
 <dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.CougUV.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.CougUV.control_schemes" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="biguasim.agents.BlueROVHeavy.control_abstractions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_abstractions</span></span><a class="headerlink" href="#biguasim.agents.BlueROVHeavy.control_abstractions" title="Link to this definition"></a></dt>
 <dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
 first element containing a short description of the control scheme, and the second
 element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
@@ -891,64 +567,24 @@ element containing the <code class="xref py py-obj docutils literal notranslate"
 <dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.CougUV.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.CougUV.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.agents.DjiMatrice">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">DjiMatrice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.DjiMatrice" title="Link to this definition"></a></dt>
-<dd><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.
-<strong>Action Space</strong>
-Has three possible control schemes, as follows
-#. Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code>
-#. PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code>
-#. Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code>
-Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">DjiMatrice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.DjiMatrice" title="Link to this definition"></a></dt>
+<dd><p><strong>Attributes:</strong></p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.DjiMatrice.control_schemes" title="biguasim.agents.DjiMatrice.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.DjiMatrice.control_abstractions" title="biguasim.agents.DjiMatrice.control_abstractions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstractions</span></code></a></p></td>
 <td><p>A list of all control schemes for the agent.</p></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.DjiMatrice.get_joint_constraints" title="biguasim.agents.DjiMatrice.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
 <dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.DjiMatrice.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.DjiMatrice.control_schemes" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="biguasim.agents.DjiMatrice.control_abstractions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_abstractions</span></span><a class="headerlink" href="#biguasim.agents.DjiMatrice.control_abstractions" title="Link to this definition"></a></dt>
 <dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
 first element containing a short description of the control scheme, and the second
 element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
@@ -960,621 +596,24 @@ element containing the <code class="xref py py-obj docutils literal notranslate"
 <dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.DjiMatrice.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.DjiMatrice.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.FixedWing">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">FixedWing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.FixedWing" title="Link to this definition"></a></dt>
-<dd><p>Fixed Wing agent</p>
-<p><strong>Action Space</strong></p>
-<p>Has three possible control schemes, as follows</p>
-<ol class="arabic simple">
-<li><p>Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code></p></li>
-<li><p>PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code></p></li>
-<li><p>Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code></p></li>
-</ol>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.FixedWing.control_schemes" title="biguasim.agents.FixedWing.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.FixedWing.get_joint_constraints" title="biguasim.agents.FixedWing.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.FixedWing.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.FixedWing.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.FixedWing.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.FixedWing.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.HoveringAUV">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">HoveringAUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.HoveringAUV" title="Link to this definition"></a></dt>
-<dd><p>A simple autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.</p>
-<p><strong>Action Space</strong></p>
-<p>Has three possible control schemes, as follows</p>
-<ol class="arabic simple">
-<li><p>Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code></p></li>
-<li><p>PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code></p></li>
-<li><p>Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code></p></li>
-</ol>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HoveringAUV.control_schemes" title="biguasim.agents.HoveringAUV.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HoveringAUV.get_joint_constraints" title="biguasim.agents.HoveringAUV.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.HoveringAUV.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.HoveringAUV.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.HoveringAUV.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.HoveringAUV.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.Huauv">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">Huauv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.Huauv" title="Link to this definition"></a></dt>
-<dd><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.
-<strong>Action Space</strong>
-Has three possible control schemes, as follows
-#. Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code>
-#. PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code>
-#. Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code>
-Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.Huauv.control_schemes" title="biguasim.agents.Huauv.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.Huauv.get_joint_constraints" title="biguasim.agents.Huauv.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.Huauv.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.Huauv.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.Huauv.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.Huauv.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.HydroneClassic">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">HydroneClassic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.HydroneClassic" title="Link to this definition"></a></dt>
-<dd><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.
-<strong>Action Space</strong>
-Has three possible control schemes, as follows
-#. Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code>
-#. PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code>
-#. Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code>
-Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HydroneClassic.control_schemes" title="biguasim.agents.HydroneClassic.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HydroneClassic.get_joint_constraints" title="biguasim.agents.HydroneClassic.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.HydroneClassic.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.HydroneClassic.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.HydroneClassic.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.HydroneClassic.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.HydroneV0">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">HydroneV0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.HydroneV0" title="Link to this definition"></a></dt>
-<dd><p>Huauv import based on HoveringAUV A simple autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.
-<strong>Action Space</strong>
-Has three possible control schemes, as follows
-#. Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code>
-#. PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code>
-#. Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code>
-Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HydroneV0.control_schemes" title="biguasim.agents.HydroneV0.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.HydroneV0.get_joint_constraints" title="biguasim.agents.HydroneV0.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.HydroneV0.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.HydroneV0.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.HydroneV0.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.HydroneV0.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.ScubaDiver">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">ScubaDiver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.ScubaDiver" title="Link to this definition"></a></dt>
-<dd><p>A copy of HoveringAUV with scuba diver mesh</p>
-<p><strong>Action Space</strong></p>
-<p>Has three possible control schemes, as follows</p>
-<ol class="arabic simple">
-<li><p>Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Vertical</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Vertical</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Vertical</span> <span class="pre">Back</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Starboard,</span> <span class="pre">Angled</span> <span class="pre">Front</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Port,</span> <span class="pre">Angled</span> <span class="pre">Back</span> <span class="pre">Starboard]</span></code></p></li>
-<li><p>PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_pos_x,</span> <span class="pre">des_pos_y,</span> <span class="pre">des_pos_z,</span> <span class="pre">roll,</span> <span class="pre">pitch,</span> <span class="pre">yaw]</span></code></p></li>
-<li><p>Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code></p></li>
-</ol>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_d</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of unit vectors in the direction of thruster propulsion</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 8x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.ScubaDiver.control_schemes" title="biguasim.agents.ScubaDiver.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.ScubaDiver.get_joint_constraints" title="biguasim.agents.ScubaDiver.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.ScubaDiver.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.ScubaDiver.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.ScubaDiver.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.ScubaDiver.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.SphereAgent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">SphereAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.SphereAgent" title="Link to this definition"></a></dt>
-<dd><p>A basic sphere robot.</p>
-<p>See <a class="reference internal" href="../agents/agents/sphere-agent.html#sphere-agent"><span class="std std-ref">SphereAgent</span></a> for more details.</p>
-<p><strong>Action Space:</strong></p>
-<p>Has two possible control schemes, one discrete and one continuous:</p>
-<table class="docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p>Control Scheme</p></td>
-<td><p>Value</p></td>
-<td><p>Action</p></td>
-</tr>
-<tr class="row-even"><td rowspan="4"><p>Discrete (<code class="docutils literal notranslate"><span class="pre">0</span></code>)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">[0]</span></code></p></td>
-<td><p>Move forward</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[1]</span></code></p></td>
-<td><p>Move backward</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[2]</span></code></p></td>
-<td><p>Turn right</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[3]</span></code></p></td>
-<td><p>Turn left</p></td>
-</tr>
-<tr class="row-even"><td><p>Continuous (<code class="docutils literal notranslate"><span class="pre">1</span></code>)</p></td>
-<td colspan="2"><p><code class="docutils literal notranslate"><span class="pre">[forward_speed,</span> <span class="pre">rot_speed]</span></code></p></td>
-</tr>
-</tbody>
-</table>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.SphereAgent.control_schemes" title="biguasim.agents.SphereAgent.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.SphereAgent.get_joint_constraints" title="biguasim.agents.SphereAgent.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.SphereAgent.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.SphereAgent.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.SphereAgent.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.SphereAgent.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.SurfaceVessel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">SurfaceVessel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.SurfaceVessel" title="Link to this definition"></a></dt>
-<dd><p>A simple surface vessel. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.</p>
-<p><strong>Action Space</strong></p>
-<p>Has three possible control schemes, as follows</p>
-<ol class="arabic simple">
-<li><p>Thruster Forces: <code class="docutils literal notranslate"><span class="pre">[Left</span> <span class="pre">thruster,</span> <span class="pre">Right</span> <span class="pre">thruster]</span></code></p></li>
-<li><p>PD Controller: <code class="docutils literal notranslate"><span class="pre">[des_x,</span> <span class="pre">des_y,</span> <span class="pre">des_yaw]</span></code></p></li>
-<li><p>Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code></p></li>
-</ol>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation.</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 2x3 matrix of positions in local frame of thrusters positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.SurfaceVessel.control_schemes" title="biguasim.agents.SurfaceVessel.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.SurfaceVessel.get_joint_constraints" title="biguasim.agents.SurfaceVessel.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.SurfaceVessel.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.SurfaceVessel.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.SurfaceVessel.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.SurfaceVessel.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.agents.TorpedoAUV">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">TorpedoAUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.TorpedoAUV" title="Link to this definition"></a></dt>
-<dd><p>A simple foward motion autonomous underwater vehicle. All variables are not actually used in simulation,
-modifying them will have no effect on results. They are exposed for convenience in implementing custom
-dynamics.</p>
-<p><strong>Action Space</strong></p>
-<p>Has two possible action spaces, as follows:</p>
-<ol class="arabic simple">
-<li><p>Fins &amp; Propeller: <code class="docutils literal notranslate"><span class="pre">[left_fin,</span> <span class="pre">top_fin,</span> <span class="pre">right_fin,</span> <span class="pre">bottom_fin,</span> <span class="pre">thrust]</span></code></p></li>
-<li><p>Accelerations, in global frame: <code class="docutils literal notranslate"><span class="pre">[lin_accel_x,</span> <span class="pre">lin_accel_y,</span> <span class="pre">lin_accel_z,</span> <span class="pre">ang_accel_x,</span> <span class="pre">ang_accel_y,</span> <span class="pre">ang_accel_x]</span></code></p></li>
-</ol>
-<p><strong>These variables are the constants used in the C++ for “Thruster” and “PD” control schemes. Editing them in python will not change the vehicle behavior.</strong>
-<strong>If using the “custom dynamics” control scheme, these values are ignored, and any desired dynamics parameters must be defined separately in your dynamics implementation. **
-**Instructions for implemeting parameters for Thor Fossen dynamics are given in the corresponding fossen dynamics documentation.</strong></p>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mass</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Mass of the vehicle in kg.</p></li>
-<li><p><strong>water_density</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Water density in kg / m^3.</p></li>
-<li><p><strong>volume</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>): Volume of vehicle in m^3.</p></li>
-<li><p><strong>cob</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3-vecter Center of buoyancy from the center of mass in m.</p></li>
-<li><p><strong>I</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3x3 Inertia matrix.</p></li>
-<li><p><strong>thruster_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 3 matrix of positions in local frame of propeller position in m.</p></li>
-<li><p><strong>fin_p</strong> – (<code class="xref py py-obj docutils literal notranslate"><span class="pre">np.ndarray</span></code>): 4x3 matrix of positions in local frame of fin positions in m.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Attributes:</strong></p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">TorpedoAUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.TorpedoAUV" title="Link to this definition"></a></dt>
+<dd><p><strong>Attributes:</strong></p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.TorpedoAUV.control_schemes" title="biguasim.agents.TorpedoAUV.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.TorpedoAUV.control_abstractions" title="biguasim.agents.TorpedoAUV.control_abstractions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstractions</span></code></a></p></td>
 <td><p>A list of all control schemes for the agent.</p></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.TorpedoAUV.get_joint_constraints" title="biguasim.agents.TorpedoAUV.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
 <dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.TorpedoAUV.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.TorpedoAUV.control_schemes" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="biguasim.agents.TorpedoAUV.control_abstractions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_abstractions</span></span><a class="headerlink" href="#biguasim.agents.TorpedoAUV.control_abstractions" title="Link to this definition"></a></dt>
 <dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
 first element containing a short description of the control scheme, and the second
 element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
@@ -1586,118 +625,6 @@ element containing the <code class="xref py py-obj docutils literal notranslate"
 <dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.TorpedoAUV.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.TorpedoAUV.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.TurtleAgent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">TurtleAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.TurtleAgent" title="Link to this definition"></a></dt>
-<dd><p>A simple turtle bot.</p>
-<p><strong>Action Space</strong>:</p>
-<p><code class="docutils literal notranslate"><span class="pre">[forward_force,</span> <span class="pre">rot_force]</span></code></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">forward_force</span></code> is capped at 160 in either direction</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rot_force</span></code> is capped at 35 either direction</p></li>
-</ul>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.TurtleAgent.control_schemes" title="biguasim.agents.TurtleAgent.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.TurtleAgent.get_joint_constraints" title="biguasim.agents.TurtleAgent.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.TurtleAgent.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.TurtleAgent.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.TurtleAgent.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.TurtleAgent.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="biguasim.agents.UavAgent">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.agents.</span></span><span class="sig-name descname"><span class="pre">UavAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DefaultAgent'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.UavAgent" title="Link to this definition"></a></dt>
-<dd><p>A UAV (quadcopter) agent</p>
-<p><strong>Action Space:</strong></p>
-<p>Has two possible continuous action control schemes</p>
-<ol class="arabic simple">
-<li><p>[pitch_torque, roll_torque, yaw_torque, thrust] and</p></li>
-<li><p>[pitch_target, roll_target, yaw_rate_target, altitude_target]</p></li>
-</ol>
-<p>See <a class="reference internal" href="../agents/agents/uav-agent.html#uav-agent"><span class="std std-ref">UAV Agent</span></a> for more details.</p>
-<p>Inherits from <a class="reference internal" href="#biguasim.agents.BiguaSimAgent" title="biguasim.agents.BiguaSimAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a>.</p>
-<p><strong>Attributes:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.UavAgent.control_schemes" title="biguasim.agents.UavAgent.control_schemes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_schemes</span></code></a></p></td>
-<td><p>A list of all control schemes for the agent.</p></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Methods:</strong></p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.agents.UavAgent.get_joint_constraints" title="biguasim.agents.UavAgent.get_joint_constraints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_joint_constraints</span></code></a>(joint_name)</p></td>
-<td><p>Returns the corresponding swing1, swing2 and twist limit values for the specified joint.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property">
-<dt class="sig sig-object py" id="biguasim.agents.UavAgent.control_schemes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">control_schemes</span></span><a class="headerlink" href="#biguasim.agents.UavAgent.control_schemes" title="Link to this definition"></a></dt>
-<dd><p>A list of all control schemes for the agent. Each list element is a 2-tuple, with the
-first element containing a short description of the control scheme, and the second
-element containing the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ActionSpace</span></code> for the control scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Each tuple contains a short description and the ActionSpace</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>(<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, <a class="reference internal" href="spaces.html#biguasim.spaces.ActionSpace" title="biguasim.spaces.ActionSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionSpace</span></code></a>)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biguasim.agents.UavAgent.get_joint_constraints">
-<span class="sig-name descname"><span class="pre">get_joint_constraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">joint_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.agents.UavAgent.get_joint_constraints" title="Link to this definition"></a></dt>
-<dd><p>Returns the corresponding swing1, swing2 and twist limit values for the
-specified joint. Will return None if the joint does not exist for the agent.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1715,7 +642,7 @@ specified joint. Will return None if the joint does not exist for the agent.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright FURG.</p>
+    <p>&#169; Copyright Nautec FURG.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

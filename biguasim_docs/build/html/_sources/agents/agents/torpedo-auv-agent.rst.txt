@@ -14,26 +14,37 @@ A generic torpedo-style AUV with four fins.
 
 See the :class:`~biguasim.agents.TorpedoAUV`.
 
+Control Abstractions
+====================
 
-Control Schemes
-===============
+**scheme_rudders_sterns_motor_speed**
+  The primary low-level control for the TorpedoAUV actuators.
 
-**AUV Fins (``0``)**
-  Takes in a 5 length vector of four fin angles and a thruster value. The format is 
-  [Right Fin, Top Fin, Left Fin, Bottom Fin, Thruster]. Fins have a range of -45 to 45 degrees, and the 
-  thruster has a range of -100 to 100 (percent of max thrust).
+  **Format**: A 5-length vector ``[rudder_top, rudder_bottom, stern_left, stern_right, rpm]``.
 
-**Custom Dynamics (``1``)**
-   A 6-length floating point vector of linear and angular accelerations in the global frame. This 
-   is to be used for implementing custom dynamics. Besides collisions, all other forces and torques 
-   (including gravity, buoyancy, and damping) have been disabled in the simulator to allow for a 
-   clean slate for custom dynamics.
+  **Actuators**:
+      * ``rudder_top/bottom``: Control the vertical fins for **Yaw** (left/right).
+      * ``stern_left/right``: Control the horizontal planes for **Pitch** (up/down).
+      * ``rpm``: Controls the main rear propeller thrust.
 
-.. note::
+  **Note**: Since it's a fin-steered vehicle, you must have forward velocity (RPM > 0) for the rudders/sterns to generate lift and turn the agent.
 
-   Dynamics models from Thor Fossen are available for the TorpedoAUV to enable more realistic 
-   simulations. To use Fossen dynamics, use the Custom Dynamics control scheme, then create a Fossen 
-   vehicle controller and a Fossen dynamics manager. For details, see :ref:`fossen-dynamics`.
+**scheme_depth_heading_rpm_surge**
+
+  An intermediate abstraction that uses internal PIDs to maintain specific navigation states.
+  **Format**: A 4-length vector ``[depth, heading, rpm, surge]``.
+
+  **Parameters**:
+      * ``depth``: Target depth in meters (negative values).
+      * ``heading``: Target yaw orientation in degrees or radians (depending on agent config).
+      * ``rpm``: Base motor speed.
+      * ``surge``: Desired forward speed component.
+
+**scheme_accel**
+
+  Applies direct linear and angular accelerations to the agent in the global frame.
+  
+  **Format**: A 6-length vector ``[lin_acc_x, lin_acc_y, lin_acc_z, ang_acc_x, ang_acc_y, ang_acc_z]``.
 
 Sockets
 =======

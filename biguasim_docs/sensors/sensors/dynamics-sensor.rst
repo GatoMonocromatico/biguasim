@@ -21,7 +21,9 @@ Example sensor definition::
         "socket": "COM",
         "configuration": {
            "UseCOM": true,
-           "UseRPY": true
+           "UseRPY": false
         }
     }
 
+.. note::
+    "UseCOM" and "UseRPY" must be opposites. In other words, one must be true while the other must be false.

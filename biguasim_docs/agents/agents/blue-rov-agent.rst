@@ -4,35 +4,47 @@
 BlueROV2
 ========
 
-.. image:: images/blue-rov.png
-   :scale: 100%
+.. image:: images/bluerov.png
 
 
 Description
 ===========
-An implementation of the BlueROV2 Heavy vehicle from Blue Robotics. 
+An implementation of the BlueROV2 vehicle from Blue Robotics. 
 
 See the :class:`~biguasim.agents.BlueROV2`.
 
 
-Control Schemes
-===============
+Control Abstractions
+====================
 
-**AUV Thrusters (``0``)**
-  An 8-length floating point vector used to specify the control on each thruster. They begin with 
-  the front right vertical thrusters, then goes around counter-clockwise, then repeat the last four 
-  with the sideways thrusters.
+**cmd_vel**
+  Uses internal PID controllers to achieve target linear velocities.
 
-**PD Controller (``1``)**
-   A 6-length floating point vector of desired position in the global frame and roll, pitch, and yaw. 
-   A basic PD controller is implemented to move the vehicle to that position and orientation 
-   using the needed forces and torques.
+  * **Format**: A 3-length vector ``[vx, vy, vz]``.
 
-**Custom Dynamics (``2``)**
-   A 6-length floating point vector of linear and angular accelerations in the global frame. This 
-   is to be used for implementing custom dynamics. Besides collisions, all other forces and torques 
-   (including gravity, buoyancy, and damping) have been disabled in the simulator to allow for a 
-   clean slate for custom dynamics.
+  * **Units**: Meters per second (m/s).
+
+**cmd_vel_yaw**
+  Maintains target linear velocities while controlling the heading rate.
+
+  * **Format**: A 4-length vector ``[vx, vy, vz, yaw_rate]``.
+
+  * **Units**: m/s for velocity and rad/s for angular rate.
+
+**cmd_pos_yaw**
+  A high-level position controller to move the vessel to a specific global coordinate and heading.
+
+  * **Format**: A 4-length vector ``[x, y, z, yaw]``.
+
+**thrusters**
+  Provides direct, raw access to the propulsion system.
+
+  * **Format**: A 2-length vector ``[r1 thruster, r2 thruster, r3 thruster, r4 thruster, r5 thruster, r6 thruster]``.
+
+**scheme_accel**
+  Applies direct linear and angular accelerations to the agent in the global frame.
+  
+  * **Format**: A 6-length vector ``[lin_acc_x, lin_acc_y, lin_acc_z, ang_acc_x, ang_acc_y, ang_acc_z]``.
 
 Sockets
 =======
@@ -44,23 +56,16 @@ Socket Definitions
 ------------------
 - ``COM`` Center of mass.
 - ``SonarSocket`` Location of the sonar sensor.
-- ``DVLSocket`` Location of the DVL.
-- ``IMUSocket`` Location of the IMU. Rotated 180 on x-axis, i.e. in a NED frame instead of NWU.
-- ``DepthSocket`` Location of the depth sensor.
 - ``CameraSocket`` Location of the camera.
-- ``Origin`` True center of the robot.
+- ``Socket`` Below the agent.
 - ``Viewport`` Where the robot is viewed from.
 
 Socket Frames
 -------------
-.. image:: images/blue-rov-sockets.png
-   :scale: 120%
+.. image:: images/bluerov-socket.png
 
-.. image:: images/blue-rov-sockets-top.png
-   :scale: 40%
+.. image:: images/bluerov-top.png
 
-.. image:: images/blue-rov-sockets-left.png
-   :scale: 65%
+.. image:: images/bluerov-side.png
 
-.. image:: images/blue-rov-sockets-front.png
-   :scale: 73%
+.. image:: images/bluerov-front.png

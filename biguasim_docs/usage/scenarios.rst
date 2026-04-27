@@ -5,7 +5,7 @@ Scenarios
 =========
 
 When you call ``biguasim.make()`` to create an environment, you pass in the
-name of a scenario, eg. ``biguasim.make("Pier-Hovering")``. A scenario tells
+name of a scenario, eg. ``biguasim.make("Pier-Hover-")``. A scenario tells
 BiguaSim:
 
 * Which world to load
@@ -17,9 +17,6 @@ BiguaSim worlds are meant to be configurable by changing out the scenario.
 Scenarios allow the same world to be used for different purposes. For different 
 senarios using the same world, the world or map itself doesn't change, but the 
 things in the world and your objective can change.
-
-We provide several pre-built scenarios in :ref:`all-packages` for common underwater 
-robotics tasks, distributed as ``.json`` files. 
 
 BiguaSim is intended to be used with user-created scenarios as well. Custom scenarios 
 can be created using a dictionary in a Python script or by creating a ``.json`` file. 
@@ -93,11 +90,14 @@ see :ref:`agent-configuration`.
          "sensors": [
             "array of sensor objects"
          ],
-         "control_scheme": "{control scheme type}",
+         "control_abstraction": "{control abstraction type}",
          "location": [1.0, 2.0, 3.0],
          "rotation": [1.0, 2.0, 3.0],
          "location_randomization": [1, 2, 3],
-         "rotation_randomization": [10, 10, 10]
+         "rotation_randomization": [10, 10, 10],
+         "dynamics" : {
+                "batch_size" : 1,
+         }, 
       }
    ]
 
@@ -179,42 +179,42 @@ Other Scenario Parameters
    For more detail, see :ref:`lcm`.
 
 
-Accessing and Modifying Pre-Built Scenarios
-===========================================
+.. Accessing and Modifying Pre-Built Scenarios
+.. ===========================================
 
-Configurations for pre-built scenarios can be found by reading the associated ``.json`` file. 
-These are located in the worlds package folder (see :ref:`package-locations`). 
+.. Configurations for pre-built scenarios can be found by reading the associated ``.json`` file. 
+.. These are located in the worlds package folder (see :ref:`package-locations`). 
 
-Sometimes it is helpful to extract specific parameters from a pre-made scenario for use within 
-a Python script (ex. for plotting data). Rather than having to copy data manually from the 
-``.json``, you can use the BiguaSim :ref:`packagemanager` to extract the scenario configuration. 
+.. Sometimes it is helpful to extract specific parameters from a pre-made scenario for use within 
+.. a Python script (ex. for plotting data). Rather than having to copy data manually from the 
+.. ``.json``, you can use the BiguaSim :ref:`packagemanager` to extract the scenario configuration. 
 
-For example, the following code extracts the azimuth angle from the sidescan sonar sensor in the 
-``OpenWater-TorpedoSidescanSonar`` scenario.
+.. For example, the following code extracts the azimuth angle from the sidescan sonar sensor in the 
+.. ``Bridge`` scenario.
 
-.. code-block:: python
+.. .. code-block:: python
 
-   import biguasim
+..    import biguasim
 
-   scenario = biguasim.packagemanager.get_scenario("OpenWater-TorpedoSidescanSonar")
-   sidescan_config = scenario['agents'][0]['sensors'][-1]["configuration"]
-   azi = sidescan_config['Azimuth']
+..    scenario = biguasim.packagemanager.get_scenario("Bridge")
+..    sidescan_config = scenario['agents'][0]['sensors'][-1]["configuration"]
+..    azi = sidescan_config['Azimuth']
 
-You may find that the provided pre-built scenarios in the :ref:`Ocean package <all-packages>` 
-meet some but not all of your needs. Rather than create a new scenario from scratch, you can 
-modify the pre-built scenarios to adjust specific parameters using a similar method as above. 
+.. You may find that the provided pre-built scenarios in the :ref:`Ocean package <all-packages>` 
+.. meet some but not all of your needs. Rather than create a new scenario from scratch, you can 
+.. modify the pre-built scenarios to adjust specific parameters using a similar method as above. 
 
-The code below demonstrates how to modify the ``ticks_per_sec`` parameter in the ``Pier-Hovering``
-scenario:
+.. The code below demonstrates how to modify the ``ticks_per_sec`` parameter in the ``Pier-Hovering``
+.. scenario:
 
-.. code-block:: python
+.. .. code-block:: python
 
-   import biguasim
+..    import biguasim
 
-   scenario = biguasim.packagemanager.get_scenario("Pier-Hovering")
-   scenario["ticks_per_sec"] = 60
+..    scenario = biguasim.packagemanager.get_scenario("Pier-Hover")
+..    scenario["ticks_per_sec"] = 60
 
-   env = biguasim.make(scenario_cfg=scenario)
+..    env = biguasim.make(scenario_cfg=scenario)
 
 
 .. _`custom-scenarios`:
@@ -235,37 +235,59 @@ An example is given below:
 
 .. code-block:: python
 
-    import biguasim
+   import biguasim
 
-    scenario = {
+   scenario = {
         "name": "test_rgb_camera",
-        "world": "SimpleUnderwater",
-        "package_name": "Ocean",
+        "world": "Bridge",
+        "package_name": "SkyDive",
         "main_agent": "auv0",
         "ticks_per_sec": 60,
         "agents": [
             {
-                "agent_name": "auv0",
-                "agent_type": "HoveringAUV",
-                "sensors": [
-                    {
-                        "sensor_type": "RGBCamera",
-                        "socket": "CameraSocket",
-                        "configuration": {
-                            "CaptureWidth": 512,
-                            "CaptureHeight": 512
-                        }
-                    }
-                ],
-                "control_scheme": 0,
-                "location": [0, 0, -10]
+               "agent_name": "auv0",
+               "agent_type": "BlueROV2",
+               "sensors": [
+                  {
+                  "sensor_type": "DynamicsSensor",
+                  "socket": "IMUSocket",
+                  "configuration": {
+                        "UseCOM": True,
+                        "UseRPY": False  
+                     }
+                  },
+                  {
+                     "sensor_type": "RGBCamera",
+                     "socket": "CameraSocket",
+                     "configuration": {
+                           "CaptureWidth": 512,
+                           "CaptureHeight": 512
+                     }
+                  }
+               ],
+
+               "dynamics" : {
+                  "batch_size" : 1,
+               },                                        
+               "control_abstraction": 'cmd_vel', 
+               "location": [0, 0, -10],
+               "rotation": [0.0, 0.0, 90.0] 
             }
         ]
-    }
+   }
 
     with biguasim.make(scenario_cfg=scenario) as env:
         for _ in range(200):
-            env.tick()
+        
+            state = env.tick()
+            if "RGBCamera" in state:
+               pixels = state["RGBCamera"]
+               frame = pixels[:, :, 0:3].astype(np.uint8)
+               
+               cv2.imshow("Camera Output", frame)
+
+               if cv2.waitKey(1) & 0xFF == ord('q'):
+                  break
 
 
 Using a ``.json`` file for a Scenario Config

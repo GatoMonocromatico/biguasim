@@ -9,7 +9,7 @@ A scenario is a specific configuration of a world, including agents, sensors, an
 Packages contain predefined scenarios for convenience, but worlds can be used with user-defined 
 scenarios as well.
 
-The Oceans package is the default package installed with BiguaSim. It contains three primary worlds, 
+The SkyDive package is the default package installed with BiguaSim. It contains four primary worlds, 
 each with several scenarios for convenient use. 
 
 
@@ -31,5 +31,5 @@ BiguaSim Packages
 .. toctree::
    :maxdepth: 3
 
-   Ocean/Ocean
+   SkyDive/SkyDive
    

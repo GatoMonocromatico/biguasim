@@ -41,7 +41,7 @@ body,
 .rst-content span,
 .rst-content div,
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato', sans-serif;
     color: #333;
 }
 
@@ -545,3 +545,43 @@ body.dark-mode .highlight .n { color: #d2a8ff !important; } /* names */
 body.dark-mode .highlight .c { color: #8b949e !important; font-style: italic !important; } /* comments */
 
 /* ================= FIM DO PATCH ================= */
+
+/* Garante que imagens centralizadas tenham respiro em cima e embaixo */
+img.align-center {
+    display: block;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+/* Dá um espaço extra entre parágrafos e imagens */
+p {
+    margin-bottom: 1.5em;
+}
+
+/* Para textos como `CaptureWidth` no meio da frase */
+code.literal {
+    background: #f0f0f0;
+    color: #d63384; /* Cor rosa/vinho padrão de documentação técnica */
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 90%;
+}
+
+/* Melhora a lista de configurações */
+.section ul li {
+    margin-bottom: 15px;
+    list-style: none; /* Tira a bolinha chata */
+    padding-left: 10px;
+    border-left: 3px solid #007bff; /* Adiciona uma barrinha azul lateral */
+}
+
+/* Deixa o nome da variável (bold) em destaque */
+.section ul li strong {
+    display: inline-block;
+    color: #2c3e50;
+    background: #eef2f7;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+}

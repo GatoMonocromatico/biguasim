@@ -6,7 +6,7 @@ Manually Controlling an Agent
 
 We've found that `pynput` is a good library for sending keyboard commands to the agents for manual control.
 
-Here's an example of controlling the :ref:`hovering-auv-agent` using the following keyboard shortcuts.
+Here's an example of controlling the :ref:`blue-rov-agent` using the following keyboard shortcuts.
 
 .. list-table::
    :widths: 35 25 25
@@ -18,9 +18,6 @@ Here's an example of controlling the :ref:`hovering-auv-agent` using the followi
    * - Up/Down
      - i
      - k
-   * - Yaw Left/Right
-     - j
-     - l
    * - Forward/Backward
      - w
      - s
@@ -34,57 +31,72 @@ Here's an example of controlling the :ref:`hovering-auv-agent` using the followi
     import numpy as np
     from pynput import keyboard
 
-    pressed_keys = list()
-    force = 25
+    config = {
+        "package_name": "SkyDive",
+        "world": "Bridge",                            
+        "main_agent": "uav0",                                                           
+        "agents":[                                          
+            {                                               
+                "agent_name": "uav0",                       
+                "agent_type": "BlueROV2",                
+                "sensors": [                               
+                    {
+                        "sensor_type": "DynamicsSensor",
+                        "socket": "IMUSocket",
+                        "configuration": {
+                            "UseCOM": True,
+                            "UseRPY": False  
+                        }
+                    }
+                ],                    
+                "dynamics" : {
+                    "batch_size" : 1,
+                },                                        
+                "control_abstraction": 'cmd_vel',                    
+                "location" : [ -21, -70, -5], 
+                "rotation": [0.0, 0.0, 0.0]               
+            }
+        ],
+    }
+
+    pressed_keys = set() 
+    linear_speed = 3.0 *3
 
     def on_press(key):
-        global pressed_keys
-        if hasattr(key, 'char'):
-            pressed_keys.append(key.char)
-            pressed_keys = list(set(pressed_keys))
+        try:
+            if hasattr(key, 'char'):
+                pressed_keys.add(key.char)
+        except AttributeError:
+            pass
 
     def on_release(key):
-        global pressed_keys
-        if hasattr(key, 'char'):
-            pressed_keys.remove(key.char)
+        try:
+            if hasattr(key, 'char'):
+                pressed_keys.remove(key.char)
+        except (AttributeError, KeyError):
+            pass
 
-    listener = keyboard.Listener(
-        on_press=on_press,
-        on_release=on_release)
+    listener = keyboard.Listener(on_press=on_press, on_release=on_release)
     listener.start()
 
-    def parse_keys(keys, val):
-        command = np.zeros(8)
-        if 'i' in keys:
-            command[0:4] += val
-        if 'k' in keys:
-            command[0:4] -= val
-        if 'j' in keys:
-            command[[4,7]] += val
-            command[[5,6]] -= val
-        if 'l' in keys:
-            command[[4,7]] -= val
-            command[[5,6]] += val
+    def parse_keys(keys):
+        cmd = np.zeros(3) 
+        
+        # Movimentação Linear (X, Y, Z)
+        if 'w' in keys: cmd[0] += linear_speed   # Forward
+        if 's' in keys: cmd[0] -= linear_speed   # Backward
+        if 'a' in keys: cmd[1] += linear_speed   # Left (Strafe)
+        if 'd' in keys: cmd[1] -= linear_speed   # Right (Strafe)
+        if 'i' in keys: cmd[2] += linear_speed   # Up (Ascend)
+        if 'k' in keys: cmd[2] -= linear_speed   # Down (Descend)
 
-        if 'w' in keys:
-            command[4:8] += val
-        if 's' in keys:
-            command[4:8] -= val
-        if 'a' in keys:
-            command[[4,6]] += val
-            command[[5,7]] -= val
-        if 'd' in keys:
-            command[[4,6]] -= val
-            command[[5,7]] += val
+        return cmd
 
-        return command
-
-    with biguasim.make("Dam-Hovering") as env:
+    with biguasim.make(scenario_cfg=config) as env:
+        print("(WASD=Mov, IK=Elev, Q=Leave)")
         while True:
             if 'q' in pressed_keys:
                 break
-            command = parse_keys(pressed_keys, force)
-
-            #send to biguasim
-            env.act("auv0", command)
-            state = env.tick()
+                
+            command = parse_keys(pressed_keys)
+            state = env.step(command.tolist())

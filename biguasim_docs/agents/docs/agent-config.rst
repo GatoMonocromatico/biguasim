@@ -23,10 +23,13 @@ new dictionary in the list.
          "rotation": [1.0, 2.0, 3.0],
          "location_randomization": [1, 2, 3],
          "rotation_randomization": [10, 10, 10],
-         "control_scheme": "{control scheme type}",
+         "control_abstraction": "{control abstraction type}"
+         "dynamics" : {
+                "batch_size" : 1,
+         }, 
       },
       { 
-         "agent_name": "uav1",
+         "agent_name": "uav1"
          ...
       }
    ]
@@ -48,15 +51,11 @@ arguments for ``agent_type``:
 =========================== ========================
 Agent Type                  String in agent_type
 =========================== ========================
-:ref:`hovering-auv-agent`   ``HoveringAUV``
-:ref:`surface-vessel-agent` ``SurfaceVessel``
+:ref:`blue-boat-agent`      ``BlueBoat``
 :ref:`torpedo-auv-agent`    ``TorpedoAUV``
-:ref:`coug-uv-agent`        ``CougUV``
 :ref:`blue-rov-agent`       ``BlueROV2``
-:ref:`sphere-agent`         ``Sphere``
-:ref:`turtle-agent`         ``TurtleAgent``
-:ref:`fixed-wing-agent`     ``FixedWing``
-:ref:`uav-agent`            ``UAV``
+:ref:`blue-rov-heavy-agent` ``BlueROV2 Heavy``
+:ref:`djimatrice-agent`     ``DjiMatrice``
 =========================== ========================
 
 Details on each agent can be found at the individual agent pages in :ref:`agents`. This list will 
@@ -95,14 +94,28 @@ randomization is in the format ``[roll, pitch, yaw]``, rotated about the XYZ fix
 R_z*R_y*R_x).
 
 
-Control Scheme
-==============
-``control_scheme`` is a string that specifies the control scheme (represented as an integer) used 
-by the agent.
+Control Abstraction
+===================
 
-Control schemes determine how commands sent to the agent are interpreted. Most agents have a control 
-scheme that exposes their thrusters, fins, and so forth to direct commands. Other control schemes 
-implement convenient features, such as position PID controllers. A Custom Dynamics control scheme 
-is available for users to fine-tune the motion of the vehicle. 
+The ``control_abstraction`` string defines how the simulator interprets commands sent to an agent via the ``step`` or ``tick`` methods. It acts as the interface layer between high-level autonomous logic and low-level physics.
 
-For more details on control schemes, see :ref:`control-schemes`.
+Standardized Agents
+-------------------
+
+In BiguaSim, most agents (such as the **BlueROV2** and **HoveringAUV**) share a unified set of control abstractions. These allow for seamless switching between different levels of autonomy:
+
+* **``cmd_vel``**: Controls linear velocity :math:`(v_x, v_y, v_z)`.
+* **``cmd_vel_yaw``**: Similar to ``cmd_vel``, but maintains a specific target yaw heading during maneuvers.
+* **``cmd_pos_yaw``**: A high-level abstraction where the user provides target coordinates :math:`[x, y, z]` and a target yaw. An internal PID controller handles the trajectory.
+* **``accel``**: Provides direct acceleration commands along the agent's axes.
+* **``cmd_motor_speeds``**: The lowest level of control for standard agents, allowing users to send individual thrust values to each motor (e.g., 8 independent thrusters for the BlueROV2).
+
+The TorpedoAUV Exception
+------------------------
+
+The **TorpedoAUV** does not follow the standard multi-thruster abstractions due to its unique underactuated physical design (single rear propeller and control surfaces). It uses a specialized abstraction:
+
+* **``cmd_rudders_sterns_motor_speed``**: Requires a specific vector to control the main motor RPM and the deflection angles of the rudders and stern planes.
+    * **Input Vector**: ``[Motor_RPM, Rudder1, Rudder2, Stern1, Stern2]``
+
+For more details on specific control implementation and PID tuning, see :ref:`control-abstractions`.

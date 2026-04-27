@@ -43,7 +43,7 @@ Managing World Packages
 
 The default option for managing packages is to use ``biguasim.install()`` and
 ``biguasim.remove()``. These functions can be used to install and remove any packages
-managed by the BiguaSim team (currently only the Ocean package).
+managed by the BiguaSim team (currently only the SkyDive package).
 
 Install a Package Automatically
 -------------------------------
@@ -55,15 +55,15 @@ Below are some example usages, but see :ref:`packagemanager` for complete docume
    >>> packagemanager.installed_packages()
    []
    >>> packagemanager.available_packages()
-   ['Ocean']
-   >>> packagemanager.install("Ocean")
-   Installing Ocean ver. 0.1.0 from https://robots.et.byu.edu/holo/Ocean/v0.1.0/Linux.zip
+   ['SkyDive']
+   >>> packagemanager.install("SkyDive")
+   Installing SkyDive ver. 0.1.0 from https://robots.et.byu.edu/holo/Ocean/v0.1.0/Linux.zip #TODO
    File size: 1.55 GB
    |â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ| 100%
    Unpacking worlds...
    Finished.
    >>> packagemanager.installed_packages()
-   ['Ocean']
+   ['SkyDive']
 
 Manually Installing a Package
 -----------------------------
@@ -106,18 +106,18 @@ and scenarios to be easily inspected.
 
 ::
 
-   >>> packagemanager.package_info("Ocean")
-   Package: Ocean
+   >>> packagemanager.package_info("SkyDive")
+   Package: SkyDive
       Platform: Linux
-      Version: 0.1.0
-      Path: Linux/Holodeck/Binaries/Linux/Holodeck
+      Version: 1.0.0
+      Path: Linux/Biguasim/Binaries/Linux/Holodeck
       Worlds:
-      Rooms
+      Pier-Harbor:
             Scenarios:
-            Rooms-DataGen:
+            Pier-Harbor:
                Agents:
                   Name: turtle0
-                  Type: TurtleAgent
+                  Type: DjiMatrice
                   Sensors:
                      LocationSensor
                         lcm_channel: POSITION
@@ -138,12 +138,12 @@ and scenarios to be easily inspected.
                      PoseSensor
                      VelocitySensor
                      IMUSensor
-      SimpleUnderwater
+      Bridge:
             Scenarios:
-            SimpleUnderwater-AUV:
+            Bridge-AUV:
                Agents:
                   Name: auv0
-                  Type: HoveringAUV
+                  Type: BlueROV2
                   Sensors:
                      PoseSensor
                         socket: IMUSocket
@@ -158,6 +158,6 @@ and scenarios to be easily inspected.
 You can also look for information for a specific world or scenario
 ::
 
-   packagemanager.world_info("SimpleUnderwater")
-   packagemanager.scenario_info("Rooms-DataGen")
+   packagemanager.world_info("Bridge")
+   packagemanager.scenario_info("Pier-Harbor")
 

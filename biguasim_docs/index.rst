@@ -9,43 +9,34 @@ at `Federal University of Rio Grande <https://www.furg.br>`_ .
 
 Features
 """"""""
-#. 3+ rich worlds with various infrastructure for generating data or testing underwater algorithms
-#. Complete with common underwater sensors including DVL, IMU, optical camera, various sonar, depth sensor, and more
-#. Highly and easily configurable sensors and missions
-#. Multi-agent missions, including optical and acoustic communications
-#. Novel sonar simulation framework for simulating imaging, profiling, sidescan, and echosounder sonars
-#. Imaging sonar implementation includes realistic noise modeling for small sim-2-real gap
-#. Easy installation and simple, OpenAI Gym-like Python interface
-#. High performance - simulation speeds of up to 2x real time are possible. Performance penalty only for what you need
-#. Run headless or watch your agents learn
-#. Linux and Windows support
+#. Multi-Domain Simulation Environments: Rich, high-fidelity worlds supporting simultaneous operations of both air and water vehicles (UAVs and AUVs).
+#. Powered by Unreal Engine 5 (UE5): Leverages modern UE5 rendering and physics for maximum visual realism and high-detail environments.
+#. Synthetic Dataset Generation: Purpose-built infrastructure for generating realistic, annotated synthetic data to train perception and AI models.
+#. Comprehensive Sensor Suite: Complete with common multi-domain sensors including DVL, IMU, optical cameras, high-precision depth cameras, and more, customized for both aerial and underwater domains.
+#. Advanced Hybrid Sonar Framework: Novel simulation framework for imaging, profiling, sidescan, and singlebeam sonars, featuring simultaneous Ground Truth (GT) extraction and realistic stochastic noise modeling.
+#. Sim-2-Real Focus: Realistic sensor noise and physics modeling designed to minimize the sim-to-real gap for seamless algorithm deployment.
+#. Multi-Agent Missions: Easily configure and scale complex multi-robot missions.
+#. OpenAI Gym-like Python Interface: Simple installation and intuitive API for testing robotics algorithms and training Reinforcement Learning agents.
+#. High Performance & Flexibility: Configurable execution speeds. Run visually or in headless mode. Pay a computational penalty only for the features you need.
+#. Cross-Platform: Full support for Linux and Windows.
 
 Attribution and Relevent Publications
 """""""""""""""""""""""""""""""""""""
-If you use BiguaSim in your research, please cite the following publications depending on the features you use as outlined below:
+If you use BiguaSim in your research, please cite the following publication:
 
 General BiguaSim use:
 ::
       
-   @inproceedings{,
-      author = {E. Potokar and S. Ashford and M. Kaess and J. Mangelson},
-      title = {Holo{O}cean: An Underwater Robotics Simulator},
-      booktitle = {Proc. IEEE Intl. Conf. on Robotics and Automation, ICRA},
-      address = {Philadelphia, PA, USA},
-      month = may,
-      year = {2022}
-   }
-
-Simulation of Sonar (Imaging, Profiling, Sidescan) sensors:
-::
-   
-   @inproceedings{Potokar22iros,
-      author = {E. Potokar and K. Lay and K. Norman and D. Benham and T. Neilsen and M. Kaess and J. Mangelson},
-      title = {Holo{O}cean: Realistic Sonar Simulation},
-      booktitle = {Proc. IEEE/RSJ Intl. Conf. Intelligent Robots and Systems, IROS},
-      address = {Kyoto, Japan},
-      month = {Oct},
-      year = {2022}
+   @inproceedings{11338720,
+      author={Mateus, Matheus G. and De Oliveira, Guilherme C. and Reichow, Luis Henrique K. and Kolling, Alisson H. and Pinheiro, Pedro M. and Drews-Jr, Paulo L. J.},
+      booktitle={2025 IEEE International Conference on Advanced Robotics (ICAR)}, 
+      title={BiguaSim: A Hybrid Multi-Domain Simulator for Robotics High-Fidelity Simulation and Synthetic Dataset Generation}, 
+      year={2025},
+      volume={},
+      number={},
+      pages={169-174},
+      keywords={Data collection;Robot sensing systems;Hybrid power systems;Complexity theory;Vehicle dynamics;Engines;Testing;Synthetic data},
+      doi={10.1109/ICAR65334.2025.11338720}
    }
 
 .. toctree::
@@ -58,6 +49,7 @@ Simulation of Sonar (Imaging, Profiling, Sidescan) sensors:
    packages/packages
    agents/agents
    sensors/sensors
+   ardubridge/ardubridge
    examples/examples
    develop/develop
    changelog/changelog
@@ -77,6 +69,7 @@ Simulation of Sonar (Imaging, Profiling, Sidescan) sensors:
    biguasim/lcm
    biguasim/dynamics
    biguasim/shmem
+   biguasim/ardubridge
    biguasim/util
    biguasim/exceptions
    biguasim/weather

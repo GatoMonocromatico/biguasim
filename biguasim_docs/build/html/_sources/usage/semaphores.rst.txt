@@ -46,7 +46,7 @@ through a simple example. Consider the following code that runs a BiguaSim simul
   import biguasim
 
   # (1). Start up the engine
-  env = biguasim.make("SimpleUnderwater-Hovering")
+  env = biguasim.make("Pier-Harbor")
 
   for i in range(10):
     # Initialize the level and the main agent inside of it

@@ -1,6 +1,6 @@
-===============
+=============
 Imaging Sonar
-===============
+=============
 
 Sometimes referred to as a forward-looking sonar, imaging sonar is a type of multi-beam sonar that 
 projects the intensity onto the 2d time of return-azimuth plane. This allows for a 2d image to be 
