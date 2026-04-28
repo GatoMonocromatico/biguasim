@@ -5,10 +5,10 @@ build:
   tools:
     python: "3.11"
 
+sphinx:
+  builder: html
+  configuration: biguasim_docs/conf.py
+
 python:
   install:
     - requirements: biguasim_docs/requirements.txt
-    - method: pip
-      path: .  # Isso instala o seu código para o Sphinx ler os sensores
-
-sphinx:
