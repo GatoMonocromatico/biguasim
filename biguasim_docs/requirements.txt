@@ -1,5 +1,6 @@
 autodocsumm==0.2.12
 numpy
+scipy
 posix_ipc
 sphinx_rtd_theme==2.0.0
 doc8

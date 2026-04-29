@@ -208,3 +208,10 @@ epub_exclude_files = ['search.html']
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True  # caminho para sua logo
+
+# Finge que essas bibliotecas pesadas existem para o autodoc não quebrar
+autodoc_mock_imports = [
+    'torch',
+    'pymavlink',
+    'roma'  # <--- ADICIONE ESTE AQUI
+]
