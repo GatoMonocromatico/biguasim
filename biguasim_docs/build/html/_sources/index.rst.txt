@@ -7,6 +7,8 @@ Welcome to BiguaSim's documentation!
 BiguaSim is a high-fidelity simulator developed by `Nautec <https://nautec.furg.br/>`_
 at `Federal University of Rio Grande <https://www.furg.br>`_ .
 
+Biguasim Engine (C++) <https://biguasim-engine.readthedocs.io>
+
 Features
 """"""""
 #. Multi-Domain Simulation Environments: Rich, high-fidelity worlds supporting simultaneous operations of both air and water vehicles (UAVs and AUVs).

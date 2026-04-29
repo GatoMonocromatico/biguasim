@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -8,20 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Commands &mdash; BiguaSim 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.svg"/>
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=8d563738"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../_static/copybutton.js?v=f281be69"></script>
-      <script src="../_static/darkmode.js?v=3994c1fa"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/darkmode.js?v=3994c1fa"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -40,6 +42,9 @@
           <a href="../index.html" class="icon icon-home">
             BiguaSim
           </a>
+              <div class="version">
+                1.0.0
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -202,7 +207,7 @@ worry about these.</p>
 </table>
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.AddSensorCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">AddSensorCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor_definition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.AddSensorCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">AddSensorCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor_definition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.AddSensorCommand" title="Link to this definition"></a></dt>
 <dd><p>Add a sensor to an agent</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -213,7 +218,7 @@ worry about these.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.Command">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><a class="headerlink" href="#biguasim.command.Command" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><a class="headerlink" href="#biguasim.command.Command" title="Link to this definition"></a></dt>
 <dd><p>Base class for Command objects.</p>
 <p>Commands are used for IPC between the biguasim python bindings and biguasim
 binaries.</p>
@@ -289,7 +294,7 @@ the order the client expects them.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.CommandCenter">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">CommandCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.CommandCenter" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">CommandCenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.CommandCenter" title="Link to this definition"></a></dt>
 <dd><p>Manages pending commands to send to the client (the engine).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -345,7 +350,7 @@ buffer, and then clears the contents of the self._commands list</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="biguasim.command.CommandCenter.queue_size">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">queue_size</span></span><a class="headerlink" href="#biguasim.command.CommandCenter.queue_size" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">queue_size</span></span><a class="headerlink" href="#biguasim.command.CommandCenter.queue_size" title="Link to this definition"></a></dt>
 <dd><p>Returns:
 int: Size of commands queue</p>
 </dd></dl>
@@ -354,7 +359,7 @@ int: Size of commands queue</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.CommandsGroup">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">CommandsGroup</span></span><a class="headerlink" href="#biguasim.command.CommandsGroup" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">CommandsGroup</span></span><a class="headerlink" href="#biguasim.command.CommandsGroup" title="Link to this definition"></a></dt>
 <dd><p>Represents a list of commands</p>
 <p>Can convert list of commands to json.</p>
 <p><strong>Methods:</strong></p>
@@ -398,7 +403,7 @@ int: Size of commands queue</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="biguasim.command.CommandsGroup.size">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#biguasim.command.CommandsGroup.size" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="#biguasim.command.CommandsGroup.size" title="Link to this definition"></a></dt>
 <dd><p>Returns:
 int: Size of commands group</p>
 </dd></dl>
@@ -420,7 +425,7 @@ int: Size of commands group</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.CustomCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">CustomCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.CustomCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">CustomCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.CustomCommand" title="Link to this definition"></a></dt>
 <dd><p>Send a custom command to the currently loaded world.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -435,7 +440,7 @@ int: Size of commands group</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.DebugDrawCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">DebugDrawCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">draw_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.DebugDrawCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">DebugDrawCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">draw_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.DebugDrawCommand" title="Link to this definition"></a></dt>
 <dd><p>Draw debug geometry in the world.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -462,7 +467,7 @@ int: Size of commands group</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.RGBCameraRateCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RGBCameraRateCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ticks_per_capture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RGBCameraRateCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RGBCameraRateCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ticks_per_capture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RGBCameraRateCommand" title="Link to this definition"></a></dt>
 <dd><p>Set the number of ticks between captures of the RGB camera.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -477,7 +482,7 @@ int: Size of commands group</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.RemoveSensorCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RemoveSensorCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RemoveSensorCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RemoveSensorCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RemoveSensorCommand" title="Link to this definition"></a></dt>
 <dd><p>Remove a sensor from an agent</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -491,7 +496,7 @@ int: Size of commands group</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.RenderQualityCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RenderQualityCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">render_quality</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RenderQualityCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RenderQualityCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">render_quality</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RenderQualityCommand" title="Link to this definition"></a></dt>
 <dd><p>Adjust the rendering quality of BiguaSim</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -502,7 +507,7 @@ int: Size of commands group</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.RenderViewportCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RenderViewportCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">render_viewport</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RenderViewportCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RenderViewportCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">render_viewport</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RenderViewportCommand" title="Link to this definition"></a></dt>
 <dd><p>Enable or disable the viewport. Note that this does not prevent the viewport from being shown,
 it just prevents it from being updated.</p>
 <dl class="field-list simple">
@@ -514,7 +519,7 @@ it just prevents it from being updated.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.RotateSensorCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RotateSensorCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RotateSensorCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">RotateSensorCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.RotateSensorCommand" title="Link to this definition"></a></dt>
 <dd><p>Rotate a sensor on the agent</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -529,7 +534,7 @@ it just prevents it from being updated.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.SendAcousticMessageCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">SendAcousticMessageCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_sensor_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_sensor_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.SendAcousticMessageCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">SendAcousticMessageCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_sensor_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_sensor_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.SendAcousticMessageCommand" title="Link to this definition"></a></dt>
 <dd><p>Set the number of ticks between captures of the RGB camera.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -544,13 +549,13 @@ it just prevents it from being updated.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.SendOpticalMessageCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">SendOpticalMessageCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_sensor_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_sensor_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.SendOpticalMessageCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">SendOpticalMessageCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_sensor_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_agent_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_sensor_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.SendOpticalMessageCommand" title="Link to this definition"></a></dt>
 <dd><p>Send information through OpticalModem.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.SpawnAgentCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">SpawnAgentCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_main_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.SpawnAgentCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">SpawnAgentCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_main_agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.SpawnAgentCommand" title="Link to this definition"></a></dt>
 <dd><p>Spawn an agent in the world.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -627,7 +632,7 @@ it just prevents it from being updated.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biguasim.command.TeleportCameraCommand">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">TeleportCameraCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.TeleportCameraCommand" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.command.</span></span><span class="sig-name descname"><span class="pre">TeleportCameraCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.command.TeleportCameraCommand" title="Link to this definition"></a></dt>
 <dd><p>Move the viewport camera (agent follower)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
