@@ -62,40 +62,35 @@ pip install .
 <!-- See [Installation](https://biguasim.readthedocs.io/en/latest/usage/installation.html) for complete instructions. -->
 
 - Docker usage:
-`docker run -it \
-  --name biguasim \
-  --privileged \
-  --ipc=host \
-  --gpus all \
-  --runtime=nvidia \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v $HOME/path/to/biguasim/content:/home/biguasim/workspace \
-  -e DISPLAY=$DISPLAY \
-  -e NVIDIA_VISIBLE_DEVICES=all \
-  -e NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility \
-  -e QT_X11_NO_MITSHM=1 \
-  mgmateus/hydrone:biguasim-base`
+    ```bash
+    echo 'xhost +local:docker > /dev/null 2>&1' >> ~/.zshrc or ~/.bashrc
 
-  To use your local worlds add to docker command: 
-  
-  `-v $HOME/path/to/your/worlds:/home/biguasim/.local/share/biguasim/1.0.0/worlds \`
-  
-  `su biguasim`
-  - password sudo : `biguasim`
-    
-  `cd workspace/biguasim`
-  
-  `sudo pip install .`
+    cd biguasim && docker build -t biguasim .
+
+    docker run -it --name biguasim \
+    --privileged --net=host --ipc=host \
+    --gpus=all --runtime=nvidia \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $XAUTHORITY:/root/.Xauthority \
+    -v $PWD:/tmp/shared \
+    -v /path/to/your/workspace:/home/user/workspace \ (volume to run files inside the container.)
+    -v $HOME/.local/share/biguasim:/home/user/.local/share/biguasim \ (option to run local worlds inside the container.)
+    -e DISPLAY=$DISPLAY \
+    -e XAUTHORITY=/root/.Xauthority \
+    -e NVIDIA_VISIBLE_DEVICES=all \  
+    -e NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility \
+    -e QT_X11_NO_MITSHM=1 \
+    biguasim:latest
+    ```
 
 ## Documentation
-### Comming soon.
-<!-- * [Quickstart](https://biguasim.readthedocs.io/en/latest/usage/getting-started.html)
+* [Quickstart](https://biguasim.readthedocs.io/en/latest/usage/getting-started.html)
 * [Changelog](https://biguasim.readthedocs.io/en/latest/changelog/changelog.html)
 * [Examples](https://biguasim.readthedocs.io/en/latest/usage/getting-started.html#code-examples)
 * [Agents](https://biguasim.readthedocs.io/en/latest/agents/agents.html)
 * [Sensors](https://biguasim.readthedocs.io/en/latest/biguasim/sensors.html)
 * [Available Packages and Worlds](https://biguasim.readthedocs.io/en/latest/packages/packages.html)
-* [Docs](https://biguasim.readthedocs.io/en/latest/) -->
+* [Docs](https://biguasim.readthedocs.io/en/latest/)
 
 ## Usage Overview
 BiguaSim's interface is similar to [OpenAI's Gym](https://gym.openai.com/). 
@@ -117,7 +112,7 @@ import biguasim
 
 cfg = {
     "package_name": "SkyDive",               
-    "world": "Relief-Generic-Bridge-Vehicles-Water-Custom",                            
+    "world": "Pier-Harbor",                            
     "main_agent": "uav0",                               
     "ticks_per_sec": 20,
     "frames_per_sec": True,
@@ -178,7 +173,7 @@ import biguasim
 
 cfg = {
     "package_name": "SkyDive",               
-    "world": "Relief-Generic-Bridge-Vehicles-Water-Custom",                            
+    "world": "Pier-Harbor",                            
     "main_agent": "uav0",                               
     "ticks_per_sec": 20,
     "frames_per_sec": True,
