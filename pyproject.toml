@@ -13,7 +13,7 @@ authors = [
     { name = "NAUTEC", email = "nateucgestao@gmail.com" }
 ]
 license = { text = "MIT License" }
-requires-python = ">=3.10"
+requires-python = "==3.11"
 dependencies = [
     # Core
     'posix_ipc >= 1.0.0; platform_system == "Linux"',
@@ -74,14 +74,17 @@ dependencies = [
     "torchvision==0.22.1",
     "tqdm==4.67.1",
     "triton==3.3.1",
-    "wheel==0.45.1"
+    "wheel>=0.45.1"
 ]
 
 [project.urls]
-Homepage = "https://bitbucket.org/frostlab/biguasim"
+Homepage = "https://biguasim.readthedocs.io/en/latest/"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+biguasim = ["certs/*.crt"]
