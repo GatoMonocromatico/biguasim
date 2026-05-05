@@ -32,6 +32,7 @@ def _make_ssl_context() -> ssl.SSLContext:
         ctx.verify_mode = ssl.CERT_NONE
     elif os.path.isfile(_CA_CERT):
         ctx.load_verify_locations(_CA_CERT)
+        ctx.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
     return ctx
 
 
@@ -533,7 +534,7 @@ def _download_binary(binary_location, install_location, block_size=1000000):
 
     queue = Queue()
     tmp_fd = tempfile.TemporaryFile(suffix=".zip")
-    with urllib.request.urlopen(binary_location) as conn:
+    with urllib.request.urlopen(binary_location, context=_make_ssl_context()) as conn:
         file_size = int(conn.headers["Content-Length"])
         print("File size:", util.human_readable_size(file_size))
         amount_read = 0
