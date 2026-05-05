@@ -13,7 +13,7 @@ authors = [
     { name = "NAUTEC", email = "nateucgestao@gmail.com" }
 ]
 license = { text = "MIT License" }
-requires-python = ">=3.10,<3.12"
+requires-python = ">=3.11"
 dependencies = [
     # Core
     'posix_ipc >= 1.0.0; platform_system == "Linux"',
