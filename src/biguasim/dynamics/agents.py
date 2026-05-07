@@ -440,7 +440,7 @@ class ModelsFactory:
         'DjiMatrice' : DjiMatrice,
         'TorpedoAUV' : TorpedoAUV,
         "HolybroX500": HolybroX500
-    }
+}
 
     @classmethod
     def build_model(cls, agent_type : str):
