@@ -10,7 +10,6 @@ Base Requirements
 
 Depending on your installation method, other requirements may be necessary, but these are prerequisites that apply to all installation methods.
 
-- GitHub account that is linked to an Epic Games account -- please `Follow the steps here <https://www.unrealengine.com/en-US/ue-on-github>`_ and remember to **accept the email invitation from Epic Games.**
 - 64-bit Linux or Windows Operating System
 
 While we don't have known minimal requirements, we recommend having:
@@ -31,7 +30,7 @@ https://github.com/hydrone-furg/biguasim.git. We suggest cloning it with lowerca
 example code uses, like so:
 ::
 
-   git clone git@github.com:hydrone-furg/biguasim.git biguasim
+   git clone https://github.com/hydrone-furg/biguasim.git biguasim
 
 
 Installation Options
@@ -41,7 +40,6 @@ Depending on your use case, different installation methods may apply. Please ref
 the instructions that are most appropriate for your purposes.
 
 - :ref:`Standard Packaged installation <install-packaged>` – Simplest method for using BiguaSim out of the box.
-- :ref:`Development with Unreal Editor installation <install-dev>` – Method that should be used if you desire to customize the simulation such as developing custom worlds, agents, or sensors.
 - :ref:`Docker-based installation <install-docker>` – Alternate setup using preconfigured Docker containers.
 
 BiguaSim is installed in two parts:
@@ -59,24 +57,25 @@ Standard Packaged Installation
 
 Additional Requirements
 -----------------------
-- Python >= 3.7
+- Python >= 3.11
 - pip3
-- For Linux: OpenGL 3+, gcc (minimum build-essential package) 
 
-.. TODO i think you dont need open gl anymore?? vulkan? mention that pip will install numpy, scipy.. etc?
-
-For the build-essential package for Linux, you can run the following console command:
-::
-
-   sudo apt install build-essential
 
 Python Library
 --------------
-From the cloned repository, install the Python package by doing the following:
+To ensure all dependencies are managed correctly and do not interfere with your system's Python, you must create and activate a virtual environment before installing. We recommend using Conda.
+
+Create and activate the environment:
+::
+
+   conda create -n biguasim_env python=3.11
+   conda activate biguasim_env
+
+Install the package in editable mode:
 ::
 
    cd biguasim
-   pip install .
+   pip install -e .
 
 Worlds Packages
 ---------------
@@ -116,7 +115,7 @@ This can be done in multiple ways:
 - Packaged Custom Worlds - After developing BiguaSim using these tools, you can then package your own worlds for later use.
 
 For more detailed instructions on installation for development, see :ref:`develop`.
-.. Linkar documentacao engine.
+`official Biiguasim-engine documentation <https://biguasim-engine.readthedocs.io/en/v1.0.0/>`_ 
 
 .. _install-docker:
 
