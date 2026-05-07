@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArduPilot Bridge &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Util" href="util.html" />
+    <link rel="prev" title="Shared Memory" href="shmem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shmem.html">Shared Memory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ArduPilot Bridge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.ardubridge">Main Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.ArduBiguaSimRunner"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduBiguaSimRunner.build_scenario"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner.build_scenario()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduBiguaSimRunner.run"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.bind"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.bind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.build_json_state"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.build_json_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.close"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.is_online"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.is_online</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.pwm_to_motor_cmds"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.pwm_to_motor_cmds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.receive_pwm"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.receive_pwm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.send_state"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.send_state()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile"><code class="docutils literal notranslate"><span class="pre">VehicleProfile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.ardupilot_vehicle"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.ardupilot_vehicle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.control_abstraction"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.control_abstraction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.include_depth_sensor"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.include_depth_sensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.motor_mapping"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.motor_mapping</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.motor_signs"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.motor_signs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.name"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.num_motors"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.num_motors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.pwm_converters"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.pwm_converters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.sitl_args"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.sitl_args</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.warmup_frames"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.warmup_frames</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.depth_to_pressure"><code class="docutils literal notranslate"><span class="pre">depth_to_pressure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.imu_glu_to_frd"><code class="docutils literal notranslate"><span class="pre">imu_glu_to_frd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.meters_to_gps"><code class="docutils literal notranslate"><span class="pre">meters_to_gps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.pos_nwu_to_ap"><code class="docutils literal notranslate"><span class="pre">pos_nwu_to_ap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.quat_glu2nwu_to_frd2ned"><code class="docutils literal notranslate"><span class="pre">quat_glu2nwu_to_frd2ned()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.vel_nwu_to_ned"><code class="docutils literal notranslate"><span class="pre">vel_nwu_to_ned()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.ardubridge.bridge">Bridge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.bind"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.bind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.build_json_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.close"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.is_online"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.is_online</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.pwm_to_motor_cmds"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.pwm_to_motor_cmds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.receive_pwm"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.receive_pwm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.send_state"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge.send_state()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.ardubridge.vehicle">Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile"><code class="docutils literal notranslate"><span class="pre">VehicleProfile</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.ardupilot_vehicle"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.ardupilot_vehicle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.control_abstraction"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.control_abstraction</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.include_depth_sensor"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.include_depth_sensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.motor_mapping"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.motor_mapping</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.motor_signs"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.motor_signs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.name"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.num_motors"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.num_motors</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.pwm_converters"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.pwm_converters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.sitl_args"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.sitl_args</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.warmup_frames"><code class="docutils literal notranslate"><span class="pre">VehicleProfile.warmup_frames</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.ardubridge.runner">Runner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner.build_scenario"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner.build_scenario()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner.run"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.ardubridge.frame">Frame</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.frame.depth_to_pressure"><code class="docutils literal notranslate"><span class="pre">depth_to_pressure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.frame.imu_glu_to_frd"><code class="docutils literal notranslate"><span class="pre">imu_glu_to_frd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.frame.meters_to_gps"><code class="docutils literal notranslate"><span class="pre">meters_to_gps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.frame.pos_nwu_to_ap"><code class="docutils literal notranslate"><span class="pre">pos_nwu_to_ap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned"><code class="docutils literal notranslate"><span class="pre">quat_glu2nwu_to_frd2ned()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.ardubridge.frame.vel_nwu_to_ned"><code class="docutils literal notranslate"><span class="pre">vel_nwu_to_ned()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ArduPilot Bridge</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/biguasim/ardubridge.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ardupilot-bridge">
+<h1>ArduPilot Bridge<a class="headerlink" href="#ardupilot-bridge" title="Link to this heading"></a></h1>
+<p>This section details the integration of BiguaSim with the ArduPilot ecosystem.</p>
+<section id="module-biguasim.ardubridge">
+<span id="main-module"></span><h2>Main Module<a class="headerlink" href="#module-biguasim.ardubridge" title="Link to this heading"></a></h2>
+<p>ardupilot_biguasim — ArduPilot JSON SITL bridge for BiguaSim.</p>
+<dl>
+<dt>Quick start:</dt><dd><p>from ardupilot_biguasim import ArduBiguaSimRunner, VEHICLE_REGISTRY</p>
+<p>profile = VEHICLE_REGISTRY[“BlueROV2”]
+scenario = ArduBiguaSimRunner.build_scenario(</p>
+<blockquote>
+<div><p>profile, package_name=”Hydrone”,
+world=”Relief-Generic-Bridge-Vehicles-Water-Custom”,
+ticks_per_sec=200,</p>
+</div></blockquote>
+<p>)
+with ArduBiguaSimRunner(profile, scenario) as runner:</p>
+<blockquote>
+<div><p>runner.run()</p>
+</div></blockquote>
+</dd>
+</dl>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduBiguaSimRunner" title="biguasim.ardubridge.ArduBiguaSimRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArduBiguaSimRunner</span></code></a>(profile, scenario[, ...])</p></td>
+<td><p>Context-manager that owns both the BiguaSim environment and the ArduPilot bridge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge" title="biguasim.ardubridge.ArduPilotBridge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArduPilotBridge</span></code></a>(profile[, address, port, ...])</p></td>
+<td><p>UDP bridge implementing the ArduPilot JSON SITL FDM protocol.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile" title="biguasim.ardubridge.VehicleProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VehicleProfile</span></code></a>(name, num_motors, ...[, ...])</p></td>
+<td><p>All configuration needed to bridge one BiguaSim vehicle to ArduPilot SITL.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.depth_to_pressure" title="biguasim.ardubridge.depth_to_pressure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depth_to_pressure</span></code></a>(depth_z_up[, rho])</p></td>
+<td><p>BiguaSim DepthSensor z_up (metres, positive=up) → absolute pressure (Pa).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.imu_glu_to_frd" title="biguasim.ardubridge.imu_glu_to_frd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imu_glu_to_frd</span></code></a>(imu_data)</p></td>
+<td><p>BiguaSim IMUSensor [[ax,ay,az],[p,q,r]] (GLU body) → ([ax,ay,az],[p,q,r]) (FRD body).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.meters_to_gps" title="biguasim.ardubridge.meters_to_gps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_gps</span></code></a>(north_m, east_m, lat0_deg, ...)</p></td>
+<td><p>Local NED offset (metres) → GPS lat/lon (degrees).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.pos_nwu_to_ap" title="biguasim.ardubridge.pos_nwu_to_ap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pos_nwu_to_ap</span></code></a>(pos, gps_origin)</p></td>
+<td><p>BiguaSim LocationSensor [x,y,z] (NWU, metres) → ArduPilot [lat_deg, lon_deg, alt_m].</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.quat_glu2nwu_to_frd2ned" title="biguasim.ardubridge.quat_glu2nwu_to_frd2ned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quat_glu2nwu_to_frd2ned</span></code></a>(q_xyzw)</p></td>
+<td><p>BiguaSim DynamicsSensor quaternion [x,y,z,w] (GLU→NWU) → [w,x,y,z] (FRD→NED).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.vel_nwu_to_ned" title="biguasim.ardubridge.vel_nwu_to_ned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vel_nwu_to_ned</span></code></a>(vel)</p></td>
+<td><p>BiguaSim VelocitySensor [vn, vw, vu] → NED [vn, ve, vd].</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduBiguaSimRunner">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">ArduBiguaSimRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><span class="pre">VehicleProfile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9002</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(33.810313,</span> <span class="pre">-118.393867)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_viewport</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.ardubridge.ArduBiguaSimRunner" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Context-manager that owns both the BiguaSim environment and the ArduPilot bridge.</p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduBiguaSimRunner.build_scenario" title="biguasim.ardubridge.ArduBiguaSimRunner.build_scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_scenario</span></code></a>(profile, package_name, world)</p></td>
+<td><p>Build a minimal BiguaSim scenario dict with all sensors required for SITL.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduBiguaSimRunner.run" title="biguasim.ardubridge.ArduBiguaSimRunner.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</p></td>
+<td><p>Blocking main loop.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduBiguaSimRunner.build_scenario">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_scenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><span class="pre">VehicleProfile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">world</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ticks_per_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduBiguaSimRunner.build_scenario" title="Link to this definition"></a></dt>
+<dd><p>Build a minimal BiguaSim scenario dict with all sensors required for SITL.</p>
+<p>Extra keyword args are merged into the top-level scenario dict.
+To override agent fields, pass them as overrides prefixed with ‘<a href="#id1"><span class="problematic" id="id2">agent_</span></a>’:</p>
+<blockquote>
+<div><p>e.g. agent_location=[10, 0, 0].</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduBiguaSimRunner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduBiguaSimRunner.run" title="Link to this definition"></a></dt>
+<dd><p>Blocking main loop. Returns only on KeyboardInterrupt.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">ArduPilotBridge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><span class="pre">VehicleProfile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9002</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(33.810313,</span> <span class="pre">-118.393867)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>UDP bridge implementing the ArduPilot JSON SITL FDM protocol.</p>
+<p>Responsible for establishing two-way communication between ArduPilot and the simulator,
+receiving actuator commands (PWM) and sending the vehicle’s sensory data (state) back.</p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.bind" title="biguasim.ardubridge.ArduPilotBridge.bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code></a>()</p></td>
+<td><p>Binds the UDP socket and drains any stale packets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.build_json_state" title="biguasim.ardubridge.ArduPilotBridge.build_json_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_json_state</span></code></a>(agent_state, sim_time)</p></td>
+<td><p>Converts the raw agent state in the simulator (NWU/GLU standard) to the ArduPilot JSON state format (NED/FRD standard).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.close" title="biguasim.ardubridge.ArduPilotBridge.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a>()</p></td>
+<td><p>Closes the UDP communication socket.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.pwm_to_motor_cmds" title="biguasim.ardubridge.ArduPilotBridge.pwm_to_motor_cmds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwm_to_motor_cmds</span></code></a>(pwm, frame_count)</p></td>
+<td><p>Converts raw PWM values received from ArduPilot into scaled motor commands for the simulator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.receive_pwm" title="biguasim.ardubridge.ArduPilotBridge.receive_pwm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receive_pwm</span></code></a>()</p></td>
+<td><p>Non-blocking receive of one servo packet (PWM).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.send_state" title="biguasim.ardubridge.ArduPilotBridge.send_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_state</span></code></a>(json_state)</p></td>
+<td><p>Serializes the state dictionary into JSON and sends it via UDP to the Flight Controller Unit (FCU).</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.is_online" title="biguasim.ardubridge.ArduPilotBridge.is_online"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_online</span></code></a></p></td>
+<td><p>Checks the current connection status with ArduPilot.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.bind" title="Link to this definition"></a></dt>
+<dd><p>Binds the UDP socket and drains any stale packets.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Call this method only once before starting the execution loop (<cite>run</cite>).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If it fails to bind to the specified UDP socket.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.build_json_state">
+<span class="sig-name descname"><span class="pre">build_json_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.build_json_state" title="Link to this definition"></a></dt>
+<dd><p>Converts the raw agent state in the simulator (NWU/GLU standard) to the ArduPilot
+JSON state format (NED/FRD standard).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agent_state</strong> (<em>dict</em>) – Dictionary containing BiguaSim sensor data (Location, Velocity, IMU, Depth, etc.).</p></li>
+<li><p><strong>sim_time</strong> (<em>float</em>) – Current simulation time in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted dictionary ready to be serialized into JSON.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.close" title="Link to this definition"></a></dt>
+<dd><p>Closes the UDP communication socket.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.is_online">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_online</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.is_online" title="Link to this definition"></a></dt>
+<dd><p>Checks the current connection status with ArduPilot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if ArduPilot is actively sending packets, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.pwm_to_motor_cmds">
+<span class="sig-name descname"><span class="pre">pwm_to_motor_cmds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pwm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.pwm_to_motor_cmds" title="Link to this definition"></a></dt>
+<dd><p>Converts raw PWM values received from ArduPilot into scaled motor commands for the simulator.</p>
+<p>Applies the warmup guard (<cite>warmup_frames</cite>), motor mapping, mathematical PWM converters,
+and directional signs configured in the <cite>VehicleProfile</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pwm</strong> (<em>np.ndarray</em>) – NumPy array containing the 16 PWM channels received from ArduPilot.</p></li>
+<li><p><strong>frame_count</strong> (<em>int</em>) – The current frame counter used to check the warmup phase.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of floats containing the final normalized commands for each motor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.receive_pwm">
+<span class="sig-name descname"><span class="pre">receive_pwm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.receive_pwm" title="Link to this definition"></a></dt>
+<dd><p>Non-blocking receive of one servo packet (PWM).</p>
+<p>Dynamically adjusts the timeout depending on the connection status (<cite>_online</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing <cite>(frame_count, pwm_array)</cite>. Returns <cite>(None, None)</cite> on timeout or error.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.ArduPilotBridge.send_state">
+<span class="sig-name descname"><span class="pre">send_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.ArduPilotBridge.send_state" title="Link to this definition"></a></dt>
+<dd><p>Serializes the state dictionary into JSON and sends it via UDP to the Flight Controller Unit (FCU).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_state</strong> (<em>dict</em>) – Dictionary generated by the <a class="reference internal" href="#biguasim.ardubridge.ArduPilotBridge.build_json_state" title="biguasim.ardubridge.ArduPilotBridge.build_json_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_json_state()</span></code></a> method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">VehicleProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_motors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motor_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motor_signs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pwm_converters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ardupilot_vehicle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sitl_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_depth_sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warmup_frames</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1700</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All configuration needed to bridge one BiguaSim vehicle to ArduPilot SITL.</p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.ardupilot_vehicle" title="biguasim.ardubridge.VehicleProfile.ardupilot_vehicle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ardupilot_vehicle</span></code></a></p></td>
+<td><p>'ArduSub', 'ArduCopter', or 'Rover'.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.control_abstraction" title="biguasim.ardubridge.VehicleProfile.control_abstraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstraction</span></code></a></p></td>
+<td><p>BiguaSim control abstraction string passed to the scenario config.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.include_depth_sensor" title="biguasim.ardubridge.VehicleProfile.include_depth_sensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">include_depth_sensor</span></code></a></p></td>
+<td><p>Add DepthSensor to auto-built scenario (enables pressure field in JSON).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.motor_mapping" title="biguasim.ardubridge.VehicleProfile.motor_mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_mapping</span></code></a></p></td>
+<td><p>motor_mapping[i] = ArduPilot PWM channel index for sim actuator i.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.motor_signs" title="biguasim.ardubridge.VehicleProfile.motor_signs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_signs</span></code></a></p></td>
+<td><p>±1 per actuator to flip thrust direction without changing wiring.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.name" title="biguasim.ardubridge.VehicleProfile.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>BiguaSim agent_type string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.num_motors" title="biguasim.ardubridge.VehicleProfile.num_motors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_motors</span></code></a></p></td>
+<td><p>Number of actuators sent to BiguaSim env.step().</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.pwm_converters" title="biguasim.ardubridge.VehicleProfile.pwm_converters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwm_converters</span></code></a></p></td>
+<td><p>pwm_val (float) → command value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.sitl_args" title="biguasim.ardubridge.VehicleProfile.sitl_args"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sitl_args</span></code></a></p></td>
+<td><p>Suggested sim_vehicle.py invocation for documentation purposes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.VehicleProfile.warmup_frames" title="biguasim.ardubridge.VehicleProfile.warmup_frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">warmup_frames</span></code></a></p></td>
+<td><p>Number of frames to hold motors at zero on startup.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.ardupilot_vehicle">
+<span class="sig-name descname"><span class="pre">ardupilot_vehicle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.ardupilot_vehicle" title="Link to this definition"></a></dt>
+<dd><p>‘ArduSub’, ‘ArduCopter’, or ‘Rover’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ArduPilot vehicle type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.control_abstraction">
+<span class="sig-name descname"><span class="pre">control_abstraction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.control_abstraction" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim control abstraction string passed to the scenario config.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.include_depth_sensor">
+<span class="sig-name descname"><span class="pre">include_depth_sensor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.include_depth_sensor" title="Link to this definition"></a></dt>
+<dd><p>Add DepthSensor to auto-built scenario (enables pressure field in JSON).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.motor_mapping">
+<span class="sig-name descname"><span class="pre">motor_mapping</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.motor_mapping" title="Link to this definition"></a></dt>
+<dd><p>motor_mapping[i] = ArduPilot PWM channel index for sim actuator i.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.motor_signs">
+<span class="sig-name descname"><span class="pre">motor_signs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.motor_signs" title="Link to this definition"></a></dt>
+<dd><p>±1 per actuator to flip thrust direction without changing wiring.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.name" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim agent_type string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.num_motors">
+<span class="sig-name descname"><span class="pre">num_motors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.num_motors" title="Link to this definition"></a></dt>
+<dd><p>Number of actuators sent to BiguaSim env.step().</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.pwm_converters">
+<span class="sig-name descname"><span class="pre">pwm_converters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.pwm_converters" title="Link to this definition"></a></dt>
+<dd><p>pwm_val (float) → command value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Per-actuator callables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.sitl_args">
+<span class="sig-name descname"><span class="pre">sitl_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.sitl_args" title="Link to this definition"></a></dt>
+<dd><p>Suggested sim_vehicle.py invocation for documentation purposes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.VehicleProfile.warmup_frames">
+<span class="sig-name descname"><span class="pre">warmup_frames</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1700</span></em><a class="headerlink" href="#biguasim.ardubridge.VehicleProfile.warmup_frames" title="Link to this definition"></a></dt>
+<dd><p>Number of frames to hold motors at zero on startup.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.depth_to_pressure">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">depth_to_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_z_up</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1026.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#biguasim.ardubridge.depth_to_pressure" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim DepthSensor z_up (metres, positive=up) → absolute pressure (Pa).
+Assumes seawater density rho=1026 kg/m³.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.imu_glu_to_frd">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">imu_glu_to_frd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imu_data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#biguasim.ardubridge.imu_glu_to_frd" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim IMUSensor [[ax,ay,az],[p,q,r]] (GLU body) → ([ax,ay,az],[p,q,r]) (FRD body).
+GLU → FRD: negate y and z axes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.meters_to_gps">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">meters_to_gps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">north_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">east_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat0_deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon0_deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#biguasim.ardubridge.meters_to_gps" title="Link to this definition"></a></dt>
+<dd><p>Local NED offset (metres) → GPS lat/lon (degrees).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.pos_nwu_to_ap">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">pos_nwu_to_ap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.pos_nwu_to_ap" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim LocationSensor [x,y,z] (NWU, metres) → ArduPilot [lat_deg, lon_deg, alt_m].
+alt_m is positive upward (ArduPilot uses NED internally but JSON position field is [lat,lon,alt]).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.quat_glu2nwu_to_frd2ned">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">quat_glu2nwu_to_frd2ned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_xyzw</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.quat_glu2nwu_to_frd2ned" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim DynamicsSensor quaternion [x,y,z,w] (GLU→NWU) → [w,x,y,z] (FRD→NED).
+R_frd2ned = Rx(π) * R_glu2nwu * Rx(π)
+scipy as_quat() returns [x,y,z,w]; ArduPilot JSON wants [w,x,y,z].
+Canonical form enforced: w &gt;= 0 (q and -q represent the same rotation).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vel_nwu_to_ned">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.</span></span><span class="sig-name descname"><span class="pre">vel_nwu_to_ned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vel</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.vel_nwu_to_ned" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim VelocitySensor [vn, vw, vu] → NED [vn, ve, vd].</p>
+</dd></dl>
+
+</section>
+<section id="module-biguasim.ardubridge.bridge">
+<span id="bridge"></span><h2>Bridge<a class="headerlink" href="#module-biguasim.ardubridge.bridge" title="Link to this heading"></a></h2>
+<p>ArduPilot JSON SITL UDP bridge — vehicle-agnostic protocol handler.</p>
+<p>Receives 40-byte servo packets from ArduPilot, converts PWM to simulator
+commands, converts simulator state to ArduPilot JSON, and sends it back.
+No BiguaSim dependency; wired to the environment by ArduBiguaSimRunner.</p>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge" title="biguasim.ardubridge.bridge.ArduPilotBridge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArduPilotBridge</span></code></a>(profile[, address, port, ...])</p></td>
+<td><p>UDP bridge implementing the ArduPilot JSON SITL FDM protocol.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.bridge.</span></span><span class="sig-name descname"><span class="pre">ArduPilotBridge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><span class="pre">VehicleProfile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9002</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(33.810313,</span> <span class="pre">-118.393867)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>UDP bridge implementing the ArduPilot JSON SITL FDM protocol.</p>
+<p>Responsible for establishing two-way communication between ArduPilot and the simulator,
+receiving actuator commands (PWM) and sending the vehicle’s sensory data (state) back.</p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.bind" title="biguasim.ardubridge.bridge.ArduPilotBridge.bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind</span></code></a>()</p></td>
+<td><p>Binds the UDP socket and drains any stale packets.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state" title="biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_json_state</span></code></a>(agent_state, sim_time)</p></td>
+<td><p>Converts the raw agent state in the simulator (NWU/GLU standard) to the ArduPilot JSON state format (NED/FRD standard).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.close" title="biguasim.ardubridge.bridge.ArduPilotBridge.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a>()</p></td>
+<td><p>Closes the UDP communication socket.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.pwm_to_motor_cmds" title="biguasim.ardubridge.bridge.ArduPilotBridge.pwm_to_motor_cmds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwm_to_motor_cmds</span></code></a>(pwm, frame_count)</p></td>
+<td><p>Converts raw PWM values received from ArduPilot into scaled motor commands for the simulator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.receive_pwm" title="biguasim.ardubridge.bridge.ArduPilotBridge.receive_pwm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receive_pwm</span></code></a>()</p></td>
+<td><p>Non-blocking receive of one servo packet (PWM).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.send_state" title="biguasim.ardubridge.bridge.ArduPilotBridge.send_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_state</span></code></a>(json_state)</p></td>
+<td><p>Serializes the state dictionary into JSON and sends it via UDP to the Flight Controller Unit (FCU).</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.is_online" title="biguasim.ardubridge.bridge.ArduPilotBridge.is_online"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_online</span></code></a></p></td>
+<td><p>Checks the current connection status with ArduPilot.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.bind" title="Link to this definition"></a></dt>
+<dd><p>Binds the UDP socket and drains any stale packets.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Call this method only once before starting the execution loop (<cite>run</cite>).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If it fails to bind to the specified UDP socket.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state">
+<span class="sig-name descname"><span class="pre">build_json_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sim_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state" title="Link to this definition"></a></dt>
+<dd><p>Converts the raw agent state in the simulator (NWU/GLU standard) to the ArduPilot
+JSON state format (NED/FRD standard).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agent_state</strong> (<em>dict</em>) – Dictionary containing BiguaSim sensor data (Location, Velocity, IMU, Depth, etc.).</p></li>
+<li><p><strong>sim_time</strong> (<em>float</em>) – Current simulation time in seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted dictionary ready to be serialized into JSON.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.close" title="Link to this definition"></a></dt>
+<dd><p>Closes the UDP communication socket.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.is_online">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_online</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.is_online" title="Link to this definition"></a></dt>
+<dd><p>Checks the current connection status with ArduPilot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if ArduPilot is actively sending packets, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.pwm_to_motor_cmds">
+<span class="sig-name descname"><span class="pre">pwm_to_motor_cmds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pwm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.pwm_to_motor_cmds" title="Link to this definition"></a></dt>
+<dd><p>Converts raw PWM values received from ArduPilot into scaled motor commands for the simulator.</p>
+<p>Applies the warmup guard (<cite>warmup_frames</cite>), motor mapping, mathematical PWM converters,
+and directional signs configured in the <cite>VehicleProfile</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pwm</strong> (<em>np.ndarray</em>) – NumPy array containing the 16 PWM channels received from ArduPilot.</p></li>
+<li><p><strong>frame_count</strong> (<em>int</em>) – The current frame counter used to check the warmup phase.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of floats containing the final normalized commands for each motor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.receive_pwm">
+<span class="sig-name descname"><span class="pre">receive_pwm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.receive_pwm" title="Link to this definition"></a></dt>
+<dd><p>Non-blocking receive of one servo packet (PWM).</p>
+<p>Dynamically adjusts the timeout depending on the connection status (<cite>_online</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing <cite>(frame_count, pwm_array)</cite>. Returns <cite>(None, None)</cite> on timeout or error.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.bridge.ArduPilotBridge.send_state">
+<span class="sig-name descname"><span class="pre">send_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.bridge.ArduPilotBridge.send_state" title="Link to this definition"></a></dt>
+<dd><p>Serializes the state dictionary into JSON and sends it via UDP to the Flight Controller Unit (FCU).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_state</strong> (<em>dict</em>) – Dictionary generated by the <a class="reference internal" href="#biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state" title="biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state"><code class="xref py py-meth docutils literal notranslate"><span class="pre">build_json_state()</span></code></a> method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.ardubridge.vehicle">
+<span id="vehicle"></span><h2>Vehicle<a class="headerlink" href="#module-biguasim.ardubridge.vehicle" title="Link to this heading"></a></h2>
+<p>Vehicle profiles for ArduPilot JSON SITL integration with BiguaSim.</p>
+<p>Each VehicleProfile maps BiguaSim actuator indices to ArduPilot PWM channels
+and specifies the correct conversion for each actuator type.</p>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VehicleProfile</span></code></a>(name, num_motors, ...[, ...])</p></td>
+<td><p>All configuration needed to bridge one BiguaSim vehicle to ArduPilot SITL.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.vehicle.</span></span><span class="sig-name descname"><span class="pre">VehicleProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_motors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motor_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">motor_signs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pwm_converters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ardupilot_vehicle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sitl_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_depth_sensor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warmup_frames</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1700</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All configuration needed to bridge one BiguaSim vehicle to ArduPilot SITL.</p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.ardupilot_vehicle" title="biguasim.ardubridge.vehicle.VehicleProfile.ardupilot_vehicle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ardupilot_vehicle</span></code></a></p></td>
+<td><p>'ArduSub', 'ArduCopter', or 'Rover'.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.control_abstraction" title="biguasim.ardubridge.vehicle.VehicleProfile.control_abstraction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">control_abstraction</span></code></a></p></td>
+<td><p>BiguaSim control abstraction string passed to the scenario config.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.include_depth_sensor" title="biguasim.ardubridge.vehicle.VehicleProfile.include_depth_sensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">include_depth_sensor</span></code></a></p></td>
+<td><p>Add DepthSensor to auto-built scenario (enables pressure field in JSON).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.motor_mapping" title="biguasim.ardubridge.vehicle.VehicleProfile.motor_mapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_mapping</span></code></a></p></td>
+<td><p>motor_mapping[i] = ArduPilot PWM channel index for sim actuator i.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.motor_signs" title="biguasim.ardubridge.vehicle.VehicleProfile.motor_signs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">motor_signs</span></code></a></p></td>
+<td><p>±1 per actuator to flip thrust direction without changing wiring.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.name" title="biguasim.ardubridge.vehicle.VehicleProfile.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>BiguaSim agent_type string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.num_motors" title="biguasim.ardubridge.vehicle.VehicleProfile.num_motors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_motors</span></code></a></p></td>
+<td><p>Number of actuators sent to BiguaSim env.step().</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.pwm_converters" title="biguasim.ardubridge.vehicle.VehicleProfile.pwm_converters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwm_converters</span></code></a></p></td>
+<td><p>pwm_val (float) → command value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.sitl_args" title="biguasim.ardubridge.vehicle.VehicleProfile.sitl_args"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sitl_args</span></code></a></p></td>
+<td><p>Suggested sim_vehicle.py invocation for documentation purposes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile.warmup_frames" title="biguasim.ardubridge.vehicle.VehicleProfile.warmup_frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">warmup_frames</span></code></a></p></td>
+<td><p>Number of frames to hold motors at zero on startup.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.ardupilot_vehicle">
+<span class="sig-name descname"><span class="pre">ardupilot_vehicle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.ardupilot_vehicle" title="Link to this definition"></a></dt>
+<dd><p>‘ArduSub’, ‘ArduCopter’, or ‘Rover’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ArduPilot vehicle type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.control_abstraction">
+<span class="sig-name descname"><span class="pre">control_abstraction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.control_abstraction" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim control abstraction string passed to the scenario config.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.include_depth_sensor">
+<span class="sig-name descname"><span class="pre">include_depth_sensor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.include_depth_sensor" title="Link to this definition"></a></dt>
+<dd><p>Add DepthSensor to auto-built scenario (enables pressure field in JSON).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.motor_mapping">
+<span class="sig-name descname"><span class="pre">motor_mapping</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.motor_mapping" title="Link to this definition"></a></dt>
+<dd><p>motor_mapping[i] = ArduPilot PWM channel index for sim actuator i.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.motor_signs">
+<span class="sig-name descname"><span class="pre">motor_signs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.motor_signs" title="Link to this definition"></a></dt>
+<dd><p>±1 per actuator to flip thrust direction without changing wiring.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.name" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim agent_type string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.num_motors">
+<span class="sig-name descname"><span class="pre">num_motors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.num_motors" title="Link to this definition"></a></dt>
+<dd><p>Number of actuators sent to BiguaSim env.step().</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.pwm_converters">
+<span class="sig-name descname"><span class="pre">pwm_converters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.pwm_converters" title="Link to this definition"></a></dt>
+<dd><p>pwm_val (float) → command value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Per-actuator callables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.sitl_args">
+<span class="sig-name descname"><span class="pre">sitl_args</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.sitl_args" title="Link to this definition"></a></dt>
+<dd><p>Suggested sim_vehicle.py invocation for documentation purposes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biguasim.ardubridge.vehicle.VehicleProfile.warmup_frames">
+<span class="sig-name descname"><span class="pre">warmup_frames</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1700</span></em><a class="headerlink" href="#biguasim.ardubridge.vehicle.VehicleProfile.warmup_frames" title="Link to this definition"></a></dt>
+<dd><p>Number of frames to hold motors at zero on startup.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.ardubridge.runner">
+<span id="runner"></span><h2>Runner<a class="headerlink" href="#module-biguasim.ardubridge.runner" title="Link to this heading"></a></h2>
+<p>ArduBiguaSimRunner — wires a BiguaSim environment to an ArduPilotBridge.</p>
+<dl>
+<dt>Usage:</dt><dd><p>from ardupilot_biguasim import ArduBiguaSimRunner, VEHICLE_REGISTRY</p>
+<p>profile = VEHICLE_REGISTRY[“BlueROV2”]
+scenario = ArduBiguaSimRunner.build_scenario(</p>
+<blockquote>
+<div><p>profile, package_name=”Hydrone”,
+world=”Relief-Generic-Bridge-Vehicles-Water-Custom”,
+ticks_per_sec=200,</p>
+</div></blockquote>
+<p>)
+with ArduBiguaSimRunner(profile, scenario) as runner:</p>
+<blockquote>
+<div><p>runner.run()</p>
+</div></blockquote>
+</dd>
+</dl>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner" title="biguasim.ardubridge.runner.ArduBiguaSimRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArduBiguaSimRunner</span></code></a>(profile, scenario[, ...])</p></td>
+<td><p>Context-manager that owns both the BiguaSim environment and the ArduPilot bridge.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.ardubridge.runner.ArduBiguaSimRunner">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.runner.</span></span><span class="sig-name descname"><span class="pre">ArduBiguaSimRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><span class="pre">VehicleProfile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9002</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(33.810313,</span> <span class="pre">-118.393867)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_viewport</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Context-manager that owns both the BiguaSim environment and the ArduPilot bridge.</p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner.build_scenario" title="biguasim.ardubridge.runner.ArduBiguaSimRunner.build_scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_scenario</span></code></a>(profile, package_name, world)</p></td>
+<td><p>Build a minimal BiguaSim scenario dict with all sensors required for SITL.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner.run" title="biguasim.ardubridge.runner.ArduBiguaSimRunner.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</p></td>
+<td><p>Blocking main loop.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.runner.ArduBiguaSimRunner.build_scenario">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_scenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#biguasim.ardubridge.vehicle.VehicleProfile" title="biguasim.ardubridge.vehicle.VehicleProfile"><span class="pre">VehicleProfile</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">world</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ticks_per_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">overrides</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner.build_scenario" title="Link to this definition"></a></dt>
+<dd><p>Build a minimal BiguaSim scenario dict with all sensors required for SITL.</p>
+<p>Extra keyword args are merged into the top-level scenario dict.
+To override agent fields, pass them as overrides prefixed with ‘<a href="#id3"><span class="problematic" id="id4">agent_</span></a>’:</p>
+<blockquote>
+<div><p>e.g. agent_location=[10, 0, 0].</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.ardubridge.runner.ArduBiguaSimRunner.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#biguasim.ardubridge.runner.ArduBiguaSimRunner.run" title="Link to this definition"></a></dt>
+<dd><p>Blocking main loop. Returns only on KeyboardInterrupt.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.ardubridge.frame">
+<span id="frame"></span><h2>Frame<a class="headerlink" href="#module-biguasim.ardubridge.frame" title="Link to this heading"></a></h2>
+<p>Coordinate frame conversions: BiguaSim (NWU world, GLU body) → ArduPilot (NED world, FRD body).</p>
+<p>BiguaSim world: NWU  — x=North, y=West,    z=Up
+BiguaSim body:  GLU  — x=forward, y=left,  z=up
+ArduPilot world: NED — x=North, y=East,    z=Down
+ArduPilot body:  FRD — x=forward, y=right, z=down</p>
+<p>Both world and body conversions are a 180° rotation about the x-axis: Rx(π).
+Quaternion chain: R_frd2ned = Rx(π) * R_glu2nwu * Rx(π)</p>
+<p><strong>Functions:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.frame.depth_to_pressure" title="biguasim.ardubridge.frame.depth_to_pressure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depth_to_pressure</span></code></a>(depth_z_up[, rho])</p></td>
+<td><p>BiguaSim DepthSensor z_up (metres, positive=up) → absolute pressure (Pa).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.frame.imu_glu_to_frd" title="biguasim.ardubridge.frame.imu_glu_to_frd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imu_glu_to_frd</span></code></a>(imu_data)</p></td>
+<td><p>BiguaSim IMUSensor [[ax,ay,az],[p,q,r]] (GLU body) → ([ax,ay,az],[p,q,r]) (FRD body).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.frame.meters_to_gps" title="biguasim.ardubridge.frame.meters_to_gps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_gps</span></code></a>(north_m, east_m, lat0_deg, ...)</p></td>
+<td><p>Local NED offset (metres) → GPS lat/lon (degrees).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.frame.pos_nwu_to_ap" title="biguasim.ardubridge.frame.pos_nwu_to_ap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pos_nwu_to_ap</span></code></a>(pos, gps_origin)</p></td>
+<td><p>BiguaSim LocationSensor [x,y,z] (NWU, metres) → ArduPilot [lat_deg, lon_deg, alt_m].</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned" title="biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quat_glu2nwu_to_frd2ned</span></code></a>(q_xyzw)</p></td>
+<td><p>BiguaSim DynamicsSensor quaternion [x,y,z,w] (GLU→NWU) → [w,x,y,z] (FRD→NED).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.ardubridge.frame.vel_nwu_to_ned" title="biguasim.ardubridge.frame.vel_nwu_to_ned"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vel_nwu_to_ned</span></code></a>(vel)</p></td>
+<td><p>BiguaSim VelocitySensor [vn, vw, vu] → NED [vn, ve, vd].</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.frame.depth_to_pressure">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.frame.</span></span><span class="sig-name descname"><span class="pre">depth_to_pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_z_up</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1026.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#biguasim.ardubridge.frame.depth_to_pressure" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim DepthSensor z_up (metres, positive=up) → absolute pressure (Pa).
+Assumes seawater density rho=1026 kg/m³.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.frame.imu_glu_to_frd">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.frame.</span></span><span class="sig-name descname"><span class="pre">imu_glu_to_frd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imu_data</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#biguasim.ardubridge.frame.imu_glu_to_frd" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim IMUSensor [[ax,ay,az],[p,q,r]] (GLU body) → ([ax,ay,az],[p,q,r]) (FRD body).
+GLU → FRD: negate y and z axes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.frame.meters_to_gps">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.frame.</span></span><span class="sig-name descname"><span class="pre">meters_to_gps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">north_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">east_m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat0_deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon0_deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#biguasim.ardubridge.frame.meters_to_gps" title="Link to this definition"></a></dt>
+<dd><p>Local NED offset (metres) → GPS lat/lon (degrees).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.frame.pos_nwu_to_ap">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.frame.</span></span><span class="sig-name descname"><span class="pre">pos_nwu_to_ap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.frame.pos_nwu_to_ap" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim LocationSensor [x,y,z] (NWU, metres) → ArduPilot [lat_deg, lon_deg, alt_m].
+alt_m is positive upward (ArduPilot uses NED internally but JSON position field is [lat,lon,alt]).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.frame.</span></span><span class="sig-name descname"><span class="pre">quat_glu2nwu_to_frd2ned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_xyzw</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim DynamicsSensor quaternion [x,y,z,w] (GLU→NWU) → [w,x,y,z] (FRD→NED).
+R_frd2ned = Rx(π) * R_glu2nwu * Rx(π)
+scipy as_quat() returns [x,y,z,w]; ArduPilot JSON wants [w,x,y,z].
+Canonical form enforced: w &gt;= 0 (q and -q represent the same rotation).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.ardubridge.frame.vel_nwu_to_ned">
+<span class="sig-prename descclassname"><span class="pre">biguasim.ardubridge.frame.</span></span><span class="sig-name descname"><span class="pre">vel_nwu_to_ned</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vel</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#biguasim.ardubridge.frame.vel_nwu_to_ned" title="Link to this definition"></a></dt>
+<dd><p>BiguaSim VelocitySensor [vn, vw, vu] → NED [vn, ve, vd].</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="shmem.html" class="btn btn-neutral float-left" title="Shared Memory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="util.html" class="btn btn-neutral float-right" title="Util" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

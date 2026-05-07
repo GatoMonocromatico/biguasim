@@ -1,0 +1,1303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/darkmode.js?v=3994c1fa"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor">AcousticBeaconSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient.acquire">acquire() (biguasim.biguasimclient.BiguaSimClient method)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.act">act() (biguasim.agents.BiguaSimAgent method)</a>
+
+      <ul>
+        <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.act">(biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.action_space">action_space (biguasim.agents.BiguaSimAgent property)</a>
+
+      <ul>
+        <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.action_space">(biguasim.environments.BiguaSimEnvironment property)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.ActionSpace">ActionSpace (class in biguasim.spaces)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.add_agent">add_agent() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandsGroup.add_command">add_command() (biguasim.command.CommandsGroup method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.Command.add_number_parameters">add_number_parameters() (biguasim.command.Command method)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.add_sensors">add_sensors() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.Command.add_string_parameters">add_string_parameters() (biguasim.command.Command method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/commands.html#biguasim.command.AddSensorCommand">AddSensorCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.agent_state_dict">agent_state_dict (biguasim.agents.BiguaSimAgent attribute)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.AgentDefinition">AgentDefinition (class in biguasim.agents)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.AgentFactory">AgentFactory (class in biguasim.agents)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent">AnnotationComponent (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduBiguaSimRunner">ArduBiguaSimRunner (class in biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.runner.ArduBiguaSimRunner">(class in biguasim.ardubridge.runner)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.ardupilot_vehicle">ardupilot_vehicle (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.ardupilot_vehicle">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge">ArduPilotBridge (class in biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge">(class in biguasim.ardubridge.bridge)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.available_packages">available_packages() (in module biguasim.packagemanager)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.control.BatchedPIDController">BatchedPIDController (class in biguasim.dynamics.control)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.beacons">beacons (biguasim.environments.BiguaSimEnvironment property)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.beacons_id">beacons_id (biguasim.environments.BiguaSimEnvironment property)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.beacons_status">beacons_status (biguasim.environments.BiguaSimEnvironment property)</a>
+</li>
+      <li>
+    biguasim.agents
+
+      <ul>
+        <li><a href="biguasim/agents.html#module-biguasim.agents">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.ardubridge
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.ardubridge.bridge
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.bridge">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.ardubridge.frame
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.frame">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.ardubridge.runner
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.runner">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.ardubridge.vehicle
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.vehicle">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.biguasim
+
+      <ul>
+        <li><a href="biguasim/index.html#module-biguasim.biguasim">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.biguasimclient
+
+      <ul>
+        <li><a href="biguasim/biguasimclient.html#module-biguasim.biguasimclient">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.command
+
+      <ul>
+        <li><a href="biguasim/commands.html#module-biguasim.command">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.dynamics.agents
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.agents">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.dynamics.control
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.control">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.dynamics.uav
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.uav">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.dynamics.usv
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.usv">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.dynamics.uuv
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.uuv">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.environments
+
+      <ul>
+        <li><a href="biguasim/environments.html#module-biguasim.environments">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.exceptions
+
+      <ul>
+        <li><a href="biguasim/exceptions.html#module-biguasim.exceptions">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    biguasim.lcm
+
+      <ul>
+        <li><a href="biguasim/lcm.html#module-biguasim.lcm">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.packagemanager
+
+      <ul>
+        <li><a href="biguasim/packagemanager.html#module-biguasim.packagemanager">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.sensors
+
+      <ul>
+        <li><a href="biguasim/sensors.html#module-biguasim.sensors">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.shmem
+
+      <ul>
+        <li><a href="biguasim/shmem.html#module-biguasim.shmem">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.spaces
+
+      <ul>
+        <li><a href="biguasim/spaces.html#module-biguasim.spaces">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.util
+
+      <ul>
+        <li><a href="biguasim/util.html#module-biguasim.util">module</a>
+</li>
+      </ul></li>
+      <li>
+    biguasim.weather
+
+      <ul>
+        <li><a href="biguasim/weather.html#module-biguasim.weather">module</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent">BiguaSimAgent (class in biguasim.agents)</a>
+</li>
+      <li><a href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient">BiguaSimClient (class in biguasim.biguasimclient)</a>
+</li>
+      <li><a href="biguasim/exceptions.html#biguasim.exceptions.BiguaSimConfigurationException">BiguaSimConfigurationException</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment">BiguaSimEnvironment (class in biguasim.environments)</a>
+</li>
+      <li><a href="biguasim/exceptions.html#biguasim.exceptions.BiguaSimException">BiguaSimException</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor">BiguaSimSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.bind">bind() (biguasim.ardubridge.ArduPilotBridge method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.bind">(biguasim.ardubridge.bridge.ArduPilotBridge method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BlueBoat">BlueBoat (class in biguasim.agents)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueBoat">(class in biguasim.dynamics.agents)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BlueROV2">BlueROV2 (class in biguasim.agents)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueROV2">(class in biguasim.dynamics.agents)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BlueROVHeavy">BlueROVHeavy (class in biguasim.agents)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueROVHeavy">(class in biguasim.dynamics.agents)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.AgentFactory.build_agent">build_agent() (biguasim.agents.AgentFactory static method)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.build_json_state">build_json_state() (biguasim.ardubridge.ArduPilotBridge method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.build_json_state">(biguasim.ardubridge.bridge.ArduPilotBridge method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.ModelsFactory.build_model">build_model() (biguasim.dynamics.agents.ModelsFactory class method)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduBiguaSimRunner.build_scenario">build_scenario() (biguasim.ardubridge.ArduBiguaSimRunner static method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.runner.ArduBiguaSimRunner.build_scenario">(biguasim.ardubridge.runner.ArduBiguaSimRunner static method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SensorFactory.build_sensor">build_sensor() (biguasim.sensors.SensorFactory static method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.CameraSensor">CameraSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.usv.Catamaran">Catamaran (class in biguasim.dynamics.usv)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandCenter.clear">clear() (biguasim.command.CommandCenter method)</a>
+
+      <ul>
+        <li><a href="biguasim/commands.html#biguasim.command.CommandsGroup.clear">(biguasim.command.CommandsGroup method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.clear_action">clear_action() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.close">close() (biguasim.ardubridge.ArduPilotBridge method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.close">(biguasim.ardubridge.bridge.ArduPilotBridge method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/commands.html#biguasim.command.Command">Command (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandCenter">CommandCenter (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandsGroup">CommandsGroup (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.control.BatchedPIDController.compute">compute() (biguasim.dynamics.control.BatchedPIDController method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace">ContinuousActionSpace (class in biguasim.spaces)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.control_abstraction">control_abstraction (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.control_abstraction">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.control_abstractions">control_abstractions (biguasim.agents.BiguaSimAgent property)</a>
+
+      <ul>
+        <li><a href="biguasim/agents.html#biguasim.agents.BlueBoat.control_abstractions">(biguasim.agents.BlueBoat property)</a>
+</li>
+        <li><a href="biguasim/agents.html#biguasim.agents.BlueROV2.control_abstractions">(biguasim.agents.BlueROV2 property)</a>
+</li>
+        <li><a href="biguasim/agents.html#biguasim.agents.BlueROVHeavy.control_abstractions">(biguasim.agents.BlueROVHeavy property)</a>
+</li>
+        <li><a href="biguasim/agents.html#biguasim.agents.DjiMatrice.control_abstractions">(biguasim.agents.DjiMatrice property)</a>
+</li>
+        <li><a href="biguasim/agents.html#biguasim.agents.TorpedoAUV.control_abstractions">(biguasim.agents.TorpedoAUV property)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/util.html#biguasim.util.convert_unicode">convert_unicode() (in module biguasim.util)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.CustomCommand">CustomCommand (class in biguasim.command)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor.data_shape">data_shape (biguasim.sensors.AcousticBeaconSensor property)</a>
+
+      <ul>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent.data_shape">(biguasim.sensors.AnnotationComponent property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.data_shape">(biguasim.sensors.BiguaSimSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.CameraSensor.data_shape">(biguasim.sensors.CameraSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DepthCamera.data_shape">(biguasim.sensors.DepthCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DepthSensor.data_shape">(biguasim.sensors.DepthSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DVLSensor.data_shape">(biguasim.sensors.DVLSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DynamicsSensor.data_shape">(biguasim.sensors.DynamicsSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.FOVDetection.data_shape">(biguasim.sensors.FOVDetection property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.GPSSensor.data_shape">(biguasim.sensors.GPSSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.ImagingSonar.data_shape">(biguasim.sensors.ImagingSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.IMUSensor.data_shape">(biguasim.sensors.IMUSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.LocationSensor.data_shape">(biguasim.sensors.LocationSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.MagnetometerSensor.data_shape">(biguasim.sensors.MagnetometerSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor.data_shape">(biguasim.sensors.OpticalModemSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.OrientationSensor.data_shape">(biguasim.sensors.OrientationSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.PoseSensor.data_shape">(biguasim.sensors.PoseSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RangeFinderSensor.data_shape">(biguasim.sensors.RangeFinderSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastLidar.data_shape">(biguasim.sensors.RaycastLidar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar.data_shape">(biguasim.sensors.RaycastSemanticLidar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBCamera.data_shape">(biguasim.sensors.RGBCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.data_shape">(biguasim.sensors.RGBDCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RotationSensor.data_shape">(biguasim.sensors.RotationSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera.data_shape">(biguasim.sensors.SemanticSegmentationCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SidescanSonar.data_shape">(biguasim.sensors.SidescanSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SinglebeamSonar.data_shape">(biguasim.sensors.SinglebeamSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.VelocitySensor.data_shape">(biguasim.sensors.VelocitySensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.ViewportCapture.data_shape">(biguasim.sensors.ViewportCapture property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.WorldNumSensor.data_shape">(biguasim.sensors.WorldNumSensor property)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/commands.html#biguasim.command.DebugDrawCommand">DebugDrawCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.depth_to_pressure">depth_to_pressure() (in module biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.frame.depth_to_pressure">(in module biguasim.ardubridge.frame)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.DepthCamera">DepthCamera (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.DepthSensor">DepthSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.usv.Differential">Differential (class in biguasim.dynamics.usv)</a>
+</li>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace">DiscreteActionSpace (class in biguasim.spaces)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/agents.html#biguasim.agents.DjiMatrice">DjiMatrice (class in biguasim.agents)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.DjiMatrice">(class in biguasim.dynamics.agents)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_arrow">draw_arrow() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_box">draw_box() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_line">draw_line() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_point">draw_point() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor.dtype">dtype (biguasim.sensors.AcousticBeaconSensor property)</a>
+
+      <ul>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent.dtype">(biguasim.sensors.AnnotationComponent property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.dtype">(biguasim.sensors.BiguaSimSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.CameraSensor.dtype">(biguasim.sensors.CameraSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DepthCamera.dtype">(biguasim.sensors.DepthCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DepthSensor.dtype">(biguasim.sensors.DepthSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DVLSensor.dtype">(biguasim.sensors.DVLSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DynamicsSensor.dtype">(biguasim.sensors.DynamicsSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.FOVDetection.dtype">(biguasim.sensors.FOVDetection property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.GPSSensor.dtype">(biguasim.sensors.GPSSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.ImagingSonar.dtype">(biguasim.sensors.ImagingSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.IMUSensor.dtype">(biguasim.sensors.IMUSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.LocationSensor.dtype">(biguasim.sensors.LocationSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.MagnetometerSensor.dtype">(biguasim.sensors.MagnetometerSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor.dtype">(biguasim.sensors.OpticalModemSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.OrientationSensor.dtype">(biguasim.sensors.OrientationSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.PoseSensor.dtype">(biguasim.sensors.PoseSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RangeFinderSensor.dtype">(biguasim.sensors.RangeFinderSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastLidar.dtype">(biguasim.sensors.RaycastLidar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar.dtype">(biguasim.sensors.RaycastSemanticLidar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBCamera.dtype">(biguasim.sensors.RGBCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.dtype">(biguasim.sensors.RGBDCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RotationSensor.dtype">(biguasim.sensors.RotationSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera.dtype">(biguasim.sensors.SemanticSegmentationCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SidescanSonar.dtype">(biguasim.sensors.SidescanSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SinglebeamSonar.dtype">(biguasim.sensors.SinglebeamSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.VelocitySensor.dtype">(biguasim.sensors.VelocitySensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.ViewportCapture.dtype">(biguasim.sensors.ViewportCapture property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.WorldNumSensor.dtype">(biguasim.sensors.WorldNumSensor property)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.DVLSensor">DVLSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.DynamicsSensor">DynamicsSensor (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandCenter.enqueue_command">enqueue_command() (biguasim.command.CommandCenter method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.FOVDetection">FOVDetection (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/lcm.html#biguasim.lcm.gen">gen() (in module biguasim.lcm)</a>
+</li>
+      <li><a href="biguasim/util.html#biguasim.util.get_biguasim_path">get_biguasim_path() (in module biguasim.util)</a>
+</li>
+      <li><a href="biguasim/util.html#biguasim.util.get_biguasim_version">get_biguasim_version() (in module biguasim.util)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.get_binary_path_for_package">get_binary_path_for_package() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.get_binary_path_for_scenario">get_binary_path_for_scenario() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.uav.QuadCopterX.get_cmd_motor_speeds">get_cmd_motor_speeds() (biguasim.dynamics.uav.QuadCopterX method)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.usv.Catamaran.get_cmd_motor_speeds">(biguasim.dynamics.usv.Catamaran method)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.usv.Differential.get_cmd_motor_speeds">(biguasim.dynamics.usv.Differential method)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.HexaCopterFiveDoF.get_cmd_motor_speeds">(biguasim.dynamics.uuv.HexaCopterFiveDoF method)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.OctaCopterSixDoF.get_cmd_motor_speeds">(biguasim.dynamics.uuv.OctaCopterSixDoF method)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.TorpedoAUV.get_cmd_motor_speeds">(biguasim.dynamics.uuv.TorpedoAUV method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SensorDefinition.get_config_json_string">get_config_json_string() (biguasim.sensors.SensorDefinition method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.ActionSpace.get_high">get_high() (biguasim.spaces.ActionSpace method)</a>
+
+      <ul>
+        <li><a href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace.get_high">(biguasim.spaces.ContinuousActionSpace method)</a>
+</li>
+        <li><a href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace.get_high">(biguasim.spaces.DiscreteActionSpace method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.get_joint_constraints">get_joint_constraints() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.ActionSpace.get_low">get_low() (biguasim.spaces.ActionSpace method)</a>
+
+      <ul>
+        <li><a href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace.get_low">(biguasim.spaces.ContinuousActionSpace method)</a>
+</li>
+        <li><a href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace.get_low">(biguasim.spaces.DiscreteActionSpace method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.get_ocean_current_velocity">get_ocean_current_velocity() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/util.html#biguasim.util.get_os_key">get_os_key() (in module biguasim.util)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.get_package_config_for_scenario">get_package_config_for_scenario() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.get_scenario">get_scenario() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/index.html#biguasim.biguasim.GL_VERSION">GL_VERSION (class in biguasim.biguasim)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.GPSSensor">GPSSensor (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandCenter.handle_buffer">handle_buffer() (biguasim.command.CommandCenter method)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.has_camera">has_camera() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.HexaCopterFiveDoF">HexaCopterFiveDoF (class in biguasim.dynamics.uuv)</a>
+</li>
+      <li><a href="biguasim/util.html#biguasim.util.human_readable_size">human_readable_size() (in module biguasim.util)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.ImagingSonar">ImagingSonar (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.imu_glu_to_frd">imu_glu_to_frd() (in module biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.frame.imu_glu_to_frd">(in module biguasim.ardubridge.frame)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.IMUSensor">IMUSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.include_depth_sensor">include_depth_sensor (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.include_depth_sensor">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.info">info() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.install">install() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.installed_packages">installed_packages() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.TorpedoAUV.integralSMC">integralSMC() (biguasim.dynamics.uuv.TorpedoAUV static method)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.is_online">is_online (biguasim.ardubridge.ArduPilotBridge property)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.is_online">(biguasim.ardubridge.bridge.ArduPilotBridge property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.load_scenario_file">load_scenario_file() (in module biguasim.packagemanager)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.LocationSensor">LocationSensor (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.MagnetometerSensor">MagnetometerSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/index.html#biguasim.biguasim.make">make() (in module biguasim.biguasim)</a>
+</li>
+      <li><a href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient.malloc">malloc() (biguasim.biguasimclient.BiguaSimClient method)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.meters_to_gps">meters_to_gps() (in module biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.frame.meters_to_gps">(in module biguasim.ardubridge.frame)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.ModelsFactory">ModelsFactory (class in biguasim.dynamics.agents)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.modems">modems (biguasim.environments.BiguaSimEnvironment property)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.modems_id">modems_id (biguasim.environments.BiguaSimEnvironment property)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="biguasim/agents.html#module-biguasim.agents">biguasim.agents</a>
+</li>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge">biguasim.ardubridge</a>
+</li>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.bridge">biguasim.ardubridge.bridge</a>
+</li>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.frame">biguasim.ardubridge.frame</a>
+</li>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.runner">biguasim.ardubridge.runner</a>
+</li>
+        <li><a href="biguasim/ardubridge.html#module-biguasim.ardubridge.vehicle">biguasim.ardubridge.vehicle</a>
+</li>
+        <li><a href="biguasim/index.html#module-biguasim.biguasim">biguasim.biguasim</a>
+</li>
+        <li><a href="biguasim/biguasimclient.html#module-biguasim.biguasimclient">biguasim.biguasimclient</a>
+</li>
+        <li><a href="biguasim/commands.html#module-biguasim.command">biguasim.command</a>
+</li>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.agents">biguasim.dynamics.agents</a>
+</li>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.control">biguasim.dynamics.control</a>
+</li>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.uav">biguasim.dynamics.uav</a>
+</li>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.usv">biguasim.dynamics.usv</a>
+</li>
+        <li><a href="biguasim/dynamics.html#module-biguasim.dynamics.uuv">biguasim.dynamics.uuv</a>
+</li>
+        <li><a href="biguasim/environments.html#module-biguasim.environments">biguasim.environments</a>
+</li>
+        <li><a href="biguasim/exceptions.html#module-biguasim.exceptions">biguasim.exceptions</a>
+</li>
+        <li><a href="biguasim/lcm.html#module-biguasim.lcm">biguasim.lcm</a>
+</li>
+        <li><a href="biguasim/packagemanager.html#module-biguasim.packagemanager">biguasim.packagemanager</a>
+</li>
+        <li><a href="biguasim/sensors.html#module-biguasim.sensors">biguasim.sensors</a>
+</li>
+        <li><a href="biguasim/shmem.html#module-biguasim.shmem">biguasim.shmem</a>
+</li>
+        <li><a href="biguasim/spaces.html#module-biguasim.spaces">biguasim.spaces</a>
+</li>
+        <li><a href="biguasim/util.html#module-biguasim.util">biguasim.util</a>
+</li>
+        <li><a href="biguasim/weather.html#module-biguasim.weather">biguasim.weather</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.motor_mapping">motor_mapping (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.motor_mapping">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.motor_signs">motor_signs (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.motor_signs">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.move_viewport">move_viewport() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.name">name (biguasim.agents.BiguaSimAgent attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.name">(biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+</li>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.name">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/exceptions.html#biguasim.exceptions.NotFoundException">NotFoundException</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.num_motors">num_motors (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.num_motors">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.OctaCopterSixDoF">OctaCopterSixDoF (class in biguasim.dynamics.uuv)</a>
+</li>
+      <li><a href="biguasim/index.html#biguasim.biguasim.GL_VERSION.OPENGL3">OPENGL3 (biguasim.biguasim.GL_VERSION attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/index.html#biguasim.biguasim.GL_VERSION.OPENGL4">OPENGL4 (biguasim.biguasim.GL_VERSION attribute)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor">OpticalModemSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.OrientationSensor">OrientationSensor (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.package_info">package_info() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueBoat.params">params (biguasim.dynamics.agents.BlueBoat property)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueROV2.params">(biguasim.dynamics.agents.BlueROV2 property)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueROVHeavy.params">(biguasim.dynamics.agents.BlueROVHeavy property)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.DjiMatrice.params">(biguasim.dynamics.agents.DjiMatrice property)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.Torpedo.params">(biguasim.dynamics.agents.Torpedo property)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.TorpedoAUV.params">(biguasim.dynamics.agents.TorpedoAUV property)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.pos_nwu_to_ap">pos_nwu_to_ap() (in module biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.frame.pos_nwu_to_ap">(in module biguasim.ardubridge.frame)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.PoseSensor">PoseSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.ProfilingSonar">ProfilingSonar (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.prune">prune() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.pwm_converters">pwm_converters (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.pwm_converters">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.pwm_to_motor_cmds">pwm_to_motor_cmds() (biguasim.ardubridge.ArduPilotBridge method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.pwm_to_motor_cmds">(biguasim.ardubridge.bridge.ArduPilotBridge method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.uav.QuadCopterX">QuadCopterX (class in biguasim.dynamics.uav)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.quat_glu2nwu_to_frd2ned">quat_glu2nwu_to_frd2ned() (in module biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned">(in module biguasim.ardubridge.frame)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandCenter.queue_size">queue_size (biguasim.command.CommandCenter property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.RangeFinderSensor">RangeFinderSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastLidar">RaycastLidar (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar">RaycastSemanticLidar (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.receive_pwm">receive_pwm() (biguasim.ardubridge.ArduPilotBridge method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.receive_pwm">(biguasim.ardubridge.bridge.ArduPilotBridge method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient.release">release() (biguasim.biguasimclient.BiguaSimClient method)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.remove">remove() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.remove_all_packages">remove_all_packages() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.remove_sensors">remove_sensors() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.RemoveSensorCommand">RemoveSensorCommand (class in biguasim.command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/commands.html#biguasim.command.RenderQualityCommand">RenderQualityCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.RenderViewportCommand">RenderViewportCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.reset">reset() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.RGBCamera">RGBCamera (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.RGBCameraRateCommand">RGBCameraRateCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.RGBDCamera">RGBDCamera (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.rotate">rotate() (biguasim.sensors.BiguaSimSensor method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.RotateSensorCommand">RotateSensorCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.RotationSensor">RotationSensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduBiguaSimRunner.run">run() (biguasim.ardubridge.ArduBiguaSimRunner method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.runner.ArduBiguaSimRunner.run">(biguasim.ardubridge.runner.ArduBiguaSimRunner method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.ActionSpace.sample">sample() (biguasim.spaces.ActionSpace method)</a>
+
+      <ul>
+        <li><a href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace.sample">(biguasim.spaces.ContinuousActionSpace method)</a>
+</li>
+        <li><a href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace.sample">(biguasim.spaces.DiscreteActionSpace method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.scenario_info">scenario_info() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera">SemanticSegmentationCamera (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.send_acoustic_message">send_acoustic_message() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.send_optical_message">send_optical_message() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge.send_state">send_state() (biguasim.ardubridge.ArduPilotBridge method)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge.send_state">(biguasim.ardubridge.bridge.ArduPilotBridge method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.send_world_command">send_world_command() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.SendAcousticMessageCommand">SendAcousticMessageCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.SendOpticalMessageCommand">SendOpticalMessageCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor.sensor_data">sensor_data (biguasim.sensors.AcousticBeaconSensor property)</a>
+
+      <ul>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.sensor_data">(biguasim.sensors.BiguaSimSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DepthCamera.sensor_data">(biguasim.sensors.DepthCamera property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.FOVDetection.sensor_data">(biguasim.sensors.FOVDetection property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.GPSSensor.sensor_data">(biguasim.sensors.GPSSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.ImagingSonar.sensor_data">(biguasim.sensors.ImagingSonar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor.sensor_data">(biguasim.sensors.OpticalModemSensor property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastLidar.sensor_data">(biguasim.sensors.RaycastLidar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar.sensor_data">(biguasim.sensors.RaycastSemanticLidar property)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.sensor_data">(biguasim.sensors.RGBDCamera property)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/lcm.html#biguasim.lcm.SensorData">SensorData (class in biguasim.lcm)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SensorDefinition">SensorDefinition (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SensorFactory">SensorFactory (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.sensors">sensors (biguasim.agents.BiguaSimAgent attribute)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.Command.set_command_type">set_command_type() (biguasim.command.Command method)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.set_control_abstraction">set_control_abstraction() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.set_control_scheme">set_control_scheme() (biguasim.agents.BiguaSimAgent method)</a>
+
+      <ul>
+        <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.set_control_scheme">(biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/weather.html#biguasim.weather.WeatherController.set_day_time">set_day_time() (biguasim.weather.WeatherController method)</a>
+</li>
+      <li><a href="biguasim/weather.html#biguasim.weather.WeatherController.set_fog_density">set_fog_density() (biguasim.weather.WeatherController method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_location">set_location() (biguasim.command.SpawnAgentCommand method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_name">set_name() (biguasim.command.SpawnAgentCommand method)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.set_physics_state">set_physics_state() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.set_render_quality">set_render_quality() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_rotation">set_rotation() (biguasim.command.SpawnAgentCommand method)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent.set_ticks_per_capture">set_ticks_per_capture() (biguasim.sensors.AnnotationComponent method)</a>
+
+      <ul>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.CameraSensor.set_ticks_per_capture">(biguasim.sensors.CameraSensor method)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.DepthCamera.set_ticks_per_capture">(biguasim.sensors.DepthCamera method)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBCamera.set_ticks_per_capture">(biguasim.sensors.RGBCamera method)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.set_ticks_per_capture">(biguasim.sensors.RGBDCamera method)</a>
+</li>
+        <li><a href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera.set_ticks_per_capture">(biguasim.sensors.SemanticSegmentationCamera method)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_type">set_type() (biguasim.command.SpawnAgentCommand method)</a>
+</li>
+      <li><a href="biguasim/lcm.html#biguasim.lcm.SensorData.set_value">set_value() (biguasim.lcm.SensorData method)</a>
+</li>
+      <li><a href="biguasim/weather.html#biguasim.weather.WeatherController.set_weather">set_weather() (biguasim.weather.WeatherController method)</a>
+</li>
+      <li><a href="biguasim/spaces.html#biguasim.spaces.ActionSpace.shape">shape (biguasim.spaces.ActionSpace property)</a>
+</li>
+      <li><a href="biguasim/shmem.html#biguasim.shmem.Shmem">Shmem (class in biguasim.shmem)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.should_render_viewport">should_render_viewport() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SidescanSonar">SidescanSonar (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.SinglebeamSonar">SinglebeamSonar (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.sitl_args">sitl_args (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.sitl_args">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/commands.html#biguasim.command.CommandsGroup.size">size (biguasim.command.CommandsGroup property)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.spawn_prop">spawn_prop() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.SpawnAgentCommand">SpawnAgentCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.TorpedoAUV.ssa">ssa() (biguasim.dynamics.uuv.TorpedoAUV static method)</a>
+</li>
+      <li><a href="biguasim/weather.html#biguasim.weather.WeatherController.start_day_cycle">start_day_cycle() (biguasim.weather.WeatherController method)</a>
+</li>
+      <li><a href="biguasim/weather.html#biguasim.weather.WeatherController.stop_day_cycle">stop_day_cycle() (biguasim.weather.WeatherController method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.teleport">teleport() (biguasim.agents.BiguaSimAgent method)</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.TeleportCameraCommand">TeleportCameraCommand (class in biguasim.command)</a>
+</li>
+      <li><a href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.tick">tick() (biguasim.environments.BiguaSimEnvironment method)</a>
+</li>
+      <li><a href="biguasim/exceptions.html#biguasim.exceptions.TimeoutException">TimeoutException</a>
+</li>
+      <li><a href="biguasim/commands.html#biguasim.command.Command.to_json">to_json() (biguasim.command.Command method)</a>
+
+      <ul>
+        <li><a href="biguasim/commands.html#biguasim.command.CommandsGroup.to_json">(biguasim.command.CommandsGroup method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.Torpedo">Torpedo (class in biguasim.dynamics.agents)</a>
+</li>
+      <li><a href="biguasim/agents.html#biguasim.agents.TorpedoAUV">TorpedoAUV (class in biguasim.agents)</a>
+
+      <ul>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.agents.TorpedoAUV">(class in biguasim.dynamics.agents)</a>
+</li>
+        <li><a href="biguasim/dynamics.html#biguasim.dynamics.uuv.TorpedoAUV">(class in biguasim.dynamics.uuv)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/shmem.html#biguasim.shmem.Shmem.unlink">unlink() (biguasim.shmem.Shmem method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/dynamics.html#biguasim.dynamics.control.BatchedPIDController.update_setpoints">update_setpoints() (biguasim.dynamics.control.BatchedPIDController method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile">VehicleProfile (class in biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile">(class in biguasim.ardubridge.vehicle)</a>
+</li>
+      </ul></li>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vel_nwu_to_ned">vel_nwu_to_ned() (in module biguasim.ardubridge)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.frame.vel_nwu_to_ned">(in module biguasim.ardubridge.frame)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.VelocitySensor">VelocitySensor (class in biguasim.sensors)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.ViewportCapture">ViewportCapture (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile.warmup_frames">warmup_frames (biguasim.ardubridge.vehicle.VehicleProfile attribute)</a>
+
+      <ul>
+        <li><a href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile.warmup_frames">(biguasim.ardubridge.VehicleProfile attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="biguasim/weather.html#biguasim.weather.WeatherController">WeatherController (class in biguasim.weather)</a>
+</li>
+      <li><a href="biguasim/packagemanager.html#biguasim.packagemanager.world_info">world_info() (in module biguasim.packagemanager)</a>
+</li>
+      <li><a href="biguasim/sensors.html#biguasim.sensors.WorldNumSensor">WorldNumSensor (class in biguasim.sensors)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

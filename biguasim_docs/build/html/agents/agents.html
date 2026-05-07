@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiguaSim Agents &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Agent Configuration" href="docs/agent-config.html" />
+    <link rel="prev" title="Small-Cave" href="../packages/SkyDive/SmallCave/small.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BiguaSim Agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-fleet">Core Fleet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docs/agent-config.html">Agent Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docs/control-abstractions.html">Control Abstractions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#available-agents-library">Available Agents Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#underwater-agents-auvs-rovs">Underwater Agents (AUVs/ROVs)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="agents/blue-rov-agent.html">BlueROV2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="agents/blue-rov-heavy-agent.html">BlueROV2 Heavy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="agents/torpedo-auv-agent.html">TorpedoAUV</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#water-surface-agents-usvs">Water Surface Agents (USVs)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="agents/blue-boat-agent.html">BlueBoat</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#aerial-agents-uavs">Aerial Agents (UAVs)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="agents/djimatrice-agent.html">DJI Matrice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-development">Custom Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BiguaSim Agents</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/agents/agents.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="biguasim-agents">
+<span id="agents"></span><h1>BiguaSim Agents<a class="headerlink" href="#biguasim-agents" title="Link to this heading"></a></h1>
+<p>Agents are the active entities in <strong>BiguaSim</strong> that interact with the environment. Defined via scenario configuration files, each agent is a robotic platform equipped with specialized sensors and physics-based dynamics.</p>
+<p>Control is achieved by passing command arrays through the <code class="docutils literal notranslate"><span class="pre">env.step()</span></code> method, which are then processed by the agent’s internal <strong>Control Scheme</strong>.</p>
+<section id="basic-implementation">
+<h2>Basic Implementation<a class="headerlink" href="#basic-implementation" title="Link to this heading"></a></h2>
+<p>To initialize a scenario with an agent, use the following configuration structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">biguasim</span>
+
+<span class="n">scenario</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Harbor-Mission&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;world&quot;</span><span class="p">:</span> <span class="s2">&quot;Pier-Harbor&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;package_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyDive&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;agents&quot;</span><span class="p">:[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;agent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;uav0&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;agent_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DjiMatrice&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span>
+         <span class="s2">&quot;control_scheme&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+         <span class="s2">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span> <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;RGBCamera&quot;</span><span class="p">,</span> <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;CameraSocket&quot;</span> <span class="p">}</span>
+         <span class="p">]</span>
+      <span class="p">}</span>
+   <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">biguasim</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">scenario_cfg</span><span class="o">=</span><span class="n">scenario</span><span class="p">)</span>
+
+<span class="c1"># Example command for a simple thruster/motor setup</span>
+<span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+   <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="core-fleet">
+<h2>Core Fleet<a class="headerlink" href="#core-fleet" title="Link to this heading"></a></h2>
+<p>BiguaSim provides a diverse library of vehicles. The three primary agents, representing the most common maritime domains, are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="agents/blue-rov-agent.html#blue-rov-agent"><span class="std std-ref">BlueROV2</span></a>: A high-fidelity Remotely Operated Vehicle for underwater inspection.</p></li>
+<li><p><a class="reference internal" href="agents/blue-boat-agent.html#blue-boat-agent"><span class="std std-ref">BlueBoat</span></a>: A surface vessel (USV) designed for coastal surveying and logistics.</p></li>
+<li><p><a class="reference internal" href="agents/torpedo-auv-agent.html#torpedo-auv-agent"><span class="std std-ref">TorpedoAUV</span></a>: An autonomous underwater vehicle optimized for long-range surveys.</p></li>
+</ul>
+<p>Beyond these, aerial vehicles like the <a class="reference internal" href="agents/djimatrice-agent.html#djimatrice-agent"><span class="std std-ref">DJI Matrice</span></a> allow for complex multi-domain missions (Air-to-Sea).</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Technical Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/agent-config.html">Agent Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/control-abstractions.html">Control Abstractions</a></li>
+</ul>
+</div>
+</section>
+<section id="available-agents-library">
+<span id="agent-pages"></span><h2>Available Agents Library<a class="headerlink" href="#available-agents-library" title="Link to this heading"></a></h2>
+<p>Explore the specific capabilities, thruster configurations, and sensor mounting points for each agent.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Test Agents</strong> (Turtle and Sphere) are simplified entities used for algorithm validation and do not apply gravity or complex fluid dynamics.</p>
+</div>
+<section id="underwater-agents-auvs-rovs">
+<h3>Underwater Agents (AUVs/ROVs)<a class="headerlink" href="#underwater-agents-auvs-rovs" title="Link to this heading"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="agents/blue-rov-agent.html">BlueROV2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/blue-rov-heavy-agent.html">BlueROV2 Heavy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/torpedo-auv-agent.html">TorpedoAUV</a></li>
+</ul>
+</div>
+</section>
+<section id="water-surface-agents-usvs">
+<h3>Water Surface Agents (USVs)<a class="headerlink" href="#water-surface-agents-usvs" title="Link to this heading"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="agents/blue-boat-agent.html">BlueBoat</a></li>
+</ul>
+</div>
+</section>
+<section id="aerial-agents-uavs">
+<h3>Aerial Agents (UAVs)<a class="headerlink" href="#aerial-agents-uavs" title="Link to this heading"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="agents/djimatrice-agent.html">DJI Matrice</a></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="custom-development">
+<h2>Custom Development<a class="headerlink" href="#custom-development" title="Link to this heading"></a></h2>
+<p>For information on integrating custom meshes or developing new vehicle dynamics in BiguaSim, see <a class="reference internal" href="../develop/agents.html#develop-agents"><span class="std std-ref">Developing Agents</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../packages/SkyDive/SmallCave/small.html" class="btn btn-neutral float-left" title="Small-Cave" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="docs/agent-config.html" class="btn btn-neutral float-right" title="Agent Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

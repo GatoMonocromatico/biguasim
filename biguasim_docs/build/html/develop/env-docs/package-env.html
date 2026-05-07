@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packaging Environments &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.svg"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Developing Agents" href="../agents.html" />
+    <link rel="prev" title="Creating a Custom Level" href="create-env.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../develop.html">Developing BiguaSim</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../start.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../env.html">Developing Environments</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create-env.html">Creating a Custom Level</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Packaging Environments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adding-biguasim-worlds">Adding BiguaSim Worlds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cooking-content">Cooking Content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packaging-biguasim">Packaging BiguaSim</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../agents.html">Developing Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sensors.html">Developing Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../develop.html">Developing BiguaSim</a></li>
+          <li class="breadcrumb-item"><a href="../env.html">Developing Environments</a></li>
+      <li class="breadcrumb-item active">Packaging Environments</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/develop/env-docs/package-env.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="packaging-environments">
+<span id="id1"></span><h1>Packaging Environments<a class="headerlink" href="#packaging-environments" title="Link to this heading"></a></h1>
+<p>An Unreal project needs to be packaged before it can be distributed. This process produces the engine
+executables and bundles up all of the assets that are needed for the client to start up the engine by
+itself without starting it from the editor or Visual Studio.</p>
+<p>This process will compile the C++ code for BiguaSim and “cook” the <code class="docutils literal notranslate"><span class="pre">.uasset</span></code> files (including
+blueprints!) into one large <code class="docutils literal notranslate"><span class="pre">.pak</span></code> file, and create the directory structure needed.</p>
+<section id="adding-biguasim-worlds">
+<h2>Adding BiguaSim Worlds<a class="headerlink" href="#adding-biguasim-worlds" title="Link to this heading"></a></h2>
+<p>The finished package will only contain the worlds (called “levels” in the editor) that are added into
+the project. The <code class="docutils literal notranslate"><span class="pre">biguasim</span></code> repo only contains the example level. You can create new worlds by
+simply making a new level in the Unreal Engine editor. Please reference <a class="reference internal" href="create-env.html#create-env"><span class="std std-ref">Creating a Custom Level</span></a> for more
+details on creating levels.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because the other packaged worlds distributed with BiguaSim contain purchased assets, they are
+only available to official BYU FRoStLab members. Other users will have to develop their own
+worlds in the BiguaSim repo.</p>
+</div>
+</section>
+<section id="cooking-content">
+<h2>Cooking Content<a class="headerlink" href="#cooking-content" title="Link to this heading"></a></h2>
+<p>You may need to cook the content to “refresh” the assets, levels, and blueprints that
+<code class="docutils literal notranslate"><span class="pre">biguasim/engine</span></code> reads.</p>
+<p><strong>From Unreal Editor:</strong></p>
+<p>Platforms ➡ Windows/Linux ➡ Cook Content</p>
+</section>
+<section id="packaging-biguasim">
+<h2>Packaging BiguaSim<a class="headerlink" href="#packaging-biguasim" title="Link to this heading"></a></h2>
+<section id="operating-system">
+<h3>Operating System<a class="headerlink" href="#operating-system" title="Link to this heading"></a></h3>
+<p>It is best to package BiguaSim using the same operating system it will be run on. If you want to run
+your project for Windows, you should be using Unreal Engine in Windows to compile the project, and
+vice versa for Linux.</p>
+<p>If you are using Windows, it is possible to package an executable for Linux.
+<strong>If you wish to cross compile from Windows to Linux, you must implement the following changes.
+Otherwise, you can continue to</strong> <a class="reference internal" href="#package-biguasim"><span class="std std-ref">Packaging</span></a>.</p>
+<ol class="arabic">
+<li><p>Go to your Unreal Engine version within the Epic Games Launcher. Right click on the arrow next to
+the “Launch” button and select Options.</p>
+<blockquote>
+<div><img alt="../../_images/linux_steps_p1.png" src="../../_images/linux_steps_p1.png" />
+</div></blockquote>
+</li>
+<li><p>Under “Target Platforms”, select Linux and install.</p>
+<blockquote>
+<div><img alt="../../_images/linux_steps_p2.png" src="../../_images/linux_steps_p2.png" />
+</div></blockquote>
+</li>
+<li><p>Download the Cross-Compile Toolchain v22 (refer to <a class="reference external" href="https://dev.epicgames.com/documentation/en-us/unreal-engine/linux-development-requirements-for-unreal-engine?application_version=5.3">Unreal Engine’s Cross-Compile documentation</a>).</p>
+<blockquote>
+<div><img alt="../../_images/linux_steps_p3.png" src="../../_images/linux_steps_p3.png" />
+</div></blockquote>
+</li>
+<li><p>Modify your Visual Studio 2022 install to include the “Linux and embedded development with C++”</p>
+<blockquote>
+<div><img alt="../../_images/linux_steps_p4.png" src="../../_images/linux_steps_p4.png" />
+</div></blockquote>
+</li>
+</ol>
+<p>With these changes, you should be able to compile for Linux from Windows.</p>
+</section>
+<section id="packaging">
+<span id="package-biguasim"></span><h3>Packaging<a class="headerlink" href="#packaging" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>From within the Unreal Editor, select Platforms ➡ Windows/Linux ➡ Package Project</p>
+<blockquote>
+<div><img alt="../../_images/package-project.png" src="../../_images/package-project.png" />
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" id="package-install-directory" start="2">
+<li><p>Select the Package Location</p>
+<blockquote>
+<div><p>In order to be able to call <code class="docutils literal notranslate"><span class="pre">biguasim.make()</span></code>, you will need to place the packaged engine in
+<a class="reference internal" href="../../packages/docs/installation.html#package-locations"><span class="std std-ref">Package Installation Location</span></a>. Make sure the version in the path matches the output of the
+<code class="docutils literal notranslate"><span class="pre">biguasim.util.get_biguasim_version</span></code> command.</p>
+<p>After selecting the package location, the exported package should have this structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span> <span class="n">worlds</span>
+<span class="o">|--+</span> <span class="n">PackageName</span>
+    <span class="o">|--</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span>
+    <span class="o">|--</span> <span class="n">WorldName</span><span class="o">-</span><span class="n">ScenarioName</span><span class="o">.</span><span class="n">json</span>
+    <span class="o">|--+</span> <span class="n">Linux</span> <span class="p">(</span><span class="ow">or</span> <span class="n">Windows</span><span class="p">)</span>
+        <span class="o">|</span> <span class="n">UE5</span> <span class="n">build</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Edit Configuration Files</p>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">config.json</span></code> file is generated by the packaging process, but may need to be modified.
+Ensure the following two fields match the operating system you are using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;linux&quot;</span>
+<span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;Linux/Holodeck/Binaries/Linux/Holodeck&quot;</span>
+</pre></div>
+</div>
+<p>OR</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="s2">&quot;windows&quot;</span>
+<span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;Windows/Holodeck/Binaries/Win64/Holodeck.exe&quot;</span>
+</pre></div>
+</div>
+<p>Configuration files for each scenario must be made by the user. They are placed in the
+<code class="docutils literal notranslate"><span class="pre">worlds/PackageName</span></code> directory. See <a class="reference internal" href="../../usage/scenarios.html#custom-scenarios"><span class="std std-ref">Making Custom Scenarios</span></a> for details on how to create
+configuration files for your scenarios.</p>
+</div></blockquote>
+</li>
+</ol>
+<p>The packaged project should now be ready to run. You can access your packaged environments and
+associated scenarios using the <code class="docutils literal notranslate"><span class="pre">biguasim.make()</span></code> command.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="create-env.html" class="btn btn-neutral float-left" title="Creating a Custom Level" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../agents.html" class="btn btn-neutral float-right" title="Developing Agents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

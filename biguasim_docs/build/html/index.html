@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to BiguaSim’s documentation! &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/darkmode.js?v=3994c1fa"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="usage/installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to BiguaSim’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-biguasim-s-documentation">
+<h1>Welcome to BiguaSim’s documentation!<a class="headerlink" href="#welcome-to-biguasim-s-documentation" title="Link to this heading"></a></h1>
+<img alt="BiguaSim hero" class="main-logo" src="_images/logo-light.svg" />
+<p>BiguaSim is a high-fidelity simulator developed by <a class="reference external" href="https://nautec.furg.br/">Nautec</a>
+at <a class="reference external" href="https://www.furg.br">Federal University of Rio Grande</a> .</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Multi-Domain Simulation Environments: Rich, high-fidelity worlds supporting simultaneous operations of both air and water vehicles (UAVs and AUVs).</p></li>
+<li><p>Powered by Unreal Engine 5 (UE5): Leverages modern UE5 rendering and physics for maximum visual realism and high-detail environments.</p></li>
+<li><p>Synthetic Dataset Generation: Purpose-built infrastructure for generating realistic, annotated synthetic data to train perception and AI models.</p></li>
+<li><p>Comprehensive Sensor Suite: Complete with common multi-domain sensors including DVL, IMU, optical cameras, high-precision depth cameras, and more, customized for both aerial and underwater domains.</p></li>
+<li><p>Advanced Hybrid Sonar Framework: Novel simulation framework for imaging, profiling, sidescan, and singlebeam sonars, featuring simultaneous Ground Truth (GT) extraction and realistic stochastic noise modeling.</p></li>
+<li><p>Sim-2-Real Focus: Realistic sensor noise and physics modeling designed to minimize the sim-to-real gap for seamless algorithm deployment.</p></li>
+<li><p>Multi-Agent Missions: Easily configure and scale complex multi-robot missions.</p></li>
+<li><p>OpenAI Gym-like Python Interface: Simple installation and intuitive API for testing robotics algorithms and training Reinforcement Learning agents.</p></li>
+<li><p>High Performance &amp; Flexibility: Configurable execution speeds. Run visually or in headless mode. Pay a computational penalty only for the features you need.</p></li>
+<li><p>Cross-Platform: Full support for Linux and Windows.</p></li>
+</ol>
+</section>
+<section id="attribution-and-relevent-publications">
+<h2>Attribution and Relevent Publications<a class="headerlink" href="#attribution-and-relevent-publications" title="Link to this heading"></a></h2>
+<p>If you use BiguaSim in your research, please cite the following publication:</p>
+<p>General BiguaSim use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="mi">11338720</span><span class="p">,</span>
+   <span class="n">author</span><span class="o">=</span><span class="p">{</span><span class="n">Mateus</span><span class="p">,</span> <span class="n">Matheus</span> <span class="n">G</span><span class="o">.</span> <span class="ow">and</span> <span class="n">De</span> <span class="n">Oliveira</span><span class="p">,</span> <span class="n">Guilherme</span> <span class="n">C</span><span class="o">.</span> <span class="ow">and</span> <span class="n">Reichow</span><span class="p">,</span> <span class="n">Luis</span> <span class="n">Henrique</span> <span class="n">K</span><span class="o">.</span> <span class="ow">and</span> <span class="n">Kolling</span><span class="p">,</span> <span class="n">Alisson</span> <span class="n">H</span><span class="o">.</span> <span class="ow">and</span> <span class="n">Pinheiro</span><span class="p">,</span> <span class="n">Pedro</span> <span class="n">M</span><span class="o">.</span> <span class="ow">and</span> <span class="n">Drews</span><span class="o">-</span><span class="n">Jr</span><span class="p">,</span> <span class="n">Paulo</span> <span class="n">L</span><span class="o">.</span> <span class="n">J</span><span class="o">.</span><span class="p">},</span>
+   <span class="n">booktitle</span><span class="o">=</span><span class="p">{</span><span class="mi">2025</span> <span class="n">IEEE</span> <span class="n">International</span> <span class="n">Conference</span> <span class="n">on</span> <span class="n">Advanced</span> <span class="n">Robotics</span> <span class="p">(</span><span class="n">ICAR</span><span class="p">)},</span>
+   <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">BiguaSim</span><span class="p">:</span> <span class="n">A</span> <span class="n">Hybrid</span> <span class="n">Multi</span><span class="o">-</span><span class="n">Domain</span> <span class="n">Simulator</span> <span class="k">for</span> <span class="n">Robotics</span> <span class="n">High</span><span class="o">-</span><span class="n">Fidelity</span> <span class="n">Simulation</span> <span class="ow">and</span> <span class="n">Synthetic</span> <span class="n">Dataset</span> <span class="n">Generation</span><span class="p">},</span>
+   <span class="n">year</span><span class="o">=</span><span class="p">{</span><span class="mi">2025</span><span class="p">},</span>
+   <span class="n">volume</span><span class="o">=</span><span class="p">{},</span>
+   <span class="n">number</span><span class="o">=</span><span class="p">{},</span>
+   <span class="n">pages</span><span class="o">=</span><span class="p">{</span><span class="mi">169</span><span class="o">-</span><span class="mi">174</span><span class="p">},</span>
+   <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="n">Data</span> <span class="n">collection</span><span class="p">;</span><span class="n">Robot</span> <span class="n">sensing</span> <span class="n">systems</span><span class="p">;</span><span class="n">Hybrid</span> <span class="n">power</span> <span class="n">systems</span><span class="p">;</span><span class="n">Complexity</span> <span class="n">theory</span><span class="p">;</span><span class="n">Vehicle</span> <span class="n">dynamics</span><span class="p">;</span><span class="n">Engines</span><span class="p">;</span><span class="n">Testing</span><span class="p">;</span><span class="n">Synthetic</span> <span class="n">data</span><span class="p">},</span>
+   <span class="n">doi</span><span class="o">=</span><span class="p">{</span><span class="mf">10.1109</span><span class="o">/</span><span class="n">ICAR65334</span><span class="mf">.2025.11338720</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage/installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage/installation.html#base-requirements">Base Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/installation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/installation.html#standard-packaged-installation">Standard Packaged Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/installation.html#installation-for-development-with-unreal-editor">Installation for Development with Unreal Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/installation.html#installation-with-docker">Installation with Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage/usage.html">Using BiguaSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage/scenarios.html">Scenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/environments.html">Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/viewport.html">Viewport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/performance.html">Improving Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/units-and-coordinates.html">Units and Coordinates in BiguaSim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/semaphores.html">BiguaSim Client-Server Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage/ROS2.html">ROS2 Bridge</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="packages/packages.html">BiguaSim Packages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="packages/packages.html#package-documentation">Package Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/packages.html#all-packages">BiguaSim Packages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agents/agents.html">BiguaSim Agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agents/agents.html#basic-implementation">Basic Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agents/agents.html#core-fleet">Core Fleet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agents/agents.html#available-agents-library">Available Agents Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agents/agents.html#custom-development">Custom Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sensors/sensors.html">BiguaSim Sensors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sensors/sensors.html#using-sensors">Using Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensors/sensors.html#id1">BiguaSim Sensors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ardubridge/ardubridge.html">ArduBridge Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ardubridge/ardubridge.html#high-level-data-flow">High-Level Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ardubridge/ardubridge.html#coordinate-frame-conversions">Coordinate Frame Conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ardubridge/ardubridge.html#vehicle-profiles-pwm-mapping">Vehicle Profiles &amp; PWM Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ardubridge/ardubridge.html#mocking-testing">Mocking &amp; Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/camera.html">Visualizing RGBCamera Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/controller.html">Manually Controlling an Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/multi-agent.html">Multi Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/multi-coms.html">Multi-Agent Communications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/sonar_imaging.html">Visualizing Imaging Sonar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/sonar_profiling.html">Visualizing Profiling Sonar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/sonar_sidescan.html">Visualizing Sidescan Sonar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/examples/sonar_singlebeam.html">Visualizing Singlebeam Sonar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="develop/develop.html">Developing BiguaSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="develop/start.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop/env.html">Developing Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop/agents.html">Developing Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop/sensors.html">Developing Sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog/changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog/changelog.html#biguasim-1-0-0">BiguaSim 1.0.0</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/index.html">BiguaSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/index.html#biguasim.biguasim.GL_VERSION"><code class="docutils literal notranslate"><span class="pre">GL_VERSION</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/index.html#biguasim.biguasim.GL_VERSION.OPENGL3"><code class="docutils literal notranslate"><span class="pre">GL_VERSION.OPENGL3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/index.html#biguasim.biguasim.GL_VERSION.OPENGL4"><code class="docutils literal notranslate"><span class="pre">GL_VERSION.OPENGL4</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/index.html#biguasim.biguasim.make"><code class="docutils literal notranslate"><span class="pre">make()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/agents.html">Agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.AgentDefinition"><code class="docutils literal notranslate"><span class="pre">AgentDefinition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.AgentFactory"><code class="docutils literal notranslate"><span class="pre">AgentFactory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.AgentFactory.build_agent"><code class="docutils literal notranslate"><span class="pre">AgentFactory.build_agent()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.name"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.sensors"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.sensors</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.agent_state_dict"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.agent_state_dict</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.act"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.act()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.action_space"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.action_space</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.add_sensors"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.add_sensors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.clear_action"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.clear_action()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.control_abstractions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.get_joint_constraints"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.get_joint_constraints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.get_ocean_current_velocity"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.get_ocean_current_velocity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.has_camera"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.has_camera()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.remove_sensors"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.remove_sensors()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.set_control_scheme"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.set_control_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.set_physics_state"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.set_physics_state()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BiguaSimAgent.teleport"><code class="docutils literal notranslate"><span class="pre">BiguaSimAgent.teleport()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BlueBoat"><code class="docutils literal notranslate"><span class="pre">BlueBoat</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BlueBoat.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BlueBoat.control_abstractions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BlueROV2"><code class="docutils literal notranslate"><span class="pre">BlueROV2</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BlueROV2.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BlueROV2.control_abstractions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BlueROVHeavy"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.BlueROVHeavy.control_abstractions"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy.control_abstractions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.DjiMatrice"><code class="docutils literal notranslate"><span class="pre">DjiMatrice</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.DjiMatrice.control_abstractions"><code class="docutils literal notranslate"><span class="pre">DjiMatrice.control_abstractions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.TorpedoAUV"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/agents.html#biguasim.agents.TorpedoAUV.control_abstractions"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.control_abstractions</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/environments.html">Environments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.act"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.act()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.action_space"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.action_space</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.add_agent"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.add_agent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.beacons"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.beacons</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.beacons_id"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.beacons_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.beacons_status"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.beacons_status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_arrow"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.draw_arrow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_box"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.draw_box()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_line"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.draw_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.draw_point"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.draw_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.info"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.modems"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.modems</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.modems_id"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.modems_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.move_viewport"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.move_viewport()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.reset"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.send_acoustic_message"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.send_acoustic_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.send_optical_message"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.send_optical_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.send_world_command"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.send_world_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.set_control_abstraction"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.set_control_abstraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.set_control_scheme"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.set_control_scheme()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.set_render_quality"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.set_render_quality()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.should_render_viewport"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.should_render_viewport()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.spawn_prop"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.spawn_prop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/environments.html#biguasim.environments.BiguaSimEnvironment.tick"><code class="docutils literal notranslate"><span class="pre">BiguaSimEnvironment.tick()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/spaces.html">Action Spaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ActionSpace"><code class="docutils literal notranslate"><span class="pre">ActionSpace</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ActionSpace.get_high"><code class="docutils literal notranslate"><span class="pre">ActionSpace.get_high()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ActionSpace.get_low"><code class="docutils literal notranslate"><span class="pre">ActionSpace.get_low()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ActionSpace.sample"><code class="docutils literal notranslate"><span class="pre">ActionSpace.sample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ActionSpace.shape"><code class="docutils literal notranslate"><span class="pre">ActionSpace.shape</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace"><code class="docutils literal notranslate"><span class="pre">ContinuousActionSpace</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace.get_high"><code class="docutils literal notranslate"><span class="pre">ContinuousActionSpace.get_high()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace.get_low"><code class="docutils literal notranslate"><span class="pre">ContinuousActionSpace.get_low()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.ContinuousActionSpace.sample"><code class="docutils literal notranslate"><span class="pre">ContinuousActionSpace.sample()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace"><code class="docutils literal notranslate"><span class="pre">DiscreteActionSpace</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace.get_high"><code class="docutils literal notranslate"><span class="pre">DiscreteActionSpace.get_high()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace.get_low"><code class="docutils literal notranslate"><span class="pre">DiscreteActionSpace.get_low()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/spaces.html#biguasim.spaces.DiscreteActionSpace.sample"><code class="docutils literal notranslate"><span class="pre">DiscreteActionSpace.sample()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/commands.html">Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.AddSensorCommand"><code class="docutils literal notranslate"><span class="pre">AddSensorCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.Command"><code class="docutils literal notranslate"><span class="pre">Command</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.Command.add_number_parameters"><code class="docutils literal notranslate"><span class="pre">Command.add_number_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.Command.add_string_parameters"><code class="docutils literal notranslate"><span class="pre">Command.add_string_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.Command.set_command_type"><code class="docutils literal notranslate"><span class="pre">Command.set_command_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.Command.to_json"><code class="docutils literal notranslate"><span class="pre">Command.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandCenter"><code class="docutils literal notranslate"><span class="pre">CommandCenter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandCenter.clear"><code class="docutils literal notranslate"><span class="pre">CommandCenter.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandCenter.enqueue_command"><code class="docutils literal notranslate"><span class="pre">CommandCenter.enqueue_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandCenter.handle_buffer"><code class="docutils literal notranslate"><span class="pre">CommandCenter.handle_buffer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandCenter.queue_size"><code class="docutils literal notranslate"><span class="pre">CommandCenter.queue_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandsGroup"><code class="docutils literal notranslate"><span class="pre">CommandsGroup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandsGroup.add_command"><code class="docutils literal notranslate"><span class="pre">CommandsGroup.add_command()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandsGroup.clear"><code class="docutils literal notranslate"><span class="pre">CommandsGroup.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandsGroup.size"><code class="docutils literal notranslate"><span class="pre">CommandsGroup.size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CommandsGroup.to_json"><code class="docutils literal notranslate"><span class="pre">CommandsGroup.to_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.CustomCommand"><code class="docutils literal notranslate"><span class="pre">CustomCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.DebugDrawCommand"><code class="docutils literal notranslate"><span class="pre">DebugDrawCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.RGBCameraRateCommand"><code class="docutils literal notranslate"><span class="pre">RGBCameraRateCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.RemoveSensorCommand"><code class="docutils literal notranslate"><span class="pre">RemoveSensorCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.RenderQualityCommand"><code class="docutils literal notranslate"><span class="pre">RenderQualityCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.RenderViewportCommand"><code class="docutils literal notranslate"><span class="pre">RenderViewportCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.RotateSensorCommand"><code class="docutils literal notranslate"><span class="pre">RotateSensorCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SendAcousticMessageCommand"><code class="docutils literal notranslate"><span class="pre">SendAcousticMessageCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SendOpticalMessageCommand"><code class="docutils literal notranslate"><span class="pre">SendOpticalMessageCommand</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SpawnAgentCommand"><code class="docutils literal notranslate"><span class="pre">SpawnAgentCommand</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_location"><code class="docutils literal notranslate"><span class="pre">SpawnAgentCommand.set_location()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_name"><code class="docutils literal notranslate"><span class="pre">SpawnAgentCommand.set_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_rotation"><code class="docutils literal notranslate"><span class="pre">SpawnAgentCommand.set_rotation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/commands.html#biguasim.command.SpawnAgentCommand.set_type"><code class="docutils literal notranslate"><span class="pre">SpawnAgentCommand.set_type()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/commands.html#biguasim.command.TeleportCameraCommand"><code class="docutils literal notranslate"><span class="pre">TeleportCameraCommand</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/biguasimclient.html">BiguaSim Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient"><code class="docutils literal notranslate"><span class="pre">BiguaSimClient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient.acquire"><code class="docutils literal notranslate"><span class="pre">BiguaSimClient.acquire()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient.malloc"><code class="docutils literal notranslate"><span class="pre">BiguaSimClient.malloc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/biguasimclient.html#biguasim.biguasimclient.BiguaSimClient.release"><code class="docutils literal notranslate"><span class="pre">BiguaSimClient.release()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/packagemanager.html">Package Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.available_packages"><code class="docutils literal notranslate"><span class="pre">available_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.get_binary_path_for_package"><code class="docutils literal notranslate"><span class="pre">get_binary_path_for_package()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.get_binary_path_for_scenario"><code class="docutils literal notranslate"><span class="pre">get_binary_path_for_scenario()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.get_package_config_for_scenario"><code class="docutils literal notranslate"><span class="pre">get_package_config_for_scenario()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.get_scenario"><code class="docutils literal notranslate"><span class="pre">get_scenario()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.install"><code class="docutils literal notranslate"><span class="pre">install()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.installed_packages"><code class="docutils literal notranslate"><span class="pre">installed_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.load_scenario_file"><code class="docutils literal notranslate"><span class="pre">load_scenario_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.package_info"><code class="docutils literal notranslate"><span class="pre">package_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.prune"><code class="docutils literal notranslate"><span class="pre">prune()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.remove"><code class="docutils literal notranslate"><span class="pre">remove()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.remove_all_packages"><code class="docutils literal notranslate"><span class="pre">remove_all_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.scenario_info"><code class="docutils literal notranslate"><span class="pre">scenario_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/packagemanager.html#biguasim.packagemanager.world_info"><code class="docutils literal notranslate"><span class="pre">world_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/sensors.html">Sensors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor"><code class="docutils literal notranslate"><span class="pre">AcousticBeaconSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">AcousticBeaconSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor.dtype"><code class="docutils literal notranslate"><span class="pre">AcousticBeaconSensor.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AcousticBeaconSensor.sensor_data"><code class="docutils literal notranslate"><span class="pre">AcousticBeaconSensor.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent"><code class="docutils literal notranslate"><span class="pre">AnnotationComponent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent.data_shape"><code class="docutils literal notranslate"><span class="pre">AnnotationComponent.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent.dtype"><code class="docutils literal notranslate"><span class="pre">AnnotationComponent.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.AnnotationComponent.set_ticks_per_capture"><code class="docutils literal notranslate"><span class="pre">AnnotationComponent.set_ticks_per_capture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor"><code class="docutils literal notranslate"><span class="pre">BiguaSimSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">BiguaSimSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.dtype"><code class="docutils literal notranslate"><span class="pre">BiguaSimSensor.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.rotate"><code class="docutils literal notranslate"><span class="pre">BiguaSimSensor.rotate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.BiguaSimSensor.sensor_data"><code class="docutils literal notranslate"><span class="pre">BiguaSimSensor.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.CameraSensor"><code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.CameraSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">CameraSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.CameraSensor.dtype"><code class="docutils literal notranslate"><span class="pre">CameraSensor.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.CameraSensor.set_ticks_per_capture"><code class="docutils literal notranslate"><span class="pre">CameraSensor.set_ticks_per_capture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DVLSensor"><code class="docutils literal notranslate"><span class="pre">DVLSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DVLSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">DVLSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DVLSensor.dtype"><code class="docutils literal notranslate"><span class="pre">DVLSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthCamera"><code class="docutils literal notranslate"><span class="pre">DepthCamera</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthCamera.data_shape"><code class="docutils literal notranslate"><span class="pre">DepthCamera.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthCamera.dtype"><code class="docutils literal notranslate"><span class="pre">DepthCamera.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthCamera.sensor_data"><code class="docutils literal notranslate"><span class="pre">DepthCamera.sensor_data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthCamera.set_ticks_per_capture"><code class="docutils literal notranslate"><span class="pre">DepthCamera.set_ticks_per_capture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthSensor"><code class="docutils literal notranslate"><span class="pre">DepthSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">DepthSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DepthSensor.dtype"><code class="docutils literal notranslate"><span class="pre">DepthSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DynamicsSensor"><code class="docutils literal notranslate"><span class="pre">DynamicsSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DynamicsSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">DynamicsSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.DynamicsSensor.dtype"><code class="docutils literal notranslate"><span class="pre">DynamicsSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.FOVDetection"><code class="docutils literal notranslate"><span class="pre">FOVDetection</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.FOVDetection.data_shape"><code class="docutils literal notranslate"><span class="pre">FOVDetection.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.FOVDetection.dtype"><code class="docutils literal notranslate"><span class="pre">FOVDetection.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.FOVDetection.sensor_data"><code class="docutils literal notranslate"><span class="pre">FOVDetection.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.GPSSensor"><code class="docutils literal notranslate"><span class="pre">GPSSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.GPSSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">GPSSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.GPSSensor.dtype"><code class="docutils literal notranslate"><span class="pre">GPSSensor.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.GPSSensor.sensor_data"><code class="docutils literal notranslate"><span class="pre">GPSSensor.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.IMUSensor"><code class="docutils literal notranslate"><span class="pre">IMUSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.IMUSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">IMUSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.IMUSensor.dtype"><code class="docutils literal notranslate"><span class="pre">IMUSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ImagingSonar"><code class="docutils literal notranslate"><span class="pre">ImagingSonar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ImagingSonar.data_shape"><code class="docutils literal notranslate"><span class="pre">ImagingSonar.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ImagingSonar.dtype"><code class="docutils literal notranslate"><span class="pre">ImagingSonar.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ImagingSonar.sensor_data"><code class="docutils literal notranslate"><span class="pre">ImagingSonar.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.LocationSensor"><code class="docutils literal notranslate"><span class="pre">LocationSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.LocationSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">LocationSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.LocationSensor.dtype"><code class="docutils literal notranslate"><span class="pre">LocationSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.MagnetometerSensor"><code class="docutils literal notranslate"><span class="pre">MagnetometerSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.MagnetometerSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">MagnetometerSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.MagnetometerSensor.dtype"><code class="docutils literal notranslate"><span class="pre">MagnetometerSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor"><code class="docutils literal notranslate"><span class="pre">OpticalModemSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">OpticalModemSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor.dtype"><code class="docutils literal notranslate"><span class="pre">OpticalModemSensor.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OpticalModemSensor.sensor_data"><code class="docutils literal notranslate"><span class="pre">OpticalModemSensor.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OrientationSensor"><code class="docutils literal notranslate"><span class="pre">OrientationSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OrientationSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">OrientationSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.OrientationSensor.dtype"><code class="docutils literal notranslate"><span class="pre">OrientationSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.PoseSensor"><code class="docutils literal notranslate"><span class="pre">PoseSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.PoseSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">PoseSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.PoseSensor.dtype"><code class="docutils literal notranslate"><span class="pre">PoseSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ProfilingSonar"><code class="docutils literal notranslate"><span class="pre">ProfilingSonar</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBCamera"><code class="docutils literal notranslate"><span class="pre">RGBCamera</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBCamera.data_shape"><code class="docutils literal notranslate"><span class="pre">RGBCamera.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBCamera.dtype"><code class="docutils literal notranslate"><span class="pre">RGBCamera.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBCamera.set_ticks_per_capture"><code class="docutils literal notranslate"><span class="pre">RGBCamera.set_ticks_per_capture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBDCamera"><code class="docutils literal notranslate"><span class="pre">RGBDCamera</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.data_shape"><code class="docutils literal notranslate"><span class="pre">RGBDCamera.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.dtype"><code class="docutils literal notranslate"><span class="pre">RGBDCamera.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.sensor_data"><code class="docutils literal notranslate"><span class="pre">RGBDCamera.sensor_data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RGBDCamera.set_ticks_per_capture"><code class="docutils literal notranslate"><span class="pre">RGBDCamera.set_ticks_per_capture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RangeFinderSensor"><code class="docutils literal notranslate"><span class="pre">RangeFinderSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RangeFinderSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">RangeFinderSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RangeFinderSensor.dtype"><code class="docutils literal notranslate"><span class="pre">RangeFinderSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastLidar"><code class="docutils literal notranslate"><span class="pre">RaycastLidar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastLidar.data_shape"><code class="docutils literal notranslate"><span class="pre">RaycastLidar.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastLidar.dtype"><code class="docutils literal notranslate"><span class="pre">RaycastLidar.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastLidar.sensor_data"><code class="docutils literal notranslate"><span class="pre">RaycastLidar.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar"><code class="docutils literal notranslate"><span class="pre">RaycastSemanticLidar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar.data_shape"><code class="docutils literal notranslate"><span class="pre">RaycastSemanticLidar.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar.dtype"><code class="docutils literal notranslate"><span class="pre">RaycastSemanticLidar.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RaycastSemanticLidar.sensor_data"><code class="docutils literal notranslate"><span class="pre">RaycastSemanticLidar.sensor_data</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RotationSensor"><code class="docutils literal notranslate"><span class="pre">RotationSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RotationSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">RotationSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.RotationSensor.dtype"><code class="docutils literal notranslate"><span class="pre">RotationSensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera"><code class="docutils literal notranslate"><span class="pre">SemanticSegmentationCamera</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera.data_shape"><code class="docutils literal notranslate"><span class="pre">SemanticSegmentationCamera.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera.dtype"><code class="docutils literal notranslate"><span class="pre">SemanticSegmentationCamera.dtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SemanticSegmentationCamera.set_ticks_per_capture"><code class="docutils literal notranslate"><span class="pre">SemanticSegmentationCamera.set_ticks_per_capture()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SensorDefinition"><code class="docutils literal notranslate"><span class="pre">SensorDefinition</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SensorDefinition.get_config_json_string"><code class="docutils literal notranslate"><span class="pre">SensorDefinition.get_config_json_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SensorFactory"><code class="docutils literal notranslate"><span class="pre">SensorFactory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SensorFactory.build_sensor"><code class="docutils literal notranslate"><span class="pre">SensorFactory.build_sensor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SidescanSonar"><code class="docutils literal notranslate"><span class="pre">SidescanSonar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SidescanSonar.data_shape"><code class="docutils literal notranslate"><span class="pre">SidescanSonar.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SidescanSonar.dtype"><code class="docutils literal notranslate"><span class="pre">SidescanSonar.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SinglebeamSonar"><code class="docutils literal notranslate"><span class="pre">SinglebeamSonar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SinglebeamSonar.data_shape"><code class="docutils literal notranslate"><span class="pre">SinglebeamSonar.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.SinglebeamSonar.dtype"><code class="docutils literal notranslate"><span class="pre">SinglebeamSonar.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.VelocitySensor"><code class="docutils literal notranslate"><span class="pre">VelocitySensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.VelocitySensor.data_shape"><code class="docutils literal notranslate"><span class="pre">VelocitySensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.VelocitySensor.dtype"><code class="docutils literal notranslate"><span class="pre">VelocitySensor.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ViewportCapture"><code class="docutils literal notranslate"><span class="pre">ViewportCapture</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ViewportCapture.data_shape"><code class="docutils literal notranslate"><span class="pre">ViewportCapture.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.ViewportCapture.dtype"><code class="docutils literal notranslate"><span class="pre">ViewportCapture.dtype</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.WorldNumSensor"><code class="docutils literal notranslate"><span class="pre">WorldNumSensor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.WorldNumSensor.data_shape"><code class="docutils literal notranslate"><span class="pre">WorldNumSensor.data_shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/sensors.html#biguasim.sensors.WorldNumSensor.dtype"><code class="docutils literal notranslate"><span class="pre">WorldNumSensor.dtype</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/lcm.html">LCM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/lcm.html#biguasim.lcm.SensorData"><code class="docutils literal notranslate"><span class="pre">SensorData</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/lcm.html#biguasim.lcm.SensorData.set_value"><code class="docutils literal notranslate"><span class="pre">SensorData.set_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/lcm.html#biguasim.lcm.gen"><code class="docutils literal notranslate"><span class="pre">gen()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/dynamics.html">BiguaSim Dynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/dynamics.html#module-biguasim.dynamics.uav">UAV (Unmanned Aerial Vehicles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.uav.QuadCopterX"><code class="docutils literal notranslate"><span class="pre">QuadCopterX</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/dynamics.html#module-biguasim.dynamics.uuv">UUV (Unmanned Underwater Vehicles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.uuv.HexaCopterFiveDoF"><code class="docutils literal notranslate"><span class="pre">HexaCopterFiveDoF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.uuv.OctaCopterSixDoF"><code class="docutils literal notranslate"><span class="pre">OctaCopterSixDoF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.uuv.TorpedoAUV"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/dynamics.html#module-biguasim.dynamics.usv">USV (Unmanned Surface Vehicles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.usv.Catamaran"><code class="docutils literal notranslate"><span class="pre">Catamaran</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.usv.Differential"><code class="docutils literal notranslate"><span class="pre">Differential</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/dynamics.html#module-biguasim.dynamics.agents">Agents Factory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueBoat"><code class="docutils literal notranslate"><span class="pre">BlueBoat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueROV2"><code class="docutils literal notranslate"><span class="pre">BlueROV2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.BlueROVHeavy"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.DjiMatrice"><code class="docutils literal notranslate"><span class="pre">DjiMatrice</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.ModelsFactory"><code class="docutils literal notranslate"><span class="pre">ModelsFactory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.Torpedo"><code class="docutils literal notranslate"><span class="pre">Torpedo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.agents.TorpedoAUV"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/dynamics.html#module-biguasim.dynamics.control">Control &amp; Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/dynamics.html#biguasim.dynamics.control.BatchedPIDController"><code class="docutils literal notranslate"><span class="pre">BatchedPIDController</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/shmem.html">Shared Memory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/shmem.html#biguasim.shmem.Shmem"><code class="docutils literal notranslate"><span class="pre">Shmem</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/shmem.html#biguasim.shmem.Shmem.unlink"><code class="docutils literal notranslate"><span class="pre">Shmem.unlink()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/ardubridge.html">ArduPilot Bridge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/ardubridge.html#module-biguasim.ardubridge">Main Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.ArduBiguaSimRunner"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.ArduPilotBridge"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.VehicleProfile"><code class="docutils literal notranslate"><span class="pre">VehicleProfile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.depth_to_pressure"><code class="docutils literal notranslate"><span class="pre">depth_to_pressure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.imu_glu_to_frd"><code class="docutils literal notranslate"><span class="pre">imu_glu_to_frd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.meters_to_gps"><code class="docutils literal notranslate"><span class="pre">meters_to_gps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.pos_nwu_to_ap"><code class="docutils literal notranslate"><span class="pre">pos_nwu_to_ap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.quat_glu2nwu_to_frd2ned"><code class="docutils literal notranslate"><span class="pre">quat_glu2nwu_to_frd2ned()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.vel_nwu_to_ned"><code class="docutils literal notranslate"><span class="pre">vel_nwu_to_ned()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/ardubridge.html#module-biguasim.ardubridge.bridge">Bridge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.bridge.ArduPilotBridge"><code class="docutils literal notranslate"><span class="pre">ArduPilotBridge</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/ardubridge.html#module-biguasim.ardubridge.vehicle">Vehicle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.vehicle.VehicleProfile"><code class="docutils literal notranslate"><span class="pre">VehicleProfile</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/ardubridge.html#module-biguasim.ardubridge.runner">Runner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.runner.ArduBiguaSimRunner"><code class="docutils literal notranslate"><span class="pre">ArduBiguaSimRunner</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/ardubridge.html#module-biguasim.ardubridge.frame">Frame</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.frame.depth_to_pressure"><code class="docutils literal notranslate"><span class="pre">depth_to_pressure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.frame.imu_glu_to_frd"><code class="docutils literal notranslate"><span class="pre">imu_glu_to_frd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.frame.meters_to_gps"><code class="docutils literal notranslate"><span class="pre">meters_to_gps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.frame.pos_nwu_to_ap"><code class="docutils literal notranslate"><span class="pre">pos_nwu_to_ap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.frame.quat_glu2nwu_to_frd2ned"><code class="docutils literal notranslate"><span class="pre">quat_glu2nwu_to_frd2ned()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/ardubridge.html#biguasim.ardubridge.frame.vel_nwu_to_ned"><code class="docutils literal notranslate"><span class="pre">vel_nwu_to_ned()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/util.html">Util</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/util.html#biguasim.util.convert_unicode"><code class="docutils literal notranslate"><span class="pre">convert_unicode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/util.html#biguasim.util.get_biguasim_path"><code class="docutils literal notranslate"><span class="pre">get_biguasim_path()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/util.html#biguasim.util.get_biguasim_version"><code class="docutils literal notranslate"><span class="pre">get_biguasim_version()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/util.html#biguasim.util.get_os_key"><code class="docutils literal notranslate"><span class="pre">get_os_key()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/util.html#biguasim.util.human_readable_size"><code class="docutils literal notranslate"><span class="pre">human_readable_size()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/exceptions.html">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/exceptions.html#biguasim.exceptions.BiguaSimConfigurationException"><code class="docutils literal notranslate"><span class="pre">BiguaSimConfigurationException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/exceptions.html#biguasim.exceptions.BiguaSimException"><code class="docutils literal notranslate"><span class="pre">BiguaSimException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/exceptions.html#biguasim.exceptions.NotFoundException"><code class="docutils literal notranslate"><span class="pre">NotFoundException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/exceptions.html#biguasim.exceptions.TimeoutException"><code class="docutils literal notranslate"><span class="pre">TimeoutException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biguasim/weather.html">Weather Controller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biguasim/weather.html#biguasim.weather.WeatherController"><code class="docutils literal notranslate"><span class="pre">WeatherController</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/weather.html#biguasim.weather.WeatherController.set_day_time"><code class="docutils literal notranslate"><span class="pre">WeatherController.set_day_time()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/weather.html#biguasim.weather.WeatherController.set_fog_density"><code class="docutils literal notranslate"><span class="pre">WeatherController.set_fog_density()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/weather.html#biguasim.weather.WeatherController.set_weather"><code class="docutils literal notranslate"><span class="pre">WeatherController.set_weather()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/weather.html#biguasim.weather.WeatherController.start_day_cycle"><code class="docutils literal notranslate"><span class="pre">WeatherController.start_day_cycle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="biguasim/weather.html#biguasim.weather.WeatherController.stop_day_cycle"><code class="docutils literal notranslate"><span class="pre">WeatherController.stop_day_cycle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage/installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+/* docs/_static/themes_override.css */
+
+/* --- Títulos e texto principal --- */
+.wy-body-content h1,
+.wy-body-content h2,
+.wy-body-content h3,
+.wy-body-content h4,
+.wy-body-content h5,
+.wy-body-content h6 {
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #321F13 !important;
+}
+
+.wy-body-content h1,
+.wy-body-content h2,
+.wy-body-content h3 {
+    font-weight: 700 !important;
+}
+
+.wy-body-content h4,
+.wy-body-content h5,
+.wy-body-content h6 {
+    font-weight: 400 !important;
+}
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.wy-body-content {
+    background-color: #FFF0E7 !important;
+    color: #333 !important;
+}
+
+/* --- Barra de Navegação Superior e Sidebar --- */
+.wy-nav-top,
+.wy-side-nav-search,
+.wy-nav-side {
+    background-color: #001C39 !important;
+}
+
+.wy-side-nav-search a {
+    color: #FFF0E7 !important;
+}
+
+/* --- Links e Navegação da Sidebar --- */
+.wy-menu-vertical a {
+    color: #FFF0E7 !important;
+}
+
+.wy-menu-vertical a:hover {
+    background-color: #004975 !important;
+}
+
+.wy-menu-vertical li.current > a {
+    color: #FFF0E7 !important;
+    background-color: #21B1D9 !important;
+}
+
+.wy-menu-vertical li.current li.toctree-l2 a {
+    color: #FFF0E7 !important;
+    background-color: #036B9D !important;
+}
+
+/* --- Links no Corpo do Texto --- */
+.wy-body-content a, .wy-body-content a:hover {
+    color: #004975 !important;
+}
+
+/* --- Regras de Tabela (original do tema) --- */
+.wy-table-responsive table td, .wy-table-responsive table th {
+  white-space: normal !important;
+}
+
+.wy-table-responsive {
+  margin-bottom: 24px !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+}

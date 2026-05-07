@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiguaSim Dynamics &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Shared Memory" href="shmem.html" />
+    <link rel="prev" title="LCM" href="lcm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lcm.html">LCM</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">BiguaSim Dynamics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.dynamics.uav">UAV (Unmanned Aerial Vehicles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.uav.QuadCopterX"><code class="docutils literal notranslate"><span class="pre">QuadCopterX</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.uav.QuadCopterX.get_cmd_motor_speeds"><code class="docutils literal notranslate"><span class="pre">QuadCopterX.get_cmd_motor_speeds()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.dynamics.uuv">UUV (Unmanned Underwater Vehicles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF"><code class="docutils literal notranslate"><span class="pre">HexaCopterFiveDoF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF.get_cmd_motor_speeds"><code class="docutils literal notranslate"><span class="pre">HexaCopterFiveDoF.get_cmd_motor_speeds()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.uuv.OctaCopterSixDoF"><code class="docutils literal notranslate"><span class="pre">OctaCopterSixDoF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.uuv.OctaCopterSixDoF.get_cmd_motor_speeds"><code class="docutils literal notranslate"><span class="pre">OctaCopterSixDoF.get_cmd_motor_speeds()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV.get_cmd_motor_speeds"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.get_cmd_motor_speeds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV.integralSMC"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.integralSMC()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV.ssa"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.ssa()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.dynamics.usv">USV (Unmanned Surface Vehicles)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.usv.Catamaran"><code class="docutils literal notranslate"><span class="pre">Catamaran</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.usv.Catamaran.get_cmd_motor_speeds"><code class="docutils literal notranslate"><span class="pre">Catamaran.get_cmd_motor_speeds()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.usv.Differential"><code class="docutils literal notranslate"><span class="pre">Differential</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.usv.Differential.get_cmd_motor_speeds"><code class="docutils literal notranslate"><span class="pre">Differential.get_cmd_motor_speeds()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.dynamics.agents">Agents Factory</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.BlueBoat"><code class="docutils literal notranslate"><span class="pre">BlueBoat</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.BlueBoat.params"><code class="docutils literal notranslate"><span class="pre">BlueBoat.params</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.BlueROV2"><code class="docutils literal notranslate"><span class="pre">BlueROV2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.BlueROV2.params"><code class="docutils literal notranslate"><span class="pre">BlueROV2.params</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.BlueROVHeavy"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.BlueROVHeavy.params"><code class="docutils literal notranslate"><span class="pre">BlueROVHeavy.params</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.DjiMatrice"><code class="docutils literal notranslate"><span class="pre">DjiMatrice</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.DjiMatrice.params"><code class="docutils literal notranslate"><span class="pre">DjiMatrice.params</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.ModelsFactory"><code class="docutils literal notranslate"><span class="pre">ModelsFactory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.ModelsFactory.build_model"><code class="docutils literal notranslate"><span class="pre">ModelsFactory.build_model()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.Torpedo"><code class="docutils literal notranslate"><span class="pre">Torpedo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.Torpedo.params"><code class="docutils literal notranslate"><span class="pre">Torpedo.params</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.agents.TorpedoAUV"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.agents.TorpedoAUV.params"><code class="docutils literal notranslate"><span class="pre">TorpedoAUV.params</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biguasim.dynamics.control">Control &amp; Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#biguasim.dynamics.control.BatchedPIDController"><code class="docutils literal notranslate"><span class="pre">BatchedPIDController</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.control.BatchedPIDController.compute"><code class="docutils literal notranslate"><span class="pre">BatchedPIDController.compute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#biguasim.dynamics.control.BatchedPIDController.update_setpoints"><code class="docutils literal notranslate"><span class="pre">BatchedPIDController.update_setpoints()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">BiguaSim Dynamics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/biguasim/dynamics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="biguasim-dynamics">
+<h1>BiguaSim Dynamics<a class="headerlink" href="#biguasim-dynamics" title="Link to this heading"></a></h1>
+<p>This section details the dynamic and physical models of the agents within BiguaSim.</p>
+<section id="module-biguasim.dynamics.uav">
+<span id="uav-unmanned-aerial-vehicles"></span><h2>UAV (Unmanned Aerial Vehicles)<a class="headerlink" href="#module-biguasim.dynamics.uav" title="Link to this heading"></a></h2>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uav.QuadCopterX" title="biguasim.dynamics.uav.QuadCopterX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">QuadCopterX</span></code></a>(batch_size, params, device, ...)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.uav.QuadCopterX">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.uav.</span></span><span class="sig-name descname"><span class="pre">QuadCopterX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uav.QuadCopterX" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VehicleModel</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uav.QuadCopterX.get_cmd_motor_speeds" title="biguasim.dynamics.uav.QuadCopterX.get_cmd_motor_speeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cmd_motor_speeds</span></code></a>(state, control)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.uav.QuadCopterX.get_cmd_motor_speeds">
+<span class="sig-name descname"><span class="pre">get_cmd_motor_speeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uav.QuadCopterX.get_cmd_motor_speeds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.dynamics.uuv">
+<span id="uuv-unmanned-underwater-vehicles"></span><h2>UUV (Unmanned Underwater Vehicles)<a class="headerlink" href="#module-biguasim.dynamics.uuv" title="Link to this heading"></a></h2>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF" title="biguasim.dynamics.uuv.HexaCopterFiveDoF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HexaCopterFiveDoF</span></code></a>(batch_size, params, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.OctaCopterSixDoF" title="biguasim.dynamics.uuv.OctaCopterSixDoF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OctaCopterSixDoF</span></code></a>(batch_size, params, device, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV" title="biguasim.dynamics.uuv.TorpedoAUV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a>(batch_size, params, device, ...)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.HexaCopterFiveDoF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.uuv.</span></span><span class="sig-name descname"><span class="pre">HexaCopterFiveDoF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VehicleModel</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF.get_cmd_motor_speeds" title="biguasim.dynamics.uuv.HexaCopterFiveDoF.get_cmd_motor_speeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cmd_motor_speeds</span></code></a>(state, control)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.HexaCopterFiveDoF.get_cmd_motor_speeds">
+<span class="sig-name descname"><span class="pre">get_cmd_motor_speeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF.get_cmd_motor_speeds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.OctaCopterSixDoF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.uuv.</span></span><span class="sig-name descname"><span class="pre">OctaCopterSixDoF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.OctaCopterSixDoF" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF" title="biguasim.dynamics.uuv.HexaCopterFiveDoF"><code class="xref py py-class docutils literal notranslate"><span class="pre">HexaCopterFiveDoF</span></code></a></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.OctaCopterSixDoF.get_cmd_motor_speeds" title="biguasim.dynamics.uuv.OctaCopterSixDoF.get_cmd_motor_speeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cmd_motor_speeds</span></code></a>(state, control)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.OctaCopterSixDoF.get_cmd_motor_speeds">
+<span class="sig-name descname"><span class="pre">get_cmd_motor_speeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.OctaCopterSixDoF.get_cmd_motor_speeds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.TorpedoAUV">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.uuv.</span></span><span class="sig-name descname"><span class="pre">TorpedoAUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.TorpedoAUV" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VehicleModel</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV.get_cmd_motor_speeds" title="biguasim.dynamics.uuv.TorpedoAUV.get_cmd_motor_speeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cmd_motor_speeds</span></code></a>(state, control)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV.integralSMC" title="biguasim.dynamics.uuv.TorpedoAUV.integralSMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integralSMC</span></code></a>(e_int, e_x, e_v, x_d, v_d, a_d, ...)</p></td>
+<td><p>Integral Sliding Mode Controller (tensor-safe, batch-ready)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV.ssa" title="biguasim.dynamics.uuv.TorpedoAUV.ssa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ssa</span></code></a>(angle)</p></td>
+<td><p>Smallest signed angle [-pi, pi)</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.TorpedoAUV.get_cmd_motor_speeds">
+<span class="sig-name descname"><span class="pre">get_cmd_motor_speeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.TorpedoAUV.get_cmd_motor_speeds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.TorpedoAUV.integralSMC">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integralSMC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e_int</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T_nomoto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_nomoto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wn_d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zeta_d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_d</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampleTime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.TorpedoAUV.integralSMC" title="Link to this definition"></a></dt>
+<dd><p>Integral Sliding Mode Controller (tensor-safe, batch-ready)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.uuv.TorpedoAUV.ssa">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ssa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.uuv.TorpedoAUV.ssa" title="Link to this definition"></a></dt>
+<dd><p>Smallest signed angle [-pi, pi)</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.dynamics.usv">
+<span id="usv-unmanned-surface-vehicles"></span><h2>USV (Unmanned Surface Vehicles)<a class="headerlink" href="#module-biguasim.dynamics.usv" title="Link to this heading"></a></h2>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.usv.Catamaran" title="biguasim.dynamics.usv.Catamaran"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Catamaran</span></code></a>(batch_size, params, device, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.usv.Differential" title="biguasim.dynamics.usv.Differential"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Differential</span></code></a>(batch_size, params, device, ...)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.usv.Catamaran">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.usv.</span></span><span class="sig-name descname"><span class="pre">Catamaran</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.usv.Catamaran" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VehicleModel</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.usv.Catamaran.get_cmd_motor_speeds" title="biguasim.dynamics.usv.Catamaran.get_cmd_motor_speeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cmd_motor_speeds</span></code></a>(state, control)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.usv.Catamaran.get_cmd_motor_speeds">
+<span class="sig-name descname"><span class="pre">get_cmd_motor_speeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.usv.Catamaran.get_cmd_motor_speeds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.usv.Differential">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.usv.</span></span><span class="sig-name descname"><span class="pre">Differential</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.usv.Differential" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">VehicleModel</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.usv.Differential.get_cmd_motor_speeds" title="biguasim.dynamics.usv.Differential.get_cmd_motor_speeds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cmd_motor_speeds</span></code></a>(state, control)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.usv.Differential.get_cmd_motor_speeds">
+<span class="sig-name descname"><span class="pre">get_cmd_motor_speeds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.usv.Differential.get_cmd_motor_speeds" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.dynamics.agents">
+<span id="agents-factory"></span><h2>Agents Factory<a class="headerlink" href="#module-biguasim.dynamics.agents" title="Link to this heading"></a></h2>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.BlueBoat" title="biguasim.dynamics.agents.BlueBoat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueBoat</span></code></a>([batch_size, device, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.BlueROV2" title="biguasim.dynamics.agents.BlueROV2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueROV2</span></code></a>([batch_size, device, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.BlueROVHeavy" title="biguasim.dynamics.agents.BlueROVHeavy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlueROVHeavy</span></code></a>([batch_size, device, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.DjiMatrice" title="biguasim.dynamics.agents.DjiMatrice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DjiMatrice</span></code></a>([batch_size, device, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.ModelsFactory" title="biguasim.dynamics.agents.ModelsFactory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModelsFactory</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.Torpedo" title="biguasim.dynamics.agents.Torpedo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Torpedo</span></code></a>([batch_size, device, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.TorpedoAUV" title="biguasim.dynamics.agents.TorpedoAUV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a>([batch_size, device, ...])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.BlueBoat">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">BlueBoat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cmd_motor_speeds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.BlueBoat" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.usv.Catamaran" title="biguasim.dynamics.usv.Catamaran"><code class="xref py py-class docutils literal notranslate"><span class="pre">Catamaran</span></code></a></p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.BlueBoat.params" title="biguasim.dynamics.agents.BlueBoat.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.BlueBoat.params">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#biguasim.dynamics.agents.BlueBoat.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.BlueROV2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">BlueROV2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cmd_motor_speeds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.BlueROV2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.uuv.HexaCopterFiveDoF" title="biguasim.dynamics.uuv.HexaCopterFiveDoF"><code class="xref py py-class docutils literal notranslate"><span class="pre">HexaCopterFiveDoF</span></code></a></p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.BlueROV2.params" title="biguasim.dynamics.agents.BlueROV2.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.BlueROV2.params">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#biguasim.dynamics.agents.BlueROV2.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.BlueROVHeavy">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">BlueROVHeavy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cmd_motor_speeds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.BlueROVHeavy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.uuv.OctaCopterSixDoF" title="biguasim.dynamics.uuv.OctaCopterSixDoF"><code class="xref py py-class docutils literal notranslate"><span class="pre">OctaCopterSixDoF</span></code></a></p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.BlueROVHeavy.params" title="biguasim.dynamics.agents.BlueROVHeavy.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.BlueROVHeavy.params">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#biguasim.dynamics.agents.BlueROVHeavy.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.DjiMatrice">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">DjiMatrice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cmd_motor_speeds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.DjiMatrice" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.uav.QuadCopterX" title="biguasim.dynamics.uav.QuadCopterX"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuadCopterX</span></code></a></p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.DjiMatrice.params" title="biguasim.dynamics.agents.DjiMatrice.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.DjiMatrice.params">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#biguasim.dynamics.agents.DjiMatrice.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.ModelsFactory">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">ModelsFactory</span></span><a class="headerlink" href="#biguasim.dynamics.agents.ModelsFactory" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.ModelsFactory.build_model" title="biguasim.dynamics.agents.ModelsFactory.build_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_model</span></code></a>(agent_type)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.ModelsFactory.build_model">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.ModelsFactory.build_model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.Torpedo">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">Torpedo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cmd_motor_speeds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.Torpedo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV" title="biguasim.dynamics.uuv.TorpedoAUV"><code class="xref py py-class docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a></p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.Torpedo.params" title="biguasim.dynamics.agents.Torpedo.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.Torpedo.params">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#biguasim.dynamics.agents.Torpedo.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.TorpedoAUV">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.agents.</span></span><span class="sig-name descname"><span class="pre">TorpedoAUV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_abstraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cmd_motor_speeds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.agents.TorpedoAUV" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biguasim.dynamics.uuv.TorpedoAUV" title="biguasim.dynamics.uuv.TorpedoAUV"><code class="xref py py-class docutils literal notranslate"><span class="pre">TorpedoAUV</span></code></a></p>
+<p><strong>Attributes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.agents.TorpedoAUV.params" title="biguasim.dynamics.agents.TorpedoAUV.params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">params</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="biguasim.dynamics.agents.TorpedoAUV.params">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#biguasim.dynamics.agents.TorpedoAUV.params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-biguasim.dynamics.control">
+<span id="control-utilities"></span><h2>Control &amp; Utilities<a class="headerlink" href="#module-biguasim.dynamics.control" title="Link to this heading"></a></h2>
+<p><strong>Classes:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.control.BatchedPIDController" title="biguasim.dynamics.control.BatchedPIDController"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatchedPIDController</span></code></a>(Kp, Ki, Kd, batch_shape)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="biguasim.dynamics.control.BatchedPIDController">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biguasim.dynamics.control.</span></span><span class="sig-name descname"><span class="pre">BatchedPIDController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Kp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ki</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.control.BatchedPIDController" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Methods:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.dynamics.control.BatchedPIDController.compute" title="biguasim.dynamics.control.BatchedPIDController.compute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute</span></code></a>(process_variables, dt, idx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.dynamics.control.BatchedPIDController.update_setpoints" title="biguasim.dynamics.control.BatchedPIDController.update_setpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_setpoints</span></code></a>(new_setpoints[, mask])</p></td>
+<td><p>Update setpoints for the batch (shape: batch_size).</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.control.BatchedPIDController.compute">
+<span class="sig-name descname"><span class="pre">compute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process_variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.control.BatchedPIDController.compute" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="biguasim.dynamics.control.BatchedPIDController.update_setpoints">
+<span class="sig-name descname"><span class="pre">update_setpoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_setpoints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.dynamics.control.BatchedPIDController.update_setpoints" title="Link to this definition"></a></dt>
+<dd><p>Update setpoints for the batch (shape: batch_size).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lcm.html" class="btn btn-neutral float-left" title="LCM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="shmem.html" class="btn btn-neutral float-right" title="Shared Memory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

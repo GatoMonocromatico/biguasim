@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Package Manager &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sensors" href="sensors.html" />
+    <link rel="prev" title="BiguaSim Client" href="biguasimclient.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package Manager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.available_packages"><code class="docutils literal notranslate"><span class="pre">available_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.get_binary_path_for_package"><code class="docutils literal notranslate"><span class="pre">get_binary_path_for_package()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.get_binary_path_for_scenario"><code class="docutils literal notranslate"><span class="pre">get_binary_path_for_scenario()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.get_package_config_for_scenario"><code class="docutils literal notranslate"><span class="pre">get_package_config_for_scenario()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.get_scenario"><code class="docutils literal notranslate"><span class="pre">get_scenario()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.install"><code class="docutils literal notranslate"><span class="pre">install()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.installed_packages"><code class="docutils literal notranslate"><span class="pre">installed_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.load_scenario_file"><code class="docutils literal notranslate"><span class="pre">load_scenario_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.package_info"><code class="docutils literal notranslate"><span class="pre">package_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.prune"><code class="docutils literal notranslate"><span class="pre">prune()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.remove"><code class="docutils literal notranslate"><span class="pre">remove()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.remove_all_packages"><code class="docutils literal notranslate"><span class="pre">remove_all_packages()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.scenario_info"><code class="docutils literal notranslate"><span class="pre">scenario_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biguasim.packagemanager.world_info"><code class="docutils literal notranslate"><span class="pre">world_info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Package Manager</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/biguasim/packagemanager.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-biguasim.packagemanager">
+<span id="package-manager"></span><span id="packagemanager"></span><h1>Package Manager<a class="headerlink" href="#module-biguasim.packagemanager" title="Link to this heading"></a></h1>
+<p>Package manager for worlds available to download and use for BiguaSim</p>
+<p><strong>Functions:</strong></p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.available_packages" title="biguasim.packagemanager.available_packages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_packages</span></code></a>()</p></td>
+<td><p>Returns a list of package names available for the current version of BiguaSim</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.get_binary_path_for_package" title="biguasim.packagemanager.get_binary_path_for_package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_binary_path_for_package</span></code></a>(package_name)</p></td>
+<td><p>Gets the path to the binary of a specific package.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.get_binary_path_for_scenario" title="biguasim.packagemanager.get_binary_path_for_scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_binary_path_for_scenario</span></code></a>(scenario_name)</p></td>
+<td><p>Gets the path to the binary for a given scenario name</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.get_package_config_for_scenario" title="biguasim.packagemanager.get_package_config_for_scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_package_config_for_scenario</span></code></a>(scenario)</p></td>
+<td><p>For the given scenario, returns the package config associated with it (config.json)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.get_scenario" title="biguasim.packagemanager.get_scenario"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scenario</span></code></a>(scenario_name)</p></td>
+<td><p>Gets the scenario configuration associated with the given name</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.install" title="biguasim.packagemanager.install"><code class="xref py py-obj docutils literal notranslate"><span class="pre">install</span></code></a>(package_name[, url, branch, commit])</p></td>
+<td><p>Installs a BiguaSim package.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.installed_packages" title="biguasim.packagemanager.installed_packages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">installed_packages</span></code></a>()</p></td>
+<td><p>Returns a list of all installed packages</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.load_scenario_file" title="biguasim.packagemanager.load_scenario_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_scenario_file</span></code></a>(scenario_path)</p></td>
+<td><p>Loads the scenario config file and returns a dictionary containing the configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.package_info" title="biguasim.packagemanager.package_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">package_info</span></code></a>(pkg_name)</p></td>
+<td><p>Prints the information of a package.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.prune" title="biguasim.packagemanager.prune"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prune</span></code></a>()</p></td>
+<td><p>Prunes old versions of biguasim, other than the running version.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.remove" title="biguasim.packagemanager.remove"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove</span></code></a>(package_name)</p></td>
+<td><p>Removes a biguasim package.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.remove_all_packages" title="biguasim.packagemanager.remove_all_packages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_all_packages</span></code></a>()</p></td>
+<td><p>Removes all biguasim packages.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#biguasim.packagemanager.scenario_info" title="biguasim.packagemanager.scenario_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scenario_info</span></code></a>([scenario_name, scenario, ...])</p></td>
+<td><p>Gets and prints information for a particular scenario file Must match this format: scenario_name.json</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#biguasim.packagemanager.world_info" title="biguasim.packagemanager.world_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">world_info</span></code></a>(world_name[, world_config, ...])</p></td>
+<td><p>Gets and prints the information of a world.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.available_packages">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">available_packages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.available_packages" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of package names available for the current version of BiguaSim</p>
+<dl class="simple">
+<dt>Returns (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>):</dt><dd><p>List of package names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.get_binary_path_for_package">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">get_binary_path_for_package</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.get_binary_path_for_package" title="Link to this definition"></a></dt>
+<dd><p>Gets the path to the binary of a specific package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>package_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Name of the package to search for</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the path to the config directory</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#biguasim.exceptions.NotFoundException" title="biguasim.exceptions.NotFoundException"><strong>NotFoundException</strong></a> – When the package requested is not found</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.get_binary_path_for_scenario">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">get_binary_path_for_scenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.get_binary_path_for_scenario" title="Link to this definition"></a></dt>
+<dd><p>Gets the path to the binary for a given scenario name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – name of the configuration to load - eg “UrbanCity-Follow”
+Must be an exact match. Name must be unique among all installed packages</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the configuration file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.get_package_config_for_scenario">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">get_package_config_for_scenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.get_package_config_for_scenario" title="Link to this definition"></a></dt>
+<dd><p>For the given scenario, returns the package config associated with it (config.json)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – scenario dict to look up the package for</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>package configuration dictionary</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.get_scenario">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">get_scenario</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.get_scenario" title="Link to this definition"></a></dt>
+<dd><p>Gets the scenario configuration associated with the given name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – name of the configuration to load - eg “UrbanCity-Follow”
+Must be an exact match. Name must be unique among all installed packages</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the configuration file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.install">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">install</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.install" title="Link to this definition"></a></dt>
+<dd><p>Installs a BiguaSim package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>package_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – The name of the package to install</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.installed_packages">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">installed_packages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.installed_packages" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of all installed packages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of all the currently installed packages</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.load_scenario_file">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">load_scenario_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.load_scenario_file" title="Link to this definition"></a></dt>
+<dd><p>Loads the scenario config file and returns a dictionary containing the configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>scenario_path</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – Path to the configuration file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing the configuration file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.package_info">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">package_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.package_info" title="Link to this definition"></a></dt>
+<dd><p>Prints the information of a package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pkg_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – The name of the desired package to get information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.prune">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">prune</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.prune" title="Link to this definition"></a></dt>
+<dd><p>Prunes old versions of biguasim, other than the running version.</p>
+<p><strong>DO NOT USE WITH HOLODECKPATH</strong></p>
+<p>Don’t use this function if you have overidden the path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.remove">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.remove" title="Link to this definition"></a></dt>
+<dd><p>Removes a biguasim package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>package_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – the name of the package to remove</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.remove_all_packages">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">remove_all_packages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.remove_all_packages" title="Link to this definition"></a></dt>
+<dd><p>Removes all biguasim packages.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.scenario_info">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">scenario_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.scenario_info" title="Link to this definition"></a></dt>
+<dd><p>Gets and prints information for a particular scenario file
+Must match this format: scenario_name.json</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scenario_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – The name of the scenario</p></li>
+<li><p><strong>scenario</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>, optional) – Loaded dictionary config
+(overrides world_name and scenario_name)</p></li>
+<li><p><strong>base_indent</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>, optional) – How much to indent output by</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biguasim.packagemanager.world_info">
+<span class="sig-prename descclassname"><span class="pre">biguasim.packagemanager.</span></span><span class="sig-name descname"><span class="pre">world_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">world_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">world_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biguasim.packagemanager.world_info" title="Link to this definition"></a></dt>
+<dd><p>Gets and prints the information of a world.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>world_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – the name of the world to retrieve information for</p></li>
+<li><p><strong>world_config</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>, optional) – A dictionary containing the world’s configuration.
+Will find the config if None. Defaults to None.</p></li>
+<li><p><strong>base_indent</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>, optional) – How much to indent output</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="biguasimclient.html" class="btn btn-neutral float-left" title="BiguaSim Client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sensors.html" class="btn btn-neutral float-right" title="Sensors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

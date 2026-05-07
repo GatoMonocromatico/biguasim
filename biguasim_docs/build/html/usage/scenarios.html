@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenarios &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Environments" href="environments.html" />
+    <link rel="prev" title="Using BiguaSim" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="usage.html">Using BiguaSim</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Scenarios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-file-format">Scenario File Format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#name-and-world">Name and World</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#agent-objects">Agent Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sensor-objects">Sensor Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#frame-rates">Frame Rates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#octree-configuration">Octree Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-scenario-parameters">Other Scenario Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#making-custom-scenarios">Making Custom Scenarios</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-dictionary-for-a-scenario-config">Using a Dictionary for a Scenario Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-a-json-file-for-a-scenario-config">Using a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file for a Scenario Config</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="environments.html">Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="viewport.html">Viewport</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html">Improving Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="units-and-coordinates.html">Units and Coordinates in BiguaSim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semaphores.html">BiguaSim Client-Server Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ROS2.html">ROS2 Bridge</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/packages.html">BiguaSim Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="usage.html">Using BiguaSim</a></li>
+      <li class="breadcrumb-item active">Scenarios</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/usage/scenarios.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scenarios">
+<span id="id1"></span><h1>Scenarios<a class="headerlink" href="#scenarios" title="Link to this heading"></a></h1>
+<p>When you call <code class="docutils literal notranslate"><span class="pre">biguasim.make()</span></code> to create an environment, you pass in the
+name of a scenario, eg. <code class="docutils literal notranslate"><span class="pre">biguasim.make(&quot;Pier-Hover-&quot;)</span></code>. A scenario tells
+BiguaSim:</p>
+<ul class="simple">
+<li><p>Which world to load</p></li>
+<li><p>What agents are present</p></li>
+<li><p>Where they are</p></li>
+<li><p>What sensors they have</p></li>
+</ul>
+<p>BiguaSim worlds are meant to be configurable by changing out the scenario.
+Scenarios allow the same world to be used for different purposes. For different
+senarios using the same world, the world or map itself doesn’t change, but the
+things in the world and your objective can change.</p>
+<p>BiguaSim is intended to be used with user-created scenarios as well. Custom scenarios
+can be created using a dictionary in a Python script or by creating a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file.
+Both methods follow the same format, described below.</p>
+<section id="scenario-file-format">
+<span id="scenario-files"></span><h2>Scenario File Format<a class="headerlink" href="#scenario-file-format" title="Link to this heading"></a></h2>
+<p>Scenario <code class="docutils literal notranslate"><span class="pre">.json</span></code> files are distributed in packages (see <a class="reference internal" href="../packages/docs/package-structure.html#package-contents"><span class="std std-ref">Package Contents</span></a>), and
+must be named <code class="docutils literal notranslate"><span class="pre">{WorldName}-{ScenarioName}.json</span></code>. By default they are stored in the
+<code class="docutils literal notranslate"><span class="pre">worlds/{PackageName}</span></code> directory (see <a class="reference internal" href="../packages/docs/installation.html#package-locations"><span class="std std-ref">Package Installation Location</span></a>).</p>
+<p>Scenarios can be defined using a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file or in a Python script using a dictionary.
+Both methods follow the same format using key-value pairs. An example dictionary is given below:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{Scenario Name}&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;world&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{world it is associated with}&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;package_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{package it is associated with}&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;agents&quot;</span><span class="p">:[</span>
+<span class="w">      </span><span class="s2">&quot;array of agent objects&quot;</span>
+<span class="w">   </span><span class="p">],</span>
+<span class="w">   </span><span class="nt">&quot;ticks_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;frames_per_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;env_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">-10</span><span class="p">,</span><span class="w"> </span><span class="mi">-10</span><span class="p">,</span><span class="w"> </span><span class="mi">-10</span><span class="p">],</span>
+<span class="w">   </span><span class="nt">&quot;env_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span>
+<span class="w">   </span><span class="nt">&quot;octree_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;octree_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;window_width&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">1280</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;window_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;lcm_provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;provider name&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>At a minimum, a scenario must contain <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">world</span></code>, and <code class="docutils literal notranslate"><span class="pre">package_name</span></code> keys, and at
+least one agent object. All other keys are optional and will default to a set value if not
+provided.</p>
+</div>
+<p>Below is a description of some of the keys in the scenario dictionary.</p>
+<section id="name-and-world">
+<h3>Name and World<a class="headerlink" href="#name-and-world" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code> is a string that specifies the name of the scenario.</dt><dd><p>This name is part of the string passed to <code class="docutils literal notranslate"><span class="pre">biguasim.make()</span></code> to create an environment.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">world</span></code> is a string that specifies the world to load.</dt><dd><p>It must match the name of the world file in the package folder (see <a class="reference internal" href="../packages/packages.html#packages"><span class="std std-ref">BiguaSim Packages</span></a>).</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">package_name</span></code> is a string that specifies the package the world is associated with.</p></li>
+</ul>
+</section>
+<section id="agent-objects">
+<h3>Agent Objects<a class="headerlink" href="#agent-objects" title="Link to this heading"></a></h3>
+<p>BiguaSim agents are declared in a list in the scenario dictionary. Each agent is defined using a
+new dictionary in the list.</p>
+<p>Below is an example of an agent configuration. For detailed descriptions of the keys and values,
+see <a class="reference internal" href="../agents/docs/agent-config.html#agent-configuration"><span class="std std-ref">Agent Configuration</span></a>.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;agents&quot;</span><span class="p">:[</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;agent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uav0&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;agent_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{agent types}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sensors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">         </span><span class="s2">&quot;array of sensor objects&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;control_abstraction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{control abstraction type}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;location_randomization&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;rotation_randomization&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;dynamics&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nt">&quot;batch_size&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="sensor-objects">
+<h3>Sensor Objects<a class="headerlink" href="#sensor-objects" title="Link to this heading"></a></h3>
+<p>Each agent can be equipped with one or more sensors, including cameras and sonar. Sensor definition
+happens within each agent definition.</p>
+<p>Below is an example of a sensor definition. For detailed descriptions of the keys and values, see
+<a class="reference internal" href="../sensors/docs/sensor-config.html#sensor-configuration"><span class="std std-ref">Sensor Configuration</span></a>.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;sensors&quot;</span><span class="p">:[</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;sensor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RGBCamera&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sensor_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FrontCamera&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;socket&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;socket name&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;rotation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;Hz&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lcm_channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;channel_name&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="s2">&quot;array of sensor configurations&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="frame-rates">
+<span id="configure-framerate"></span><h3>Frame Rates<a class="headerlink" href="#frame-rates" title="Link to this heading"></a></h3>
+<p>The frame rate in BiguaSim is controlled using two parameters: <code class="docutils literal notranslate"><span class="pre">ticks_per_sec</span></code> and
+<code class="docutils literal notranslate"><span class="pre">frames_per_sec</span></code>.</p>
+<ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ticks_per_sec</span></code> changes how many ticks are in a simulation second.</dt><dd><p>This must be higher than any “Hz” sampling rate used by any sensors. Defaults to 30.</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frames_per_sec</span></code> is the max FPS the environment can run at.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, it will match <code class="docutils literal notranslate"><span class="pre">ticks_per_sec</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">false</span></code>, FPS will not be capped, and the environment will run as fast as possible.</p></li>
+<li><p>If a number is given, the simulation will attempt to reach that frame rate, but no higher.</p></li>
+<li><p>Defaults to <cite>true</cite>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>For running the simulation in real time (for example, when <a class="reference internal" href="../examples/examples/controller.html#manual-control"><span class="std std-ref">Manually Controlling an Agent</span></a>), set
+<code class="docutils literal notranslate"><span class="pre">frames_per_sec</span></code> to true. For running BiguaSim <a class="reference internal" href="viewport.html#headless"><span class="std std-ref">headless</span></a>, you’ll likely want the
+simulation to run as fast as possible, so <code class="docutils literal notranslate"><span class="pre">frames_per_sec</span></code> should be set to false. When using a
+GPU, simulations can run much faster than realtime, making things difficult to control when the
+framerate is unlimited. In this case, capping <code class="docutils literal notranslate"><span class="pre">frames_per_sec</span></code> at a specific value can be useful.</p>
+</section>
+<section id="octree-configuration">
+<span id="configure-octree"></span><h3>Octree Configuration<a class="headerlink" href="#octree-configuration" title="Link to this heading"></a></h3>
+<p>When using a form of sonar sensor and initializing the world, an Octree will either be
+created or loaded from a cache. The parameters of these can be set using the <code class="docutils literal notranslate"><span class="pre">env_min</span></code>,
+<code class="docutils literal notranslate"><span class="pre">env_max</span></code>, <code class="docutils literal notranslate"><span class="pre">octree_min</span></code>, and <code class="docutils literal notranslate"><span class="pre">octree_max</span></code>. The octrees are cached in the <code class="docutils literal notranslate"><span class="pre">Linux/Holodeck/Octrees</span></code> folder
+in the worlds folder (see <a class="reference internal" href="../packages/docs/installation.html#package-locations"><span class="std std-ref">Package Installation Location</span></a>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">env_min</span></code>/<code class="docutils literal notranslate"><span class="pre">env_max</span></code> are used to set the upper/lower bounds of the environment. They should
+be set in <a class="reference internal" href="../packages/docs/package-structure.html#id2"><span class="std std-ref">Package Structure</span></a>, but the values set here will override it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">octree_min</span></code>/<code class="docutils literal notranslate"><span class="pre">octree_max</span></code> are used to set the minimum/mid-level size of the octree. <code class="docutils literal notranslate"><span class="pre">octree_min</span></code>
+can go as low as .01 (1cm), and then the octree will double in size until it reaches <code class="docutils literal notranslate"><span class="pre">octree_max</span></code>.</p>
+<p>For more information about Octrees, see <a class="reference internal" href="../sensors/docs/octree.html#octree"><span class="std std-ref">Octree Generation</span></a>.</p>
+</section>
+<section id="other-scenario-parameters">
+<h3>Other Scenario Parameters<a class="headerlink" href="#other-scenario-parameters" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">window_width/height</span></code> control the size of the viewport window opened when an environment is created.</dt><dd><p>Sizes are in pixels.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">lcm_provider</span></code> is an optional parameter that specifies where to publish LCM messages.</dt><dd><p>For more detail, see <a class="reference internal" href="../sensors/docs/publishing.html#lcm"><span class="std std-ref">Publishing Data Using LCM</span></a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="making-custom-scenarios">
+<span id="custom-scenarios"></span><h2>Making Custom Scenarios<a class="headerlink" href="#making-custom-scenarios" title="Link to this heading"></a></h2>
+<p>You can create custom scenarios in two ways: with a dictionary in a Python script, or by
+creating a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file. Both methods follow the same format as described in the section above.</p>
+<section id="using-a-dictionary-for-a-scenario-config">
+<h3>Using a Dictionary for a Scenario Config<a class="headerlink" href="#using-a-dictionary-for-a-scenario-config" title="Link to this heading"></a></h3>
+<p>Create a dictionary in Python that matches the structure specified in <a class="reference internal" href="#scenario-files"><span class="std std-ref">Scenario File Format</span></a>,
+and pass it in to <code class="xref py py-func docutils literal notranslate"><span class="pre">biguasim.make()</span></code> using the <code class="docutils literal notranslate"><span class="pre">scenario_cfg</span></code> variable.</p>
+<p>An example is given below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">biguasim</span>
+
+<span class="n">scenario</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test_rgb_camera&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;world&quot;</span><span class="p">:</span> <span class="s2">&quot;Bridge&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;package_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyDive&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;main_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;auv0&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;ticks_per_sec&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+     <span class="s2">&quot;agents&quot;</span><span class="p">:</span> <span class="p">[</span>
+         <span class="p">{</span>
+            <span class="s2">&quot;agent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;auv0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;agent_type&quot;</span><span class="p">:</span> <span class="s2">&quot;BlueROV2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sensors&quot;</span><span class="p">:</span> <span class="p">[</span>
+               <span class="p">{</span>
+               <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DynamicsSensor&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;IMUSocket&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                     <span class="s2">&quot;UseCOM&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                     <span class="s2">&quot;UseRPY&quot;</span><span class="p">:</span> <span class="kc">False</span>
+                  <span class="p">}</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="s2">&quot;sensor_type&quot;</span><span class="p">:</span> <span class="s2">&quot;RGBCamera&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;socket&quot;</span><span class="p">:</span> <span class="s2">&quot;CameraSocket&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;CaptureWidth&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+                        <span class="s2">&quot;CaptureHeight&quot;</span><span class="p">:</span> <span class="mi">512</span>
+                  <span class="p">}</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+
+            <span class="s2">&quot;dynamics&quot;</span> <span class="p">:</span> <span class="p">{</span>
+               <span class="s2">&quot;batch_size&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;control_abstraction&quot;</span><span class="p">:</span> <span class="s1">&#39;cmd_vel&#39;</span><span class="p">,</span>
+            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">],</span>
+            <span class="s2">&quot;rotation&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">]</span>
+         <span class="p">}</span>
+     <span class="p">]</span>
+<span class="p">}</span>
+
+ <span class="k">with</span> <span class="n">biguasim</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">scenario_cfg</span><span class="o">=</span><span class="n">scenario</span><span class="p">)</span> <span class="k">as</span> <span class="n">env</span><span class="p">:</span>
+     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+
+         <span class="n">state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">tick</span><span class="p">()</span>
+         <span class="k">if</span> <span class="s2">&quot;RGBCamera&quot;</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
+            <span class="n">pixels</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;RGBCamera&quot;</span><span class="p">]</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">pixels</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;Camera Output&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
+               <span class="k">break</span>
+</pre></div>
+</div>
+</section>
+<section id="using-a-json-file-for-a-scenario-config">
+<h3>Using a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file for a Scenario Config<a class="headerlink" href="#using-a-json-file-for-a-scenario-config" title="Link to this heading"></a></h3>
+<p>You can specify a custom scenario by creating a <code class="docutils literal notranslate"><span class="pre">.json</span></code> file that follows
+the format given in <a class="reference internal" href="#scenario-files"><span class="std std-ref">Scenario File Format</span></a> and either:</p>
+<ol class="arabic simple">
+<li><p>Loading it yourself in a Python script and parsing it into a dictionary, then
+using that dictionary as described above.</p></li>
+<li><p>Placing it in BiguaSim’s scenario search path.</p></li>
+</ol>
+<p>When you give a scenario name to <code class="xref py py-func docutils literal notranslate"><span class="pre">biguasim.make()</span></code>, BiguaSim will search
+each package folder (see <a class="reference internal" href="../packages/docs/installation.html#package-locations"><span class="std std-ref">Package Installation Location</span></a>) until it finds a
+<code class="docutils literal notranslate"><span class="pre">.json</span></code> file that matches the scenario name.</p>
+<p>To use custom scenario <code class="docutils literal notranslate"><span class="pre">.json</span></code> files, place them in the Oceans package folder
+(or the package folder that contains the world your scenario uses). For details
+on package folder locations, see <a class="reference internal" href="../packages/docs/installation.html#package-locations"><span class="std std-ref">Package Installation Location</span></a>. BiguaSim
+will automatically find and use <code class="docutils literal notranslate"><span class="pre">.json</span></code> scenario files in the package folder.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you remove and reinstall a package, BiguaSim will clear the contents of
+that folder. Be sure to remove any custom scenario <code class="docutils literal notranslate"><span class="pre">.json</span></code> files from the
+package folder before uninstalling and reinstalling a package.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Using BiguaSim" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="environments.html" class="btn btn-neutral float-right" title="Environments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Small-Cave &mdash; BiguaSim 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom_style.css?v=25159554" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.svg"/>
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/darkmode.js?v=3994c1fa"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="BiguaSim Agents" href="../../../agents/agents.html" />
+    <link rel="prev" title="Pier-Harbor" href="../Pier-Harbor/Pier-Harbor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            BiguaSim
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">BiguaSim Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/usage.html">Using BiguaSim</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../packages.html">BiguaSim Packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../packages.html#package-documentation">Package Documentation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../packages.html#all-packages">BiguaSim Packages</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../SkyDive.html">SkyDive Package</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../Bridge/Bridge.html">Bridge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../LargeCave/large.html">Large-Cave</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pier-Harbor/Pier-Harbor.html">Pier-Harbor</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Small-Cave</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agents/agents.html">BiguaSim Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../sensors/sensors.html">BiguaSim Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ardubridge/ardubridge.html">ArduBridge Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/develop.html">Developing BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog/changelog.html">Changelog</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/index.html">BiguaSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/spaces.html">Action Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/biguasimclient.html">BiguaSim Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/packagemanager.html">Package Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/sensors.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/lcm.html">LCM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/dynamics.html">BiguaSim Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/shmem.html">Shared Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/ardubridge.html">ArduPilot Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/util.html">Util</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../biguasim/weather.html">Weather Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">BiguaSim</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../packages.html">BiguaSim Packages</a></li>
+          <li class="breadcrumb-item"><a href="../SkyDive.html">SkyDive Package</a></li>
+      <li class="breadcrumb-item active">Small-Cave</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/packages/SkyDive/SmallCave/small.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="small-cave">
+<span id="id1"></span><h1>Small-Cave<a class="headerlink" href="#small-cave" title="Link to this heading"></a></h1>
+<img alt="Small-Cave Exterior View" class="align-center" src="../../../_images/small_cave_far.png" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <strong>Small-Cave</strong> environment is a high-complexity cave system designed for micro-agent navigation and confined space exploration. The “Small” designation refers to the tunnel diameter, which is specifically scaled for small robotic agents (ROVs) rather than humans or large vehicles.</p>
+<dl>
+<dt>This environment is uniquely challenging as it features three distinct zones:</dt><dd><p><strong>Fully Submerged:</strong> Deep tunnel sections completely filled with water.</p>
+<p><strong>Semi-Submerged:</strong> Areas with air pockets and varying water levels, ideal for surface-to-underwater transitions.</p>
+<p><strong>Dry Zones:</strong> Upper cave chambers located entirely above the water line.</p>
+</dd>
+</dl>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="environment-dimensions-coordinates">
+<h2>Environment Dimensions &amp; Coordinates<a class="headerlink" href="#environment-dimensions-coordinates" title="Link to this heading"></a></h2>
+<p>The cave system is centered within a specific coordinate grid to assist in SLAM (Simultaneous Localization and Mapping) validation.</p>
+<section id="top-down-layout">
+<h3>Top-Down Layout<a class="headerlink" href="#top-down-layout" title="Link to this heading"></a></h3>
+<img alt="Top-Down Coordinate Grid" class="align-center" src="../../../_images/small_cave_top_grid.png" />
+<p>The cave footprint spans from <strong>-300 to 300 units</strong> on the longitudinal axis and <strong>-300 to 300 units</strong> laterally. The intricate network of interconnected tunnels is centered at the origin (0,0), providing a complex maze for navigation testing.</p>
+</section>
+<section id="vertical-profile-and-water-line">
+<h3>Vertical Profile and Water Line<a class="headerlink" href="#vertical-profile-and-water-line" title="Link to this heading"></a></h3>
+<img alt="Vertical Profile" class="align-center" src="../../../_images/small_cave_depth.png" />
+<dl>
+<dt>This cross-section view illustrates the vertical complexity of the system:</dt><dd><p><strong>Water Surface (Z=0):</strong> Represented by the green horizontal line.</p>
+<p><strong>Tunnel Depth:</strong> Tunnels reach down to <strong>-20 meters</strong> below the surface.</p>
+<p><strong>Cave Ceiling:</strong> Dry chambers extend up to <strong>+10 meters</strong> above the water level.</p>
+</dd>
+</dl>
+</section>
+<section id="landmarks-and-waypoints">
+<h3>Landmarks and Waypoints<a class="headerlink" href="#landmarks-and-waypoints" title="Link to this heading"></a></h3>
+<img alt="Cave Landmarks" class="align-center" src="../../../_images/small_cave_landmarks.png" />
+<dl>
+<dt>Key strategic points have been identified for mission planning:</dt><dd><p><strong>Submerged Entrance (1):</strong> The main underwater access point for ROV deployment.</p>
+<p><strong>Transition Chamber (2):</strong> A semi-submerged zone for testing sensor transitions between air and water.</p>
+<p><strong>Deep Siphon (3):</strong> A narrow, fully flooded passage requiring precise maneuvering.</p>
+<p><strong>Dry Terminal (4):</strong> The furthest reach of the dry cave sections.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Pier-Harbor/Pier-Harbor.html" class="btn btn-neutral float-left" title="Pier-Harbor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../agents/agents.html" class="btn btn-neutral float-right" title="BiguaSim Agents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Nautec FURG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
