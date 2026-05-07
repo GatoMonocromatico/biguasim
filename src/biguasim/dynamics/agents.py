@@ -371,14 +371,75 @@ class TorpedoAUV(uuv.TorpedoAUV):
     @property                                                                                  
     def params(self) -> dict:                                                                  
         return self._params
+    
+#class of the competition drone
+class HolybroX500(uav.QuadCopterX):
+    _params = {
+        # Inertial properties
+        'mass': 2.0,            # kg, approximate weight of DJI Matrice quadcopter
 
+        'rho' : 1225,       # Air density
+
+        'I' : np.diag([0.02166, 0.02166, 0.04000]),
+        
+        # Geometric properties, all vectors relative to center of mass
+        'd' : 0.25,             # Arm length    
+
+        'rotor_pos': {          # location of each rotor in meters
+            'r1': 0.25 * np.array([0.70710678118, 0.70710678118, 0]),       # Rotor 1 position
+            'r2': 0.25 * np.array([0.70710678118, -0.70710678118, 0]),       # Rotor 2 position
+            'r3': 0.25 * np.array([-0.70710678118, -0.70710678118, 0]),      # Rotor 3 position
+            'r4': 0.25 * np.array([-0.70710678118, 0.70710678118, 0]),      # Rotor 4 position
+        },
+        
+        'k_eta' : 1.225e-5, 
+        'k_m' : 1.689e-7 ,   
+
+        'rotor_directions': np.array([1, -1, 1, -1]),  # Rotor spin directions (+1 for CW, -1 for CCW)
+        'rotor_speed_min': 423.27,   # minimum rotor speed, rad/s
+        'rotor_speed_max': 1032.25, # maximum rotor speed, rad/s
+
+        # Frame aerodynamic properties
+        'c_Dx': 0.1,            # parasitic drag coefficient in body x-axis, N/(m/s)^2
+        'c_Dy': 0.1,            # parasitic drag coefficient in body y-axis, N/(m/s)^2
+        'c_Dz': 0.15,           # parasitic drag coefficient in body z-axis, N/(m/s)^2
+
+        # Lower level controller properties (for higher level control abstractions)
+        'k_v': 1,              # The *world* velocity P gain (for cmd_vel)
+        'kp_att': 0.1,            # The attitude P gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
+        'kd_att': 0.01,          # The attitude D gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
+
+        'kp_yaw': 1,            # The attitude P gain (for cmd_vel_yaw)
+        'kd_yaw': 0.1,          # The attitude D gain (for cmd_vel_yaw)
+
+        'kp_pos': 0.05,            # The attitude P gain (for cmd_pos_yaw)
+        'kd_pos': 0.01,          # The attitude D gain (for cmd_pos_yaw)
+
+    }
+
+    _scheme = 1
+    
+    def __init__(self, batch_size=1, device='cpu', control_abstraction='cmd_motor_speeds', params= None):
+        super().__init__(
+                        batch_size, 
+                        params= params or HolybroX500._params, 
+                        device=device, 
+                        control_abstraction=control_abstraction)
+        
+        self._params = params
+
+    @property
+    def params(self) -> dict: 
+        return self._params
+    
 class ModelsFactory:
     _types = {
         'BlueBoat' : BlueBoat,
         'BlueROV2' : BlueROV2,
         'BlueROVHeavy' : BlueROVHeavy,
         'DjiMatrice' : DjiMatrice,
-        'TorpedoAUV' : TorpedoAUV
+        'TorpedoAUV' : TorpedoAUV,
+        "HolybroX500": HolybroX500
     }
 
     @classmethod

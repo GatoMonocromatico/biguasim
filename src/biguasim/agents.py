@@ -321,6 +321,27 @@ class TorpedoAUV(BiguaSimAgent):
 
     def __repr__(self):
         return "TorpedoAUV " + self.name
+
+#implementation of the competition drone 
+class HolybroX500(BiguaSimAgent):
+    agent_type = 'HolybroX500'
+
+    @property
+    def control_abstractions(self):
+        scheme_accel = "[lin_accel_x, lin_accel_y, lin_accel_z, ang_accel_x, ang_accel_y, ang_accel_x]"
+        thrusters = "[r1 thruster, r2 thruster, r3 thruster, r4 thruster]"
+        cmd_vel = "[vx, vy, vz]"
+        cmd_vel_yaw = "[vx, vy, vz, yaw_rate]"
+        cmd_pos_yaw = "[vx, vy, vz, yaw]"
+        
+        return [(scheme_accel, ContinuousActionSpace([6], low=[-20] * 3 + [-2] * 3, high=[20] * 3 + [2] * 3)),
+                (thrusters, ContinuousActionSpace([4], low=[0], high=[592.4])),
+                (cmd_vel, ContinuousActionSpace([3], low=[-10] * 3, high=[10]*3)),
+                (cmd_vel_yaw, ContinuousActionSpace([4], low=[-10] * 3 + [-180] , high=[10] * 3 + [180])),
+                (cmd_pos_yaw, ContinuousActionSpace([4], low=[-100] * 3 + [-180] , high=[10] * 3 + [180]))]
+
+    def __repr__(self):
+        return "HolybroX500 " + self.name
     
 ######################################################################################################################################################
     
@@ -347,6 +368,7 @@ class AgentDefinition:
         "BlueROVHeavy" : BlueROVHeavy,
         "DjiMatrice" : DjiMatrice,
         "TorpedoAUV": TorpedoAUV,
+        "HolybroX500": HolybroX500,
     }
 
     def __init__(self, agent_name, agent_type, sensors=None, starting_loc=(0, 0, 0),
