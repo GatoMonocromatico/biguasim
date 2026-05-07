@@ -26,6 +26,10 @@ src/biguasim/ardubridge/frame.py
 src/biguasim/ardubridge/mock_bridge_json.py
 src/biguasim/ardubridge/mock_bridge_mavlink.py
 src/biguasim/ardubridge/runner.py
+<<<<<<< HEAD
+=======
+src/biguasim/ardubridge/test.py
+>>>>>>> da9afad8f4a9df47a505b95b727ae4c391c2275d
 src/biguasim/ardubridge/vehicle.py
 src/biguasim/ardubridge/ardupilot/Tools/PrintVersion.py
 src/biguasim/ardubridge/ardupilot/Tools/FilterTestTool/BiquadFilter.py
@@ -288,6 +292,10 @@ src/biguasim/ardubridge/ardupilot/libraries/AP_OSD/fonts/mcm2bin.py
 src/biguasim/ardubridge/ardupilot/libraries/AP_OSD/fonts/mcm_all.py
 src/biguasim/ardubridge/ardupilot/libraries/AP_Scripting/applets/Aerobatics/FixedWing/dual_log.py
 src/biguasim/ardubridge/ardupilot/libraries/AP_Scripting/applets/Aerobatics/FixedWing/view_paths.py
+<<<<<<< HEAD
+=======
+src/biguasim/ardubridge/ardupilot/libraries/AP_Scripting/tests/docs_check.py
+>>>>>>> da9afad8f4a9df47a505b95b727ae4c391c2275d
 src/biguasim/ardubridge/ardupilot/libraries/AP_Terrain/tools/create_terrain.py
 src/biguasim/ardubridge/ardupilot/libraries/SITL/examples/JSON/pybullet/robot.py
 src/biguasim/ardubridge/ardupilot/libraries/SITL/examples/JSON/pybullet/walking_robot.py
@@ -301,6 +309,10 @@ src/biguasim/ardubridge/ardupilot/libraries/SITL/examples/Webots_Python/controll
 src/biguasim/ardubridge/ardupilot/libraries/SITL/examples/Webots_Python/controllers/ardupilot_vehicle_controller/webots_vehicle.py
 src/biguasim/ardubridge/ardupilot/libraries/SITL/examples/Webots_Python/scripts/example_aruco_detection.py
 src/biguasim/ardubridge/ardupilot/libraries/SITL/examples/Webots_Python/scripts/example_camera_receive.py
+<<<<<<< HEAD
+=======
+src/biguasim/ardubridge/ardupilot/tests/test_pre_commit_copyright.py
+>>>>>>> da9afad8f4a9df47a505b95b727ae4c391c2275d
 src/biguasim/dynamics/__init__.py
 src/biguasim/dynamics/agents.py
 src/biguasim/dynamics/base_model.py

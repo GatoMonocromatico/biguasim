@@ -13,6 +13,7 @@ import ssl
 
 from queue import Queue
 from threading import Thread
+from importlib import resources
 
 from biguasim import util
 from biguasim import __version__
@@ -20,20 +21,24 @@ from biguasim.exceptions import BiguaSimException, NotFoundException
 
 
 BACKEND_URL = os.environ.get("BS_WORLDS_URL", "https://10.228.0.40:8000/")
-_DEFAULT_CA_CERT = os.path.join(os.path.dirname(__file__), "certs/server.crt")
-_CA_CERT = os.environ.get("BS_WORLDS_CA_CERT", _DEFAULT_CA_CERT)
 _VERIFY_SSL = os.environ.get("BS_WORLDS_VERIFY_SSL", "true").lower() not in ("false", "0", "no")
 
 
 def _make_ssl_context() -> ssl.SSLContext:
     ctx = ssl.create_default_context()
+
     if not _VERIFY_SSL:
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE
-    elif os.path.isfile(_CA_CERT):
-        ctx.load_verify_locations(_CA_CERT)
-    return ctx
+    else:
+        try:
+            with resources.path("biguasim.certs", "server.crt") as cert_path:
+                ctx.load_verify_locations(cert_path)
+                ctx.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
+        except FileNotFoundError:
+            pass
 
+    return ctx
 
 def _get_from_backend(rel_url):
     """
@@ -533,7 +538,7 @@ def _download_binary(binary_location, install_location, block_size=1000000):
 
     queue = Queue()
     tmp_fd = tempfile.TemporaryFile(suffix=".zip")
-    with urllib.request.urlopen(binary_location) as conn:
+    with urllib.request.urlopen(binary_location, context=_make_ssl_context()) as conn:
         file_size = int(conn.headers["Content-Length"])
         print("File size:", util.human_readable_size(file_size))
         amount_read = 0
