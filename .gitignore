@@ -1,0 +1,14 @@
+.pytest_cache/
+.vscode/
+
+__pycache__/
+src/biguasim/lcm/__pycache__/
+src/biguasim/tools/plot/__pycache__/
+
+build/**
+docker/
+
+profile.prof
+# example.py
+# test.py
+# publish.sh
