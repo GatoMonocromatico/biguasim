@@ -376,11 +376,11 @@ class TorpedoAUV(uuv.TorpedoAUV):
 class HolybroX500(uav.QuadCopterX):
     _params = {
         # Inertial properties
-        'mass': 2.0,            # kg, approximate weight of DJI Matrice quadcopter
+        'mass': 2,            # kg, approximate weight of DJI Matrice quadcopter
 
         'rho' : 1225,       # Air density
 
-        'I' : np.diag([0.02166, 0.02166, 0.04000]),
+        'I' : np.diag([0.05166, 0.05166, 0.1000]),
         
         # Geometric properties, all vectors relative to center of mass
         'd' : 0.25,             # Arm length    
@@ -393,7 +393,7 @@ class HolybroX500(uav.QuadCopterX):
         },
         
         'k_eta' : 1.225e-5, 
-        'k_m' : 1.689e-7 ,   
+        'k_m' : 1.689e-7,#1.689e-7 ,   
 
         'rotor_directions': np.array([1, -1, 1, -1]),  # Rotor spin directions (+1 for CW, -1 for CCW)
         'rotor_speed_min': 423.27,   # minimum rotor speed, rad/s
@@ -402,18 +402,19 @@ class HolybroX500(uav.QuadCopterX):
         # Frame aerodynamic properties
         'c_Dx': 0.1,            # parasitic drag coefficient in body x-axis, N/(m/s)^2
         'c_Dy': 0.1,            # parasitic drag coefficient in body y-axis, N/(m/s)^2
-        'c_Dz': 0.15,           # parasitic drag coefficient in body z-axis, N/(m/s)^2
+        'c_Dz': 0.15,           # parasitic drag coefficient in body z-axis, N/(m/s)^2oq ta
 
         # Lower level controller properties (for higher level control abstractions)
-        'k_v': 1,              # The *world* velocity P gain (for cmd_vel)
-        'kp_att': 0.1,            # The attitude P gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
-        'kd_att': 0.01,          # The attitude D gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
+        'k_v': 0.5,              # The *world* velocity P gain (for cmd_vel)
+        
+        'kp_att': 0.38,            # ABAIXE: 0.28 está muito rígido para 2kg, gera micro-vibração
+        'kd_att': 0.35,            # AUMENTE: Precisamos de mais "amortecedor" na atitude
 
-        'kp_yaw': 1,            # The attitude P gain (for cmd_vel_yaw)
-        'kd_yaw': 0.1,          # The attitude D gain (for cmd_vel_yaw)
+        'kp_yaw': 0.1,             
+        'kd_yaw': 0.001,          
 
-        'kp_pos': 0.05,            # The attitude P gain (for cmd_pos_yaw)
-        'kd_pos': 0.01,          # The attitude D gain (for cmd_pos_yaw)
+        'kp_pos': 0.046,            # ABAIXE: Deixa ele ser "preguiçoso" para se mover
+        'kd_pos': 0.15,            # AUMENTE: Esse freio alto com o P baixo vai matar o pêndulo
 
     }
 
