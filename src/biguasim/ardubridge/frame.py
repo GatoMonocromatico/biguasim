@@ -24,18 +24,19 @@ def pos_nwu_to_ap(pos, gps_origin: tuple) -> list:
     alt_m is positive upward (ArduPilot uses NED internally but JSON position field is [lat,lon,alt]).
     """
     lat0, lon0 = gps_origin
-    north, west, up = float(pos[0]), float(pos[1]), float(pos[2])
-    east = -west  # NWU y=West → NED y=East
+    north, west, z_down = float(pos[0]), float(pos[1]), float(pos[2])
+    east = -west                # NWU y=West → NED y=East
+    alt  = -z_down              # sensor z is DOWN; negate to get altitude (positive up)
 
     lat = lat0 + math.degrees(north / _EARTH_RADIUS_M)
     lon = lon0 + math.degrees(east / (_EARTH_RADIUS_M * math.cos(math.radians(lat0))))
-    return [lat, lon, up]
+    return [lat, lon, alt]
 
 
 def vel_nwu_to_ned(vel) -> list:
     """BiguaSim VelocitySensor [vn, vw, vu] → NED [vn, ve, vd]."""
     vn, vw, vu = float(vel[0]), float(vel[1]), float(vel[2])
-    return [vn, -vw, -vu]
+    return [vn, -vw, vu]
 
 
 def imu_glu_to_frd(imu_data) -> tuple:

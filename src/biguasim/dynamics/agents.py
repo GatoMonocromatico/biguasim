@@ -214,8 +214,17 @@ class DjiMatrice(uav.QuadCopterX):
             'r4': 0.33 * np.array([-0.70710678118, 0.70710678118, 0]),      # Rotor 4 position
         },
         
-        'k_eta' : 3.55e-4, 
-        'k_m' : 1.12e-5,   
+        # thrust = k_eta * omega^2 [N].  k_eta sized for a realistic thrust-to-weight
+        # ratio of ~2.5:1 at omega_max (was 3.55e-4 -> T/W ~13:1, which makes the
+        # vehicle hyper-responsive and drives the ArduPilot rate loop into a
+        # high-frequency limit cycle, i.e. the "shaking").
+        # k_eta = (T/W) * m * g / (4 * omega_max^2) = 2.5 * 3.8 * 9.80665 / (4 * 592.4^2)
+        'k_eta' : 6.64e-5,
+        # k_m/k_eta ratio = drag/thrust ≈ 0.0315 (physical propeller property, was
+        # correct before). After reducing k_eta 5x without scaling k_m, yaw authority
+        # became 5x too high -> yaw divergence on any large yaw command. Fix: scale k_m.
+        # k_m = 6.64e-5 * 0.0315 = 2.09e-6
+        'k_m' : 2.09e-6,
 
         'rotor_directions': np.array([1, -1, 1, -1]),  # Rotor spin directions (+1 for CW, -1 for CCW)
         'rotor_speed_min': 0,   # minimum rotor speed, rad/s
@@ -387,7 +396,7 @@ class ModelsFactory:
 
 
 #começar por aqui
-        
+
 
 
 

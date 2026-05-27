@@ -68,8 +68,9 @@ class ArduBiguaSimRunner:
         try:
             while True:
                 frame, pwm = bridge.receive_pwm()
-                if frame is not None:
-                    motor_cmds = bridge.pwm_to_motor_cmds(pwm, frame)
+                if frame is None:
+                    continue
+                motor_cmds = bridge.pwm_to_motor_cmds(pwm, frame)
 
                 raw = env.step(motor_cmds)
                 agent_state = raw[agent][0]
