@@ -246,6 +246,10 @@ class DjiMatrice(uav.QuadCopterX):
         'kp_pos': 0.05,            # The attitude P gain (for cmd_pos_yaw)
         'kd_pos': 0.01,          # The attitude D gain (for cmd_pos_yaw)
 
+        'c_wx': 1.5,   #                         (N.m.s/rad) — roll
+        'c_wy': 1.5,   #                                       pitch
+        'c_wz': 0.5,   #                                       yaw
+
     }
 
     _scheme = 1

@@ -36,6 +36,12 @@ class QuadCopterX(VehicleModel):
                                         [0,          0,          params["c_Dz"]]] for _ in range(self.batch_size)], 
                                                                                         device=self.device).double()
         
+        self.batched_params.ang_drag_matrix = torch.tensor(
+            [[[params["c_wx"], 0, 0],
+            [0, params["c_wy"], 0],
+            [0, 0, params["c_wz"]]] for _ in range(self.batch_size)],
+            device=self.device).double()
+                
         self.batched_params.I = torch.from_numpy(np.array([params['I'] 
                                                         for _ in range(self.batch_size)])).double().to(self.device)
         self.batched_params.invI = torch.linalg.inv(self.batched_params.I).double()
@@ -144,8 +150,14 @@ class QuadCopterX(VehicleModel):
         #compute body wrench
         (FtotB, MtotB) = self._compute_body_wrench(cmd_ctrl)
         FtotB += F
-        Ftot = R @ FtotB.unsqueeze(-1)
 
+        # rotational damping
+        w = state['w'][self.idxs].double()
+        M_drag = -torch.einsum('bij,bj->bi', self.batched_params.ang_drag_matrix[self.idxs], w)
+        MtotB = MtotB + M_drag
+
+        Ftot = R @ FtotB.unsqueeze(-1)
+        
         v_dot = (self.batched_params.weight[self.idxs] + Ftot.squeeze(-1)) / self.batched_params.mass
         w = state['w'][self.idxs].double() 
         w_hat = self.batched_params.hat_map(w).permute(2, 0, 1)
