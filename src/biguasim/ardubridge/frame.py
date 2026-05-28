@@ -20,13 +20,14 @@ _Rx180 = R.from_euler('x', np.pi)
 
 def pos_nwu_to_ap(pos, gps_origin: tuple) -> list:
     """
-    BiguaSim LocationSensor [x,y,z] (NWU, metres) → ArduPilot [lat_deg, lon_deg, alt_m].
-    alt_m is positive upward (ArduPilot uses NED internally but JSON position field is [lat,lon,alt]).
+    BiguaSim LocationSensor [x,y,z] (NWU, metres, z=up) → [lat_deg, lon_deg, alt_m_AMSL].
+    alt_m is positive upward: submerged → negative, above water → positive.
+    Feed as separate "latitude"/"longitude"/"altitude" scalars to the JSON SITL backend.
     """
     lat0, lon0 = gps_origin
-    north, west, z_down = float(pos[0]), float(pos[1]), float(pos[2])
+    north, west, z_up = float(pos[0]), float(pos[1]), float(pos[2])
     east = -west                # NWU y=West → NED y=East
-    alt  = -z_down              # sensor z is DOWN; negate to get altitude (positive up)
+    alt  = z_up                 # NWU z=up already matches ArduPilot's positive-up altitude
 
     lat = lat0 + math.degrees(north / _EARTH_RADIUS_M)
     lon = lon0 + math.degrees(east / (_EARTH_RADIUS_M * math.cos(math.radians(lat0))))
@@ -34,9 +35,9 @@ def pos_nwu_to_ap(pos, gps_origin: tuple) -> list:
 
 
 def vel_nwu_to_ned(vel) -> list:
-    """BiguaSim VelocitySensor [vn, vw, vu] → NED [vn, ve, vd]."""
+    """BiguaSim VelocitySensor [vn, vw, vu] (NWU, z=up) → NED [vn, ve, vd] (z=down)."""
     vn, vw, vu = float(vel[0]), float(vel[1]), float(vel[2])
-    return [vn, -vw, vu]
+    return [vn, -vw, -vu]
 
 
 def imu_glu_to_frd(imu_data) -> tuple:

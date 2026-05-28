@@ -12,3 +12,13 @@ profile.prof
 # example.py
 # test.py
 # publish.sh
+
+# MAVProxy runtime artifacts
+eeprom.bin
+logs/
+mav.parm
+mav.tlog
+mav.tlog.raw
+
+# local scratch files
+myFile.py

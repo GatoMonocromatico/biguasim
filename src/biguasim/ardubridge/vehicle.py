@@ -98,9 +98,12 @@ VEHICLE_REGISTRY: dict[str, VehicleProfile] = {
     "BlueROV2": VehicleProfile(
         name="BlueROV2",
         num_motors=6,
-        # sim actuators r1..r6 ← AP PWM channels MOT6,5,2,1,4,3
-        motor_mapping=[5, 4, 1, 0, 3, 2],
-        motor_signs=[1, 1, 1, 1, 1, 1],
+        # sim actuators r1..r6 ← AP PWM channels MOT5,6,3,4,1,2 (diagonal swap)
+        # BiguaSim's BlueROV2 thruster geometry is the mirror of ArduSub's
+        # SUB_FRAME_VECTORED mixer; routing each AP motor to the diagonally
+        # opposite BiguaSim rotor + flipping vertical signs aligns all 6 axes.
+        motor_mapping=[4, 5, 2, 3, 0, 1],
+        motor_signs=[-1, -1, 1, 1, 1, 1],
         pwm_converters=[_sub_bipolar] * 6,
         control_abstraction="cmd_motor_speeds",
         ardupilot_vehicle="ArduSub",

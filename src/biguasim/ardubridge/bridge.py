@@ -178,15 +178,23 @@ class ArduPilotBridge:
         state = {
             "timestamp": sim_time,
             "imu": {"gyro": gyro, "accel_body": accel},
-            "position": pos,
+            "latitude": pos[0],
+            "longitude": pos[1],
+            "altitude": pos[2],
             "velocity": vel,
             "quaternion": quat,
         }
 
-        if "DepthSensor" in agent_state:
-            depth_val = agent_state["DepthSensor"]
-            z_up = float(depth_val[0]) if hasattr(depth_val, "__len__") else float(depth_val)
-            state["pressure"] = depth_to_pressure(z_up)
+        print(f"\
+            'latitude': {pos[0]},\
+            'longitude': {pos[1]},\
+            'altitude': {pos[2]}"
+        );
+
+        # if "DepthSensor" in agent_state:
+        #     depth_val = agent_state["DepthSensor"]
+        #     z_up = float(depth_val[0]) if hasattr(depth_val, "__len__") else float(depth_val)
+        #     state["pressure"] = depth_to_pressure(z_up)
 
         return state
 
