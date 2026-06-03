@@ -63,6 +63,7 @@ class BlueROV2(uuv.HexaCopterFiveDoF):
 
         #spheroid
         'mass' : 10.5,
+        'net_buoyancy_kgf' : 0.2,   # net positive buoyancy (kgf) when fully submerged; ~neutral, like a trimmed BlueROV2
         'length' : 0.4571,      # m
         'width' : 0.3381,      # m
         'height' : 0.2539,      # m

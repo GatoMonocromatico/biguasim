@@ -188,7 +188,9 @@ class ArduPilotBridge:
         print(f"\
             'latitude': {pos[0]},\
             'longitude': {pos[1]},\
-            'altitude': {pos[2]}"
+            'altitude': {pos[2]},\
+            'quaternion:' {quat}"
+            
         );
 
         # if "DepthSensor" in agent_state:

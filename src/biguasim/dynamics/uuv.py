@@ -20,9 +20,6 @@ class HexaCopterFiveDoF(VehicleModel):
 
         self.submerged_mask = torch.zeros(self.batch_size, 1, device=self.device).double()
         
-        # a hack to generate a nice buoyancy behavior :)
-        self.dumping_hack = torch.ones(self.batch_size, 1).to(device=self.device)
-
         self.gen_moments = torch.ones(self.batch_size, 3).to(device=self.device)
         self.gen_moments[:, 1] = 0 
 
@@ -39,7 +36,15 @@ class HexaCopterFiveDoF(VehicleModel):
         self.batched_params.I = torch.from_numpy(np.array([params['I'] 
                                                            for _ in range(self.batch_size)])).double().to(self.device)
         
-        self.batched_params.volume = (4/3) * np.pi * rsphere**3
+        # Displaced volume is set for (near-)neutral buoyancy. A real BlueROV2 is
+        # ballasted to be ~neutral (slightly positive). The old spheroid volume
+        # (4/3*pi*rsphere**3) over-estimated displacement ~3x, giving ~+219 N net
+        # upward force at full submersion (a ~ +5 m/s^2). With only ~59 N of combined
+        # vertical-thruster authority the vehicle could never hold or reach depth,
+        # which produced the "rapidly arises on spawn" behaviour and the runaway
+        # vertical loops in GUIDED. rsphere is still used below for the drag model.
+        net_buoyancy_kgf = params.get('net_buoyancy_kgf', 0.2)  # slightly positive
+        self.batched_params.volume = (self.batched_params.mass + net_buoyancy_kgf) / self.batched_params.rho
         self.batched_params.added_mass = self.batched_params.volume * self.batched_params.rho
 
         self.batched_params.buoyancy = np.linalg.norm(self.batched_params.rho * \
@@ -136,12 +141,17 @@ class HexaCopterFiveDoF(VehicleModel):
         z = x[:,2].unsqueeze(-1)
         self.submerged_mask[x[:,2] > -0.1] = 0
 
-        factor = 0.5 * self.batched_params.height * self.batched_params.mass
-        dumping = self.dumping_hack * (torch.clamp(torch.abs(z), min=0, max= factor) / factor) * self.submerged_mask
-        
+        # Fraction of the hull below the waterline: 0 at/above the surface, ramping to
+        # 1 once submerged by one body height. Realistic partial-submersion buoyancy at
+        # the surface WITHOUT making buoyancy depend on depth once fully submerged.
+        # (The old code ramped buoyancy over 0.5*height*mass ~ 1.33 m of depth and
+        # halved it via `dumping_hack` whenever both vertical thrusters fired, creating
+        # a depth-dependent spring + discontinuity that destabilized the depth loop.)
+        submergence = torch.clamp(-z / self.batched_params.height, min=0.0, max=1.0)
+
         #Forces
         W = self.batched_params.weight
-        B = (rho * self.batched_params.volume * self.batched_params.gravity) * dumping 
+        B = (rho * self.batched_params.volume * self.batched_params.gravity) * submergence
         D = -0.5 * rho * torch.einsum('bij,bj->bi', Cp, v *  torch.abs(v))     
         C = torch.cross(w, self.batched_params.mass * v, dim=1) 
         FtotB = (W + B + D + C) 
@@ -163,7 +173,6 @@ class HexaCopterFiveDoF(VehicleModel):
         Supports 5DOF (X, Y, Z, roll, yaw).
         """
         
-        self.dumping_hack[(rotor_speeds[:, 0] != 0) & (rotor_speeds[:, 1] != 0)] = 0.5
         TT = self.batched_params.k_eta[self.idxs] * rotor_speeds[self.idxs]**2 * torch.sign(rotor_speeds[self.idxs])
         TT = TT * self.submerged_mask[self.idxs]
 
