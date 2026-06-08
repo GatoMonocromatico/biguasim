@@ -428,13 +428,9 @@ class OctaCopterSixDoF(HexaCopterFiveDoF):
         Supports 5DOF (X, Y, Z, roll, yaw).
         """
 
-        normal_rotors = rotor_speeds[:, :4]    
-        vec_rotors = rotor_speeds[:, 4:]  
+        normal_rotors = rotor_speeds[:, :4]
+        vec_rotors = rotor_speeds[:, 4:]
 
-        #Check minimal action
-        self.dumping_hack[(normal_rotors[:, 0] != 0) & (normal_rotors[:, 1] != 0) & \
-                          (normal_rotors[:, 2] != 0) & (normal_rotors[:, 3] != 0)] = 0.5
-        
         #Normal rotors thrusts
         T = torch.zeros(self.batch_size, 3, 4, device=self.device).double()
         T[..., -1, :] = (self.batched_params.k_eta[self.idxs] * normal_rotors[self.idxs]**2 
