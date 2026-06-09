@@ -153,7 +153,7 @@ VEHICLE_REGISTRY: dict[str, VehicleProfile] = {
     "DjiMatrice": VehicleProfile(
         name="DjiMatrice",
         num_motors=4,
-        motor_mapping=[2, 0, 3, 1],
+        motor_mapping=[0, 1, 2, 3],
         motor_signs=[1, 1, 1, 1],
         pwm_converters=[_unipolar_pwm(592.4)] * 4,
         control_abstraction="cmd_motor_speeds",
