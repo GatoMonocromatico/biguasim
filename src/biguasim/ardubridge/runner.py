@@ -68,8 +68,12 @@ class ArduBiguaSimRunner:
         try:
             while True:
                 frame, pwm = bridge.receive_pwm()
-                if frame is not None:
-                    motor_cmds = bridge.pwm_to_motor_cmds(pwm, frame)
+                # if frame is not None:
+                #     motor_cmds = bridge.pwm_to_motor_cmds(pwm, frame)
+
+                if frame is None:
+                    continue
+                motor_cmds = bridge.pwm_to_motor_cmds(pwm, frame)
 
                 raw = env.step(motor_cmds)
                 agent_state = raw[agent][0]
@@ -80,9 +84,10 @@ class ArduBiguaSimRunner:
 
                 if self._verbose and frame is not None and frame % 200 == 0:
                     print(
-                        f"  t={sim_time:.2f}s frame={frame} "
-                        f"quat={[f'{v:.3f}' for v in json_state['quaternion']]} "
-                        f"motors={[f'{m:.1f}' for m in motor_cmds]}"
+                        f"Json state = {json_state}"
+                        # f"  t={sim_time:.2f}s frame={frame} "
+                        # f"quat={[f'{v:.3f}' for v in json_state['quaternion']]} "
+                        # f"motors={[f'{m:.1f}' for m in motor_cmds]}"
                     )
         except KeyboardInterrupt:
             print("Bridge stopped.")

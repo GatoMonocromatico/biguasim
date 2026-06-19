@@ -36,6 +36,7 @@ class QuadCopterX(VehicleModel):
                                         [0,          0,          params["c_Dz"]]] for _ in range(self.batch_size)], 
                                                                                         device=self.device).double()
         
+    
         self.batched_params.I = torch.from_numpy(np.array([params['I'] 
                                                         for _ in range(self.batch_size)])).double().to(self.device)
         self.batched_params.invI = torch.linalg.inv(self.batched_params.I).double()

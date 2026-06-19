@@ -12,6 +12,7 @@ import json
 import socket
 import struct
 from typing import Optional
+import math
 
 import numpy as np
 
@@ -170,23 +171,33 @@ class ArduPilotBridge:
         :returns: Formatted dictionary ready to be serialized into JSON.
         :rtype: dict
         """
+
+        def _all_finite(*lists):
+            return all(math.isfinite(v) for lst in lists for v in lst)
+    
         accel, gyro = imu_glu_to_frd(agent_state["IMUSensor"])
         pos = pos_nwu_to_ap(agent_state["LocationSensor"].tolist(), self._gps_origin)
         vel = vel_nwu_to_ned(agent_state["VelocitySensor"].tolist())
         quat = quat_glu2nwu_to_frd2ned(agent_state["DynamicsSensor"][-4:].tolist())
 
+        if not _all_finite(accel, gyro, pos, vel, quat):
+            return None
+    
         state = {
-            "timestamp": sim_time,
+            "timestamp": sim_time ,
             "imu": {"gyro": gyro, "accel_body": accel},
-            "position": pos,
+            # "position": pos,
+            "latitude": pos[0],
+            "longitude": pos[1],
+            "altitude": pos[2],
             "velocity": vel,
             "quaternion": quat,
         }
-
-        if "DepthSensor" in agent_state:
-            depth_val = agent_state["DepthSensor"]
-            z_up = float(depth_val[0]) if hasattr(depth_val, "__len__") else float(depth_val)
-            state["pressure"] = depth_to_pressure(z_up)
+        print(quat)
+        # if "DepthSensor" in agent_state:
+        #     depth_val = agent_state["DepthSensor"]
+        #     z_up = float(depth_val[0]) if hasattr(depth_val, "__len__") else float(depth_val)
+        #     state["pressure"] = depth_to_pressure(z_up)
 
         return state
 

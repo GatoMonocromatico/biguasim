@@ -163,6 +163,23 @@ VEHICLE_REGISTRY: dict[str, VehicleProfile] = {
         warmup_frames=500,
     ),
 
+    "HolybroX500": VehicleProfile(
+        name="HolybroX500",
+        num_motors=4,
+        # motor_mapping=[0, 1, 2, 3],
+        motor_mapping=[2, 0, 3, 1],
+        motor_signs=[1, 1, 1, 1],
+        pwm_converters=[_unipolar_pwm(592.4)] * 4,
+        control_abstraction="cmd_motor_speeds",
+        ardupilot_vehicle="ArduCopter",
+        sitl_args=(
+            "sim_vehicle.py -v ArduCopter -L RATBeach --console --map "
+            "-f quadx --model JSON:127.0.0.1 --no-mavproxy"
+        ),
+        include_depth_sensor=False,
+        warmup_frames=500,
+    ),
+
     "TorpedoAUV": VehicleProfile(
         name="TorpedoAUV",
         num_motors=5,

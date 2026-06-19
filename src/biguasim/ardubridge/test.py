@@ -24,11 +24,12 @@ import sys
 import pprint
 from pathlib import Path
 
-# allow running directly from this directory: python test.py
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Aponta corretamente para a pasta 'src' de cima
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from ardupilot_biguasim import ArduBiguaSimRunner, VEHICLE_REGISTRY
-from ardupilot_biguasim.frame import (
+# Importa os módulos pelo caminho correto do pacote
+from biguasim.ardubridge import ArduBiguaSimRunner, VEHICLE_REGISTRY
+from biguasim.ardubridge.frame import (
     depth_to_pressure,
     imu_glu_to_frd,
     pos_nwu_to_ap,
@@ -36,8 +37,8 @@ from ardupilot_biguasim.frame import (
     vel_nwu_to_ned,
 )
 
-PACKAGE_NAME = "Hydrone"
-WORLD = "Relief-Generic-Bridge-Vehicles-Water-Custom"
+PACKAGE_NAME = "Competition"
+WORLD = "CompetionMap"
 GPS_ORIGIN = (33.810313, -118.393867)
 
 
@@ -110,8 +111,8 @@ def run_sitl(vehicle_key: str):
         profile,
         package_name=PACKAGE_NAME,
         world=WORLD,
-        ticks_per_sec=200,
-        location=[0, 0, 0],
+        ticks_per_sec=720,
+        location=[0, 0, 0.3],
         rotation=[0.0, 0.0, 0.0],
     )
 
@@ -119,7 +120,8 @@ def run_sitl(vehicle_key: str):
         profile,
         scenario,
         gps_origin=GPS_ORIGIN,
-        verbose=True,
+        show_viewport=True,  # <--- ADICIONA ESSA LINHA AQUI
+        verbose=False,
     ) as runner:
         runner.run()
 

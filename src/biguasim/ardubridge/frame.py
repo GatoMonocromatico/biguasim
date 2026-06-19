@@ -24,12 +24,17 @@ def pos_nwu_to_ap(pos, gps_origin: tuple) -> list:
     alt_m is positive upward (ArduPilot uses NED internally but JSON position field is [lat,lon,alt]).
     """
     lat0, lon0 = gps_origin
-    north, west, up = float(pos[0]), float(pos[1]), float(pos[2])
-    east = -west  # NWU y=West → NED y=East
+    # north, west, up = float(pos[0]), float(pos[1]), float(pos[2])
+    # east = -west  # NWU y=West → NED y=East
+
+    north, west, z_up = float(pos[0]), float(pos[1]), float(pos[2])
+    east = -west                # NWU y=West → NED y=East
+    z_up = float(pos[2])
+    alt = z_up             # sensor z is DOWN; negate to get altitude (positive up)
 
     lat = lat0 + math.degrees(north / _EARTH_RADIUS_M)
     lon = lon0 + math.degrees(east / (_EARTH_RADIUS_M * math.cos(math.radians(lat0))))
-    return [lat, lon, up]
+    return [lat, lon, alt]
 
 
 def vel_nwu_to_ned(vel) -> list:
@@ -55,6 +60,10 @@ def quat_glu2nwu_to_frd2ned(q_xyzw) -> list:
     scipy as_quat() returns [x,y,z,w]; ArduPilot JSON wants [w,x,y,z].
     Canonical form enforced: w >= 0 (q and -q represent the same rotation).
     """
+    # Proteção para o frame 0 da Unreal Engine quando os sensores vêm zerados
+    if np.linalg.norm(q_xyzw) < 1e-6:
+        return [1.0, 0.0, 0.0, 0.0]  # Retorna o drone em posição padrão (identidade)
+
     R_glu2nwu = R.from_quat(q_xyzw)  # scipy: [x,y,z,w]
     R_frd2ned = _Rx180 * R_glu2nwu * _Rx180
     x, y, z, w = R_frd2ned.as_quat()

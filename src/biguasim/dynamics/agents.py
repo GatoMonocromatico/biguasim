@@ -376,7 +376,7 @@ class TorpedoAUV(uuv.TorpedoAUV):
 class HolybroX500(uav.QuadCopterX):
     _params = {
         # Inertial properties
-        'mass': 2,            # kg, approximate weight of DJI Matrice quadcopter
+        'mass': 1,            # kg, approximate weight of DJI Matrice quadcopter
 
         'rho' : 1225,       # Air density
 
@@ -396,7 +396,7 @@ class HolybroX500(uav.QuadCopterX):
         'k_m' : 1.689e-7,#1.689e-7 ,   
 
         'rotor_directions': np.array([1, -1, 1, -1]),  # Rotor spin directions (+1 for CW, -1 for CCW)
-        'rotor_speed_min': 423.27,   # minimum rotor speed, rad/s
+        'rotor_speed_min': 0,   # minimum rotor speed, rad/s
         'rotor_speed_max': 1032.25, # maximum rotor speed, rad/s
 
         # Frame aerodynamic properties
