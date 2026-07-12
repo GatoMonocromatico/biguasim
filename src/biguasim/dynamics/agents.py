@@ -375,46 +375,53 @@ class TorpedoAUV(uuv.TorpedoAUV):
 #class of the competition drone
 class HolybroX500(uav.QuadCopterX):
     _params = {
-        # Inertial properties
-        'mass': 1,            # kg, approximate weight of DJI Matrice quadcopter
+        # Inertial properties (official PX4 x500 model, mass in kg)
+        'mass': 2.0,            # kg, all-up weight of the Holybro X500 V2
 
         'rho' : 1225,       # Air density
 
-        'I' : np.diag([0.05166, 0.05166, 0.1000]),
-        
-        # Geometric properties, all vectors relative to center of mass
-        'd' : 0.25,             # Arm length    
+        # Inertia tensor (kg*m^2) from the PX4 x500_base model
+        'I' : np.diag([0.021666666, 0.021666666, 0.04]),
+
+        # Geometric properties, all vectors relative to center of mass.
+        # PX4 x500 rotors sit at +-0.174 m on both body axes -> in-plane
+        # distance to each rotor is 0.174*sqrt(2) ~= 0.246 m.
+        'd' : 0.246,             # Distance from CoM to each rotor, m
 
         'rotor_pos': {          # location of each rotor in meters
-            'r1': 0.25 * np.array([0.70710678118, 0.70710678118, 0]),       # Rotor 1 position
-            'r2': 0.25 * np.array([0.70710678118, -0.70710678118, 0]),       # Rotor 2 position
-            'r3': 0.25 * np.array([-0.70710678118, -0.70710678118, 0]),      # Rotor 3 position
-            'r4': 0.25 * np.array([-0.70710678118, 0.70710678118, 0]),      # Rotor 4 position
+            'r1': 0.246 * np.array([0.70710678118, 0.70710678118, 0]),       # Rotor 1 position
+            'r2': 0.246 * np.array([0.70710678118, -0.70710678118, 0]),       # Rotor 2 position
+            'r3': 0.246 * np.array([-0.70710678118, -0.70710678118, 0]),      # Rotor 3 position
+            'r4': 0.246 * np.array([-0.70710678118, 0.70710678118, 0]),      # Rotor 4 position
         },
-        
-        'k_eta' : 1.225e-5, 
-        'k_m' : 1.689e-7,#1.689e-7 ,   
+
+        # Rotor coefficients from the PX4 x500 motor plugin:
+        #   thrust  = k_eta * omega^2  (motorConstant = 8.54858e-06)
+        #   torque  = k_m   * omega^2  (k_m = momentConstant * motorConstant = 0.016 * 8.54858e-06)
+        'k_eta' : 8.54858e-6,
+        'k_m' : 1.36777e-7,
 
         'rotor_directions': np.array([1, -1, 1, -1]),  # Rotor spin directions (+1 for CW, -1 for CCW)
-        'rotor_speed_min': 0,   # minimum rotor speed, rad/s
-        'rotor_speed_max': 1032.25, # maximum rotor speed, rad/s
+        'rotor_speed_min': 0,      # minimum rotor speed, rad/s
+        'rotor_speed_max': 1000.0, # maximum rotor speed, rad/s (PX4 maxRotVelocity)
 
         # Frame aerodynamic properties
         'c_Dx': 0.1,            # parasitic drag coefficient in body x-axis, N/(m/s)^2
         'c_Dy': 0.1,            # parasitic drag coefficient in body y-axis, N/(m/s)^2
-        'c_Dz': 0.15,           # parasitic drag coefficient in body z-axis, N/(m/s)^2oq ta
+        'c_Dz': 0.15,           # parasitic drag coefficient in body z-axis, N/(m/s)^2
 
-        # Lower level controller properties (for higher level control abstractions)
-        'k_v': 0.5,              # The *world* velocity P gain (for cmd_vel)
-        
-        'kp_att': 0.38,            # ABAIXE: 0.28 está muito rígido para 2kg, gera micro-vibração
-        'kd_att': 0.35,            # AUMENTE: Precisamos de mais "amortecedor" na atitude
+        # Lower level controller properties (for higher level control abstractions).
+        # Tuned for the X500's low inertia / high thrust-to-weight: the attitude loop
+        # needs strong damping (kd_att) to stay stable at the 30 Hz control rate.
+        'k_v': 2.0,             # The *world* velocity P gain (for cmd_vel)
+        'kp_att': 10.0,         # The attitude P gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
+        'kd_att': 6.0,          # The attitude D gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
 
-        'kp_yaw': 0.1,             
-        'kd_yaw': 0.001,          
+        'kp_yaw': 1.2,          # The yaw P gain (for cmd_vel_yaw)
+        'kd_yaw': 0.03,         # The yaw D gain (low: X500 Izz is small, keep yaw gentle)
 
-        'kp_pos': 0.046,            # ABAIXE: Deixa ele ser "preguiçoso" para se mover
-        'kd_pos': 0.15,            # AUMENTE: Esse freio alto com o P baixo vai matar o pêndulo
+        'kp_pos': 0.3,          # The position P gain (for cmd_pos_yaw)
+        'kd_pos': 1.2,          # The position D gain (for cmd_pos_yaw)
 
     }
 
@@ -423,11 +430,11 @@ class HolybroX500(uav.QuadCopterX):
     def __init__(self, batch_size=1, device='cpu', control_abstraction='cmd_motor_speeds', params= None):
         super().__init__(
                         batch_size, 
-                        params= params or HolybroX500._params, 
-                        device=device, 
+                        params= params or HolybroX500._params,
+                        device=device,
                         control_abstraction=control_abstraction)
-        
-        self._params = params
+
+        self._params = params or HolybroX500._params
 
     @property
     def params(self) -> dict: 
