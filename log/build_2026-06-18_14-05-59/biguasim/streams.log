@@ -1,0 +1,174 @@
+[0.277s] Invoking command in '/home/lh/Documents/biguasim-competicao/bs-drone-competition': CONDA_PROMPT_MODIFIER=(drone_champ) PYTHONPATH=/home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/biguasim build --build-base /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build install --record /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/install.log --single-version-externally-managed
+[0.385s] running egg_info
+[0.385s] creating build/biguasim/biguasim.egg-info
+[0.385s] writing build/biguasim/biguasim.egg-info/PKG-INFO
+[0.386s] writing dependency_links to build/biguasim/biguasim.egg-info/dependency_links.txt
+[0.386s] writing requirements to build/biguasim/biguasim.egg-info/requires.txt
+[0.386s] writing top-level names to build/biguasim/biguasim.egg-info/top_level.txt
+[0.386s] writing manifest file 'build/biguasim/biguasim.egg-info/SOURCES.txt'
+[0.387s] reading manifest file 'build/biguasim/biguasim.egg-info/SOURCES.txt'
+[0.387s] writing manifest file 'build/biguasim/biguasim.egg-info/SOURCES.txt'
+[0.387s] running build
+[0.387s] running build_py
+[0.387s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build
+[0.387s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib
+[0.387s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/packagemanager.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/shmem.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/agents.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/exceptions.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/spaces.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.387s] copying src/biguasim/biguasim.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/util.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/environments.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/sensors.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/weather.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/command.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/joint_constraints.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] copying src/biguasim/biguasimclient.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim
+[0.388s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.388s] copying src/biguasim/lcm/main.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.388s] copying src/biguasim/lcm/ImagingSonar.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/DVLSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/RangeFinderSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/IMUSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/PoseSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/LocationSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/RGBCamera.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/RotationSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/VelocitySensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/GPSSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/OrientationSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.389s] copying src/biguasim/lcm/AcousticBeaconSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.390s] copying src/biguasim/lcm/DepthSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm
+[0.390s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/mock_bridge_mavlink.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/mock_bridge_json.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/frame.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/runner.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/bridge.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/vehicle.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] copying src/biguasim/ardubridge/test.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge
+[0.390s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.390s] copying src/biguasim/dynamics/usv.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.390s] copying src/biguasim/dynamics/control.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.390s] copying src/biguasim/dynamics/agents.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.390s] copying src/biguasim/dynamics/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.390s] copying src/biguasim/dynamics/plot_rotors.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.390s] copying src/biguasim/dynamics/uuv.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.391s] copying src/biguasim/dynamics/utils.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.391s] copying src/biguasim/dynamics/uav.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.391s] copying src/biguasim/dynamics/base_model.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics
+[0.391s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools
+[0.391s] copying src/biguasim/tools/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools
+[0.391s] copying src/biguasim/tools/utils.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools
+[0.391s] copying src/biguasim/tools/projections.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools
+[0.392s] running install
+[0.392s] running install_lib
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/packagemanager.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/shmem.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/main.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/ImagingSonar.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/DVLSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/RangeFinderSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.392s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/IMUSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/PoseSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/LocationSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/RGBCamera.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/RotationSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/VelocitySensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/GPSSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/OrientationSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/AcousticBeaconSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/lcm/DepthSensor.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/exceptions.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.393s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/mock_bridge_mavlink.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/mock_bridge_json.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/frame.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/runner.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/bridge.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/vehicle.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/ardubridge/test.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/spaces.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.393s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/usv.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/control.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/agents.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/plot_rotors.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/uuv.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/utils.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/uav.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.393s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/dynamics/base_model.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/biguasim.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] creating /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools/__init__.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools/utils.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/tools/projections.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/util.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/environments.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/sensors.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/weather.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/command.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/joint_constraints.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] copying /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build/lib/biguasim/biguasimclient.py -> /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim
+[0.394s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/packagemanager.py to packagemanager.cpython-310.pyc
+[0.395s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/shmem.py to shmem.cpython-310.pyc
+[0.396s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/agents.py to agents.cpython-310.pyc
+[0.398s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/main.py to main.cpython-310.pyc
+[0.399s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/ImagingSonar.py to ImagingSonar.cpython-310.pyc
+[0.399s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/DVLSensor.py to DVLSensor.cpython-310.pyc
+[0.399s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/RangeFinderSensor.py to RangeFinderSensor.cpython-310.pyc
+[0.399s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/IMUSensor.py to IMUSensor.cpython-310.pyc
+[0.400s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/PoseSensor.py to PoseSensor.cpython-310.pyc
+[0.400s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/__init__.py to __init__.cpython-310.pyc
+[0.400s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/LocationSensor.py to LocationSensor.cpython-310.pyc
+[0.400s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/RGBCamera.py to RGBCamera.cpython-310.pyc
+[0.400s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/RotationSensor.py to RotationSensor.cpython-310.pyc
+[0.401s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/VelocitySensor.py to VelocitySensor.cpython-310.pyc
+[0.401s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/GPSSensor.py to GPSSensor.cpython-310.pyc
+[0.401s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/OrientationSensor.py to OrientationSensor.cpython-310.pyc
+[0.401s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/AcousticBeaconSensor.py to AcousticBeaconSensor.cpython-310.pyc
+[0.402s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/lcm/DepthSensor.py to DepthSensor.cpython-310.pyc
+[0.402s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/exceptions.py to exceptions.cpython-310.pyc
+[0.402s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/__init__.py to __init__.cpython-310.pyc
+[0.402s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/mock_bridge_mavlink.py to mock_bridge_mavlink.cpython-310.pyc
+[0.402s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/mock_bridge_json.py to mock_bridge_json.cpython-310.pyc
+[0.402s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/__init__.py to __init__.cpython-310.pyc
+[0.403s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/frame.py to frame.cpython-310.pyc
+[0.403s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/runner.py to runner.cpython-310.pyc
+[0.403s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/bridge.py to bridge.cpython-310.pyc
+[0.404s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/vehicle.py to vehicle.cpython-310.pyc
+[0.404s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/ardubridge/test.py to test.cpython-310.pyc
+[0.404s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/spaces.py to spaces.cpython-310.pyc
+[0.405s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/usv.py to usv.cpython-310.pyc
+[0.407s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/control.py to control.cpython-310.pyc
+[0.407s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/agents.py to agents.cpython-310.pyc
+[0.408s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/__init__.py to __init__.cpython-310.pyc
+[0.408s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/plot_rotors.py to plot_rotors.cpython-310.pyc
+[0.408s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/uuv.py to uuv.cpython-310.pyc
+[0.411s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/utils.py to utils.cpython-310.pyc
+[0.412s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/uav.py to uav.cpython-310.pyc
+[0.414s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/dynamics/base_model.py to base_model.cpython-310.pyc
+[0.414s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/biguasim.py to biguasim.cpython-310.pyc
+[0.414s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools/__init__.py to __init__.cpython-310.pyc
+[0.414s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools/utils.py to utils.cpython-310.pyc
+[0.415s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/tools/projections.py to projections.cpython-310.pyc
+[0.415s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/util.py to util.cpython-310.pyc
+[0.416s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/environments.py to environments.cpython-310.pyc
+[0.418s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/sensors.py to sensors.cpython-310.pyc
+[0.421s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/weather.py to weather.cpython-310.pyc
+[0.421s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/command.py to command.cpython-310.pyc
+[0.422s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/joint_constraints.py to joint_constraints.cpython-310.pyc
+[0.422s] byte-compiling /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim/biguasimclient.py to biguasimclient.cpython-310.pyc
+[0.423s] running install_egg_info
+[0.423s] Copying build/biguasim/biguasim.egg-info to /home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages/biguasim-1.0.0-py3.10.egg-info
+[0.423s] running install_scripts
+[0.433s] writing list of installed files to '/home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/install.log'
+[0.444s] Invoked command in '/home/lh/Documents/biguasim-competicao/bs-drone-competition' returned '0': CONDA_PROMPT_MODIFIER=(drone_champ) PYTHONPATH=/home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lh/Documents/biguasim-competicao/bs-drone-competition/install/biguasim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/biguasim build --build-base /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/build install --record /home/lh/Documents/biguasim-competicao/bs-drone-competition/build/biguasim/install.log --single-version-externally-managed
