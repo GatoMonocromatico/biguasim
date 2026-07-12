@@ -87,10 +87,26 @@ class QuadCopterX(VehicleModel):
                                                                 for _ in range(self.batch_size)])).unsqueeze(-1).to(self.device)
 
         
-        self.batched_params.kp_pos = torch.from_numpy(np.array([params['kp_pos'] 
+        self.batched_params.kp_pos = torch.from_numpy(np.array([params['kp_pos']
                                                                 for _ in range(self.batch_size)])).unsqueeze(-1).to(self.device)
-        self.batched_params.kd_pos = torch.from_numpy(np.array([params['kd_pos'] 
+        self.batched_params.kd_pos = torch.from_numpy(np.array([params['kd_pos']
                                                                 for _ in range(self.batch_size)])).unsqueeze(-1).to(self.device)
+
+        # Yaw-moment inertia scaling. The roll/pitch moment is multiplied by I, but the
+        # yaw moment is added raw. For low-inertia airframes (small Izz) that raw moment
+        # over-drives yaw. When 'scale_yaw_by_inertia' is set, the yaw moment is scaled by
+        # Izz so it is consistent with the roll/pitch terms. Defaults off to keep the
+        # behaviour of existing vehicles (e.g. DjiMatrice) unchanged.
+        izz = self.batched_params.I[:, 2, 2]  # (batch,)
+        if params.get('scale_yaw_by_inertia', False):
+            self.batched_params.yaw_scale = izz
+        else:
+            self.batched_params.yaw_scale = torch.ones_like(izz)
+
+        # When set, cmd_pos_yaw uses the dedicated yaw gains (kp_yaw/kd_yaw) and an
+        # absolute-heading reference, so the yaw loop is decoupled from the roll/pitch
+        # attitude stiffness. Defaults off to preserve existing vehicles' behaviour.
+        self.batched_params.pos_yaw_decoupled = bool(params.get('pos_yaw_decoupled', False))
         
         
     def _compute_external_forces(self, R : Tensor, inertial_velocity : Tensor):
@@ -297,7 +313,7 @@ class QuadCopterX(VehicleModel):
                         + torch.cross(state['w'][self.idxs], Iw.squeeze(-1), dim=-1)
 
             # Add yaw moment correction
-            cmd_moment[:, 2] += M_yaw[self.idxs]
+            cmd_moment[:, 2] += M_yaw[self.idxs] * self.batched_params.yaw_scale[self.idxs]
 
             # --- Map thrust & moments to rotor speeds ---
             TM = torch.cat([cmd_thrust, cmd_moment.squeeze(-1)], dim=-1)
@@ -356,8 +372,11 @@ class QuadCopterX(VehicleModel):
 
             # --- Desired orientation with yaw ---
             b3_des = F_des / torch.norm(F_des, dim=-1, keepdim=True)
-            # Reference x-axis in world frame based on yaw_des
-            c1_des = torch.stack([torch.cos(yaw_err), torch.sin(yaw_err), torch.zeros_like(yaw)], dim=-1) 
+            # Reference x-axis in world frame. The decoupled path uses the absolute
+            # desired heading (yaw_des, consistent with cmd_vel_yaw); the original path
+            # used yaw_err, which collapses the heading to world-x as yaw converges.
+            _yaw_ref = yaw_des if bp.pos_yaw_decoupled else yaw_err
+            c1_des = torch.stack([torch.cos(_yaw_ref), torch.sin(_yaw_ref), torch.zeros_like(yaw)], dim=-1)
             
 
             cross = torch.cross(b3_des, c1_des, dim=-1)
@@ -374,14 +393,18 @@ class QuadCopterX(VehicleModel):
             att_err = torch.stack([-S_err[:,1,2], S_err[:,0,2], -S_err[:,0,1]], dim=-1)
 
             # --- Desired moments ---
-            # PD yaw control law
-            M_yaw = self.batched_params.kp_att[self.idxs].squeeze(-1) * yaw_err - self.batched_params.kd_att[self.idxs].squeeze(-1) * yaw_rate
+            # PD yaw control law. Use dedicated yaw gains (as cmd_vel_yaw does) so the
+            # yaw loop can be tuned independently of the roll/pitch attitude stiffness.
+            if bp.pos_yaw_decoupled:
+                M_yaw = bp.kp_yaw[idxs].squeeze(-1) * yaw_err - bp.kd_yaw[idxs].squeeze(-1) * yaw_rate
+            else:
+                M_yaw = bp.kp_att[idxs].squeeze(-1) * yaw_err - bp.kd_att[idxs].squeeze(-1) * yaw_rate
 
             I = bp.I[idxs].double()
             Iw = torch.einsum("bij,bi->bj", I, state['w'][idxs])
             tmp = -bp.kp_att[idxs] *  att_err - bp.kd_att[idxs] * state['w'][idxs] 
             cmd_moment = torch.einsum("bij,bi->bj", I, tmp) + torch.cross(state['w'][idxs], Iw, dim=-1)
-            cmd_moment[:, 2] += M_yaw
+            cmd_moment[:, 2] += M_yaw * bp.yaw_scale[idxs]
 
             # --- Stack thrust + moments ---
             TM = torch.cat([cmd_thrust, cmd_moment], dim=-1)  # [B,4]

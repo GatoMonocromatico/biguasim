@@ -405,6 +405,12 @@ class HolybroX500(uav.QuadCopterX):
         'rotor_speed_min': 0,      # minimum rotor speed, rad/s
         'rotor_speed_max': 1000.0, # maximum rotor speed, rad/s (PX4 maxRotVelocity)
 
+        # Scale the yaw moment by Izz so it is consistent with the roll/pitch moments,
+        # and decouple the cmd_pos_yaw yaw loop from the attitude stiffness. Both are
+        # required for this low-inertia airframe to keep the yaw modes stable.
+        'scale_yaw_by_inertia': True,
+        'pos_yaw_decoupled': True,
+
         # Frame aerodynamic properties
         'c_Dx': 0.1,            # parasitic drag coefficient in body x-axis, N/(m/s)^2
         'c_Dy': 0.1,            # parasitic drag coefficient in body y-axis, N/(m/s)^2
@@ -417,11 +423,11 @@ class HolybroX500(uav.QuadCopterX):
         'kp_att': 10.0,         # The attitude P gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
         'kd_att': 6.0,          # The attitude D gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
 
-        'kp_yaw': 1.2,          # The yaw P gain (for cmd_vel_yaw)
-        'kd_yaw': 0.03,         # The yaw D gain (low: X500 Izz is small, keep yaw gentle)
+        'kp_yaw': 1.0,          # The yaw P gain (for cmd_vel_yaw / cmd_pos_yaw)
+        'kd_yaw': 2.0,          # The yaw D gain (yaw moment is Izz-scaled, so ~O(1) gains)
 
-        'kp_pos': 0.3,          # The position P gain (for cmd_pos_yaw)
-        'kd_pos': 1.2,          # The position D gain (for cmd_pos_yaw)
+        'kp_pos': 0.4,          # The position P gain (for cmd_pos_yaw)
+        'kd_pos': 1.6,          # The position D gain (for cmd_pos_yaw, well damped)
 
     }
 
