@@ -410,6 +410,9 @@ class HolybroX500(uav.QuadCopterX):
         # required for this low-inertia airframe to keep the yaw modes stable.
         'scale_yaw_by_inertia': True,
         'pos_yaw_decoupled': True,
+        # cmd_pos_yaw heading governor: slew large yaw commands through small, stable
+        # yaw errors. 0.2 rad keeps rotate-in-place robust for any target yaw (incl 180).
+        'yaw_slew_max': 0.2,
 
         # Frame aerodynamic properties
         'c_Dx': 0.1,            # parasitic drag coefficient in body x-axis, N/(m/s)^2
