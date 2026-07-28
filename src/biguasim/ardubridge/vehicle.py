@@ -169,7 +169,10 @@ VEHICLE_REGISTRY: dict[str, VehicleProfile] = {
         # motor_mapping=[0, 1, 2, 3],
         motor_mapping=[2, 0, 3, 1],
         motor_signs=[1, 1, 1, 1],
-        pwm_converters=[_unipolar_pwm(592.4)] * 4,
+        # cap must match this agent's rotor_speed_max (1000 rad/s); the PX4
+        # x500 retune raised rotor_speed_max but left this at the old 592.4,
+        # which capped thrust-to-weight at 0.61 so the drone couldn't lift.
+        pwm_converters=[_unipolar_pwm(1000.0)] * 4,
         control_abstraction="cmd_motor_speeds",
         ardupilot_vehicle="ArduCopter",
         sitl_args=(
