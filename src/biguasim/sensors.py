@@ -2408,7 +2408,12 @@ class SensorFactory:
         # TODO: Make this part of the constructors rather than hacking it on
         # Wanted to make sure this is what we want before making large changes
         result.lcm_msg = sensor_def.lcm_msg
-        result.tick_every = sensor_def.tick_every
-        result.tick_count = sensor_def.tick_every
+        # A sensor with no rate set runs every tick. Passing None straight
+        # through used to make sensor_data() return once and then None forever:
+        # _tick_sensor sets tick_count to 1, which never equals None again.
+        # Scenario sensors always get a rate computed from Hz, so only sensors
+        # built at runtime hit it.
+        result.tick_every = 1 if sensor_def.tick_every is None else sensor_def.tick_every
+        result.tick_count = result.tick_every
 
         return result

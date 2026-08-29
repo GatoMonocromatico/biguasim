@@ -178,8 +178,22 @@ class CommandCenter:
         input_bytes = str.encode(to_write)
         if len(input_bytes) > self.max_buffer:
             raise BiguaSimException("Error: Command length exceeds buffer size")
-        for index, val in enumerate(input_bytes):
-            self._command_buffer_ptr[index] = val
+        # Commands are ASCII, so the bytes drop straight into the int8 buffer.
+        # Copied in one go: a world server writes this every tick, and the
+        # per-byte Python loop this replaces cost milliseconds on large payloads.
+        self._command_buffer_ptr[:len(input_bytes)] = np.frombuffer(input_bytes, dtype=np.int8)
+
+    @property
+    def pending_bytes(self):
+        """Serialized size of the queued commands.
+
+        Lets a caller feeding many commands per tick stop before it overruns
+        the buffer, and defer the rest to the next tick.
+
+        Returns:
+            :obj:`int`: Bytes the queue would occupy if written now.
+        """
+        return len(self._commands.to_json().encode())
 
     @property
     def queue_size(self):
