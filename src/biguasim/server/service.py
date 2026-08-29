@@ -202,6 +202,18 @@ class WorldService:
                     }),
                 ])
 
+    def _report_corrections(self):
+        """Tell owners of client-driven agents where the world says they are."""
+        for tick, agent, pose in self._world.drain_corrections():
+            owner = self._world.owner_of(agent)
+            identity = self._identities.get(owner)
+            if identity is None:
+                continue
+            self._requests.send_multipart([identity, proto.pack({
+                "ok": True, "event": "correction", "tick": tick,
+                "agent": agent, "pose": pose,
+            })])
+
     def _report_failures(self):
         """Tell clients about actions of theirs that did not work."""
         for tick, action, message in self._world.drain_errors():
@@ -223,6 +235,7 @@ class WorldService:
             # step() has already advanced, so the tick just completed is one back.
             self._recorder.observe(self._world.tick - 1, state)
         self._publish_tick(state)
+        self._report_corrections()
         self._report_failures()
         return state
 

@@ -173,6 +173,17 @@ class RemoteWorld:
         return self.submit(act.SetControlDefaults(agent=agent,
                                                   command=list(command)))[0]
 
+    def set_pose(self, agent, position, rotation=(0.0, 0.0, 0.0),
+                 velocity=(0.0, 0.0, 0.0), angular_velocity=(0.0, 0.0, 0.0)):
+        """Place an agent this client integrates itself.
+
+        Only for agents spawned with ``externally_driven=True``.
+        """
+        return self.submit(act.SetPose(
+            agent=agent, position=tuple(position), rotation=tuple(rotation),
+            velocity=tuple(velocity),
+            angular_velocity=tuple(angular_velocity)))[0]
+
     def add_sensor(self, agent, sensor_type, **kwargs):
         """Attach a sensor. The world names it, so it cannot collide."""
         return self.submit(act.AddSensor(agent=agent, sensor_type=sensor_type,
@@ -183,19 +194,42 @@ class RemoteWorld:
         return self.submit(act.RemoveSensor(agent=agent,
                                             sensor_name=sensor_name))[0]
 
-    def failures(self):
-        """Take any 'that did not work' notices received so far.
-
-        Returns:
-            :obj:`list` of :obj:`dict`: Oldest first.
-        """
-        # Non-blocking sweep, in case notices are waiting but nothing has asked.
+    def _pump_events(self):
+        """Collect anything the world has sent unprompted."""
         while self._requests.poll(0):
             message = proto.unpack(self._requests.recv())
             if message.get("event"):
                 self._events.append(message)
-        events, self._events = self._events, []
-        return events
+
+    def _take(self, kind):
+        self._pump_events()
+        taken = [e for e in self._events if e.get("event") == kind]
+        self._events = [e for e in self._events if e.get("event") != kind]
+        return taken
+
+    def failures(self):
+        """Take any 'that did not work' notices received so far.
+
+        These arrive late by nature: whether an action works is not knowable
+        until it runs, several ticks after it was accepted.
+
+        Returns:
+            :obj:`list` of :obj:`dict`: Oldest first.
+        """
+        return self._take("action_failed")
+
+    def corrections(self):
+        """Take collision corrections for agents this client drives itself.
+
+        The world is authoritative on contact, so when a client-driven vehicle
+        hits something the world says where it actually ended up. What to do
+        about it is this client's decision -- snap to it, blend towards it, or
+        ignore it and keep flying through the pier.
+
+        Returns:
+            :obj:`list` of :obj:`dict`: Each with ``tick``, ``agent``, ``pose``.
+        """
+        return self._take("correction")
 
     # ------------------------------------------------------------ streaming
 

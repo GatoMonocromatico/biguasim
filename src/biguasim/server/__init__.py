@@ -15,6 +15,7 @@ from biguasim.server.actions import (
     SetDayTime,
     SetFogDensity,
     SetControlDefaults,
+    SetPose,
     SetWeather,
     SpawnAgent,
     decode,
@@ -25,7 +26,7 @@ from biguasim.server.world import World, WorldError
 
 __all__ = [
     "Action", "AddSensor", "KillAgent", "RemoveSensor", "RotateSensor",
-    "SetControl", "SetControlDefaults", "SetDayTime", "SetFogDensity",
+    "SetControl", "SetControlDefaults", "SetDayTime", "SetFogDensity", "SetPose",
     "SetWeather", "SpawnAgent", "decode", "encode", "World", "WorldError",
     "Recorder", "Recording", "replay",
 ]

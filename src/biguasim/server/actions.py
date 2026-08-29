@@ -113,6 +113,31 @@ class SpawnAgent(Action):
 
 @_action
 @dataclass(frozen=True, kw_only=True)
+class SetPose(Action):
+    """Place an agent whose dynamics live on the client.
+
+    For vehicles the world does not integrate: a custom dynamics model, a
+    hardware-in-the-loop rig, or a real airframe appearing in the shared world.
+    The owner works out where it is and says so; the world still does collision
+    and sensor simulation for it, and still decides what everyone else sees.
+
+    Only valid for an agent spawned with ``externally_driven``. Accepting poses
+    for a vehicle the world is also integrating would leave two things deciding
+    where it is, and no way to say which is right.
+    """
+
+    kind = "set_pose"
+    mutates_world = False
+
+    agent: str
+    position: Tuple[float, float, float]
+    rotation: Tuple[float, float, float] = (0.0, 0.0, 0.0)
+    velocity: Tuple[float, float, float] = (0.0, 0.0, 0.0)
+    angular_velocity: Tuple[float, float, float] = (0.0, 0.0, 0.0)
+
+
+@_action
+@dataclass(frozen=True, kw_only=True)
 class KillAgent(Action):
     """Retire an agent.
 

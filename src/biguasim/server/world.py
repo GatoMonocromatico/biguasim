@@ -16,6 +16,7 @@ Two rules do most of the work:
 There is deliberately no reset. A living world spawns and kills; a global reset
 would silently pull the floor out from under every other client.
 """
+import numpy as np
 import torch
 
 import biguasim
@@ -106,6 +107,7 @@ class World:
         self._types = {}            # agent -> vehicle type, so viewers know
         self._sensor_seq = 0
         self._errors = []           # (tick, action, message), drained by the caller
+        self._corrections = []      # (tick, agent, pose) for client-driven agents
 
         self._device = torch.device(
             "cuda:" + str(gpu()) if torch.cuda.is_available() else "cpu")
@@ -305,6 +307,9 @@ class World:
         state = self._env.tick()
         dt = state["t"]
 
+        if self._external:
+            self._collect_corrections(state)
+
         for name, model in list(self._env._dynamics_dict.items()):
             command = self._controls.get(name)
             if command is None or name not in state:
@@ -318,10 +323,65 @@ class World:
 
     # ------------------------------------------------------------- handlers
 
+    def _set_pose(self, action):
+        """Place a client-driven agent where its owner says it is."""
+        agent = _base(action.agent)
+        if agent not in self._external:
+            raise WorldError(
+                "agent {!r} is driven by the world; use set_control".format(agent))
+
+        engine_agent = self._env.agents.get(agent + "-id0")
+        if engine_agent is None:
+            raise WorldError("no such agent: {!r}".format(action.agent))
+
+        engine_agent.set_physics_state(
+            location=list(action.position),
+            rotation=list(action.rotation),
+            velocity=list(action.velocity),
+            angular_velocity=list(action.angular_velocity))
+
+    def _collect_corrections(self, state):
+        """Tell owners when the world disagrees with them about a collision.
+
+        A client integrating its own vehicle does not know about the world's
+        geometry, so it will happily fly through a pier. The world is
+        authoritative on contact and says so; what the client does about it --
+        accept the correction, blend towards it, ignore it -- is the client's
+        business, and deliberately not decided here.
+        """
+        for agent in self._external:
+            frames = state.get(agent)
+            if not frames:
+                continue
+            collision = frames[0].get("CollisionSensor")
+            if collision is None or not np.any(np.asarray(collision)):
+                continue
+            dynamics = frames[0].get("DynamicsSensor")
+            if dynamics is None:
+                continue
+            values = np.asarray(dynamics, dtype=np.float64)
+            self._corrections.append((self._tick, agent, {
+                "position": values[6:9].tolist(),
+                "velocity": values[3:6].tolist(),
+                "quaternion": values[15:19].tolist(),
+            }))
+
+    def drain_corrections(self):
+        """Take collision corrections raised since this was last called.
+
+        Returns:
+            :obj:`list`: ``(tick, agent, pose)`` triples, oldest first.
+        """
+        found, self._corrections = self._corrections, []
+        return found
+
     def _set_control(self, action):
         agent = _base(action.agent)
         if agent not in self._controls:
             raise WorldError("no such agent: {!r}".format(action.agent))
+        if agent in self._external:
+            raise WorldError(
+                "agent {!r} is driven by its client; use set_pose".format(agent))
         self._controls[agent] = list(action.command)
 
     def _set_control_defaults(self, action):
@@ -507,6 +567,7 @@ class World:
 
     _HANDLERS = {
         act.SetControl: _set_control,
+        act.SetPose: _set_pose,
         act.SetControlDefaults: _set_control_defaults,
         act.SpawnAgent: _spawn_agent,
         act.KillAgent: _kill_agent,

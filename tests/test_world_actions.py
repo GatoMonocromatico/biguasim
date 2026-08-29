@@ -30,6 +30,7 @@ def bare_world(tick=0, admin=()):
 
 ONE_OF_EACH = [
     act.SetControl(agent="uav0", command=[1.0, 2.0, 3.0, 4.0]),
+    act.SetPose(agent="rig", position=(1.0, 2.0, 3.0)),
     act.SetControlDefaults(agent="uav0", command=[0.0] * 4),
     act.SpawnAgent(agent="uav1", agent_type="DjiMatrice", location=(1, 2, 3),
                    sensors=[{"sensor_type": "DynamicsSensor"}]),
@@ -148,3 +149,32 @@ def test_next_tick_reflects_the_fixed_input_delay():
     """Fixed, not adaptive: adapting it makes a log replay differently."""
     world = bare_world(tick=100)
     assert world.next_tick == 103
+
+
+def test_set_pose_is_not_world_mutating():
+    """Like a control input: latest wins, and losing one is harmless."""
+    assert not act.SetPose(agent="a", position=(1.0, 2.0, 3.0)).mutates_world
+
+
+def test_set_pose_survives_a_round_trip():
+    action = act.SetPose(agent="rig", position=(1.0, 2.0, 3.0),
+                         rotation=(0.0, 45.0, 0.0), velocity=(0.0, 0.0, -1.0))
+    assert act.decode(act.encode(action)) == action
+
+
+def test_client_driven_agents_refuse_control_commands():
+    """Two things deciding where a vehicle is, and no way to say which is right."""
+    world = bare_world()
+    world._controls["rig"] = None
+    world._external.add("rig")
+
+    with pytest.raises(WorldError, match="driven by its client"):
+        world._set_control(act.SetControl(agent="rig", command=[1.0]))
+
+
+def test_world_driven_agents_refuse_poses():
+    world = bare_world()
+    world._controls["uav0"] = None
+
+    with pytest.raises(WorldError, match="driven by the world"):
+        world._set_pose(act.SetPose(agent="uav0", position=(0.0, 0.0, 0.0)))
