@@ -18,6 +18,9 @@ dependencies = [
     # Core
     'posix_ipc >= 1.0.0; platform_system == "Linux"',
     "numpy>=1.26.4",
+    # Serving a world to several clients (biguasim.server, biguasim.client)
+    "pyzmq>=25.0",
+    "msgpack>=1.0",
     "typing-extensions>=4.12",
     # Testing / Dev
     "bz2file==0.98",
