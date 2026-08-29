@@ -103,6 +103,7 @@ class World:
         self._defaults = {}         # base agent name -> fallback command
         self._owner = {}            # entity key -> client id
         self._external = set()      # agents whose dynamics live client-side
+        self._types = {}            # agent -> vehicle type, so viewers know
         self._sensor_seq = 0
         self._errors = []           # (tick, action, message), drained by the caller
 
@@ -111,6 +112,8 @@ class World:
 
         for name in list(self._env._dynamics_dict):
             self._controls.setdefault(name, None)
+        for spec in scenario_cfg.get("agents", []):
+            self._types[_base(spec.get("agent_name", ""))] = spec.get("agent_type", "")
 
     # ---------------------------------------------------------------- state
 
@@ -128,6 +131,15 @@ class World:
     def agents(self):
         """:obj:`list` of :obj:`str`: Live agents, by base name."""
         return sorted(self._controls)
+
+    @property
+    def agent_types(self):
+        """:obj:`dict`: Agent name to vehicle type.
+
+        Published with the roster: a viewer drawing the world locally has to
+        know which vehicle to draw before it can draw anything.
+        """
+        return {name: self._types.get(name, "") for name in self._controls}
 
     def owner_of(self, agent):
         """Who owns an agent, or ``None`` if it came from the scenario.
@@ -363,6 +375,7 @@ class World:
             )
             self._controls[agent] = None
 
+        self._types[agent] = action.agent_type
         if action.client_id:
             self._owner[("agent", agent)] = action.client_id
 
@@ -410,6 +423,7 @@ class World:
         self._controls.pop(agent, None)
         self._defaults.pop(agent, None)
         self._external.discard(agent)
+        self._types.pop(agent, None)
         self._owner.pop(("agent", agent), None)
 
     def _add_sensor(self, action):

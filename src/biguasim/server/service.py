@@ -160,6 +160,7 @@ class WorldService:
         asked. That keeps the decision out of the tick loop.
         """
         roster = {}
+        types = self._world.agent_types
         for agent in self._world.agents:
             frames = state.get(agent)
             if not frames:
@@ -169,6 +170,7 @@ class WorldService:
                 continue
             values = np.asarray(dynamics, dtype=np.float64)
             roster[agent] = {
+                "type": types.get(agent, ""),
                 "position": values[6:9].tolist(),
                 "velocity": values[3:6].tolist(),
                 "quaternion": values[15:19].tolist(),
