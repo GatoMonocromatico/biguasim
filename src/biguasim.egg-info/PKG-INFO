@@ -31,7 +31,7 @@ Requires-Dist: lark==1.2.2
 Requires-Dist: matplotlib==3.10.3
 Requires-Dist: moviepy==1.0.3
 Requires-Dist: mpmath==1.3.0
-Requires-Dist: networkx>=3.5
+Requires-Dist: networkx<3.5,>=3.4
 Requires-Dist: nvidia-cublas-cu12==12.6.4.1
 Requires-Dist: nvidia-cuda-cupti-cu12==12.6.80
 Requires-Dist: nvidia-cuda-nvrtc-cu12==12.6.77

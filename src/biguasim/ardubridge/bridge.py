@@ -193,7 +193,6 @@ class ArduPilotBridge:
             "velocity": vel,
             "quaternion": quat,
         }
-        print(quat)
         # if "DepthSensor" in agent_state:
         #     depth_val = agent_state["DepthSensor"]
         #     z_up = float(depth_val[0]) if hasattr(depth_val, "__len__") else float(depth_val)
