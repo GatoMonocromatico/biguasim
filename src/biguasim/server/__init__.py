@@ -20,10 +20,12 @@ from biguasim.server.actions import (
     decode,
     encode,
 )
+from biguasim.server.recording import Recorder, Recording, replay
 from biguasim.server.world import World, WorldError
 
 __all__ = [
     "Action", "AddSensor", "KillAgent", "RemoveSensor", "RotateSensor",
     "SetControl", "SetControlDefaults", "SetDayTime", "SetFogDensity",
     "SetWeather", "SpawnAgent", "decode", "encode", "World", "WorldError",
+    "Recorder", "Recording", "replay",
 ]

@@ -38,12 +38,18 @@ class WorldService:
         bind (:obj:`str`, optional): Interface to bind. Defaults to all.
         admin_clients (:obj:`set`, optional): Clients exempt from ownership.
         record (callable, optional): Passed to :class:`~biguasim.server.world.World`.
+        recorder (:class:`~biguasim.server.recording.Recorder`, optional): If
+            given, every action and periodic keyframes are written to it, and
+            the run can be replayed later.
         **world_kwargs: Passed to :class:`~biguasim.server.world.World`.
     """
 
     def __init__(self, scenario_cfg, port=8770, bind="*", admin_clients=None,
-                 record=None, **world_kwargs):
+                 record=None, recorder=None, **world_kwargs):
         self._build = proto.build_id(scenario_cfg)
+        self._recorder = recorder
+        if recorder is not None and record is None:
+            record = recorder.record_action
         self._world = World(scenario_cfg, admin_clients=admin_clients,
                             record=record, **world_kwargs)
 
@@ -211,6 +217,9 @@ class WorldService:
         """One full cycle: requests in, world forward, state out."""
         self._drain_requests()
         state = self._world.step()
+        if self._recorder is not None:
+            # step() has already advanced, so the tick just completed is one back.
+            self._recorder.observe(self._world.tick - 1, state)
         self._publish_tick(state)
         self._report_failures()
         return state
@@ -236,9 +245,11 @@ class WorldService:
         self._running = False
 
     def close(self):
-        """Shut down sockets and the world."""
+        """Shut down sockets, the recording and the world."""
         self._requests.close(linger=0)
         self._publish.close(linger=0)
+        if self._recorder is not None:
+            self._recorder.close()
         self._world.close()
 
     def __enter__(self):

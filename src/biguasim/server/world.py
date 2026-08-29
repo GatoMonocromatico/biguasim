@@ -170,6 +170,19 @@ class World:
         self._pending.append(action)
         return action.target_tick
 
+    def preload(self, action):
+        """Queue an action at exactly the tick it names, checking nothing.
+
+        For replay, which is re-running a script the world already accepted
+        once. :meth:`submit` would move a stale tick forward and re-check
+        ownership, both of which would make the replay differ from the run it
+        is supposed to reproduce.
+
+        Args:
+            action (:class:`~biguasim.server.actions.Action`): The action.
+        """
+        self._pending.append(action)
+
     def _authorize(self, action):
         agent = getattr(action, "agent", None)
         if agent is None or action.client_id in self._admin:
