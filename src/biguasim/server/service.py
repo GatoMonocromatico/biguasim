@@ -89,6 +89,16 @@ class WorldService:
             self._requests.send_multipart([identity, proto.pack(reply)])
 
     def _handle(self, identity, message):
+        """Dispatch one client message.
+
+        Args:
+            identity (:obj:`bytes`): The ROUTER identity it arrived on, kept so
+                failures and corrections can be sent back unprompted later.
+            message (:obj:`dict`): The decoded request.
+
+        Returns:
+            :obj:`dict`: The reply to send.
+        """
         op = message.get("op")
         client_id = message.get("client_id", "")
 
@@ -113,6 +123,16 @@ class WorldService:
         return {"ok": False, "error": "unknown op: {!r}".format(op)}
 
     def _hello(self, identity, message, client_id):
+        """Admit a client, or explain why not.
+
+        Both checks here are refusals rather than warnings, because both failure
+        modes are silent and confusing if allowed through: a protocol mismatch
+        garbles messages, and a build mismatch means the client's collision
+        geometry disagrees with the world's.
+
+        Returns:
+            :obj:`dict`: The greeting, or the reason for refusal.
+        """
         if message.get("protocol") != proto.PROTOCOL_VERSION:
             return {"ok": False, "error": "protocol {} != {}".format(
                 message.get("protocol"), proto.PROTOCOL_VERSION)}
@@ -136,6 +156,20 @@ class WorldService:
         }
 
     def _submit(self, message, client_id):
+        """Queue a client's actions.
+
+        The declared ``client_id`` is replaced with the one belonging to this
+        connection. Trusting the client's own claim would let anyone act as
+        anyone else simply by saying so, which would defeat ownership entirely.
+
+        Actions with no target tick are aimed at
+        :attr:`~biguasim.server.world.World.next_tick`, so a client that does
+        not care about timing gets sensible timing anyway.
+
+        Returns:
+            :obj:`dict`: Which ticks the actions were scheduled for, or the
+            first rejection.
+        """
         scheduled = []
         for payload in message.get("actions", []):
             payload = dict(payload)

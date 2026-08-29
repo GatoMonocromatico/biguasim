@@ -56,12 +56,14 @@ def current_device():
 
 
 def _write(handle, record):
+    """Append one length-prefixed msgpack record."""
     payload = msgpack.packb(record, use_bin_type=True)
     handle.write(_LEN.pack(len(payload)))
     handle.write(payload)
 
 
 def _read_all(handle):
+    """Yield every record in a file, in the order they were written."""
     while True:
         size = handle.read(_LEN.size)
         if not size or len(size) < _LEN.size:

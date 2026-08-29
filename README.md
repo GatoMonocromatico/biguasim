@@ -241,6 +241,50 @@ You can access the sensor states as before:
 dvl = states["auv0"][0]["DVLSensor"]
 location = states["uav0"][0]["DepthSensor"]
 ```
+
+## Shared Worlds
+The examples above use BiguaSim as a library: one script owns the simulation and
+exits with it. BiguaSim can also run as a **world** — a long-lived process that
+several clients connect to at once, each spawning its own agents, attaching
+sensors mid-flight, and watching from wherever it likes.
+
+```bash
+python tools/serve_world.py --package SkyDive --world Pier-Harbor --port 8770
+```
+
+```python
+from biguasim.client import RemoteWorld
+
+scenario = {"package_name": "SkyDive", "world": "Pier-Harbor"}
+
+with RemoteWorld(port=8770, client_id="pilot", scenario_cfg=scenario) as world:
+    world.watch_state()
+    landed = world.spawn_agent("uav1", "DjiMatrice", location=(10.0, 0.0, 25.0),
+                               sensors=[{"sensor_type": "DynamicsSensor",
+                                         "socket": "IMUSocket"}])
+    world.set_control("uav1", [330.0] * 4)
+    print(world.wait_for_tick(landed + 20)["agents"]["uav1"]["position"])
+```
+
+Watching is cheap. A viewer runs its own copy of the world and draws what the
+world reports, so the wire carries poses rather than pixels and ten people
+watching cost the world the same as one:
+
+```bash
+python tools/watch_world.py --port 8770
+```
+
+The simulator is bit-deterministic, so a session can be recorded as the actions
+that were asked for rather than the state that resulted — about 50 bytes per
+tick — and re-run afterwards. Because it re-executes rather than plays back, an
+action can be edited to find out what would have happened instead:
+
+```bash
+python tools/replay.py run.bslog --verify
+```
+
+See the [world server documentation](https://biguasim.readthedocs.io/en/latest/server/server.html)
+for the design and its reasoning.
 <!-- 
 
 ## Running BiguaSim Headless

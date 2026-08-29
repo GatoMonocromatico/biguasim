@@ -46,6 +46,7 @@ General BiguaSim use:
    usage/installation
    usage/getting-started
    usage/usage
+   server/server
    packages/packages
    agents/agents
    sensors/sensors
@@ -73,6 +74,8 @@ General BiguaSim use:
    biguasim/util
    biguasim/exceptions
    biguasim/weather
+   biguasim/server-api
+   biguasim/client-api
 
 
 Indices and tables

@@ -186,6 +186,12 @@ class Viewer:
         return [float(roll), float(pitch), float(yaw)]
 
     def _add_puppet(self, name, agent_type):
+        """Create a local stand-in for an agent the world has announced.
+
+        The type comes from the roster rather than being guessed: a viewer
+        cannot draw a vehicle without knowing which one it is. Falling back to a
+        quadrotor is a last resort for a world that did not say.
+        """
         full = name + "-id0"
         if full in self._env.agents:
             self._puppets[name] = agent_type

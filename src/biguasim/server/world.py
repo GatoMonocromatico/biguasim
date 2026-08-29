@@ -198,6 +198,16 @@ class World:
         self._pending.append(action)
 
     def _authorize(self, action):
+        """Refuse an action a client is not entitled to submit.
+
+        Checked here, at submit time, rather than when the action runs: whether
+        a client *may* act is knowable the moment it asks, and answering
+        immediately gives it something it can act on. Whether the action works
+        is a separate question with a separate answer, ticks later.
+
+        Agents from the starting scenario are owned by nobody and open to all --
+        they are the world's furniture rather than anyone's property.
+        """
         agent = getattr(action, "agent", None)
         if agent is None or action.client_id in self._admin:
             return
@@ -376,6 +386,12 @@ class World:
         return found
 
     def _set_control(self, action):
+        """Set an agent's standing command.
+
+        Held until superseded, so a client that stops sending does not cause the
+        vehicle to stop being driven -- which is how a real autopilot behaves
+        between messages, and why dropping one of these is harmless.
+        """
         agent = _base(action.agent)
         if agent not in self._controls:
             raise WorldError("no such agent: {!r}".format(action.agent))
@@ -385,9 +401,25 @@ class World:
         self._controls[agent] = list(action.command)
 
     def _set_control_defaults(self, action):
+        """Record what an agent should do if its owner disappears.
+
+        Without one, :meth:`release_client` has no safe option but to kill the
+        agent, because leaving it on its last command means a quadrotor whose
+        pilot closed their laptop climbs at full power until it leaves the map.
+        """
         self._defaults[_base(action.agent)] = list(action.command)
 
     def _spawn_agent(self, action):
+        """Add an agent to the running world.
+
+        The environment appends ``-id0`` to every agent name and keys its own
+        dictionaries on the result, while dynamics and published state use the
+        base name. Both are maintained here.
+
+        The dynamics model is built the same way :mod:`biguasim.environments`
+        builds one at load time, because an agent spawned into a running world
+        should be indistinguishable from one that started in it.
+        """
         agent = _base(action.agent)
         if agent in self._controls:
             raise WorldError("agent already exists: {!r}".format(agent))
@@ -487,6 +519,11 @@ class World:
         self._owner.pop(("agent", agent), None)
 
     def _add_sensor(self, action):
+        """Attach a sensor to a running agent, under a name the world chooses.
+
+        Returns:
+            :obj:`str`: The name actually used.
+        """
         agent = _base(action.agent)
         full_name = agent + "-id0"
         engine_agent = self._env.agents.get(full_name)
@@ -543,6 +580,11 @@ class World:
         return int(every)
 
     def _remove_sensor(self, action):
+        """Detach a sensor.
+
+        The shared memory behind it is released at the end of the tick rather
+        than now -- see :meth:`biguasim.biguasimclient.BiguaSimClient.free`.
+        """
         agent = _base(action.agent)
         engine_agent = self._env.agents.get(agent + "-id0")
         if engine_agent is None or action.sensor_name not in engine_agent.sensors:
@@ -553,16 +595,24 @@ class World:
         self._owner.pop(("sensor", agent, action.sensor_name), None)
 
     def _rotate_sensor(self, action):
+        """Re-aim a sensor. The engine applies it within about three ticks."""
         self._env._enqueue_command(RotateSensorCommand(
             _base(action.agent) + "-id0", action.sensor_name, list(action.rotation)))
 
     def _set_weather(self, action):
+        """Change the weather.
+
+        Weather is entirely command-driven, so replaying the same actions into a
+        viewer's local world syncs its weather for free.
+        """
         self._env.weather.set_weather(action.weather)
 
     def _set_day_time(self, action):
+        """Set the hour of day, 0-23."""
         self._env.weather.set_day_time(action.hour)
 
     def _set_fog_density(self, action):
+        """Set fog density, 0-1."""
         self._env.weather.set_fog_density(action.density)
 
     _HANDLERS = {

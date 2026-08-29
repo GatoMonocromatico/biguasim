@@ -73,6 +73,18 @@ class RemoteWorld:
         return self._info
 
     def _request(self, message):
+        """Send a request and wait for its reply.
+
+        Failure notices and collision corrections arrive unprompted on this same
+        socket and can overtake a reply, so they are set aside as they appear
+        rather than mistaken for one.
+
+        Returns:
+            :obj:`dict`: The reply.
+
+        Raises:
+            RemoteError: If nothing answered within the timeout.
+        """
         message = dict(message, client_id=self._client_id)
         self._requests.send(proto.pack(message))
 
@@ -202,6 +214,7 @@ class RemoteWorld:
                 self._events.append(message)
 
     def _take(self, kind):
+        """Remove and return buffered events of one kind."""
         self._pump_events()
         taken = [e for e in self._events if e.get("event") == kind]
         self._events = [e for e in self._events if e.get("event") != kind]
