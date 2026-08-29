@@ -657,6 +657,10 @@ class BiguaSimEnvironment:
             self._client.release()
             self._client.acquire(self._timeout)
 
+            # The engine has now handled this tick's commands, so any sensor
+            # blocks retired during it are safe to unmap.
+            self._client.drain_pending_frees()
+
             state = self._default_state_fn()
             
             #Clock will not advance if the tick_clock is false (pre_start_steps in reset() so clock starts at 0)

@@ -25,6 +25,7 @@ class BiguaSimClient:
         self.command_center = None
 
         self._memory = dict()
+        self._pending_free = []
         self._sensors = dict()
         self._agents = dict()
         self._settings = dict()
@@ -122,34 +123,70 @@ class BiguaSimClient:
             or self._memory[key].shape != shape
             or self._memory[key].dtype != dtype
         ):
+            # Drop the outgoing mapping rather than letting it fall out of scope
+            # unreleased. close() rather than unlink() so the file -- and the
+            # inode the engine mapped -- survives the reallocation.
+            outgoing = self._memory.pop(key, None)
+            if outgoing is not None:
+                outgoing.close()
+
             self._memory[key] = Shmem(key, shape, dtype, self._uuid)
 
         return self._memory[key].np_array
     
-    # def free(self, key):
-    #     mm = self._memory[key]._mem_pointer
-    #     # print(b"\x00" * self._memory[key]._mem_pointer.size())
-    #     mm.seek(24)  # Move to position 24
-    #     remaining_size = mm.size() - 24
-    #     mm.write(b'\x00' * remaining_size)  # Clear only the remaining part
-    #     mm.flush()
-    #     # print()
+    def defer_free(self, key):
+        """Queue a block for release at the end of the current tick.
+
+        The engine only drops its mapping when it processes the RemoveSensor
+        command sitting in this tick's command buffer, so the actual free has to
+        wait until that tick has completed.
+
+        Args:
+            key (:obj:`str`): The key identifying the block.
+        """
+        if key not in self._pending_free:
+            self._pending_free.append(key)
+
+    def drain_pending_frees(self):
+        """Release every block queued by :meth:`defer_free`.
+
+        Called by the environment once a tick has completed and the engine has
+        therefore let go of the blocks in question.
+
+        Returns:
+            :obj:`int`: How many blocks were released.
+        """
+        pending, self._pending_free = self._pending_free, []
+        for key in pending:
+            self.free(key)
+        return len(pending)
+
+    def clear(self, key):
+        """Zero a shared memory block, keeping it mapped.
+
+        Used when the world resets: the engine still holds this block, so the
+        contents are wiped but the mapping is left intact. See :meth:`free` for
+        genuine release.
+
+        Args:
+            key (:obj:`str`): The key identifying the block.
+        """
+        mem = self._memory.get(key)
+        if mem is not None:
+            mem.clear()
 
     def free(self, key):
-        mem = self._memory.get(key)
-        if mem is None:
-            return
+        """Release a shared memory block and drop it from the local table.
 
-        mm = mem._mem_pointer
+        Only call this once the engine has released its own mapping, i.e. after
+        the tick carrying the matching RemoveSensor command. Freeing a block the
+        engine still holds detaches the two sides silently.
 
-        try:
-            size = mm.size()
-        except (ValueError, OSError):
-            return  # already closed
-
-        if size < 24:
-            return  # nothing to clean safely
-
-        mm.seek(24)
+        Args:
+            key (:obj:`str`): The key identifying the block.
+        """
+        mem = self._memory.pop(key, None)
+        if mem is not None:
+            mem.unlink()
 
 

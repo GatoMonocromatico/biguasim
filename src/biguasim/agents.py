@@ -155,10 +155,15 @@ class BiguaSimAgent:
             sensor_defs = [sensor_defs]
 
         for sensor_def in sensor_defs:
-            self.sensors.pop(sensor_def.sensor_name, None)
+            sensor = self.sensors.pop(sensor_def.sensor_name, None)
             self.agent_state_dict.pop(sensor_def.sensor_name, None)
             command_to_send = RemoveSensorCommand(self.name, sensor_def.sensor_name)
             self._client.command_center.enqueue_command(command_to_send)
+
+            if sensor is not None:
+                # The engine keeps this block mapped until it handles the command
+                # above, so the release waits for the end of that tick.
+                self._client.defer_free(sensor.key)
 
     def has_camera(self):
         """Indicatates whether this agent has a camera or not.

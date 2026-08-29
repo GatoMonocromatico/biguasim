@@ -101,7 +101,30 @@ class BiguaSimSensor:
         command_to_send = RotateSensorCommand(self.agent_name, self.name, rotation)
         self._client.command_center.enqueue_command(command_to_send)
 
+    @property
+    def key(self):
+        """The shared memory key backing this sensor's data buffer.
+
+        Returns:
+            :obj:`str`: The key, as passed to :meth:`~biguasim.biguasimclient.BiguaSimClient.malloc`
+        """
+        return self._key
+
     def reset(self):
+        """Zero this sensor's buffer, keeping it mapped.
+
+        Called when the world resets. The engine still holds this block, so the
+        contents are wiped but the mapping is left alone.
+        """
+        self._client.clear(self._key)
+
+    def destroy(self):
+        """Release this sensor's shared memory for good.
+
+        Only valid once the engine has processed the matching RemoveSensor
+        command -- see :meth:`biguasim.agents.BiguaSimAgent.remove_sensors`,
+        which defers this to the end of the tick rather than calling it directly.
+        """
         self._client.free(self._key)
 
 
