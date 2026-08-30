@@ -95,6 +95,49 @@ Leaving the ``with`` block says goodbye properly. That matters; see
 `Disconnection`_.
 
 
+Steering: two paths, and when each is wrong
+===========================================
+
+:meth:`~biguasim.client.remote.RemoteWorld.set_control` waits for the world to
+acknowledge the command. That is what you want when you are placing a vehicle
+and care whether it worked, and it is what the example above uses.
+
+It is also a full round trip, which caps how often a client can steer at
+``1/RTT``. For a script nudging a vehicle every few seconds that is invisible.
+For a flight controller closing a loop at the world's tick rate it is fatal: at
+200 ticks per second on a 5 ms link, waiting for acks alone would hold the loop
+to 200 Hz on paper and far less in practice.
+
+:meth:`~biguasim.client.remote.RemoteWorld.stream_control` sends and moves on::
+
+   while flying:
+       world.stream_control("uav1", motor_speeds)
+
+Nothing is lost by not waiting. Control is latest-wins under zero-order hold, so
+a command that is dropped is superseded rather than missed -- which is also what
+a real vehicle does with a missed setpoint. A command the world *rejects* still
+surfaces, asynchronously, through
+:meth:`~biguasim.client.remote.RemoteWorld.failures`.
+
+The reason this works at all is that the two directions are not symmetric:
+
+===============  ===========================  ===========================
+path             shape                        what latency costs
+===============  ===========================  ===========================
+state            world to client, streamed    a constant offset, no rate
+control          client to world, no reply    delay before it takes effect
+===============  ===========================  ===========================
+
+State is published every tick and pipelined, so a client reads ticks at the rate
+the world produces them no matter how far away it is. Only the control direction
+pays for distance, and it pays in *delay* rather than in *rate* -- the vehicle
+responds a few ticks later, exactly as it would with a slow ESC.
+
+That distinction is what makes an external flight controller possible at all.
+Anything with a serial round-trip dependency has to stay local; anything that
+streams can cross a network.
+
+
 The build check
 ===============
 

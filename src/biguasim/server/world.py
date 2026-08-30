@@ -443,6 +443,11 @@ class World:
                 location=spec.get("location", (0, 0, 0)),
                 rotation=spec.get("rotation", (0, 0, 0)),
                 config=spec.get("configuration"),
+                # Spawn-time sensors get the same rate divider a later
+                # AddSensor would. Without this a camera declared at 10 Hz
+                # renders every tick -- at 200 ticks/sec that is twenty times
+                # the intended load, paid by every client in the world.
+                tick_every=self._tick_every(spec.get("Hz")),
             )
             for spec in action.sensors
         ]

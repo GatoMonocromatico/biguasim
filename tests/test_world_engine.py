@@ -227,3 +227,34 @@ def test_an_impossible_spawn_does_not_kill_the_world(world):
     assert "NoSuchVehicle9000" in failures[0][2]
     assert world.tick > before, "the world must have kept ticking"
     assert "bogus" not in world.agents
+
+
+def test_spawn_time_sensors_honour_their_rate(world):
+    """A rate declared at spawn has to mean the same as one added later.
+
+    AddSensor passed Hz through to a tick divider; SpawnAgent silently did not,
+    so a camera declared at 10 Hz in a scenario rendered on every tick. At the
+    200 ticks/sec an ArduPilot bridge runs at, that is twenty times the
+    intended render load -- paid by every client in the world, not just the one
+    that asked for it.
+    """
+    rate = world._env._ticks_per_sec          # 20 in this scenario
+    hz = rate / 4                             # every fourth tick
+
+    world.submit(act.SpawnAgent(
+        client_id="alice", target_tick=world.next_tick, agent="uav7",
+        agent_type="DjiMatrice", location=(20.0, 0.0, 25.0),
+        sensors=[DYNAMICS, {"sensor_type": "IMUSensor", "socket": "IMUSocket",
+                            "Hz": hz}]))
+    run_to(world, world.tick + 5)
+
+    start = world.tick
+    seen = 0
+    while world.tick < start + 20:
+        state = world.step()
+        frames = state.get("uav7")
+        if frames and "IMUSensor" in frames[0]:
+            seen += 1
+
+    # Exactly a divider, not an approximation: 20 ticks at every fourth.
+    assert seen == 5, "IMU sampled {} times in 20 ticks, expected 5".format(seen)

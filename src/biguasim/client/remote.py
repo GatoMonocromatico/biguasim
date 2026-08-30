@@ -57,6 +57,10 @@ class RemoteWorld:
         self._seq = 0
         self._events = []
         self._info = None
+        # Submits sent without waiting for their ack. Replies carry no
+        # correlation id, so _request would otherwise hand back one of
+        # these instead of the answer it is waiting for.
+        self._unacked = 0
 
         ctx = zmq.Context.instance()
         self._requests = ctx.socket(zmq.DEALER)
@@ -112,6 +116,10 @@ class RemoteWorld:
             # reply, so they are set aside rather than mistaken for one.
             if reply.get("event"):
                 self._events.append(reply)
+                continue
+            if self._unacked:
+                # An ack for a stream_control() nobody is waiting on.
+                self._unacked -= 1
                 continue
             return reply
 
@@ -191,6 +199,47 @@ class RemoteWorld:
         """Drive an agent. Held until superseded."""
         return self.submit(act.SetControl(agent=agent, command=list(command)))[0]
 
+    def stream_control(self, agent, command):
+        """Drive an agent without waiting for the world to acknowledge it.
+
+        :meth:`set_control` costs a full round trip, which caps how often a
+        client can steer at ``1/RTT``. That is fine for a script placing a
+        vehicle and fatal for a flight controller closing a loop at the world's
+        tick rate -- so this sends and moves on.
+
+        Nothing is lost by not waiting. Control is latest-wins under
+        zero-order hold, so a dropped command is superseded rather than
+        missed, and a rejected one still surfaces through :meth:`failures`.
+
+        Args:
+            agent (:obj:`str`): Whose controls to set.
+            command (sequence of :obj:`float`): The command.
+        """
+        self._seq += 1
+        payload = dict(
+            act.encode(act.SetControl(agent=agent, command=list(command))),
+            seq=self._seq, client_id=self._client_id)
+        self._requests.send(proto.pack({
+            "op": proto.OP_SUBMIT,
+            "actions": [payload],
+            "client_id": self._client_id,
+        }))
+        self._unacked += 1
+        self._drain_acks()
+
+    def _drain_acks(self):
+        """Clear replies owed to :meth:`stream_control`, without blocking.
+
+        Left unread they would fill the socket's queue and, worse, be handed
+        to the next :meth:`_request` as its answer.
+        """
+        while self._unacked and self._requests.poll(0):
+            reply = proto.unpack(self._requests.recv())
+            if reply.get("event"):
+                self._events.append(reply)
+            else:
+                self._unacked -= 1
+
     def set_control_defaults(self, agent, command):
         """What this agent should do if this client disappears."""
         return self.submit(act.SetControlDefaults(agent=agent,
@@ -223,6 +272,10 @@ class RemoteWorld:
             message = proto.unpack(self._requests.recv())
             if message.get("event"):
                 self._events.append(message)
+            elif self._unacked:
+                # A stream_control() ack. Counted off here as well as in
+                # _drain_acks, or _request would later skip a real reply.
+                self._unacked -= 1
 
     def _take(self, kind):
         """Remove and return buffered events of one kind."""
