@@ -35,6 +35,27 @@ OP_BYE = "bye"
 OP_PING = "ping"
 
 
+def endpoint(address, port):
+    """Build a ZeroMQ ``tcp://`` endpoint, bracketing IPv6 literals.
+
+    An IPv6 address is full of colons, and so is the ``host:port`` separator.
+    ``tcp://2804:60:114::1:8770`` is unparseable for that reason, so the address
+    part has to be wrapped in brackets. Hostnames and IPv4 addresses are left
+    alone, and an address that is already bracketed is not bracketed twice.
+
+    Args:
+        address (:obj:`str`): Host, IPv4 literal, IPv6 literal, or ``*``.
+        port (:obj:`int`): Port number.
+
+    Returns:
+        :obj:`str`: The endpoint.
+    """
+    address = str(address)
+    if ":" in address and not address.startswith("["):
+        address = "[{}]".format(address)
+    return "tcp://{}:{}".format(address, port)
+
+
 def sensor_topic(agent, sensor):
     """The topic a given sensor publishes on.
 

@@ -136,6 +136,64 @@ disconnection and one that does not. Which you want depends on the agent, so the
 world does not guess.
 
 
+Reaching a world from another machine
+=====================================
+
+The service binds all interfaces by default, so a world is already reachable
+from anywhere that can route to the machine serving it. Nothing needs enabling;
+what varies is whether a route exists.
+
+.. code-block:: console
+
+   $ python tools/watch_world.py --address 192.168.2.118 --port 8770
+
+Both IPv4 and IPv6 are accepted. ZeroMQ disables IPv6 per socket unless told
+otherwise -- an IPv6 address would otherwise be accepted, connected to, and
+silently never reach anything -- so it is switched on explicitly, and the
+wildcard bind is then dual-stack. ``--ipv4-only`` turns it off.
+
+An IPv6 address may be given plainly. The brackets ZeroMQ needs, because an IPv6
+address is as full of colons as the ``host:port`` separator, are added for you:
+
+.. code-block:: console
+
+   $ python tools/watch_world.py --address 2804:60:114:8b00::1 --port 8770
+
+Across the internet
+-------------------
+
+A private IPv4 address -- ``192.168.x.x``, ``10.x.x.x`` -- means nothing outside
+its own network, and a home router has no way to know which machine an unsolicited
+inbound packet belongs to. Three ways round that, in order of how well they work:
+
+**An overlay network** (Tailscale, ZeroTier) gives every enrolled machine a
+stable address that works from anywhere, and handles the traversal itself. It is
+also encrypted and authenticated, which matters here; see the warning below.
+Nothing in BiguaSim needs configuring -- use the overlay address.
+
+**IPv6**, if the ISP provides it, gives the machine a globally routable address
+with no translation in front of it at all. Home routers still firewall inbound
+IPv6 by default, but that is a rule to permit rather than an address to forward.
+
+**A public IPv4 address**, from an ISP that will sell one, or a rented machine in
+a datacentre. Increasingly ISPs place customers behind carrier-grade NAT, in
+which case no amount of router configuration will help and one has to be
+requested.
+
+.. danger::
+
+   This protocol has **no encryption and no authentication**. ``client_id`` is
+   whatever a client claims it is, and that includes claiming to be an
+   administrator listed in ``--admin`` -- so anyone who can reach the port can
+   take the world over.
+
+   That is a reasonable design for a trusted or overlay network, where the
+   network itself does the authenticating. It is not safe on a public address.
+   Do not port-forward or firewall-open a world to the open internet as it
+   stands; put it behind an overlay network instead, or add transport security
+   first. ZeroMQ's CURVE mechanism is the natural fit.
+
+
 Watching one
 ============
 

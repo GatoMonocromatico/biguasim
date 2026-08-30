@@ -38,6 +38,10 @@ def main():
                         help="client id exempt from ownership; repeatable")
     parser.add_argument("--viewport", action="store_true",
                         help="show the engine window on this machine")
+    parser.add_argument("--ipv4-only", action="store_true",
+                        help="refuse IPv6. On by default because ZeroMQ ignores "
+                             "IPv6 unless told otherwise, and the wildcard bind "
+                             "is dual-stack, so allowing it costs nothing")
     args = parser.parse_args()
 
     fps = args.rate if args.fps is None else args.fps
@@ -62,14 +66,20 @@ def main():
     service = WorldService(scenario, port=args.port, bind=args.bind,
                            input_delay=args.input_delay,
                            admin_clients=set(args.admin),
+                           ipv6=not args.ipv4_only,
                            show_viewport=args.viewport)
 
     signal.signal(signal.SIGINT, lambda *_: service.stop())
     signal.signal(signal.SIGTERM, lambda *_: service.stop())
 
-    print("{}/{} serving on {}:{} (state on {}), {} Hz{}".format(
+    print("{}/{} serving on {}:{} (state on {}), {} Hz{}{}".format(
         args.package, args.world, args.bind, args.port, args.port + 1,
-        args.rate, "" if fps else ", uncapped"))
+        args.rate, "" if fps else ", uncapped",
+        "" if args.ipv4_only else ", IPv4 and IPv6"))
+    if not args.ipv4_only:
+        print("note: this protocol has no authentication -- client_id is "
+              "whatever a client claims. Keep it to a trusted or overlay "
+              "network rather than a public address.")
     print("agents at start: {}".format(service.world.agents or "none"))
     try:
         service.run()

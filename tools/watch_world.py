@@ -22,7 +22,9 @@ def main():
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--package", default="SkyDive")
     parser.add_argument("--world", default="Pier-Harbor")
-    parser.add_argument("--address", default="127.0.0.1")
+    parser.add_argument("--address", default="127.0.0.1",
+                        help="host of the world; an IPv6 address may be given "
+                             "plainly, without brackets")
     parser.add_argument("--port", type=int, default=8770)
     parser.add_argument("--name", default="viewer", help="how to identify")
     parser.add_argument("--fps", type=float, default=60.0)
@@ -31,6 +33,8 @@ def main():
                              "smoother over a worse connection")
     parser.add_argument("--seconds", type=float, help="stop after this long")
     parser.add_argument("--headless", action="store_true")
+    parser.add_argument("--ipv4-only", action="store_true",
+                        help="refuse IPv6")
     args = parser.parse_args()
 
     scenario = {"package_name": args.package, "world": args.world,
@@ -39,6 +43,7 @@ def main():
 
     viewer = Viewer(scenario, address=args.address, port=args.port,
                     delay=args.delay, client_id=args.name,
+                    ipv6=not args.ipv4_only,
                     show_viewport=not args.headless)
     try:
         info = viewer.connect()

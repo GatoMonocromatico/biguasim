@@ -41,11 +41,12 @@ class Viewer:
         delay (:obj:`float`, optional): Snapshot intervals to draw behind.
             Defaults to 1.5.
         client_id (:obj:`str`, optional): How to identify to the world.
+        ipv6 (:obj:`bool`, optional): Allow IPv6. Defaults to True.
         **make_kwargs: Passed to :func:`biguasim.make` for the local engine.
     """
 
     def __init__(self, scenario_cfg, address="127.0.0.1", port=8770,
-                 delay=1.5, client_id=None, **make_kwargs):
+                 delay=1.5, client_id=None, ipv6=True, **make_kwargs):
         local = dict(scenario_cfg)
         # Puppets are created as the roster is discovered, so nothing is
         # assumed about who is in the world when the viewer opens.
@@ -61,7 +62,7 @@ class Viewer:
 
         self._remote = RemoteWorld(address=address, port=port,
                                    client_id=client_id or "viewer",
-                                   scenario_cfg=scenario_cfg)
+                                   scenario_cfg=scenario_cfg, ipv6=ipv6)
         self._buffer = PoseBuffer(delay=delay)
         self._puppets = {}          # agent name -> vehicle type, as drawn
         self._types = {}            # agent name -> vehicle type, as announced

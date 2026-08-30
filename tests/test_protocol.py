@@ -38,3 +38,36 @@ def test_build_id_distinguishes_package_and_world(changed):
 def test_build_id_is_stable():
     cfg = {"package_name": "SkyDive", "world": "Pier-Harbor"}
     assert proto.build_id(cfg) == proto.build_id(dict(cfg))
+
+
+@pytest.mark.parametrize("address, expected", [
+    ("127.0.0.1", "tcp://127.0.0.1:8770"),
+    ("100.101.40.22", "tcp://100.101.40.22:8770"),
+    ("example.com", "tcp://example.com:8770"),
+    ("*", "tcp://*:8770"),
+])
+def test_endpoints_without_colons_are_left_alone(address, expected):
+    assert proto.endpoint(address, 8770) == expected
+
+
+@pytest.mark.parametrize("address, expected", [
+    ("::", "tcp://[::]:8770"),
+    ("::1", "tcp://[::1]:8770"),
+    ("2804:60:114:8b00::1", "tcp://[2804:60:114:8b00::1]:8770"),
+    ("2804:60:114:8b00:48e5:b380:dbff:bd2f",
+     "tcp://[2804:60:114:8b00:48e5:b380:dbff:bd2f]:8770"),
+])
+def test_ipv6_literals_are_bracketed(address, expected):
+    """An IPv6 address is all colons, and so is the host:port separator.
+
+    Without brackets ``tcp://2804:60:114::1:8770`` cannot be parsed at all.
+    """
+    assert proto.endpoint(address, 8770) == expected
+
+
+def test_already_bracketed_addresses_are_not_bracketed_twice():
+    assert proto.endpoint("[2804::1]", 8770) == "tcp://[2804::1]:8770"
+
+
+def test_the_state_port_is_one_above_the_request_port():
+    assert proto.endpoint("::1", 8771) == "tcp://[::1]:8771"

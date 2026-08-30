@@ -41,11 +41,28 @@ class WorldService:
         recorder (:class:`~biguasim.server.recording.Recorder`, optional): If
             given, every action and periodic keyframes are written to it, and
             the run can be replayed later.
+        ipv6 (:obj:`bool`, optional): Accept IPv6 as well as IPv4. Defaults to
+            True. ZeroMQ disables IPv6 on a socket unless told otherwise, and
+            with it enabled the wildcard bind is dual-stack, so this costs
+            nothing and is the difference between being reachable from a machine
+            with only IPv6 and not.
         **world_kwargs: Passed to :class:`~biguasim.server.world.World`.
+
+    .. note::
+
+       Enabling IPv6 does not expose anything by itself. A home router firewalls
+       inbound IPv6 by default -- that is a firewall rule rather than address
+       translation, so unlike IPv4 there is nothing to forward, only something to
+       permit. Nothing is reachable from outside until you permit it.
+
+       Before doing so, note that this protocol has no encryption and no
+       authentication: ``client_id`` is whatever a client says it is, including
+       an administrator's. That is fine on a trusted or overlay network and is
+       not fine on a public address.
     """
 
     def __init__(self, scenario_cfg, port=8770, bind="*", admin_clients=None,
-                 record=None, recorder=None, **world_kwargs):
+                 record=None, recorder=None, ipv6=True, **world_kwargs):
         self._build = proto.build_id(scenario_cfg)
         self._recorder = recorder
         if recorder is not None and record is None:
@@ -55,9 +72,13 @@ class WorldService:
 
         self._ctx = zmq.Context.instance()
         self._requests = self._ctx.socket(zmq.ROUTER)
-        self._requests.bind("tcp://{}:{}".format(bind, port))
         self._publish = self._ctx.socket(zmq.PUB)
-        self._publish.bind("tcp://{}:{}".format(bind, port + 1))
+        for socket in (self._requests, self._publish):
+            # Must be set before binding; ZeroMQ reads it when it creates the
+            # underlying socket and ignores it afterwards.
+            socket.setsockopt(zmq.IPV6, 1 if ipv6 else 0)
+        self._requests.bind(proto.endpoint(bind, port))
+        self._publish.bind(proto.endpoint(bind, port + 1))
 
         self._clients = {}          # client id -> last seen time
         self._identities = {}       # client id -> ROUTER identity

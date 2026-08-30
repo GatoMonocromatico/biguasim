@@ -36,10 +36,19 @@ class RemoteWorld:
             queue before old ones are dropped. Small is right for watching --
             a viewer wants the present, not a backlog it will never catch up
             with. Raise it for a recorder, which wants every message.
+        ipv6 (:obj:`bool`, optional): Allow IPv6. Defaults to True. ZeroMQ
+            disables it per socket unless told otherwise, so without this an
+            IPv6 address is accepted, connected to, and silently never reaches
+            anything.
+
+    An IPv6 address may be given plainly; the brackets ZeroMQ needs are added
+    for you::
+
+        RemoteWorld(address="2804:60:114:8b00::1", port=8770)
     """
 
     def __init__(self, address="127.0.0.1", port=8770, client_id=None,
-                 scenario_cfg=None, timeout=5.0, stream_backlog=64):
+                 scenario_cfg=None, timeout=5.0, stream_backlog=64, ipv6=True):
         self._address = address
         self._port = port
         self._client_id = client_id or "client-{:x}".format(id(self) & 0xFFFFFF)
@@ -51,14 +60,16 @@ class RemoteWorld:
 
         ctx = zmq.Context.instance()
         self._requests = ctx.socket(zmq.DEALER)
-        self._requests.setsockopt(zmq.LINGER, 0)
-        self._requests.connect("tcp://{}:{}".format(address, port))
         self._stream = ctx.socket(zmq.SUB)
-        self._stream.setsockopt(zmq.LINGER, 0)
+        for socket in (self._requests, self._stream):
+            socket.setsockopt(zmq.LINGER, 0)
+            # Set before connecting; ZeroMQ only reads it at socket creation.
+            socket.setsockopt(zmq.IPV6, 1 if ipv6 else 0)
         # Bounded on purpose: a client slower than the world should lose old
         # messages rather than accumulate a backlog it reads as if it were now.
         self._stream.setsockopt(zmq.RCVHWM, int(stream_backlog))
-        self._stream.connect("tcp://{}:{}".format(address, port + 1))
+        self._requests.connect(proto.endpoint(address, port))
+        self._stream.connect(proto.endpoint(address, port + 1))
 
     # ------------------------------------------------------------- plumbing
 
