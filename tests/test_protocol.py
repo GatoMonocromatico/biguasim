@@ -71,3 +71,68 @@ def test_already_bracketed_addresses_are_not_bracketed_twice():
 
 def test_the_state_port_is_one_above_the_request_port():
     assert proto.endpoint("::1", 8771) == "tcp://[::1]:8771"
+
+
+def _install(tmp_path, monkeypatch, worlds, version="1.0.0", indent=None):
+    """Write a fake installed package config and point build_id at it."""
+    import json
+    root = tmp_path / ".local" / "share" / "biguasim" / "1.0.0" / "worlds" / "SkyDive"
+    root.mkdir(parents=True, exist_ok=True)
+    (root / "config.json").write_text(json.dumps(
+        {"name": "SkyDive", "platform": "Linux", "version": version,
+         "path": "Linux/Biguasim/Binaries/Linux/Holodeck", "worlds": worlds},
+        indent=indent))
+    monkeypatch.setattr(proto.os.path, "expanduser",
+                        lambda p: str(tmp_path / ".local" / "share" / "biguasim")
+                        if "biguasim" in p else p)
+    return {"package_name": "SkyDive", "world": "Pier-Harbor"}
+
+
+PIER = {"name": "Pier-Harbor", "pre_start_steps": 20,
+        "env_min": [-500.0, -500.0, -100.0], "env_max": [500.0, 500.0, 100.0]}
+BRIDGE = {"name": "Bridge", "pre_start_steps": 20,
+          "env_min": [-200, -200, -50.0], "env_max": [200.0, 200.0, 50.0]}
+EXTRA = {"name": "Aquatec_full", "pre_start_steps": 20,
+         "env_min": [-500.0, -500.0, -100.0], "env_max": [500.0, 500.0, 100.0]}
+
+
+def test_an_unrelated_extra_world_does_not_change_the_build_id(tmp_path, monkeypatch):
+    """Having another world installed says nothing about this one's geometry.
+
+    Hashing the whole config file made this a false alarm, which refused
+    connections between machines whose Pier-Harbor was byte-identical.
+    """
+    cfg = _install(tmp_path, monkeypatch, [BRIDGE, PIER])
+    without = proto.build_id(cfg)
+    cfg = _install(tmp_path, monkeypatch, [BRIDGE, PIER, EXTRA])
+    assert proto.build_id(cfg) == without
+
+
+def test_formatting_does_not_change_the_build_id(tmp_path, monkeypatch):
+    cfg = _install(tmp_path, monkeypatch, [PIER], indent=None)
+    compact = proto.build_id(cfg)
+    cfg = _install(tmp_path, monkeypatch, [PIER], indent=4)
+    assert proto.build_id(cfg) == compact
+
+
+def test_a_changed_world_definition_does_change_the_build_id(tmp_path, monkeypatch):
+    """The case the check exists for: different geometry for the same name."""
+    cfg = _install(tmp_path, monkeypatch, [PIER])
+    original = proto.build_id(cfg)
+    moved = dict(PIER, env_max=[9999.0, 9999.0, 100.0])
+    cfg = _install(tmp_path, monkeypatch, [moved])
+    assert proto.build_id(cfg) != original
+
+
+def test_a_different_package_version_does_change_the_build_id(tmp_path, monkeypatch):
+    cfg = _install(tmp_path, monkeypatch, [PIER], version="1.0.0")
+    original = proto.build_id(cfg)
+    cfg = _install(tmp_path, monkeypatch, [PIER], version="1.1.0")
+    assert proto.build_id(cfg) != original
+
+
+def test_a_missing_world_does_change_the_build_id(tmp_path, monkeypatch):
+    cfg = _install(tmp_path, monkeypatch, [PIER])
+    present = proto.build_id(cfg)
+    cfg = _install(tmp_path, monkeypatch, [BRIDGE])
+    assert proto.build_id(cfg) != present

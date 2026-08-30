@@ -16,6 +16,7 @@ positions: this is not the bandwidth that matters, and a readable log is worth
 more than the bytes.
 """
 import hashlib
+import json
 import os
 
 import msgpack
@@ -87,11 +88,17 @@ def build_id(scenario_cfg):
     one -- and nothing about that failure looks like a version problem. Cheaper
     to refuse the connection.
 
+    Only what actually determines geometry is compared: the package version and
+    platform, and the definition of the world being used. Deliberately not the
+    whole config file -- two machines can have the same build of Pier-Harbor
+    while one of them also happens to have another world installed, and refusing
+    that connection would be a false alarm.
+
     Args:
         scenario_cfg (:obj:`dict`): The scenario the world was built from.
 
     Returns:
-        :obj:`str`: A digest of the package, world and installed world config.
+        :obj:`str`: A digest identifying the world build in use.
     """
     package = scenario_cfg.get("package_name", "")
     world = scenario_cfg.get("world", "")
@@ -104,10 +111,21 @@ def build_id(scenario_cfg):
         package, "config.json")
     try:
         with open(config, "rb") as handle:
-            digest.update(handle.read())
-    except OSError:
+            installed = json.loads(handle.read().decode("utf-8"))
+    except (OSError, ValueError):
         # Not installed here, or installed somewhere else. The package and
         # world names still have to match, which is the common failure.
         digest.update(b"<no local config>")
+    else:
+        digest.update(str(installed.get("version", "")).encode())
+        digest.update(str(installed.get("platform", "")).encode())
+
+        entry = next(
+            (w for w in installed.get("worlds", [])
+             if isinstance(w, dict) and w.get("name") == world), None)
+        # Canonicalised, so formatting and key order cannot cause a false alarm.
+        digest.update(json.dumps(entry, sort_keys=True,
+                                 separators=(",", ":")).encode()
+                      if entry is not None else b"<world not in package>")
 
     return "{}:{}:{}".format(package, world, digest.hexdigest()[:12])
