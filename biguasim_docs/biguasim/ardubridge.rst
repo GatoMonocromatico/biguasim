@@ -31,6 +31,13 @@ Runner
    :undoc-members:
    :show-inheritance:
 
+Remote runner
+-------------
+.. automodule:: biguasim.ardubridge.remote_runner
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Frame
 -----
 .. automodule:: biguasim.ardubridge.frame

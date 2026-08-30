@@ -29,6 +29,7 @@ deterministic, and the engine is the only thing that can decide anything.
    running
    actions
    viewing
+   ardupilot
    recording
    external-dynamics
    design-notes
