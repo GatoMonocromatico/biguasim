@@ -130,9 +130,16 @@ def main():
         home.split("=")[-1] if "=" in home else home.split()[-1]))
     print("  match it or the EKF places the vehicle a long way from itself.")
     print()
-    print("Forward MAVLink to another machine with:")
-    print("  mavproxy.py --master tcp:127.0.0.1:{} --out tcpin:0.0.0.0:{}".format(
-        runner.mavlink_port, 14550 + args.instance))
+    # sim_vehicle already runs MAVProxy against tcp/5760, and SITL takes one
+    # client there, so a second MAVProxy cannot attach. Its only default output
+    # is 127.0.0.1:14550, which is why a GCS on another machine sees nothing.
+    print("To reach it from QGroundControl on another machine, add this to the")
+    print("sim_vehicle command above -- sim_vehicle already runs MAVProxy, and")
+    print("its only output is 127.0.0.1:14550, which no other machine can see:")
+    print("      --out=tcpin:0.0.0.0:{}".format(14551 + args.instance))
+    print()
+    print("  then in QGC: Application Settings, Comm Links, Add, type TCP,")
+    print("  host = this machine, port = {}.".format(14551 + args.instance))
     print()
 
     stopping = []

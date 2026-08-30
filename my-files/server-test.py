@@ -7,9 +7,10 @@ with RemoteWorld(address="100.119.211.18", port=8770, client_id="pilot", scenari
 
     landed = world.spawn_agent(
         "uav1", "DjiMatrice",
-        location=(0.0, 0.0, 5.0),
+        location=(3.0, 3.0, 5.0),
         sensors=[{"sensor_type": "DynamicsSensor", "socket": "IMUSocket",
                   "configuration": {"UseCOM": True, "UseRPY": False}}])
 
-    world.set_control("uav1", [330.0] * 4)
-    state = world.wait_for_tick(landed + 20)
+    while True:
+        state = world.wait_for_tick(landed + 100)
+        print(state["agents"]["uav0"]["position"])

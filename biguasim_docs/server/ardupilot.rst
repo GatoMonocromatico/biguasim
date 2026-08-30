@@ -212,17 +212,52 @@ for you, filled in, so it cannot drift out of step with the bridge::
    the usual 100 that means the world must tick at 180 or more, which is the
    other reason ``--rate 200`` above is not arbitrary.
 
-The pilot spawns ``uav0`` the moment SITL says hello. Point a GCS at
-``tcp:127.0.0.1:5760``, or forward it to another machine::
-
-   mavproxy.py --master tcp:127.0.0.1:5760 --out tcpin:0.0.0.0:14550
-
-``tcpin`` makes MAVProxy *listen* rather than dial, so the server never needs
-to know where you are -- which also means it keeps working when your address
-changes.
+The pilot spawns ``uav0`` the moment SITL says hello.
 
 Watch it from anywhere with ``tools/watch_world.py``, which needs nothing from
 the pilot: the vehicle is in the world like any other.
+
+
+Reaching SITL from a GCS on another machine
+-------------------------------------------
+
+``sim_vehicle.py`` **already starts MAVProxy**, connected to SITL with
+``--master tcp:127.0.0.1:5760``. That matters twice over:
+
+* SITL's MAVLink TCP port accepts one client, and MAVProxy is holding it. A
+  second ``mavproxy.py --master tcp:127.0.0.1:5760`` will not get in.
+* MAVProxy's only default output is ``--out 127.0.0.1:14550`` -- **localhost**.
+  Which is exactly why QGroundControl on another machine sees nothing at all.
+
+So add an output to the MAVProxy that is already running, on the
+``sim_vehicle.py`` command line. Either direction works; they differ only in
+who has to know whose address.
+
+**The server listens, and QGC dials in.** Nothing needs to know where you are,
+so it survives your address changing::
+
+   sim_vehicle.py ... --out=tcpin:0.0.0.0:14551
+
+Then in QGroundControl: *Application Settings, Comm Links, Add*, type **TCP**,
+host the server's tailnet name, port ``14551``. Connect.
+
+**Or the server pushes, and QGC listens.** QGC auto-connects to UDP on 14550,
+so there is nothing to configure at all -- but the server has to be told your
+address::
+
+   sim_vehicle.py ... --out=udp:<your-tailscale-ip>:14550
+
+Get that address with ``tailscale ip -4`` on the machine running QGC.
+
+.. note::
+
+   ``0.0.0.0`` binds every interface. On a host reachable only through a
+   tailnet that is fine; on one with a public address, bind the tailnet address
+   instead -- ``--out=tcpin:100.x.y.z:14551`` -- since nothing in MAVLink
+   authenticates anybody.
+
+Both forms are additive: MAVProxy keeps its console, its map and its localhost
+output, and simply sends to one more place.
 
 
 A second vehicle
