@@ -294,11 +294,19 @@ class World:
         # A client asking for something impossible -- driving an agent that was
         # killed a moment ago, say -- is ordinary traffic in a shared world, not
         # grounds for stopping it. The failure goes back to whoever asked.
+        #
+        # Every exception is caught, not just WorldError. A handler reaches into
+        # the environment and the engine, so it can raise anything at all, and a
+        # world that dies because one client asked for an agent type this build
+        # does not have is a world that any client can kill by accident. What
+        # the failure was matters to the client that caused it; that it happened
+        # at all must not matter to everyone else.
         error = None
         try:
             handler(self, action)
-        except WorldError as exc:
-            error = str(exc)
+        except Exception as exc:                              # noqa: BLE001
+            error = ("{}: {}".format(type(exc).__name__, exc)
+                     if not isinstance(exc, WorldError) else str(exc))
             self._errors.append((self._tick, action, error))
 
         if self._record is not None:

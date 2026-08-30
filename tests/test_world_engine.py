@@ -205,3 +205,25 @@ def test_the_world_loop_is_reproducible_across_processes(tmp_path):
     assert len(a.files) == 3, "expected uav0 dynamics, uav0 rangefinder, uav9 dynamics"
     for key in a.files:
         assert np.array_equal(a[key], b[key]), "{} diverged".format(key)
+
+
+def test_an_impossible_spawn_does_not_kill_the_world(world):
+    """A handler can raise anything, and none of it may stop the simulation.
+
+    Handlers reach into the environment and the engine, so they raise far more
+    than WorldError -- an agent type this build does not have surfaces as a
+    KeyError. Catching only WorldError meant any client could kill a world other
+    people were using, by accident, with one bad spawn.
+    """
+    world.submit(act.SpawnAgent(
+        client_id="hopeful", target_tick=world.next_tick, agent="bogus",
+        agent_type="NoSuchVehicle9000", sensors=[DYNAMICS]))
+
+    before = world.tick
+    run_to(world, before + 20)
+
+    failures = world.drain_errors()
+    assert len(failures) == 1
+    assert "NoSuchVehicle9000" in failures[0][2]
+    assert world.tick > before, "the world must have kept ticking"
+    assert "bogus" not in world.agents
