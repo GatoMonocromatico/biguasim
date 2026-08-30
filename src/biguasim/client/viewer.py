@@ -18,6 +18,8 @@ visibly.
 """
 import time
 
+import numpy as np
+
 import biguasim
 from biguasim.agents import AgentDefinition
 from biguasim.client.interpolation import PoseBuffer
@@ -82,6 +84,35 @@ class Viewer:
     def tick(self):
         """:obj:`int`: The newest world tick this viewer has seen."""
         return self._last_tick
+
+    def look_at(self, target, offset=(-4.0, -4.0, 2.0)):
+        """Place the camera once, aimed at a point in the world.
+
+        Deliberately one-shot. An earlier version re-aimed every frame to track
+        an agent, which meant the viewport was overwritten sixty times a second
+        and nobody could move the camera by hand. Placing it once and then
+        leaving it alone is what a viewer actually wants: a useful starting
+        vantage point, and then control.
+
+        Purely local either way -- the world is never told where anyone is
+        looking, which is why watching costs it nothing.
+
+        Args:
+            target (sequence of :obj:`float`): The point to look at.
+            offset (sequence of :obj:`float`, optional): Where to put the camera
+                relative to the target.
+        """
+        target = np.asarray(target, dtype=np.float64)
+        camera = target + np.asarray(offset, dtype=np.float64)
+
+        direction = target - camera
+        flat = float(np.hypot(direction[0], direction[1]))
+        rotation = [
+            0.0,
+            float(np.degrees(np.arctan2(direction[2], flat))),   # pitch
+            float(np.degrees(np.arctan2(direction[1], direction[0]))),  # yaw
+        ]
+        self._env.move_viewport(camera.tolist(), rotation)
 
     def connect(self):
         """Join the world and start listening for state.
@@ -227,21 +258,41 @@ class Viewer:
 
     # ----------------------------------------------------------------- run
 
-    def run(self, seconds=None, fps=60.0):
+    def run(self, seconds=None, fps=60.0, report_every=None):
         """Watch until stopped.
+
+        Ends quietly if the local engine goes away -- closing the render window
+        is a normal way to stop watching, not an error worth a stack trace.
 
         Args:
             seconds (:obj:`float`, optional): Stop after this long.
             fps (:obj:`float`, optional): Frames to draw per second. Drawing
                 faster than snapshots arrive is the point -- that is what the
                 interpolation is for.
+            report_every (:obj:`float`, optional): Seconds between progress
+                lines naming what is being drawn.
         """
         frame = 1.0 / fps if fps else 0.0
         deadline = None if seconds is None else time.time() + seconds
+        next_report = time.time() + (report_every or 0)
+        frames = 0
+
         while deadline is None or time.time() < deadline:
             started = time.time()
-            self.pump()
-            self.draw()
+            try:
+                self.pump()
+                drawn = self.draw()
+            except Exception as exc:                          # noqa: BLE001
+                print("stopped watching: {}: {}".format(type(exc).__name__, exc))
+                return
+            frames += 1
+
+            if report_every and started >= next_report:
+                next_report = started + report_every
+                print("  tick {}  drawing {}  ({} frames)".format(
+                    self.tick, sorted(self._puppets) or "nothing", frames),
+                    flush=True)
+
             slack = frame - (time.time() - started)
             if slack > 0:
                 time.sleep(slack)

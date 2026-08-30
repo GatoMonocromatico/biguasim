@@ -35,6 +35,13 @@ def main():
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--ipv4-only", action="store_true",
                         help="refuse IPv6")
+    parser.add_argument("--start-near", metavar="AGENT",
+                        help="place the camera near this agent once at startup, "
+                             "then leave it alone so you can fly it yourself")
+    parser.add_argument("--start-offset", metavar="X,Y,Z", default="-4,-4,2",
+                        help="camera position relative to --start-near")
+    parser.add_argument("--report", type=float, default=5.0, metavar="SECONDS",
+                        help="how often to print what is being drawn; 0 to hush")
     args = parser.parse_args()
 
     scenario = {"package_name": args.package, "world": args.world,
@@ -48,8 +55,21 @@ def main():
     try:
         info = viewer.connect()
         print("watching {}/{} at tick {}; agents: {}".format(
-            args.package, args.world, info["tick"], info["agents"] or "none"))
-        viewer.run(seconds=args.seconds, fps=args.fps)
+            args.package, args.world, info["tick"], info["agents"] or "none"),
+            flush=True)
+        if args.start_near:
+            for _ in range(40):                 # let a snapshot or two arrive
+                viewer.pump(0.05); viewer.draw()
+            pose = viewer._buffer.sample().get(args.start_near)
+            if pose is None:
+                print("no agent {!r} to start near".format(args.start_near), flush=True)
+            else:
+                offset = tuple(float(v) for v in args.start_offset.split(","))
+                viewer.look_at(pose["position"], offset=offset)
+                print("camera placed near {}; it is yours to move".format(
+                    args.start_near), flush=True)
+        viewer.run(seconds=args.seconds, fps=args.fps,
+                   report_every=args.report or None)
     finally:
         print("saw up to tick {}, drew {}".format(viewer.tick, sorted(viewer.puppets)))
         viewer.close()
