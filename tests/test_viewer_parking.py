@@ -8,7 +8,12 @@ even though the world goes on saying the agent is gone every tick.
 """
 import numpy as np
 
-from biguasim.client.viewer import GRAVEYARD, PARK_ATTEMPTS, Viewer
+from biguasim.client.viewer import PARK_ATTEMPTS, Viewer
+from biguasim.server.world import graveyard
+
+#: Bounds of CompetionMap, from the installed package config.
+ENV_MIN = [-200.0, -200.0, -50.0]
+GRAVEYARD = graveyard(ENV_MIN)
 
 
 class FakeSensor:
@@ -45,6 +50,7 @@ def viewer_with(agents):
     """A Viewer with only the fields the retirement path touches."""
     viewer = object.__new__(Viewer)
     viewer._env = FakeEnv(agents)
+    viewer._graveyard = GRAVEYARD
     viewer._puppets = {}
     viewer._parked = {}
     return viewer
@@ -92,6 +98,19 @@ def test_an_actor_created_after_retirement_is_still_parked():
     assert agent.sensors["DynamicsSensor"].sensor_data[8] == GRAVEYARD[2]
 
 
+def test_the_graveyard_is_inside_the_world_it_belongs_to():
+    """The bug the constant had: a fixed point is outside almost every world.
+
+    Every world declares its own box, and a teleport outside it is ignored
+    rather than refused -- so a graveyard that is not derived from these numbers
+    parks nothing and says nothing.
+    """
+    for env_min in ([-200.0, -200.0, -50.0], [-500.0, -500.0, -100.0],
+                    [-10, -10, -10]):
+        spot = graveyard(env_min)
+        assert all(spot[i] > env_min[i] for i in range(3)), spot
+
+
 def test_a_park_the_engine_ignores_is_reported(capsys):
     """Repeating a teleport does not surface one that will never be honoured."""
     agent = FakeAgent(z=5.0, movable=False)
@@ -104,7 +123,7 @@ def test_a_park_the_engine_ignores_is_reported(capsys):
 
     assert "uav0" not in viewer._parked, "gives up rather than retrying forever"
     warning = capsys.readouterr().out
-    assert "uav0" in warning and "world bounds" in warning
+    assert "uav0" in warning and "env_min/env_max" in warning
 
 
 def test_a_puppet_that_cannot_say_where_it_is_reports_differently(capsys):

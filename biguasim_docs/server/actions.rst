@@ -115,15 +115,34 @@ Killing an agent
 
 The engine has no despawn command. ``KillAgent`` is therefore a **soft kill**:
 sensors removed, dynamics stopped, dropped from the roster and the broadcast,
-and parked far out of range.
+and parked in the far bottom corner of the world.
 
 The actor survives, and so do the five small shared-memory blocks it was built
 with. They cannot be released while the engine still maps them -- see
 :ref:`world-design-notes` for why that would be worse than leaking them.
 
-The cost is therefore bounded and permanent: five blocks per agent ever killed,
-none of which grows over time. Hard despawn needs a ``DespawnAgent`` handler in
-the plugin C++, which does not exist yet.
+Where the corner is has to be **derived from the world**, not fixed. Every world
+declares an ``env_min``/``env_max`` box in its package config, and the engine
+ignores a teleport outside it rather than refusing one -- so a parking spot that
+suited one world did nothing at all in every other, silently, leaving the
+vehicle sitting where it died. :func:`~biguasim.server.world.graveyard` computes
+it from the bounds the engine was actually given.
+
+.. warning::
+
+   A parked agent is **not out of range of anything**. In a bounded world there
+   is nowhere to put it: ``CompetionMap`` is 400 x 400 x 100 m, so its far
+   corner is under 300 m from the middle. The actor is still in the octree,
+   still hit by raycasts and sonar, still something a vehicle flown into the
+   corner can collide with, and still visible to a camera pointed that way.
+
+   Killing an agent removes it from the roster, not from the world.
+
+The cost is therefore bounded and permanent, but it is larger than the memory:
+five blocks per agent ever killed, plus one inert collision body in the corner,
+neither of which grows over time. Hard despawn needs a ``DespawnAgent`` handler
+in the plugin C++, which does not exist yet, and is the only thing that would
+make the corner genuinely empty.
 
 
 Reference

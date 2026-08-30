@@ -130,8 +130,16 @@ vehicle without knowing which one it is -- and is tracked outside the
 interpolation buffer, which only carries quantities that can meaningfully be
 blended between two snapshots. A type cannot.
 
-When an agent leaves, its puppet is parked out of range. The local engine has no
-despawn either, for the same reason and at the same cost as the world side.
+When an agent leaves, its puppet is parked in the same corner the world uses,
+derived from the same bounds -- the local engine has no despawn either, for the
+same reason and at the same cost as the world side.
+
+The park is re-issued every frame until the puppet's own dynamics sensor reports
+that it arrived, and complains if it never does. That is not belt and braces: a
+teleport the engine declines to honour is not an error, and the one-shot version
+of this left a vehicle drawn in a world that no longer contained it, with nothing
+to correct it -- even though the roster is a full snapshot rather than a delta,
+so the world went on saying the agent was gone twenty times a second.
 
 
 .. seealso::

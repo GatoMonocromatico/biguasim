@@ -43,17 +43,42 @@ DEFAULT_INPUT_DELAY = 3
 #: Leaves room in the engine's command buffer rather than filling it exactly.
 DEFAULT_COMMAND_BUDGET = 8 * 1024 * 1024
 
-#: Where soft-killed agents are parked. Far enough to be out of every sensor's
-#: range, since the engine has no despawn and the actor lingers.
-#:
-#: Coordinates are metres and the engine works in centimetres, so this arrives
-#: as -1,000,000 cm -- under half of Unreal's ``WORLD_MAX`` of 2,097,152 cm, and
-#: it has to stay well inside it. An out-of-bounds ``SetActorLocation`` is not an
-#: error, it is silently ignored, and a kill that cannot move its actor leaves
-#: the vehicle sitting exactly where it died: still in the octree, still hit by
-#: raycasts, still something another vehicle can fly into. The previous value,
-#: -100000.0, was five times outside the world and never moved anything.
-GRAVEYARD = (0.0, 0.0, -10000.0)
+#: How far inside the world's own bounds a parked agent sits, in metres. A
+#: margin rather than the corner exactly, so nothing rounds its way back out.
+GRAVEYARD_INSET = 1.0
+
+def graveyard(env_min, inset=GRAVEYARD_INSET):
+    """Where to park a soft-killed agent in a world with these bounds.
+
+    The engine has no despawn, so a killed actor lingers and the most that can
+    be done is put it where nothing operates. Where that is has to be derived
+    rather than fixed. Every world declares its own ``env_min``/``env_max`` box
+    -- handed to the engine as ``-EnvMinZ`` and friends, see
+    :class:`biguasim.environments.BiguaSimEnvironment` -- and a teleport outside
+    that box is not refused, it is ignored, leaving the vehicle exactly where it
+    died. So a constant that happened to suit one world did nothing whatsoever
+    in every other, and did it silently.
+
+    The far bottom corner is as far from the action as a bounded world allows,
+    and is usually under the terrain.
+
+    .. warning::
+
+       This is not out of range of anything, and in a small world nothing is.
+       ``CompetionMap`` is 400 x 400 x 100 m; its corner is under 300 m from the
+       middle. A camera pointed that way sees what died there, the octree still
+       carries it, and a vehicle flown into the corner can still hit it. Killing
+       an agent removes it from the roster, not from the world.
+
+    Args:
+        env_min (sequence of :obj:`float`): The world's lower bound, in metres.
+        inset (:obj:`float`, optional): How far inside that bound to sit.
+
+    Returns:
+        :obj:`tuple`: The ``(x, y, z)`` to park at.
+    """
+    return tuple(float(v) + inset for v in env_min[:3])
+
 
 #: Blocks a soft-killed agent keeps: action, teleport flag, teleport command,
 #: control scheme, ocean current. Retained because the engine still maps them.
@@ -99,6 +124,10 @@ class World:
         self._env = biguasim.make(scenario_cfg=scenario_cfg, **make_kwargs)
         self._env.reset()
 
+        # Derived from this world's own bounds, because a location outside them
+        # is ignored rather than refused -- see graveyard().
+        self._graveyard = graveyard(self._env._env_min)
+
         # The environment picks its state function once, at construction, and a
         # single-agent scenario gets the one that only ever reports the main
         # agent. In a world whose roster changes that is never what is wanted:
@@ -141,6 +170,11 @@ class World:
     def agents(self):
         """:obj:`list` of :obj:`str`: Live agents, by base name."""
         return sorted(self._controls)
+
+    @property
+    def graveyard(self):
+        """:obj:`tuple`: Where this world parks soft-killed agents."""
+        return self._graveyard
 
     @property
     def agent_types(self):
@@ -529,7 +563,7 @@ class World:
             # No despawn command exists, so the actor is parked instead. It
             # still costs the engine collision and render.
             engine_agent.set_physics_state(
-                location=list(GRAVEYARD), rotation=[0, 0, 0],
+                location=list(self._graveyard), rotation=[0, 0, 0],
                 velocity=[0, 0, 0], angular_velocity=[0, 0, 0])
 
         self._env._dynamics_dict.pop(agent, None)

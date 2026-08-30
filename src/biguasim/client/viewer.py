@@ -25,7 +25,7 @@ from biguasim.agents import AgentDefinition
 from biguasim.client.interpolation import PoseBuffer
 from biguasim.client.remote import RemoteWorld
 from biguasim.sensors import SensorDefinition
-from biguasim.server.world import GRAVEYARD
+from biguasim.server.world import graveyard
 
 #: Minimal sensor set for a puppet. It computes nothing; the environment just
 #: expects agents to have somewhere to put state. It also reports where the
@@ -39,8 +39,7 @@ _PUPPET_SENSORS = [{"sensor_type": "DynamicsSensor", "socket": "IMUSocket",
 #: creating an actor that was announced and withdrawn a frame or two apart.
 PARK_ATTEMPTS = 120
 
-#: How close to :data:`~biguasim.server.world.GRAVEYARD` counts as arrived, in
-#: metres.
+#: How close to the graveyard counts as arrived, in metres.
 PARK_TOLERANCE = 1.0
 
 
@@ -73,6 +72,10 @@ class Viewer:
         self._env.reset()
         # The roster changes, so the viewer always wants the full-state view.
         self._env._default_state_fn = self._env._get_full_state
+        # The same derivation the world uses, from the same package config --
+        # which the build check already guarantees both sides agree on, so the
+        # two never park in different places.
+        self._graveyard = graveyard(self._env._env_min)
 
         self._remote = RemoteWorld(address=address, port=port,
                                    client_id=client_id or "viewer",
@@ -303,13 +306,12 @@ class Viewer:
             if agent is None:
                 continue            # not created yet; ask again next frame
 
-            agent.set_physics_state(location=list(GRAVEYARD),
+            agent.set_physics_state(location=list(self._graveyard),
                                     rotation=[0.0, 0.0, 0.0],
                                     velocity=[0.0, 0.0, 0.0],
                                     angular_velocity=[0.0, 0.0, 0.0])
 
-    @staticmethod
-    def _at_graveyard(agent):
+    def _at_graveyard(self, agent):
         """Whether the engine really moved an actor to the graveyard.
 
         Returns:
@@ -320,21 +322,21 @@ class Viewer:
         data = getattr(sensor, "sensor_data", None)
         if data is None or len(data) < 9:
             return None
-        return abs(float(data[8]) - GRAVEYARD[2]) < PARK_TOLERANCE
+        return abs(float(data[8]) - self._graveyard[2]) < PARK_TOLERANCE
 
-    @staticmethod
-    def _report_stuck(name, agent):
+    def _report_stuck(self, name, agent):
         """Say that a puppet could not be buried, and which kind of failure."""
-        seen = None if agent is None else Viewer._at_graveyard(agent)
+        seen = None if agent is None else self._at_graveyard(agent)
         if seen is None:
             print("warning: gave up parking {!r} after {} frames; the local "
                   "engine never reported where it went, so it may still be "
                   "drawn where it died".format(name, PARK_ATTEMPTS), flush=True)
         else:
             print("warning: {!r} will not move to {}; it is still drawn where "
-                  "it died. Check that location is inside the engine's world "
-                  "bounds -- Unreal ignores an out-of-bounds teleport rather "
-                  "than failing it".format(name, GRAVEYARD), flush=True)
+                  "it died. That location should be inside this world's "
+                  "env_min/env_max box -- the engine ignores a teleport outside "
+                  "it rather than failing it".format(name, self._graveyard),
+                  flush=True)
 
     # ----------------------------------------------------------------- run
 
