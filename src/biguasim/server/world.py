@@ -45,7 +45,15 @@ DEFAULT_COMMAND_BUDGET = 8 * 1024 * 1024
 
 #: Where soft-killed agents are parked. Far enough to be out of every sensor's
 #: range, since the engine has no despawn and the actor lingers.
-GRAVEYARD = (0.0, 0.0, -100000.0)
+#:
+#: Coordinates are metres and the engine works in centimetres, so this arrives
+#: as -1,000,000 cm -- under half of Unreal's ``WORLD_MAX`` of 2,097,152 cm, and
+#: it has to stay well inside it. An out-of-bounds ``SetActorLocation`` is not an
+#: error, it is silently ignored, and a kill that cannot move its actor leaves
+#: the vehicle sitting exactly where it died: still in the octree, still hit by
+#: raycasts, still something another vehicle can fly into. The previous value,
+#: -100000.0, was five times outside the world and never moved anything.
+GRAVEYARD = (0.0, 0.0, -10000.0)
 
 #: Blocks a soft-killed agent keeps: action, teleport flag, teleport command,
 #: control scheme, ocean current. Retained because the engine still maps them.

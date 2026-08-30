@@ -25,11 +25,23 @@ from biguasim.agents import AgentDefinition
 from biguasim.client.interpolation import PoseBuffer
 from biguasim.client.remote import RemoteWorld
 from biguasim.sensors import SensorDefinition
+from biguasim.server.world import GRAVEYARD
 
 #: Minimal sensor set for a puppet. It computes nothing; the environment just
-#: expects agents to have somewhere to put state.
+#: expects agents to have somewhere to put state. It also reports where the
+#: local actor really is, which is how a park is confirmed -- see
+#: :meth:`Viewer._park_departed`.
 _PUPPET_SENSORS = [{"sensor_type": "DynamicsSensor", "socket": "IMUSocket",
                     "configuration": {"UseCOM": True, "UseRPY": False}}]
+
+#: Frames a departed puppet is re-sent to the graveyard before the viewer gives
+#: up and says so. Generous on purpose: it only has to outlast the local engine
+#: creating an actor that was announced and withdrawn a frame or two apart.
+PARK_ATTEMPTS = 120
+
+#: How close to :data:`~biguasim.server.world.GRAVEYARD` counts as arrived, in
+#: metres.
+PARK_TOLERANCE = 1.0
 
 
 class Viewer:
@@ -68,6 +80,10 @@ class Viewer:
         self._buffer = PoseBuffer(delay=delay)
         self._puppets = {}          # agent name -> vehicle type, as drawn
         self._types = {}            # agent name -> vehicle type, as announced
+        # Departed puppets still being sent to the graveyard, and how many
+        # frames each has been asked. Kept until the actor confirmably arrives,
+        # because a teleport that quietly did not land is otherwise permanent.
+        self._parked = {}           # agent name -> attempts so far
         self._last_tick = -1
 
     @property
@@ -186,6 +202,9 @@ class Viewer:
         for name, pose in poses.items():
             if name not in self._puppets:
                 self._add_puppet(name, self._types.get(name, ""))
+            # Back from the dead -- an agent may be respawned under a name that
+            # was retired earlier. Stop trying to bury it.
+            self._parked.pop(name, None)
             agent = self._env.agents.get(name + "-id0")
             if agent is None:
                 continue
@@ -196,6 +215,7 @@ class Viewer:
                 velocity=list(pose["velocity"]),
                 angular_velocity=[0.0, 0.0, 0.0])
 
+        self._park_departed()
         self._env.tick()
         return len(poses)
 
@@ -243,18 +263,78 @@ class Viewer:
         self._puppets[name] = agent_type
 
     def _retire(self, name):
-        """Park a puppet whose original has gone.
+        """Stop drawing a puppet whose original has gone.
 
-        The local engine has no despawn either, so it goes out of range for the
-        same reason and at the same cost as on the world side.
+        The parking itself is left to :meth:`_park_departed`, which keeps at it
+        until the actor has confirmably arrived. Doing it once here and dropping
+        the name immediately was a bug: the local engine may not have created
+        the actor yet when a short-lived agent is withdrawn, and a teleport that
+        quietly did not land then had nothing left tracking it -- even though
+        the world goes on saying the agent is gone every single tick.
         """
-        agent = self._env.agents.get(name + "-id0")
-        if agent is not None:
-            agent.set_physics_state(location=[0.0, 0.0, -100000.0],
+        self._parked.setdefault(name, 0)
+        self._puppets.pop(name, None)
+
+    def _park_departed(self):
+        """Send departed puppets out of range, and keep sending them.
+
+        Live puppets are re-teleported every frame, so a lost write costs one
+        frame. Departed ones deserve the same treatment for the same reason: the
+        local engine has no despawn, so the actor lingers either way, and the
+        only thing worth guaranteeing is that it lingers where nobody looks.
+
+        Repetition alone would not surface a teleport the engine will never
+        honour, so each attempt is checked rather than assumed. An out-of-bounds
+        location is not an error in Unreal, it is ignored -- without the check
+        the actor sits in plain sight and nothing anywhere says why.
+        """
+        for name in list(self._parked):
+            agent = self._env.agents.get(name + "-id0")
+            if agent is not None and self._at_graveyard(agent) is True:
+                self._parked.pop(name)
+                continue
+
+            attempts = self._parked[name] + 1
+            self._parked[name] = attempts
+            if attempts > PARK_ATTEMPTS:
+                self._parked.pop(name)
+                self._report_stuck(name, agent)
+                continue
+            if agent is None:
+                continue            # not created yet; ask again next frame
+
+            agent.set_physics_state(location=list(GRAVEYARD),
                                     rotation=[0.0, 0.0, 0.0],
                                     velocity=[0.0, 0.0, 0.0],
                                     angular_velocity=[0.0, 0.0, 0.0])
-        self._puppets.pop(name, None)
+
+    @staticmethod
+    def _at_graveyard(agent):
+        """Whether the engine really moved an actor to the graveyard.
+
+        Returns:
+            :obj:`bool` or None: None when the puppet cannot say, which is not
+            the same answer as no and is not reported the same way.
+        """
+        sensor = agent.sensors.get("DynamicsSensor")
+        data = getattr(sensor, "sensor_data", None)
+        if data is None or len(data) < 9:
+            return None
+        return abs(float(data[8]) - GRAVEYARD[2]) < PARK_TOLERANCE
+
+    @staticmethod
+    def _report_stuck(name, agent):
+        """Say that a puppet could not be buried, and which kind of failure."""
+        seen = None if agent is None else Viewer._at_graveyard(agent)
+        if seen is None:
+            print("warning: gave up parking {!r} after {} frames; the local "
+                  "engine never reported where it went, so it may still be "
+                  "drawn where it died".format(name, PARK_ATTEMPTS), flush=True)
+        else:
+            print("warning: {!r} will not move to {}; it is still drawn where "
+                  "it died. Check that location is inside the engine's world "
+                  "bounds -- Unreal ignores an out-of-bounds teleport rather "
+                  "than failing it".format(name, GRAVEYARD), flush=True)
 
     # ----------------------------------------------------------------- run
 
