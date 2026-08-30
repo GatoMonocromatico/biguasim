@@ -219,40 +219,17 @@ the pilot: the vehicle is in the world like any other.
 
 .. warning::
 
-   **A HolybroX500 cannot currently be drawn by a viewer**, though it flies
-   perfectly well. The engine will spawn one and simulate it, but its actor has
-   no teleport handler in the UE5 plugin, so every pose a viewer sends is
-   accepted and ignored and the actor stays at its spawn point. Measured
-   against ``CompetionMap``, teleported to ``[7, 7, 5]`` every frame:
+   **Give a HolybroX500 room when it is created.** That airframe rests at
+   0.216 m and fails below it: created any lower it sits inside the ground,
+   its physics body never initialises, and its sensors report zeros for the
+   rest of the run. Teleports still arrive and the engine still logs them --
+   the actor is simply never usable, which looks like a great many other
+   things before it looks like a spawn point.
 
-   .. list-table::
-      :header-rows: 1
-      :widths: 30 35 35
+   ``--location 0,0,1`` is clear. ``--location 0,0,0`` is not.
 
-      * - Type
-        - Where it ended up
-        - Drawable?
-      * - DjiMatrice
-        - ``[6.99, 6.88, 4.52]``
-        - yes
-      * - BlueROV2
-        - ``[7.06, 6.91, 4.88]``
-        - yes
-      * - BlueBoat
-        - ``[7.06, 6.98, 5.17]``
-        - yes
-      * - TorpedoAUV
-        - ``[7.04, 6.91, 4.69]``
-        - yes
-      * - **HolybroX500**
-        - ``[0, 0, 0]``
-        - **no**
-
-   The viewer now says so after two seconds of being ignored rather than
-   reporting that it drew something. Fixing it needs a teleport handler for
-   that actor in the plugin, alongside the missing ``DespawnAgent``. Until
-   then, fly the HolybroX500 on instruments -- QGroundControl and the pilot's
-   own reporting -- or watch a DjiMatrice in the same world.
+   The viewer creates its puppets lifted clear for the same reason, so this
+   only applies to where you ask the *pilot* to spawn.
 
 
 Reaching SITL from a GCS on another machine

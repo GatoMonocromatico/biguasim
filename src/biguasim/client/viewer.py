@@ -51,6 +51,16 @@ TRACKING_TOLERANCE = 2.0
 #: Two seconds at 60 fps -- long enough that a spawning actor is not accused.
 TRACKING_ATTEMPTS = 120
 
+#: Metres a puppet is created above the pose it is about to be teleported to.
+#:
+#: Creating an actor inside geometry can leave its physics body uninitialised,
+#: after which it reports nothing for the rest of the run no matter what is sent
+#: to it. The margin is small but the boundary is sharp: a HolybroX500 rests at
+#: 0.216 m and fails below that. Since the first teleport places it exactly
+#: anyway, spawning clear costs one frame of being slightly high and removes the
+#: failure entirely.
+PUPPET_SPAWN_LIFT = 2.0
+
 
 class Viewer:
     """A local, drawing-only mirror of a remote world.
@@ -216,7 +226,8 @@ class Viewer:
 
         for name, pose in poses.items():
             if name not in self._puppets:
-                self._add_puppet(name, self._types.get(name, ""))
+                self._add_puppet(name, self._types.get(name, ""),
+                                 pose["position"])
             # Back from the dead -- an agent may be respawned under a name that
             # was retired earlier. Stop trying to bury it.
             self._parked.pop(name, None)
@@ -259,12 +270,32 @@ class Viewer:
         yaw = np.degrees(np.arctan2(siny, cosy))
         return [float(roll), float(pitch), float(yaw)]
 
-    def _add_puppet(self, name, agent_type):
+    def _add_puppet(self, name, agent_type, position=None):
         """Create a local stand-in for an agent the world has announced.
 
         The type comes from the roster rather than being guessed: a viewer
         cannot draw a vehicle without knowing which one it is. Falling back to a
         quadrotor is a last resort for a world that did not say.
+
+        It is created **where the world says it already is**, lifted clear by
+        :data:`PUPPET_SPAWN_LIFT`, rather than at the origin. That is not a
+        nicety. A puppet created inside geometry can fail to initialise its
+        physics body and then reports nothing ever again: a HolybroX500 at
+        (0, 0, 0) in CompetionMap sits inside the ground and its DynamicsSensor
+        reads zeros forever, while the same vehicle at (10, 0, 3) is fine.
+        Teleports still arrive and the engine still logs them; the actor simply
+        never appears, which looks exactly like a broken teleport handler and
+        is not one.
+
+        The lift matters because the boundary is tight -- that airframe rests
+        at 0.216 m and fails below it -- so a landed vehicle's own pose is not
+        a safe spawn point. The first teleport corrects the height immediately.
+
+        Args:
+            name (:obj:`str`): Agent name as the world knows it.
+            agent_type (:obj:`str`): Vehicle type from the roster.
+            position (sequence of :obj:`float`, optional): Where the world says
+                it is, used as the spawn point.
         """
         full = name + "-id0"
         if full in self._env.agents:
@@ -281,21 +312,30 @@ class Viewer:
             for spec in _PUPPET_SENSORS
         ]
         self._env.add_agent(AgentDefinition(
-            agent_name=full, agent_type=kind, sensors=sensors))
+            agent_name=full, agent_type=kind, sensors=sensors,
+            starting_loc=self._spawn_point(position)))
         self._puppets[name] = agent_type
+
+    @staticmethod
+    def _spawn_point(position):
+        """Where to create a puppet: its own pose, lifted clear of the ground."""
+        if position is None:
+            return (0.0, 0.0, PUPPET_SPAWN_LIFT)
+        x, y, z = (float(v) for v in position)
+        return (x, y, z + PUPPET_SPAWN_LIFT)
 
     def _check_tracking(self, name, agent, pose):
         """Say so when a puppet is not going where it is told.
 
-        Some vehicles the engine will spawn, it will not move: the plugin has
-        no teleport handler for them, so every frame is accepted and ignored.
-        Nothing raises, the roster is right, the pose stream is right, and the
-        viewer cheerfully reports drawing an actor that is sitting at its spawn
-        point out of sight.
+        The known cause is an actor created inside geometry, whose physics body
+        never initialises: teleports still arrive, the engine still logs them,
+        and the actor reports zeros for the rest of the run. Nothing raises,
+        the roster is right and the pose stream is right, so the viewer would
+        otherwise report drawing something that is not there.
 
-        That is a miserable thing to diagnose from the outside -- it looks like
-        a camera problem, or a coordinate problem, or a network problem -- so
-        it is worth one clear line instead.
+        That is a miserable thing to diagnose from outside -- it looks like a
+        camera problem, a coordinate problem or a network problem long before
+        it looks like a spawn point -- so it is worth one clear line instead.
         """
         import numpy as np
 
@@ -312,13 +352,15 @@ class Viewer:
 
         self._untracked[name] += 1
         if self._untracked[name] == TRACKING_ATTEMPTS:
-            print("{} ({}) is not being drawn: the engine has accepted {} "
-                  "teleports and left it at {}, not {}. This vehicle has no "
-                  "teleport handler in the UE5 plugin, so a viewer cannot show "
-                  "it -- it is in the world and flying, just not here."
-                  .format(name, self._puppets.get(name) or "unknown type",
-                          TRACKING_ATTEMPTS, np.round(actual, 2),
-                          np.round(wanted, 2)))
+            zeros = not np.any(actual)
+            print("{} ({}) is not being drawn: {} teleports accepted and it is "
+                  "still at {}, not {}.{}".format(
+                      name, self._puppets.get(name) or "unknown type",
+                      TRACKING_ATTEMPTS, np.round(actual, 2),
+                      np.round(wanted, 2),
+                      " Reporting all zeros, which means its physics body never"
+                      " came up -- it was created inside something." if zeros
+                      else ""))
 
     def _retire(self, name):
         """Stop drawing a puppet whose original has gone.

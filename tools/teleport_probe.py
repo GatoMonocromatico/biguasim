@@ -10,6 +10,14 @@ reports where it ended up.
 
 A code that moves the actor is implemented. A code that leaves it at its spawn
 point is not.
+
+**Spawn point matters, and it is why an earlier version of this probe lied.** A
+vehicle created inside geometry can fail to initialise its physics body and
+then reports nothing for the rest of the run -- a HolybroX500 at (0, 0, 0) in
+CompetionMap reads zeros forever, while the same vehicle at (10, 0, 3) is fine.
+The teleport is still delivered and the engine still logs it; only the readback
+is dead. So each case is spawned in clear air, well apart, and --spawn-z can
+raise them further if a map needs it.
 """
 import argparse
 
@@ -38,6 +46,11 @@ def main():
                         help="a second vehicle as a control; '' to skip")
     parser.add_argument("--target", default="7,7,5")
     parser.add_argument("--frames", type=int, default=150)
+    parser.add_argument("--spawn-z", type=float, default=20.0,
+                        help="height to create each actor at. Must be clear of "
+                             "geometry: a vehicle spawned inside something "
+                             "reports zeros forever and looks exactly like a "
+                             "teleport that was ignored")
     parser.add_argument("--viewport", action="store_true")
     args = parser.parse_args()
 
@@ -57,8 +70,12 @@ def main():
         for code, label in CODES:
             name = "t{}".format(len(cases))
             full = name + "-id0"
+            # Spread out and up: two actors sharing a spawn point, or one
+            # inside the ground, is the failure this probe exists to not
+            # produce itself.
             env.add_agent(AgentDefinition(
                 agent_name=full, agent_type=kind,
+                starting_loc=(5.0 * len(cases), 0.0, args.spawn_z),
                 sensors=[SensorDefinition(
                     agent_name=full, agent_type=kind,
                     sensor_name="DynamicsSensor", sensor_type="DynamicsSensor",
@@ -98,10 +115,15 @@ def main():
             verdict = "(position n/a)"
         elif got is None:
             verdict = "no sensor data"
-        elif float(np.linalg.norm(got)) > 0.5:
+        elif float(np.linalg.norm(np.asarray(got) - np.asarray(target))) < 1.0:
             verdict = "HANDLED"
+        elif not np.any(got):
+            # All zeros is not a refused teleport. It is an actor whose physics
+            # body never came up -- usually because it was spawned inside
+            # something -- and it reports nothing regardless of what is sent.
+            verdict = "NO READBACK -- actor reporting zeros, raise --spawn-z"
         else:
-            verdict = "ignored -- still at spawn"
+            verdict = "ignored -- did not reach the target"
         print("    type {:<3} {:<46} -> {}  {}".format(
             code, label, got, verdict))
     print()

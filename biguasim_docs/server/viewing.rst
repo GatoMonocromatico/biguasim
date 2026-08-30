@@ -148,24 +148,45 @@ so the world went on saying the agent was gone twenty times a second.
    :class:`~biguasim.client.interpolation.PoseBuffer`.
 
 
-Vehicles the engine will not move
-=================================
+Puppets that never appear
+=========================
 
-A puppet is teleported to the pose the world published, every frame. Some
-actors have no teleport handler in the UE5 plugin: the engine accepts the
-command, ignores it, reports nothing, and the actor sits at its spawn point
-while the viewer cheerfully counts it as drawn.
+A puppet is created locally and then teleported to the pose the world published,
+every frame. It can still fail to appear, and the reason is worth knowing
+because nothing about it looks like what it is.
 
-``HolybroX500`` is the one known case. Every other vehicle tested against
-``CompetionMap`` -- DjiMatrice, BlueROV2, BlueBoat, TorpedoAUV -- lands within
-half a metre of where it is sent.
+**An actor created inside geometry never initialises its physics body.** After
+that it reports zeros forever, whatever is sent to it. The teleports are
+delivered and the engine logs them; the actor is simply inert. Measured on
+``CompetionMap`` with a landed HolybroX500 at ``[3, 2, 0.216]``:
 
-The viewer watches for this. When a live puppet is more than
+.. list-table::
+   :header-rows: 1
+   :widths: 40 30 30
+
+   * - Created at
+     - Reports
+     - Drawn?
+   * - ``(0, 0, 0)``
+     - ``[0, 0, 0]``
+     - no
+   * - ``(3, 2, 0.216)`` -- its own pose
+     - ``[0, 0, 0]``
+     - no
+   * - ``(3, 2, 2.216)`` -- lifted
+     - ``[3, 2, 0.216]``
+     - yes
+
+Note the middle row: a landed vehicle's *own* pose is not a safe spawn point,
+because it is exactly on the boundary. So puppets are created at the pose the
+world reported plus :data:`~biguasim.client.viewer.PUPPET_SPAWN_LIFT`, and the
+first teleport brings them down to the right place immediately.
+
+The viewer also watches for the failure. When a live puppet stays more than
 :data:`~biguasim.client.viewer.TRACKING_TOLERANCE` metres from where it was put
 for :data:`~biguasim.client.viewer.TRACKING_ATTEMPTS` consecutive frames, it
-says so once, naming the vehicle. Without that the symptom is a vehicle that is
-simply absent, which looks like a camera problem, a coordinate problem or a
-network problem long before it looks like a missing plugin handler.
+says so once, and says whether the actor is reporting all zeros -- which is the
+signature of this particular fault rather than of a teleport being refused.
 
 .. note::
 
