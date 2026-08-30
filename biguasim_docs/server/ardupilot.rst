@@ -132,21 +132,85 @@ multi-vehicle port allocation.
      - the world -- shared
 
 
+Rates are asked for, not configured
+-----------------------------------
+
+The pilot takes the world's tick rate from the greeting it gets on connect, and
+sizes the IMU to match -- one sample per tick, which is what ArduPilot's EKF
+expects. Nothing about that rate is a flag or a YAML entry on the pilot's side,
+because a number the caller supplies is a number the caller can get wrong, and
+the symptom appears much later: a refused spawn quoting a rate nobody typed.
+
+An extra sensor asking for a rate the world cannot produce is rejected at
+connect rather than at spawn, with both numbers named. Sensor rates are tick
+dividers, so a rate must divide the tick rate exactly and cannot exceed it.
+
+
 Flying one, with no ROS involved
 --------------------------------
 
-Three terminals on the machine running the world. First the world::
+Three terminals on the machine running the world. First the world -- and note
+the rate, which is the whole reason this section names it::
 
-   python tools/serve_world.py --package Competition --world CompetionMap --port 8770
+   python tools/serve_world.py --package Competition --world CompetionMap \
+       --port 8770 --rate 200
+
+.. important::
+
+   ``serve_world.py`` defaults to ``--rate 20``. That is a sensible default for
+   a world people are watching and hopeless for one being flown: the tick rate
+   *is* the rate ArduPilot's attitude loop runs at, and a multirotor at 20 Hz
+   will not arm, let alone hold attitude.
+
+   The pilot asks the world for its rate on connect and warns when it is this
+   low, rather than letting it look like a flight-tuning problem later.
 
 Then the pilot, which prints the ports it wants and waits::
 
    python tools/ardu_pilot.py --package Competition --world CompetionMap \
        --vehicle HolybroX500 --agent uav0 --location 0,0,1
 
-Then SITL, pointed at the port the pilot named::
+Then SITL, pointed at the port the pilot named. The pilot prints this command
+for you, filled in, so it cannot drift out of step with the bridge::
 
-   sim_vehicle.py -v ArduCopter -f json:127.0.0.1 -I 0 -N
+   sim_vehicle.py -v ArduCopter -f JSON:127.0.0.1 \
+       -L RATBeach --console --map \
+       --add-param-file=/path/to/holybro_sitl_gps.parm
+
+.. important::
+
+   **``-L RATBeach`` is not optional.** ArduPilot ships that location as
+   ``33.810313,-118.393867``, which is exactly the origin the bridge converts
+   world positions around -- the two agree by construction, not by luck. Leave
+   it out and SITL's home is somewhere else entirely, so the EKF places the
+   vehicle thousands of kilometres from where the world says it is.
+
+   If a pilot is given a different ``gps_origin``, it prints the equivalent
+   ``--custom-location`` instead. Take the command from the pilot rather than
+   from here.
+
+.. important::
+
+   **Which parameter file, and why it decides whether it arms.**
+
+   A tuned frame usually comes with two, and they are not interchangeable:
+
+   * one where the EKF navigates on **visual odometry** -- ``GPS1_TYPE 0``,
+     ``VISO_TYPE 1``, ``EK3_SRC1_POSXY 6``. That is the competition
+     configuration, and it needs the autonomy stack running to supply the
+     odometry. With no ROS anywhere, the EKF has no horizontal position source
+     and the vehicle will not arm in any position-holding mode.
+   * one where it navigates on **GPS** -- ``GPS1_TYPE 1``, ``VISO_TYPE 0``,
+     ``EK3_SRC1_POSXY 3``. SITL synthesises the GPS from the latitude and
+     longitude the bridge sends it, so nothing else is required.
+
+   **Use the GPS one for a plain SITL flight.** The vision configuration is
+   for later, once the autonomy stack is in the picture.
+
+   Note also ``SCHED_LOOP_RATE``: arming requires the gyro rate -- which here
+   *is* the world's tick rate -- to be at least ``1.8 x SCHED_LOOP_RATE``. At
+   the usual 100 that means the world must tick at 180 or more, which is the
+   other reason ``--rate 200`` above is not arbitrary.
 
 The pilot spawns ``uav0`` the moment SITL says hello. Point a GCS at
 ``tcp:127.0.0.1:5760``, or forward it to another machine::

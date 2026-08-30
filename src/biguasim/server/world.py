@@ -167,6 +167,17 @@ class World:
         return self._tick + self._input_delay
 
     @property
+    def ticks_per_sec(self):
+        """:obj:`int`: How many ticks make a simulated second.
+
+        Reported to clients on connect. A sensor rate has to divide it, and a
+        flight controller has to live with it, so a client that had to be told
+        this number separately would be a client that could be told the wrong
+        one.
+        """
+        return self._env._ticks_per_sec
+
+    @property
     def agents(self):
         """:obj:`list` of :obj:`str`: Live agents, by base name."""
         return sorted(self._controls)

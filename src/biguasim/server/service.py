@@ -172,6 +172,7 @@ class WorldService:
             "tick": self._world.tick,
             "next_tick": self._world.next_tick,
             "input_delay": self._world._input_delay,
+            "ticks_per_sec": self._world.ticks_per_sec,
             "agents": self._world.agents,
             "build": self._build,
         }

@@ -21,6 +21,30 @@ import argparse
 import signal
 
 from biguasim.ardubridge import VEHICLE_REGISTRY, RemoteArduRunner
+from biguasim.client.remote import RemoteError
+
+
+#: ArduPilot ships this in Tools/autotest/locations.txt as exactly the
+#: latitude and longitude the bridge uses for the world origin, which is why
+#: the two agree by name rather than by coincidence.
+RATBEACH = (33.810313, -118.393867)
+
+
+def runner_gps_origin(runner):
+    """The latitude and longitude this pilot's bridge is converting around."""
+    return runner._bridge._gps_origin
+
+
+def _home_argument(lat, lon):
+    """The sim_vehicle argument that puts SITL's home at the world origin.
+
+    Named locations are nicer to read and to type, so one is used when it fits;
+    anything else falls back to the explicit form rather than being silently
+    wrong.
+    """
+    if (round(lat, 6), round(lon, 6)) == RATBEACH:
+        return "-L RATBeach"
+    return "--custom-location={},{},0,270".format(lat, lon)
 
 
 def _triple(text):
@@ -54,13 +78,16 @@ def main():
                         metavar="X,Y,Z")
     parser.add_argument("--rotation", type=_triple, default=(0.0, 0.0, 0.0),
                         metavar="R,P,Y")
-    parser.add_argument("--ticks-per-sec", type=int, default=200,
-                        help="only rates the IMU in the default sensor list; "
-                             "the world ticks at whatever it was started with")
     parser.add_argument("--wait", type=float, default=120.0,
                         help="seconds to wait for SITL before giving up")
     parser.add_argument("--report", type=int, default=0,
                         metavar="N", help="print a frame/skip count every N ticks")
+    parser.add_argument("--params", default=None, metavar="FILE",
+                        help="a SITL parameter file, quoted back in the printed "
+                             "sim_vehicle command. Use the GPS-navigating one "
+                             "for a plain flight: the vision-navigating one "
+                             "needs an autonomy stack to supply odometry, and "
+                             "without it the vehicle will not arm")
     args = parser.parse_args()
 
     profile = VEHICLE_REGISTRY[args.vehicle]
@@ -69,7 +96,6 @@ def main():
         package_name=args.package, world=args.world,
         agent=args.agent, address=args.address, port=args.port,
         instance=args.instance, location=args.location, rotation=args.rotation,
-        ticks_per_sec=args.ticks_per_sec,
     )
 
     print(__doc__.strip().splitlines()[0])
@@ -83,9 +109,26 @@ def main():
     print("  mavlink   tcp/{}   <- point a GCS here once it is up".format(
         runner.mavlink_port))
     print()
-    print("Start SITL with, for example:")
-    print("  sim_vehicle.py -v ArduCopter -f json:127.0.0.1 \\")
-    print("      -I {} --sysid {} -N".format(args.instance, args.instance + 1))
+    print("The world must tick fast enough to fly. serve_world.py defaults to")
+    print("--rate 20, which is fine for a viewer and hopeless for an attitude")
+    print("loop -- start it with --rate 200.")
+    print()
+    # Derived, not written down, so the home location cannot drift away from
+    # the origin the bridge converts positions around. If those two disagree
+    # the EKF believes the vehicle is thousands of kilometres from home.
+    lat, lon = runner_gps_origin(runner)
+    home = _home_argument(lat, lon)
+    print("Start SITL with:")
+    print("  sim_vehicle.py -v ArduCopter -f JSON:127.0.0.1 \\")
+    print("      {} --console --map \\".format(home))
+    if args.instance:
+        print("      -I {} --sysid {} \\".format(args.instance, args.instance + 1))
+    print("      --add-param-file={}".format(
+        args.params or "<your>/holybro_sitl_gps.parm"))
+    print()
+    print("  {} is where the bridge puts the world origin. SITL's home has to".format(
+        home.split("=")[-1] if "=" in home else home.split()[-1]))
+    print("  match it or the EKF places the vehicle a long way from itself.")
     print()
     print("Forward MAVLink to another machine with:")
     print("  mavproxy.py --master tcp:127.0.0.1:{} --out tcpin:0.0.0.0:{}".format(
@@ -98,16 +141,23 @@ def main():
 
     try:
         runner.connect()
+        print("  world ticks at {} Hz".format(runner.ticks_per_sec))
+        print()
         runner.start(timeout=args.wait)
         print("flying -- ctrl-c to land the pilot (the vehicle stays, on zero throttle)")
         runner.run(should_stop=lambda: bool(stopping),
                    report_every=args.report)
-    except RuntimeError as exc:
+    except (RuntimeError, RemoteError) as exc:
+        # RemoteError is what a world that is not there looks like, and it is
+        # the single most likely way to arrive here. A traceback for that would
+        # bury the one line worth reading.
         raise SystemExit("pilot failed: {}".format(exc))
     finally:
         for failure in runner.failures():
             print("world rejected: {}".format(failure.get("error")))
-        print("serviced {} ticks, skipped {}".format(runner.frames, runner.skipped))
+        if runner.frames or runner.skipped:
+            print("serviced {} ticks, skipped {}".format(
+                runner.frames, runner.skipped))
         runner.close()
 
 

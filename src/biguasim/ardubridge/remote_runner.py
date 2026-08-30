@@ -69,6 +69,11 @@ FDM_BASE_PORT = 9002
 #: speaks MAVLink -- but reported so a caller knows where to point a GCS.
 MAVLINK_BASE_PORT = 5760
 
+#: Below this the pilot warns. A multirotor attitude loop is closed at a few
+#: hundred hertz, and the world's tick rate is what it actually gets; at
+#: serve_world's default of 20 the vehicle will not arm, let alone fly.
+ADVISED_FLIGHT_RATE = 200
+
 
 def _spawn_hint(agent, error):
     """Explain a duplicate-name refusal, which is not what it looks like.
@@ -109,13 +114,12 @@ class RemoteArduRunner:
         instance (:obj:`int`, optional): ArduPilot SITL instance number. Shifts
             every port by ``10 * instance``, which is how a second vehicle
             avoids the first.
-        sensors (:obj:`list`, optional): Sensor specs to spawn with. Defaults to
-            what ArduPilot needs and nothing else.
+        extra_sensors (:obj:`list`, optional): Sensor specs to add on top of
+            the ones ArduPilot needs -- cameras, a rangefinder, anything a ROS
+            stack wants. The ArduPilot set is built at connect time from the
+            rate the world reports, so it is never out of step with it.
         location, rotation (sequence of :obj:`float`, optional): Where to spawn.
         dynamics (:obj:`dict`, optional): Overrides for the dynamics model.
-        ticks_per_sec (:obj:`int`, optional): Only used to rate the IMU when
-            building the default sensor list; the world's own tick rate is
-            whatever it was started with.
         gps_origin (:obj:`tuple`, optional): Latitude and longitude the world
             origin maps to.
         client_id (:obj:`str`, optional): How the world should know this pilot.
@@ -125,9 +129,9 @@ class RemoteArduRunner:
     """
 
     def __init__(self, profile, *, package_name, world, agent=None,
-                 address="127.0.0.1", port=8770, instance=0, sensors=None,
+                 address="127.0.0.1", port=8770, instance=0, extra_sensors=None,
                  location=(0.0, 0.0, 0.0), rotation=(0.0, 0.0, 0.0),
-                 dynamics=None, ticks_per_sec=200,
+                 dynamics=None,
                  gps_origin=_DEFAULT_GPS_ORIGIN, client_id=None,
                  stream_backlog=256, verbose=True):
         # Imported here rather than at module scope so that importing
@@ -144,8 +148,12 @@ class RemoteArduRunner:
         self._verbose = verbose
         self._started = False
 
-        self.sensors = (list(sensors) if sensors is not None
-                        else self.build_sensors(profile, ticks_per_sec))
+        self._extra_sensors = [dict(spec) for spec in (extra_sensors or [])]
+        #: Filled in by :meth:`connect`, once the world has said how fast it
+        #: ticks. Building it earlier would mean guessing that number.
+        self.sensors = None
+        #: The world's tick rate, as reported on connect.
+        self.ticks_per_sec = None
 
         self._bridge = ArduPilotBridge(
             profile, port=self.fdm_port, gps_origin=gps_origin)
@@ -213,18 +221,68 @@ class RemoteArduRunner:
     # -------------------------------------------------------------- startup
 
     def connect(self):
-        """Introduce the pilot to the world and subscribe to its streams.
+        """Introduce the pilot, learn the world's tick rate, size the sensors.
+
+        The rate is asked for rather than configured. ArduPilot's IMU has to be
+        sampled every tick, and a sensor rate has to divide the tick rate
+        exactly, so a pilot carrying its own idea of that number is a pilot
+        that can carry the wrong one -- which surfaces much later as a refused
+        spawn that names a rate nobody typed.
 
         Returns:
             :obj:`dict`: The world's greeting.
+
+        Raises:
+            RuntimeError: If the world does not report its tick rate, or an
+                extra sensor asks for a rate this world cannot produce.
         """
         info = self.world.connect()
+
+        rate = info.get("ticks_per_sec")
+        if not rate:
+            raise RuntimeError(
+                "this world did not report its tick rate, so it is running "
+                "older code than this pilot. Restart it from the same "
+                "checkout.")
+        self.ticks_per_sec = int(rate)
+
+        self._check_rates()
+        self.sensors = self.build_sensors(
+            self._profile, self.ticks_per_sec, extra=self._extra_sensors)
+
         self.world.watch_state()
         for spec in self.sensors:
             self.world.watch_sensor(
                 self._agent, spec.get("sensor_name", spec["sensor_type"]))
-        self._say("connected to the world at tick {}".format(info.get("tick")))
+
+        self._say("connected at tick {}, world ticks at {} Hz".format(
+            info.get("tick"), self.ticks_per_sec))
+        if self.ticks_per_sec < ADVISED_FLIGHT_RATE:
+            self._say(
+                "WARNING: {} Hz is well below the {} Hz an ArduPilot attitude "
+                "loop wants. Expect it to arm badly or not at all -- start the "
+                "world with --rate {}.".format(
+                    self.ticks_per_sec, ADVISED_FLIGHT_RATE, ADVISED_FLIGHT_RATE))
         return info
+
+    def _check_rates(self):
+        """Reject an extra sensor this world cannot sample, and say why.
+
+        The world refuses these too, but not until the spawn runs, and its
+        message names a rate the caller never typed -- it came from a default.
+        Caught here it can name both numbers and where they came from.
+        """
+        for spec in self._extra_sensors:
+            hz = spec.get("Hz")
+            if hz is None:
+                continue
+            name = spec.get("sensor_name", spec["sensor_type"])
+            if hz > self.ticks_per_sec or self.ticks_per_sec % hz:
+                raise RuntimeError(
+                    "sensor {!r} asks for {} Hz, but this world ticks at {} Hz. "
+                    "A sensor rate is a tick divider, so it must divide that "
+                    "exactly and cannot exceed it.".format(
+                        name, hz, self.ticks_per_sec))
 
     def start(self, timeout=120.0):
         """Wait for SITL, then spawn the agent it will fly.
@@ -242,6 +300,8 @@ class RemoteArduRunner:
             RuntimeError: If SITL never appears, the world refuses the spawn, or
                 the agent never shows up in the roster.
         """
+        if self.sensors is None:
+            raise RuntimeError("call connect() before start()")
         self._bridge.bind()
         self._say("listening for SITL on udp/{} -- start it now"
                   .format(self.fdm_port))

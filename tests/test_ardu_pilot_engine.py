@@ -122,7 +122,7 @@ def pilot(service):
     runner = RemoteArduRunner(
         PROFILE, package_name="SkyDive", world="Pier-Harbor",
         agent=next(_names), port=PORT, instance=7,  # a port nothing else uses
-        location=(6.0, 0.0, 25.0), ticks_per_sec=20, verbose=False)
+        location=(6.0, 0.0, 25.0), verbose=False)
     try:
         yield runner
     finally:
@@ -236,3 +236,34 @@ def test_servo_output_becomes_motor_commands_in_the_world(service, pilot):
             "PWM 1700 should be positive thrust, got {}".format(commanded)
     finally:
         sitl.stop()
+
+
+def test_the_pilot_takes_the_tick_rate_from_the_world(service, pilot):
+    """Not from a flag, a YAML file, or a default.
+
+    The rate has to be right or the IMU cannot be sampled every tick, and a
+    number the caller supplies is a number the caller can get wrong -- which
+    surfaces much later as a refused spawn naming a rate nobody typed.
+    """
+    info = pilot.connect()
+
+    assert info["ticks_per_sec"] == SCENARIO["ticks_per_sec"]
+    assert pilot.ticks_per_sec == SCENARIO["ticks_per_sec"]
+
+    imu = next(s for s in pilot.sensors if s["sensor_type"] == "IMUSensor")
+    assert imu["Hz"] == SCENARIO["ticks_per_sec"], \
+        "the IMU must be sampled every tick, whatever the world's rate is"
+
+
+def test_a_sensor_rate_the_world_cannot_produce_is_refused_at_connect(service):
+    """And refused with both numbers named, rather than at spawn with one."""
+    runner = RemoteArduRunner(
+        PROFILE, package_name="SkyDive", world="Pier-Harbor",
+        agent=next(_names), port=PORT, instance=8,
+        extra_sensors=[{"sensor_type": "RGBCamera", "Hz": 90}],
+        verbose=False)
+    try:
+        with pytest.raises(RuntimeError, match="90 Hz.*ticks at 20 Hz"):
+            runner.connect()
+    finally:
+        runner.close()

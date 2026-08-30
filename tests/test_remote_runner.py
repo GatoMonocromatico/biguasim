@@ -242,6 +242,14 @@ def test_the_default_sensor_list_is_exactly_what_the_ekf_needs():
     assert sorted(s["sensor_type"] for s in sensors) == sorted(REQUIRED_SENSORS)
 
 
+@pytest.mark.parametrize("rate", [20, 50, 200, 400])
+def test_the_imu_is_sampled_every_tick_whatever_the_rate(rate):
+    """ArduPilot wants an IMU sample per frame, and a frame is a tick."""
+    sensors = RemoteArduRunner.build_sensors(PROFILE, rate)
+    imu = next(s for s in sensors if s["sensor_type"] == "IMUSensor")
+    assert imu["Hz"] == rate
+
+
 def test_extra_sensors_are_added_but_never_displace_the_ekf_ones():
     extra = [{"sensor_type": "RGBCamera", "Hz": 10},
              {"sensor_type": "IMUSensor", "Hz": 1}]      # a deliberate clash
