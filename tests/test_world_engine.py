@@ -258,3 +258,39 @@ def test_spawn_time_sensors_honour_their_rate(world):
 
     # Exactly a divider, not an approximation: 20 ticks at every fourth.
     assert seen == 5, "IMU sampled {} times in 20 ticks, expected 5".format(seen)
+
+
+def test_a_spawned_agent_answers_its_controls(world):
+    """The test that was missing, and the bug it would have caught.
+
+    An agent spawned at runtime got no control scheme, because add_agent does
+    not set one and environments.py does it separately, right afterwards, for
+    the agents it loads. Every fresh agent starts on scheme 0 while a
+    quadrotor's dynamics emit scheme 1, so the engine read thrust as something
+    else and the vehicle sat where it landed and answered nothing.
+
+    Nothing raised. The roster was right, the controls dict held the right
+    numbers, and the vehicle simply never moved -- so the assertion has to be
+    about motion, not about bookkeeping.
+    """
+    world.submit(act.SpawnAgent(
+        client_id="alice", target_tick=world.next_tick, agent="uav5",
+        agent_type="DjiMatrice", location=(30.0, 0.0, 25.0), sensors=[DYNAMICS]))
+    state = run_to(world, world.tick + 10)
+
+    engine_agent = world._env.agents["uav5-id0"]
+    model = world._env._dynamics_dict["uav5"]
+    assert engine_agent._current_control_scheme == model._scheme, \
+        "the engine will read this agent's actions under the wrong scheme"
+
+    def altitude(state):
+        return float(np.asarray(state["uav5"][0]["DynamicsSensor"])[8])
+
+    before = altitude(state)
+    world.submit(act.SetControl(client_id="alice", target_tick=world.next_tick,
+                                agent="uav5", command=[600.0] * 4))
+    for _ in range(120):
+        state = world.step()
+
+    assert altitude(state) > before + 1.0, \
+        "full throttle moved it {:.2f} m".format(altitude(state) - before)

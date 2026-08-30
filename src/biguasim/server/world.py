@@ -519,6 +519,17 @@ class World:
             starting_rot=tuple(action.rotation),
         ))
 
+        # The engine has to be told how to read this agent's actions, exactly
+        # as environments.py does immediately after its own add_agent. Every
+        # fresh agent starts on scheme 0 (agents.py), while a quadrotor's model
+        # emits scheme 1 and the underwater models scheme 2 -- so without this
+        # the engine interprets thrust as something else entirely. The vehicle
+        # then spawns, falls, rests on the ground and answers no command, with
+        # nothing anywhere reporting an error.
+        engine_agent = self._env.agents.get(full_name)
+        if engine_agent is not None:
+            engine_agent.set_control_scheme(model_cls._scheme)
+
         if action.externally_driven:
             # Option (b): the owner integrates this vehicle and sends poses.
             # The world still does collision and sensors for it.

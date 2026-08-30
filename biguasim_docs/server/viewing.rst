@@ -146,3 +146,33 @@ so the world went on saying the agent was gone twenty times a second.
 
    :doc:`../biguasim/client-api` for :class:`~biguasim.client.viewer.Viewer` and
    :class:`~biguasim.client.interpolation.PoseBuffer`.
+
+
+Vehicles the engine will not move
+=================================
+
+A puppet is teleported to the pose the world published, every frame. Some
+actors have no teleport handler in the UE5 plugin: the engine accepts the
+command, ignores it, reports nothing, and the actor sits at its spawn point
+while the viewer cheerfully counts it as drawn.
+
+``HolybroX500`` is the one known case. Every other vehicle tested against
+``CompetionMap`` -- DjiMatrice, BlueROV2, BlueBoat, TorpedoAUV -- lands within
+half a metre of where it is sent.
+
+The viewer watches for this. When a live puppet is more than
+:data:`~biguasim.client.viewer.TRACKING_TOLERANCE` metres from where it was put
+for :data:`~biguasim.client.viewer.TRACKING_ATTEMPTS` consecutive frames, it
+says so once, naming the vehicle. Without that the symptom is a vehicle that is
+simply absent, which looks like a camera problem, a coordinate problem or a
+network problem long before it looks like a missing plugin handler.
+
+.. note::
+
+   Puppets are moved with ``teleport()``, not ``set_physics_state()``. The
+   latter leaves the actor simulating, so it falls back toward wherever physics
+   wants it between frames: asked for ``[6, 6, 4]``, a DjiMatrice settles on
+   ``[6, 6, 3.99]`` under ``teleport`` and on ``[1.51, 1.51, 1.18]`` under
+   ``set_physics_state``. That was the source of the drift viewers used to
+   show. Velocity is dropped along with it and is no loss -- nothing here
+   integrates, and the pose is replaced wholesale on the next frame.

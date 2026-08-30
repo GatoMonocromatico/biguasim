@@ -42,6 +42,15 @@ PARK_ATTEMPTS = 120
 #: How close to the graveyard counts as arrived, in metres.
 PARK_TOLERANCE = 1.0
 
+#: How close a live puppet must land to count as tracking, in metres. Loose
+#: enough to forgive a frame of settling, tight enough to catch an actor that
+#: is not moving at all.
+TRACKING_TOLERANCE = 2.0
+
+#: Consecutive misses before the viewer says a puppet is not being drawn.
+#: Two seconds at 60 fps -- long enough that a spawning actor is not accused.
+TRACKING_ATTEMPTS = 120
+
 
 class Viewer:
     """A local, drawing-only mirror of a remote world.
@@ -87,6 +96,9 @@ class Viewer:
         # frames each has been asked. Kept until the actor confirmably arrives,
         # because a teleport that quietly did not land is otherwise permanent.
         self._parked = {}           # agent name -> attempts so far
+        # Live puppets that are not arriving where they are sent, and for how
+        # many frames. A vehicle the plugin cannot teleport never moves at all.
+        self._untracked = {}        # agent name -> consecutive misses
         self._last_tick = -1
 
     @property
@@ -212,11 +224,18 @@ class Viewer:
             if agent is None:
                 continue
             # Teleported, not simulated. The world already decided this.
-            agent.set_physics_state(
-                location=list(pose["position"]),
-                rotation=self._rotation_from(pose),
-                velocity=list(pose["velocity"]),
-                angular_velocity=[0.0, 0.0, 0.0])
+            #
+            # teleport() rather than set_physics_state(), which was measured to
+            # be far worse: asked for [6, 6, 4] a DjiMatrice landed on
+            # [6, 6, 3.99] under teleport and on [1.51, 1.51, 1.18] under
+            # set_physics_state. The latter leaves the actor simulating and it
+            # falls back toward where physics wants it between frames, which is
+            # the drift viewers have always shown. Velocity is dropped with it
+            # and is no loss: nothing here integrates, and the pose is replaced
+            # wholesale on the next frame anyway.
+            agent.teleport(location=list(pose["position"]),
+                           rotation=self._rotation_from(pose))
+            self._check_tracking(name, agent, pose)
 
         self._park_departed()
         self._env.tick()
@@ -264,6 +283,42 @@ class Viewer:
         self._env.add_agent(AgentDefinition(
             agent_name=full, agent_type=kind, sensors=sensors))
         self._puppets[name] = agent_type
+
+    def _check_tracking(self, name, agent, pose):
+        """Say so when a puppet is not going where it is told.
+
+        Some vehicles the engine will spawn, it will not move: the plugin has
+        no teleport handler for them, so every frame is accepted and ignored.
+        Nothing raises, the roster is right, the pose stream is right, and the
+        viewer cheerfully reports drawing an actor that is sitting at its spawn
+        point out of sight.
+
+        That is a miserable thing to diagnose from the outside -- it looks like
+        a camera problem, or a coordinate problem, or a network problem -- so
+        it is worth one clear line instead.
+        """
+        import numpy as np
+
+        if self._untracked.get(name) is None:
+            self._untracked[name] = 0
+        state = agent.agent_state_dict.get("DynamicsSensor")
+        if state is None or len(state) < 9:
+            return
+        actual = np.asarray(state[6:9], dtype=float)
+        wanted = np.asarray(pose["position"], dtype=float)
+        if np.linalg.norm(actual - wanted) < TRACKING_TOLERANCE:
+            self._untracked[name] = 0
+            return
+
+        self._untracked[name] += 1
+        if self._untracked[name] == TRACKING_ATTEMPTS:
+            print("{} ({}) is not being drawn: the engine has accepted {} "
+                  "teleports and left it at {}, not {}. This vehicle has no "
+                  "teleport handler in the UE5 plugin, so a viewer cannot show "
+                  "it -- it is in the world and flying, just not here."
+                  .format(name, self._puppets.get(name) or "unknown type",
+                          TRACKING_ATTEMPTS, np.round(actual, 2),
+                          np.round(wanted, 2)))
 
     def _retire(self, name):
         """Stop drawing a puppet whose original has gone.
