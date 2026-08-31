@@ -38,6 +38,20 @@ def main():
                         help="client id exempt from ownership; repeatable")
     parser.add_argument("--viewport", action="store_true",
                         help="show the engine window on this machine")
+    parser.add_argument("--allow-sitl", action="store_true",
+                        help="let clients ask this world to start ArduPilot SITL "
+                             "for an agent. OFF by default: it runs processes on "
+                             "behalf of anyone who can reach this port, and "
+                             "nothing on this port is authenticated yet")
+    parser.add_argument("--sitl-params-dir", default=None, metavar="DIR",
+                        help="the only directory a client may name a parameter "
+                             "file in. Without it, parameter files are refused")
+    parser.add_argument("--sim-vehicle", default="sim_vehicle.py",
+                        help="path to ArduPilot's sim_vehicle.py")
+    parser.add_argument("--sitl-log-dir", default=None, metavar="DIR",
+                        help="where to write each SITL and pilot's output. "
+                             "Without it they share this terminal, which with "
+                             "several vehicles is unreadable")
     parser.add_argument("--ipv4-only", action="store_true",
                         help="refuse IPv6. On by default because ZeroMQ ignores "
                              "IPv6 unless told otherwise, and the wildcard bind "
@@ -63,10 +77,18 @@ def main():
         "agents": agents,
     }
 
+    sitl = None
+    if args.allow_sitl:
+        sitl = {"enabled": True,
+                "params_dir": args.sitl_params_dir,
+                "sim_vehicle": args.sim_vehicle,
+                "log_dir": args.sitl_log_dir}
+
     service = WorldService(scenario, port=args.port, bind=args.bind,
                            input_delay=args.input_delay,
                            admin_clients=set(args.admin),
                            ipv6=not args.ipv4_only,
+                           sitl=sitl,
                            show_viewport=args.viewport)
 
     signal.signal(signal.SIGINT, lambda *_: service.stop())
@@ -76,6 +98,11 @@ def main():
         args.package, args.world, args.bind, args.port, args.port + 1,
         args.rate, "" if fps else ", uncapped",
         "" if args.ipv4_only else ", IPv4 and IPv6"))
+    if args.allow_sitl:
+        print("  flight controllers ENABLED -- clients may ask this world to "
+              "run sim_vehicle.py")
+        print("  parameter files: {}".format(
+            args.sitl_params_dir or "refused (no --sitl-params-dir)"))
     if not args.ipv4_only:
         print("note: this protocol has no authentication -- client_id is "
               "whatever a client claims. Keep it to a trusted or overlay "

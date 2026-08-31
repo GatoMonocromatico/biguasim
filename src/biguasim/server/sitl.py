@@ -51,6 +51,10 @@ configured directory rather than anywhere on disk.
 """
 import os
 import shlex
+import signal
+import subprocess
+import sys
+import time
 
 #: Flags the world owns. Passing one of these is refused rather than merged,
 #: because the failure of a silently-ignored home location is a vehicle that
@@ -223,3 +227,224 @@ def build_command(config, *, instance, gps_origin, ardupilot_vehicle,
 def describe(argv):
     """The command as a person would type it, for logs and error messages."""
     return " ".join(shlex.quote(part) for part in argv)
+
+
+class SitlSupervisor:
+    """Starts and reaps the SITL and pilot a provisioned vehicle needs.
+
+    Two child processes per vehicle, both on this machine:
+
+    * **SITL** -- the flight controller, talking to the bridge over loopback.
+      Nothing else would do: its FDM protocol is a blocking lockstep handshake,
+      so a network in the middle would cap the whole flight loop at ``1/RTT``.
+    * **the pilot** -- ``biguasim.ardubridge.pilot_cli``, which connects back to
+      this world as an ordinary client, binds the bridge, and spawns the agent
+      once SITL says hello.
+
+    The pilot is a separate process rather than a thread on purpose. It blocks
+    on a UDP socket for up to ten milliseconds per tick, which inside the tick
+    loop would stall the world for every other client; and a flight controller
+    that wedges should not be able to take the simulation down with it.
+
+    It is also why the world does not create the agent itself when a spawn asks
+    for ArduPilot. The pilot does, when its SITL is up -- an agent that exists
+    before something is stabilising it does not wait politely, it falls.
+
+    Args:
+        package (:obj:`str`), world (:obj:`str`): Which world the pilot should
+            connect to. Must match this world's own, since the pilot is checked
+            against it like any other client.
+        port (:obj:`int`): This world's request port.
+        gps_origin (sequence of :obj:`float`): The bridge's origin, which SITL's
+            home is set to match.
+        address (:obj:`str`, optional): How the pilot should reach this world.
+        params_dir (:obj:`str`, optional): The only directory a requested
+            parameter file may come from.
+        sim_vehicle (:obj:`str`, optional): Path to ``sim_vehicle.py``.
+        log_dir (:obj:`str`, optional): Where to write each child's output.
+            Without it they inherit the world's own streams, which interleaves
+            several flight controllers into one terminal.
+        enabled (:obj:`bool`, optional): Whether to do any of this at all.
+            Off unless the world was started with it on, because it runs
+            processes on behalf of whoever can reach the port.
+    """
+
+    def __init__(self, *, package, world, port, gps_origin,
+                 address="127.0.0.1", params_dir=None,
+                 sim_vehicle="sim_vehicle.py", log_dir=None, enabled=False):
+        self.enabled = bool(enabled)
+        self._package = package
+        self._world = world
+        self._port = int(port)
+        self._address = address
+        self._gps_origin = tuple(gps_origin)
+        self._params_dir = params_dir
+        self._sim_vehicle = sim_vehicle
+        self._log_dir = log_dir
+        self._vehicles = {}         # agent -> record of what was started
+
+    # ------------------------------------------------------------ accounting
+
+    @property
+    def vehicles(self):
+        """:obj:`dict`: What is provisioned, by agent name."""
+        return {name: dict(entry) for name, entry in self._vehicles.items()}
+
+    def next_instance(self):
+        """The lowest instance number nothing is using.
+
+        Numbered rather than arbitrary because every ArduPilot port derives
+        from it, so a gap left by a departed vehicle is worth reusing.
+        """
+        taken = {entry["instance"] for entry in self._vehicles.values()}
+        instance = 0
+        while instance in taken:
+            instance += 1
+        return instance
+
+    # ------------------------------------------------------------- lifecycle
+
+    def provision(self, agent, agent_type, config):
+        """Start a flight controller and a pilot for one agent.
+
+        Args:
+            agent (:obj:`str`): Agent name, as the world will know it.
+            agent_type (:obj:`str`): Vehicle type, used for its registry entry.
+            config (:obj:`dict`): The client's ``ardupilot`` block.
+
+        Returns:
+            :obj:`dict`: What was started -- instance, ports, and the command.
+
+        Raises:
+            SitlError: If the feature is off, the vehicle is unknown, the agent
+                already has one, or the command cannot be composed.
+        """
+        from biguasim.ardubridge import VEHICLE_REGISTRY
+
+        if not self.enabled:
+            raise SitlError(
+                "this world does not start flight controllers: it was started "
+                "without --allow-sitl")
+        if agent in self._vehicles:
+            raise SitlError("{!r} already has a flight controller".format(agent))
+
+        match = next((k for k in VEHICLE_REGISTRY
+                      if k.upper() == str(agent_type).upper()), None)
+        if match is None:
+            raise SitlError(
+                "no ArduPilot profile for {!r}; known vehicles are {}".format(
+                    agent_type, ", ".join(sorted(VEHICLE_REGISTRY))))
+        profile = VEHICLE_REGISTRY[match]
+
+        config = dict(config or {})
+        instance = config.pop("instance", None)
+        instance = self.next_instance() if instance is None else int(instance)
+
+        argv, ports = build_command(
+            config, instance=instance, gps_origin=self._gps_origin,
+            ardupilot_vehicle=profile.ardupilot_vehicle,
+            params_dir=self._params_dir, sim_vehicle=self._sim_vehicle,
+            address=self._address)
+
+        pilot_argv = [
+            sys.executable, "-m", "biguasim.ardubridge.pilot_cli",
+            "--package", self._package, "--world", self._world,
+            "--address", self._address, "--port", str(self._port),
+            "--vehicle", match, "--agent", agent,
+            "--instance", str(instance),
+        ]
+
+        entry = {"instance": instance, "ports": ports,
+                 "command": describe(argv), "agent_type": match,
+                 "sitl": None, "pilot": None}
+        try:
+            # The pilot goes up first so the bridge is listening before SITL
+            # starts talking to it. SITL resends servos until answered, so the
+            # other order also works -- this one just wastes less time.
+            entry["pilot"] = self._launch(pilot_argv, agent, "pilot")
+            entry["sitl"] = self._launch(argv, agent, "sitl")
+        except Exception as exc:                                  # noqa: BLE001
+            self._stop_entry(entry)
+            raise SitlError("could not start {!r}: {}".format(agent, exc))
+
+        self._vehicles[agent] = entry
+        return entry
+
+    def _launch(self, argv, agent, role):
+        """Start one child, in its own process group.
+
+        The group matters for SITL: ``sim_vehicle.py`` is a launcher, and
+        killing it alone leaves the ArduPilot binary and MAVProxy behind,
+        holding the ports the next vehicle wants.
+        """
+        stream = None
+        if self._log_dir:
+            os.makedirs(self._log_dir, exist_ok=True)
+            stream = open(os.path.join(
+                self._log_dir, "{}-{}.log".format(agent, role)), "wb")
+        return {
+            "process": subprocess.Popen(
+                argv, stdout=stream, stderr=subprocess.STDOUT if stream else None,
+                start_new_session=True),
+            "log": stream,
+        }
+
+    def poll(self):
+        """Report any child that has exited on its own.
+
+        Returns:
+            :obj:`list`: ``(agent, role, returncode)`` for each one, so the
+            world can tell the owner rather than leaving a vehicle that quietly
+            stopped being flown.
+        """
+        gone = []
+        for agent, entry in self._vehicles.items():
+            for role in ("sitl", "pilot"):
+                child = entry.get(role)
+                if child is None or child.get("reported"):
+                    continue
+                code = child["process"].poll()
+                if code is not None:
+                    child["reported"] = True
+                    gone.append((agent, role, code))
+        return gone
+
+    def release(self, agent):
+        """Stop whatever was started for an agent, if anything was."""
+        entry = self._vehicles.pop(agent, None)
+        if entry is not None:
+            self._stop_entry(entry)
+
+    @staticmethod
+    def _stop_entry(entry, grace=5.0):
+        """End both children, politely and then not.
+
+        The whole group is signalled, since what was started is a launcher and
+        what needs to stop is everything it started.
+        """
+        for role in ("sitl", "pilot"):
+            child = entry.get(role)
+            if child is None:
+                continue
+            process = child["process"]
+            if process.poll() is None:
+                try:
+                    os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+                except (ProcessLookupError, PermissionError):
+                    pass
+            deadline = time.time() + grace
+            while process.poll() is None and time.time() < deadline:
+                time.sleep(0.05)
+            if process.poll() is None:
+                try:
+                    os.killpg(os.getpgid(process.pid), signal.SIGKILL)
+                except (ProcessLookupError, PermissionError):
+                    pass
+                process.wait(timeout=2)
+            if child.get("log"):
+                child["log"].close()
+
+    def close(self):
+        """Stop everything."""
+        for agent in list(self._vehicles):
+            self.release(agent)

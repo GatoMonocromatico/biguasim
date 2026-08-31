@@ -274,6 +274,88 @@ Both forms are additive: MAVProxy keeps its console, its map and its localhost
 output, and simply sends to one more place.
 
 
+Letting the world start it for you
+----------------------------------
+
+Everything above works, and asks a lot of whoever is at the keyboard: three
+terminals, a free instance number, the right parameter file, and the knowledge
+that home has to match the bridge's GPS origin. A client already told the world
+which world, which vehicle and where. It can do the rest.
+
+Start the world with the feature on::
+
+   python tools/serve_world.py --package Competition --world CompetionMap \
+       --port 8770 --rate 200 --allow-sitl \
+       --sitl-params-dir ~/params --sitl-log-dir ~/sitl-logs
+
+Then, from anywhere::
+
+   from biguasim.client import RemoteWorld
+
+   with RemoteWorld(address="fakenatty", port=8770, scenario_cfg=scenario) as w:
+       info = w.spawn_ardupilot_agent(
+           "uav0", "HolybroX500", location=(0.0, 0.0, 1.0),
+           ardupilot={"params": "holybro_sitl_gps.parm", "console": True})
+       print(info["ports"]["gcs"])      # point QGroundControl here
+
+The world starts SITL and a pilot beside itself and answers with the ports. The
+agent appears a moment later, created by that pilot once its flight controller
+is up -- not by the request, because a vehicle that exists before something is
+stabilising it falls.
+
+.. important::
+
+   ``--allow-sitl`` is off by default, and should stay off on anything exposed.
+   It runs processes on behalf of whoever can reach the port, and nothing on
+   that port is authenticated yet.
+
+   Parameter files resolve inside ``--sitl-params-dir`` and nowhere else, with
+   the path resolved before it is checked so neither ``..`` nor a symlink walks
+   out of it. Without that flag, parameter files are refused entirely.
+
+What the world fills in, and what is yours
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+These come from the world and cannot be overridden, because they are the ones
+that have to agree with something:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Flag
+     - Where it comes from
+   * - ``-v``
+     - The vehicle's registry entry. A BlueROV2 is ArduSub, a HolybroX500 is
+       ArduCopter, and the client already said which vehicle it wanted.
+   * - ``-f JSON:``
+     - The bridge the world is about to start.
+   * - ``-L``
+     - The bridge's GPS origin. Not a convenience -- see the warning above.
+   * - ``-I``
+     - The lowest free instance, which is the whole of port allocation.
+   * - ``--out``
+     - A listening MAVLink endpoint, so a GCS elsewhere can connect without the
+       world knowing where it is.
+
+Passing any of them is refused rather than merged: two homes, silently, is a
+vehicle that looks broken for reasons that have nothing to do with the flag.
+
+Everything else is yours, and a key this code has never heard of still works::
+
+   ardupilot={"console": True, "map": True, "speedup": 2, "wipe_eeprom": True}
+   # --console --map --speedup 2 --wipe-eeprom
+
+``True`` is a bare flag, ``False`` and ``None`` are omitted, a list repeats the
+flag, and underscores become dashes. The command is built as an argument list
+and run without a shell, so a value carrying shell metacharacters is an
+argument and nothing more.
+
+Killing the agent stops its SITL and its pilot, and so does shutting the world
+down. The whole process group is signalled, since ``sim_vehicle.py`` is a
+launcher and what needs to stop is everything it started.
+
+
 A second vehicle
 ----------------
 

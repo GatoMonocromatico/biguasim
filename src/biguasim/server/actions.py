@@ -109,6 +109,15 @@ class SpawnAgent(Action):
     #: Client-side dynamics -- the world integrates nothing and takes poses from
     #: the owner instead. See the plan's option (b).
     externally_driven: bool = False
+    #: Ask the world to fly this vehicle with a real ArduPilot. The world starts
+    #: SITL and a pilot beside itself and reports the MAVLink port to connect a
+    #: GCS to; see :mod:`biguasim.server.sitl` for what it composes and what is
+    #: left to the caller.
+    #:
+    #: The agent is then created by that pilot rather than by this action, once
+    #: its flight controller is up -- an agent that exists before something is
+    #: stabilising it does not wait, it falls.
+    ardupilot: Optional[Dict[str, Any]] = None
 
 
 @_action

@@ -145,3 +145,34 @@ def test_the_command_is_a_list_never_a_string():
 def test_describe_is_readable_and_quoted():
     argv = argv_of({"speedup": "a b"})
     assert "'a b'" in sitl.describe(argv)
+
+
+# --------------------------------------------------------------- supervisor
+
+def supervisor(**kwargs):
+    kwargs.setdefault("package", "Competition")
+    kwargs.setdefault("world", "CompetionMap")
+    kwargs.setdefault("port", 8770)
+    kwargs.setdefault("gps_origin", sitl.RATBEACH)
+    return sitl.SitlSupervisor(**kwargs)
+
+
+def test_provisioning_is_refused_unless_the_world_allowed_it():
+    """It runs processes for whoever can reach the port, so it is opt-in."""
+    with pytest.raises(sitl.SitlError, match="--allow-sitl"):
+        supervisor(enabled=False).provision("uav0", "HolybroX500", {})
+
+
+def test_instances_are_assigned_and_reused():
+    """Every ArduPilot port derives from the instance, so a freed gap is worth
+    taking rather than counting past."""
+    s = supervisor(enabled=True)
+    s._vehicles = {"a": {"instance": 0}, "b": {"instance": 2}}
+    assert s.next_instance() == 1
+    s._vehicles["c"] = {"instance": 1}
+    assert s.next_instance() == 3
+
+
+def test_an_unknown_vehicle_is_named_along_with_the_known_ones():
+    with pytest.raises(sitl.SitlError, match="known vehicles are"):
+        supervisor(enabled=True).provision("uav0", "Submarine9000", {})

@@ -163,6 +163,10 @@ class World:
         self._command_budget = int(command_budget)
         self._admin = set(admin_clients or ())
         self._record = record
+        #: Set by the service when the world was started with --allow-sitl.
+        #: Without one, a spawn asking for ArduPilot is refused rather than
+        #: quietly producing a vehicle nothing is flying.
+        self.sitl = None
 
         self._env = biguasim.make(scenario_cfg=scenario_cfg, **make_kwargs)
         self._env.reset()
@@ -533,6 +537,9 @@ class World:
         if agent in self._controls:
             raise WorldError("agent already exists: {!r}".format(agent))
 
+        if action.ardupilot is not None:
+            return self._provision_ardupilot(agent, action)
+
         full_name = agent + "-id0"
         sensors = [
             SensorDefinition(
@@ -601,6 +608,57 @@ class World:
         if action.client_id:
             self._owner[("agent", agent)] = action.client_id
 
+    def provision_ardupilot(self, action):
+        """Start a flight controller for an agent, outside the tick loop.
+
+        Called straight from the transport rather than queued, because it
+        creates nothing in the world -- it starts two processes beside it --
+        and the caller needs the ports back in the same reply. The spawn that
+        does reach the world is the pilot's, and that one is ordered like
+        every other action.
+
+        Args:
+            action (:class:`~biguasim.server.actions.SpawnAgent`): The request,
+                with its ``ardupilot`` block set.
+
+        Returns:
+            :obj:`dict`: Instance, ports and the command that was run.
+
+        Raises:
+            WorldError: If the world will not do it.
+        """
+        agent = _base(action.agent)
+        if agent in self._controls:
+            raise WorldError("agent already exists: {!r}".format(agent))
+        return self._provision_ardupilot(agent, action)
+
+    def _provision_ardupilot(self, agent, action):
+        """Start a flight controller for this vehicle, and let it do the spawn.
+
+        Deliberately does not create the agent. The pilot does, once its SITL
+        has connected, because a served world free-runs: an agent that exists
+        before something is stabilising it is integrated on whatever command it
+        has and falls out of the sky while the controller boots.
+
+        Returns:
+            :obj:`dict`: The ports the caller needs, chiefly the MAVLink one to
+            point a GCS at.
+        """
+        if self.sitl is None or not self.sitl.enabled:
+            raise WorldError(
+                "this world does not start flight controllers: it was started "
+                "without --allow-sitl")
+        try:
+            entry = self.sitl.provision(agent, action.agent_type, action.ardupilot)
+        except Exception as exc:                                  # noqa: BLE001
+            raise WorldError(str(exc))
+
+        # Recorded against the requesting client, not the pilot that will do the
+        # spawning, so whoever asked for the vehicle is who can retire it.
+        if action.client_id:
+            self._owner[("sitl", agent)] = action.client_id
+        return entry
+
     @staticmethod
     def _removal_def(engine_agent, full_name, sensor_name):
         """A SensorDefinition good enough to detach an existing sensor.
@@ -640,6 +698,11 @@ class World:
             engine_agent.set_physics_state(
                 location=list(self._graveyard), rotation=[0, 0, 0],
                 velocity=[0, 0, 0], angular_velocity=[0, 0, 0])
+
+        if self.sitl is not None:
+            # Otherwise the SITL and pilot keep running, holding their ports and
+            # trying to fly an agent the world no longer has.
+            self.sitl.release(agent)
 
         self._env._dynamics_dict.pop(agent, None)
         self._controls.pop(agent, None)
@@ -759,6 +822,11 @@ class World:
         act.SetFogDensity: _set_fog_density,
     }
 
+    def stop_flight_controllers(self):
+        """End every SITL and pilot this world started."""
+        if self.sitl is not None:
+            self.sitl.close()
+
     def drain_errors(self):
         """Take the actions that failed since this was last called.
 
@@ -774,7 +842,8 @@ class World:
     # ---------------------------------------------------------------- close
 
     def close(self):
-        """Shut the world down."""
+        """Shut the world down, and everything it started."""
+        self.stop_flight_controllers()
         self._env.__exit__(None, None, None)
 
     def __enter__(self):

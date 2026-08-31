@@ -34,3 +34,10 @@ Recording
 
 .. automodule:: biguasim.server.recording
    :members:
+
+SITL supervision
+----------------
+.. automodule:: biguasim.server.sitl
+   :members:
+   :undoc-members:
+   :show-inheritance:

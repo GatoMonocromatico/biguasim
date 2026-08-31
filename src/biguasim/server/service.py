@@ -26,6 +26,7 @@ import zmq
 from biguasim.server import protocol as proto
 from biguasim.server.actions import decode
 from biguasim.server.world import World, WorldError
+from biguasim.server.sitl import RATBEACH, SitlSupervisor
 
 
 class WorldService:
@@ -62,13 +63,24 @@ class WorldService:
     """
 
     def __init__(self, scenario_cfg, port=8770, bind="*", admin_clients=None,
-                 record=None, recorder=None, ipv6=True, **world_kwargs):
+                 record=None, recorder=None, ipv6=True, sitl=None,
+                 **world_kwargs):
         self._build = proto.build_id(scenario_cfg)
         self._recorder = recorder
         if recorder is not None and record is None:
             record = recorder.record_action
         self._world = World(scenario_cfg, admin_clients=admin_clients,
                             record=record, **world_kwargs)
+
+        # Off unless asked for: it runs processes on behalf of whoever can
+        # reach this port, and nothing on this port is authenticated yet.
+        if sitl is not None:
+            self._world.sitl = SitlSupervisor(
+                package=scenario_cfg.get("package_name", ""),
+                world=scenario_cfg.get("world", ""),
+                port=port,
+                gps_origin=sitl.pop("gps_origin", RATBEACH),
+                **sitl)
 
         self._ctx = zmq.Context.instance()
         self._requests = self._ctx.socket(zmq.ROUTER)
@@ -193,6 +205,7 @@ class WorldService:
             first rejection.
         """
         scheduled = []
+        provisioned = {}
         for payload in message.get("actions", []):
             payload = dict(payload)
             # The client's declared identity never overrides the connection's,
@@ -201,10 +214,35 @@ class WorldService:
             if not payload.get("target_tick"):
                 payload["target_tick"] = self._world.next_tick
             try:
-                scheduled.append(self._world.submit(decode(payload)))
+                action = decode(payload)
+            except ValueError as exc:
+                return {"ok": False, "error": str(exc), "scheduled": scheduled}
+
+            # A spawn asking for ArduPilot is answered now rather than queued.
+            # It creates no agent -- the pilot it starts does that, once its
+            # flight controller is up -- and the caller needs the MAVLink port
+            # back in the same breath, which a tick-ordered action cannot give
+            # it. The spawn that does reach the world is the pilot's, and that
+            # one is ordered like everything else.
+            if getattr(action, "ardupilot", None) is not None:
+                try:
+                    provisioned[action.agent] = self._world.provision_ardupilot(
+                        action)
+                except (WorldError, ValueError) as exc:
+                    return {"ok": False, "error": str(exc),
+                            "scheduled": scheduled}
+                scheduled.append(self._world.next_tick)
+                continue
+
+            try:
+                scheduled.append(self._world.submit(action))
             except (ValueError, WorldError) as exc:
                 return {"ok": False, "error": str(exc), "scheduled": scheduled}
-        return {"ok": True, "scheduled": scheduled, "tick": self._world.tick}
+
+        reply = {"ok": True, "scheduled": scheduled, "tick": self._world.tick}
+        if provisioned:
+            reply["ardupilot"] = provisioned
+        return reply
 
     # -------------------------------------------------------------- publish
 

@@ -191,6 +191,47 @@ class RemoteWorld:
         return self.submit(act.SpawnAgent(agent=agent, agent_type=agent_type,
                                           **kwargs))[0]
 
+    def spawn_ardupilot_agent(self, agent, agent_type, ardupilot=None, **kwargs):
+        """Ask the world to fly a vehicle with a real ArduPilot.
+
+        The world starts SITL and a bridge beside itself and answers with the
+        ports, so nothing here needs to know which are free, where ArduPilot
+        lives, or that its home has to match the world's GPS origin.
+
+        The agent appears a moment later, created by the pilot once its flight
+        controller is up rather than by this call -- an agent that exists before
+        something is stabilising it does not wait, it falls.
+
+        Args:
+            agent (:obj:`str`): Name for the vehicle.
+            agent_type (:obj:`str`): Vehicle type. Its registry entry decides
+                which ArduPilot is run.
+            ardupilot (:obj:`dict`, optional): Extra sim_vehicle options.
+                ``params`` names a file in the world's parameter directory;
+                any other key becomes a flag, so ``{"console": True,
+                "speedup": 2}`` adds ``--console --speedup 2``.
+            **kwargs: Passed to :class:`~biguasim.server.actions.SpawnAgent`,
+                chiefly ``location`` and ``rotation``.
+
+        Returns:
+            :obj:`dict`: ``instance``, ``ports`` and the ``command`` that ran.
+            ``ports["mavlink"]`` is what a GCS on this machine connects to;
+            ``ports["gcs"]`` is where it listens for one anywhere else.
+
+        Raises:
+            RemoteError: If the world was not started with ``--allow-sitl``, or
+                will not run what was asked.
+        """
+        self._seq += 1
+        action = act.SpawnAgent(agent=agent, agent_type=agent_type,
+                                ardupilot=dict(ardupilot or {}), **kwargs)
+        payload = dict(act.encode(action), seq=self._seq,
+                       client_id=self._client_id)
+        reply = self._request({"op": proto.OP_SUBMIT, "actions": [payload]})
+        if not reply.get("ok"):
+            raise RemoteError(reply.get("error", "action rejected"))
+        return reply.get("ardupilot", {}).get(agent, {})
+
     def kill_agent(self, agent):
         """Retire an agent this client owns."""
         return self.submit(act.KillAgent(agent=agent))[0]
