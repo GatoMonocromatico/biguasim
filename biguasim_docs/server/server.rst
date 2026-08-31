@@ -35,7 +35,7 @@ deterministic, and the engine is the only thing that can decide anything.
    design-notes
 
 
-A note on the word "client"
+A Note on the Word "Client"
 ===========================
 
 This project now uses "client" for two different things, one layer apart, and

@@ -11,8 +11,8 @@ value with a tick and an identity on it, requests can be sorted, logged,
 replayed and refused by one mechanism rather than several.
 
 
-Two kinds, and why the distinction matters
-==========================================
+Two Kinds of Action
+===================
 
 .. list-table::
    :header-rows: 1
@@ -46,7 +46,7 @@ Because of that, dropping a control message costs almost nothing, and the design
 never has to work hard to guarantee their delivery.
 
 
-Ordering and identity
+Ordering and Identity
 =====================
 
 Every action carries three fields beyond its payload:
@@ -83,8 +83,8 @@ whoever shows up.
 Clients listed as admin (``--admin``) bypass ownership entirely.
 
 
-Sensor names are assigned, not requested
-========================================
+Sensor Naming
+=============
 
 :class:`~biguasim.server.actions.AddSensor` takes an optional ``sensor_name``,
 and the world will happily ignore it.
@@ -100,7 +100,7 @@ derivation intact and makes collisions impossible rather than unlikely. The name
 the world actually used appears in the published state.
 
 
-Sensor rates
+Sensor Rates
 ============
 
 ``AddSensor`` takes an optional ``hz``, defaulting to the world's tick rate.
@@ -110,7 +110,7 @@ rounded, because a sensor quietly running at 6.67 Hz when you asked for 7 is the
 kind of thing that is discovered months later in a plot.
 
 
-Killing an agent
+Killing an Agent
 ================
 
 The engine has no despawn command. ``KillAgent`` is therefore a **soft kill**:

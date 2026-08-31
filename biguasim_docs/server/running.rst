@@ -4,8 +4,8 @@
 Running a World
 ===============
 
-Serving one
-===========
+Serving a World
+===============
 
 .. code-block:: console
 
@@ -40,10 +40,10 @@ Useful options:
    usually headless and watched from elsewhere.
 
 
-Pacing: why the default is real time
-====================================
+Pacing
+======
 
-.. important::
+.. note::
 
    Left free-running, the engine ticks as fast as it can, which is far faster
    than real time. In testing a world reached tick 175 within one second of
@@ -64,8 +64,8 @@ new machinery. The engine already knows how to pace itself; the world had no
 business reinventing that.
 
 
-Connecting to one
-=================
+Connecting to a World
+=====================
 
 .. code-block:: python
 
@@ -95,8 +95,8 @@ Leaving the ``with`` block says goodbye properly. That matters; see
 `Disconnection`_.
 
 
-Steering: two paths, and when each is wrong
-===========================================
+Steering an Agent
+=================
 
 :meth:`~biguasim.client.remote.RemoteWorld.set_control` waits for the world to
 acknowledge the command. That is what you want when you are placing a vehicle
@@ -138,7 +138,7 @@ Anything with a serial round-trip dependency has to stay local; anything that
 streams can cross a network.
 
 
-Uncommanded is not unforced
+Uncommanded Is Not Unforced
 ---------------------------
 
 Two different things decide what an agent does, and they are easy to confuse:
@@ -170,7 +170,7 @@ would be a strange one.
    directions.
 
 
-The build check
+The Build Check
 ===============
 
 A connecting client must be running the same world build, or it is refused.
@@ -211,7 +211,7 @@ disconnection and one that does not. Which you want depends on the agent, so the
 world does not guess.
 
 
-Reaching a world from another machine
+Reaching a World From Another Machine
 =====================================
 
 The service binds all interfaces by default, so a world is already reachable
@@ -234,7 +234,7 @@ address is as full of colons as the ``host:port`` separator, are added for you:
 
    $ python tools/watch_world.py --address 2804:60:114:8b00::1 --port 8770
 
-Across the internet
+Across the Internet
 -------------------
 
 A private IPv4 address -- ``192.168.x.x``, ``10.x.x.x`` -- means nothing outside
@@ -269,8 +269,8 @@ requested.
    first. ZeroMQ's CURVE mechanism is the natural fit.
 
 
-Watching one
-============
+Watching a World
+================
 
 .. code-block:: console
 
@@ -280,8 +280,8 @@ Opens a local copy of the world in puppet mode and draws what the world reports.
 See :ref:`world-viewing` for what that means and what it costs.
 
 
-Replaying one
-=============
+Replaying a World
+=================
 
 .. code-block:: console
 
@@ -291,7 +291,7 @@ Replaying one
 See :ref:`world-recording`.
 
 
-Checking reproducibility
+Checking Reproducibility
 ========================
 
 .. code-block:: console

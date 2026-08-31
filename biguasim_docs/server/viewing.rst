@@ -8,7 +8,7 @@ Several people watching one simulation, each from their own angle, is the thing
 this was built for. It is also, happily, the cheap part.
 
 
-Poses over the wire, pixels at home
+Poses Over the Wire, Pixels at Home
 ===================================
 
 A viewer opens **its own full copy of the world** and puts it in puppet mode: it
@@ -32,8 +32,8 @@ to match. That is what the build check at connection time is for; see
 :ref:`world-running`.
 
 
-The camera is nobody else's business
-====================================
+The Camera Is Client-Local
+==========================
 
 Where a viewer points its camera never leaves that machine. The world is not
 told, does not care, and does no work for it.
@@ -71,7 +71,7 @@ the design keeps them visibly different:
      - Yes
 
 
-Drawing between snapshots
+Drawing Between Snapshots
 =========================
 
 State arrives at the world's tick rate -- twenty a second, say. Viewers draw
@@ -100,10 +100,10 @@ happen to have opposite signs sends the vehicle spinning the long way round.
 is negative.
 
 
-Smoothing never touches data
-============================
+Smoothing Never Touches Sensor Data
+===================================
 
-.. important::
+.. note::
 
    Interpolation exists only in the drawing path. Sensor data is never smoothed,
    predicted, or interpolated.
@@ -118,7 +118,7 @@ Smoothing never touches data
    and it has no business anywhere near data anyone might use for anything.
 
 
-Agents appearing and disappearing
+Agents Appearing and Disappearing
 =================================
 
 Puppets are created as the roster is discovered, so a viewer assumes nothing
@@ -148,7 +148,7 @@ so the world went on saying the agent was gone twenty times a second.
    :class:`~biguasim.client.interpolation.PoseBuffer`.
 
 
-Puppets that never appear
+Puppets That Never Appear
 =========================
 
 A puppet is created locally and then teleported to the pose the world published,

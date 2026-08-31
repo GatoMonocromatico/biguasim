@@ -1,7 +1,8 @@
 """
 ardupilot_biguasim — ArduPilot JSON SITL bridge for BiguaSim.
 
-Quick start:
+Quick start::
+
     from ardupilot_biguasim import ArduBiguaSimRunner, VEHICLE_REGISTRY
 
     profile = VEHICLE_REGISTRY["BlueROV2"]

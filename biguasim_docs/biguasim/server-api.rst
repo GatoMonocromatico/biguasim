@@ -1,5 +1,6 @@
-World Server
-============
+==============
+ World Server
+==============
 
 Running a simulation as a shared, long-lived process. See :ref:`world-server`
 for the concepts.

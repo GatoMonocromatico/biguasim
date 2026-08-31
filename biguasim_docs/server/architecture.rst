@@ -4,7 +4,7 @@
 Architecture
 ============
 
-The problem
+The Problem
 ===========
 
 Several people want to interact with one simulation at the same time, each with
@@ -52,7 +52,7 @@ And the expensive half of the shooter answer turns out to be unnecessary here.
    that is the moment to build it, and not before.
 
 
-The shape of it
+The Shape of It
 ===============
 
 ::
@@ -77,13 +77,13 @@ Each tick, in order:
 5. Return failures to whoever caused them.
 
 
-Two rules carry the design
+Two Rules Carry the Design
 ==========================
 
 Everything else is detail. These two are load-bearing.
 
-Actions apply in ``(target_tick, client_id, seq)`` order, never arrival order
------------------------------------------------------------------------------
+Actions Apply in ``(target_tick, client_id, seq)`` Order
+--------------------------------------------------------
 
 When two clients' messages cross on the wire, the order they *arrive* in is a
 property of the network that day. It will not be the same twice, and it is not
@@ -99,8 +99,8 @@ This is why :meth:`~biguasim.server.world.World.submit` is separate from
 applying: submission is when an action arrives, and the world deliberately
 forgets that fact immediately.
 
-The tick an action *ran* on is what gets recorded, not the tick it asked for
-----------------------------------------------------------------------------
+The Recorded Tick Is the One an Action Ran On
+---------------------------------------------
 
 Clients aim actions a fixed few ticks ahead (see `Input delay`_ below). Usually
 an action lands exactly there. Under load it can slip -- the engine's command
@@ -111,7 +111,7 @@ and replaying it would produce a different one. So the world records where each
 action actually landed, and :mod:`~biguasim.server.recording` writes that.
 
 
-Input delay
+Input Delay
 ===========
 
 Clients submit actions for ``current_tick + D``, where ``D`` is a small constant
@@ -138,7 +138,7 @@ is moved to the next available tick rather than dropped -- the client's intent
 survives, and the log records where it really landed.
 
 
-What the world is authoritative about
+What the World Is Authoritative About
 =====================================
 
 .. list-table::
@@ -159,7 +159,7 @@ What the world is authoritative about
 That last row is the one that makes watching cheap. See :ref:`world-viewing`.
 
 
-Rendering is not sensor simulation
+Rendering Is Not Sensor Simulation
 ==================================
 
 These get conflated, and separating them is what makes the cost model work.
@@ -178,7 +178,7 @@ kilobytes a tick. A viewer that wants a photoreal camera feed asks for a camera
 sensor, and that one costs a render -- correctly, and visibly.
 
 
-Errors happen at two different times
+Errors Happen at Two Different Times
 ====================================
 
 Not a quirk; the two kinds are knowable at different moments, so pretending
@@ -199,7 +199,7 @@ for stopping it. The failure goes to that client and the world carries on for
 everyone else.
 
 
-There is no reset
+There Is No Reset
 =================
 
 :meth:`biguasim.environments.BiguaSimEnvironment.reset` is not reachable through

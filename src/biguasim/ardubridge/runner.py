@@ -1,7 +1,8 @@
 """
 ArduBiguaSimRunner — wires a BiguaSim environment to an ArduPilotBridge.
 
-Usage:
+Usage::
+
     from ardupilot_biguasim import ArduBiguaSimRunner, VEHICLE_REGISTRY
 
     profile = VEHICLE_REGISTRY["BlueROV2"]
@@ -113,8 +114,8 @@ class ArduBiguaSimRunner:
         Build a minimal BiguaSim scenario dict with all sensors required for SITL.
 
         Extra keyword args are merged into the top-level scenario dict.
-        To override agent fields, pass them as overrides prefixed with 'agent_':
-          e.g. agent_location=[10, 0, 0].
+        To override agent fields, pass them as overrides prefixed with
+        ``agent_`` -- for example ``agent_location=[10, 0, 0]``.
         """
         if not agent_name:
             agent_name = profile.name.lower() + "0"

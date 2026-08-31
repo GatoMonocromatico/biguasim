@@ -14,7 +14,7 @@ the world's dynamics entirely; its owner works out where it is and says so with
 sensor simulation for it, and still decides what everyone else sees.
 
 
-Why bother
+Why Bother
 ==========
 
 Three things this makes possible, none of which the default mode can do:
@@ -35,7 +35,7 @@ It also makes latency moot for whoever is flying it: their vehicle's physics is
 already on their machine, so there is nothing to hide.
 
 
-The two modes are kept apart
+The Two Modes Are Kept Apart
 ============================
 
 An externally driven agent refuses ``SetControl``. A world-driven one refuses
@@ -47,7 +47,7 @@ to say which is right when they disagree. Better to make the question impossible
 to ask.
 
 
-Collision stays the world's call
+Collision Stays the World's Call
 ================================
 
 A client integrating its own vehicle has no idea where the piers are. It will
@@ -73,7 +73,7 @@ world's opinion about a collision that did not physically happen is simply
 wrong. Only the client knows which case it is in, so only the client decides.
 
 
-Using it
+Using It
 ========
 
 .. code-block:: python

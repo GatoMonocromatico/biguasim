@@ -1,5 +1,6 @@
-World Client
-============
+==============
+ World Client
+==============
 
 Talking to a world running somewhere else. See :ref:`world-server` for the
 concepts, and note the two meanings of "client" described there.

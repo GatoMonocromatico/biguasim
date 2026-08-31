@@ -4,7 +4,7 @@
 Recording and Replaying
 =======================
 
-The measurement everything rests on
+The Measurement Everything Rests On
 ===================================
 
 Before any of this was designed, one question had to be answered: does the same
@@ -42,8 +42,8 @@ Reproduce it with ``tools/determinism_probe.py``; it is guarded by
 ``tests/test_determinism.py``.
 
 
-Why that changes what a recording is
-====================================
+What That Changes About a Recording
+===================================
 
 There are two kinds of replay, and they are not interchangeable.
 
@@ -93,7 +93,7 @@ drifted -- because something changed underneath it -- says so at the next
 keyframe rather than diverging quietly and being believed.
 
 
-The device caveat
+The Device Caveat
 =================
 
 .. warning::
@@ -115,7 +115,7 @@ wrong and entirely plausible -- much worse than one that fails outright. Pass
 ``--any-device`` if you genuinely want it.
 
 
-Failed actions are recorded too
+Failed Actions Are Recorded Too
 ===============================
 
 If an action failed during the original run, it is kept in the log, error and
@@ -123,7 +123,7 @@ all. A faithful replay should fail the same way at the same tick. Dropping
 failures would produce a replay of a tidier session than the one that happened.
 
 
-Using it
+Using It
 ========
 
 .. code-block:: python
