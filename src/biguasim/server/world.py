@@ -31,6 +31,49 @@ from biguasim.server import actions as act
 from biguasim.util import gpu
 
 
+#: Command width per control abstraction. ``cmd_motor_speeds`` is not here
+#: because it depends on the vehicle -- it is one value per rotor, and the
+#: rotor count comes from the model's own ``rotor_pos`` parameter.
+COMMAND_WIDTHS = {
+    "accel": 6,
+    "cmd_vel": 3,
+    "cmd_vel_yaw": 4,
+    "cmd_pos_yaw": 4,
+    "cmd_rudders_sterns_motor_speed": 5,
+    "cmd_depth_heading_rpm_surge": 4,
+}
+
+
+def neutral_command(control_abstraction, params):
+    """A do-nothing command of the right width for one agent.
+
+    Every agent needs one from the moment it exists. The engine does not
+    integrate these vehicles -- the Python dynamics model does, and the engine
+    applies whatever that model produces -- so an agent that is never stepped
+    is not an agent left alone. It has no forces on it at all, gravity
+    included, and it hangs in the air.
+
+    That distinction only shows up once an agent is told how its actions should
+    be read: before a control scheme is set the engine falls back to simulating
+    the actor itself, which looks like normal physics right up until it stops
+    being.
+
+    Args:
+        control_abstraction (:obj:`str`): What the commands mean.
+        params (:obj:`dict`): The model's parameters, for the rotor count.
+
+    Returns:
+        :obj:`list` of :obj:`float`: Zeros, of the width the model expects.
+    """
+    width = COMMAND_WIDTHS.get(control_abstraction)
+    if width is None:
+        # Per-rotor abstractions. Every vehicle family builds its geometry from
+        # rotor_pos, keyed by rotor name, so its length is the motor count.
+        rotors = params.get("rotor_pos") if isinstance(params, dict) else None
+        width = len(rotors) if rotors else 4
+    return [0.0] * width
+
+
 class WorldError(Exception):
     """A client asked for something the world will not do."""
 
@@ -150,7 +193,12 @@ class World:
             "cuda:" + str(gpu()) if torch.cuda.is_available() else "cpu")
 
         for name in list(self._env._dynamics_dict):
-            self._controls.setdefault(name, None)
+            # Same reasoning as a spawned agent: uncommanded is not the same as
+            # unforced, and an agent nobody has driven yet still has to fall.
+            model = self._env._dynamics_dict[name]
+            self._controls.setdefault(name, neutral_command(
+                getattr(model, "control_abstraction", ""),
+                getattr(model, "_params", {})))
         for spec in scenario_cfg.get("agents", []):
             self._types[_base(spec.get("agent_name", ""))] = spec.get("agent_type", "")
 
@@ -542,7 +590,12 @@ class World:
                 control_abstraction=action.control_abstraction,
                 params=params,
             )
-            self._controls[agent] = None
+            # Not None. An agent with no command is skipped in _advance, so its
+            # model never runs and the engine -- which is now told to take its
+            # motion from that model -- applies nothing at all. It would hang
+            # in the air until somebody happened to command it.
+            self._controls[agent] = neutral_command(
+                action.control_abstraction, params)
 
         self._types[agent] = action.agent_type
         if action.client_id:

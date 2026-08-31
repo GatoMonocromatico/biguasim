@@ -294,3 +294,40 @@ def test_a_spawned_agent_answers_its_controls(world):
 
     assert altitude(state) > before + 1.0, \
         "full throttle moved it {:.2f} m".format(altitude(state) - before)
+
+
+def test_an_uncommanded_agent_still_falls(world):
+    """Uncommanded is not unforced.
+
+    The engine does not integrate these vehicles once they have been told how
+    to read their actions -- the Python model does, and the engine applies what
+    it produces. So an agent that is never stepped has no forces on it at all,
+    gravity included, and hangs in the air.
+
+    _advance skips any agent whose command is None, so every agent needs a
+    neutral one from the moment it exists. This went unnoticed because it only
+    appears alongside a control scheme: without one the engine simulates the
+    actor itself and everything looks normal.
+    """
+    world.submit(act.SpawnAgent(
+        client_id="alice", target_tick=world.next_tick, agent="uav6",
+        agent_type="DjiMatrice", location=(40.0, 0.0, 25.0), sensors=[DYNAMICS]))
+    state = run_to(world, world.tick + 10)
+
+    assert world._controls["uav6"] is not None, "would never be stepped"
+
+    def altitude():
+        return float(np.asarray(state["uav6"][0]["DynamicsSensor"])[8])
+
+    start = altitude()
+    for _ in range(60):
+        state = world.step()
+
+    assert altitude() < start - 1.0, \
+        "no command was sent and it only moved {:.2f} m".format(altitude() - start)
+
+
+def test_the_agents_a_world_starts_with_fall_too(world):
+    """The same applies to agents that came from the scenario, not a spawn."""
+    assert world._controls["uav0"] is not None
+    assert len(world._controls["uav0"]) == 4, "one value per rotor"

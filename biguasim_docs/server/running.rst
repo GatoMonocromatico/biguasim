@@ -138,6 +138,38 @@ Anything with a serial round-trip dependency has to stay local; anything that
 streams can cross a network.
 
 
+Uncommanded is not unforced
+---------------------------
+
+Two different things decide what an agent does, and they are easy to confuse:
+
+**Control abstraction** -- ``cmd_motor_speeds``, ``cmd_vel``, ``accel`` and the
+rest -- is what the numbers in a command *mean*. It belongs to the Python
+dynamics model, which turns a command into an action.
+
+**Control scheme** is an integer the engine reads to decide what to do with
+that action. Every agent starts on 0 and is set to its model's own scheme when
+it is created, exactly as :mod:`biguasim.environments` does for the agents in a
+scenario.
+
+The consequence is easy to miss: once the scheme is set, **the engine is no
+longer integrating the vehicle**. The Python model is, and the engine applies
+whatever that model produces. So an agent that is never stepped does not simply
+drift -- it has no forces on it at all, gravity included, and hangs in the air.
+
+Which is why every agent is given a neutral command the moment it exists,
+rather than being left uncommanded until somebody sends one. Nobody has to send
+a command for a vehicle to fall out of the sky, and a world where they did
+would be a strange one.
+
+.. note::
+
+   This is only visible once a scheme is set. Before that the engine falls back
+   to simulating the actor itself, which looks like ordinary physics right up
+   until it stops being -- so the two faults mask each other in both
+   directions.
+
+
 The build check
 ===============
 
