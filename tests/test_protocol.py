@@ -136,3 +136,46 @@ def test_a_missing_world_does_change_the_build_id(tmp_path, monkeypatch):
     present = proto.build_id(cfg)
     cfg = _install(tmp_path, monkeypatch, [BRIDGE])
     assert proto.build_id(cfg) != present
+
+
+def test_a_reply_that_cannot_be_packed_is_reported_not_raised():
+    """The guard has to cover packing, not just building.
+
+    A reply the world cannot serialize is still one client's problem. It was
+    everybody's: proto.pack sat outside the try, so the exception escaped the
+    request loop and stopped the world for everyone connected.
+    """
+    import zmq
+
+    from biguasim.server.service import WorldService
+
+    class _Poisoned:
+        """A service whose handler returns something msgpack refuses."""
+
+        _handle = staticmethod(lambda identity, message: {"ok": True,
+                                                          "bad": object()})
+        _drain_requests = WorldService._drain_requests
+
+        def __init__(self, socket):
+            self._requests = socket
+
+    ctx = zmq.Context.instance()
+    server = ctx.socket(zmq.ROUTER)
+    server.setsockopt(zmq.LINGER, 0)
+    port = server.bind_to_random_port("tcp://127.0.0.1")
+    client = ctx.socket(zmq.DEALER)
+    client.setsockopt(zmq.LINGER, 0)
+    client.connect("tcp://127.0.0.1:{}".format(port))
+    try:
+        client.send(proto.pack({"op": "ping"}))
+        assert server.poll(3000), "the request never arrived"
+
+        _Poisoned(server)._drain_requests()          # must not raise
+
+        assert client.poll(3000), "no reply came back"
+        reply = proto.unpack(client.recv())
+        assert reply["ok"] is False
+        assert "serialize" in reply["error"] or "TypeError" in reply["error"]
+    finally:
+        client.close(linger=0)
+        server.close(linger=0)

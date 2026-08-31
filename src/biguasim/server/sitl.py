@@ -285,10 +285,26 @@ class SitlSupervisor:
 
     # ------------------------------------------------------------ accounting
 
+    #: Keys of an entry that exist only in this process. Everything else is
+    #: answered to the client, so nothing here may be a live object.
+    _PRIVATE = ("sitl", "pilot")
+
+    @classmethod
+    def _public(cls, entry):
+        """The part of an entry that can go over the wire.
+
+        The process handles cannot: msgpack refuses a Popen, and the refusal
+        arrives while packing a reply -- far from here, in the middle of the
+        tick loop.
+        """
+        return {key: value for key, value in entry.items()
+                if key not in cls._PRIVATE}
+
     @property
     def vehicles(self):
-        """:obj:`dict`: What is provisioned, by agent name."""
-        return {name: dict(entry) for name, entry in self._vehicles.items()}
+        """:obj:`dict`: What is provisioned, by agent name. Wire-safe."""
+        return {name: self._public(entry)
+                for name, entry in self._vehicles.items()}
 
     def next_instance(self):
         """The lowest instance number nothing is using.
@@ -314,6 +330,7 @@ class SitlSupervisor:
 
         Returns:
             :obj:`dict`: What was started -- instance, ports, and the command.
+            Only what can be serialized: the process handles stay here.
 
         Raises:
             SitlError: If the feature is off, the vehicle is unknown, the agent
@@ -368,7 +385,7 @@ class SitlSupervisor:
             raise SitlError("could not start {!r}: {}".format(agent, exc))
 
         self._vehicles[agent] = entry
-        return entry
+        return self._public(entry)
 
     def _launch(self, argv, agent, role):
         """Start one child, in its own process group.

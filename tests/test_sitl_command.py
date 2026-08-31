@@ -176,3 +176,21 @@ def test_instances_are_assigned_and_reused():
 def test_an_unknown_vehicle_is_named_along_with_the_known_ones():
     with pytest.raises(sitl.SitlError, match="known vehicles are"):
         supervisor(enabled=True).provision("uav0", "Submarine9000", {})
+
+
+def test_what_provisioning_returns_can_go_over_the_wire():
+    """It is the body of a reply, and a reply is packed inside the tick loop.
+
+    An unserializable value here does not fail here. It fails while packing,
+    in the middle of serving a request, and it used to stop the world.
+    """
+    import msgpack
+
+    s = supervisor(enabled=True)
+    s._launch = lambda argv, agent, role: {"process": object(), "log": None}
+    entry = s.provision("uav0", "HolybroX500", {"console": True})
+
+    msgpack.packb(entry, use_bin_type=True)          # must not raise
+    assert "sitl" not in entry and "pilot" not in entry
+    assert entry["ports"]["mavlink"] == 5760
+    msgpack.packb(s.vehicles, use_bin_type=True)     # nor must the roster

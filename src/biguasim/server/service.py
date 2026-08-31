@@ -114,12 +114,16 @@ class WorldService:
             try:
                 message = proto.unpack(raw)
                 reply = self._handle(identity, message)
+                # Packed inside the guard, not after it. A reply the world
+                # built but cannot serialize is still one client's problem,
+                # and it used to be everybody's: the exception escaped the
+                # tick loop and stopped the world for everyone connected.
+                packed = proto.pack(reply)
             except Exception as exc:                      # noqa: BLE001
-                # A malformed message is one client's problem, not the world's.
-                reply = {"ok": False, "error": "{}: {}".format(
-                    type(exc).__name__, exc)}
+                packed = proto.pack({"ok": False, "error": "{}: {}".format(
+                    type(exc).__name__, exc)})
 
-            self._requests.send_multipart([identity, proto.pack(reply)])
+            self._requests.send_multipart([identity, packed])
 
     def _handle(self, identity, message):
         """Dispatch one client message.
