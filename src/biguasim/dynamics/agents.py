@@ -449,6 +449,120 @@ class HolybroX500(uav.QuadCopterX):
     def params(self) -> dict: 
         return self._params
     
+#class of the competition drone: Holybro Kopis X8 Cinelifter 5" (Caged).
+#The real airframe is an X8 coaxial octo (4 arms, top+bottom rotor each), but
+#only the FOUR TOP rotors are modelled here, so it is a plain QuadCopterX.
+#Mass and inertia still describe the complete physical drone -- the bottom
+#motors and the cage are on board, they just do not produce thrust in the model.
+class KopisX8(uav.QuadCopterX):
+    _params = {
+        # Inertial properties.
+        # 1.2 kg full kit (Holybro) + ~0.8 kg 6S 5000 mAh LiPo = ~2.0 kg AUW,
+        # no cinema payload. The frame is rated for 1.5 kg of payload on top.
+        'mass': 2.0,            # kg, all-up weight without payload
+
+        'rho' : 1225,       # Air density
+
+        # Inertia tensor (kg*m^2), estimated from the published geometry:
+        #   8 x 35.1 g Velox V2207 V2 at r = 0.125 m, 570 g caged carbon frame
+        #   treated as a 0.315 x 0.315 m plate, and ~1.15 kg of battery +
+        #   electronics as a compact central box. Izz/Ixx ~ 1.8, typical.
+        'I' : np.diag([0.0084, 0.0084, 0.0150]),
+
+        # Geometric properties, all vectors relative to center of mass.
+        # Holybro gives the caged footprint as 315 x 315 mm; with a ~140 mm
+        # guard ring around each 5" (127 mm) prop that puts the motors at
+        # ~0.125 m from the CoM, i.e. a 250 mm wheelbase.
+        'd' : 0.125,             # Distance from CoM to each rotor, m
+
+        'rotor_pos': {          # location of each rotor in meters (top layer only)
+            'r1': 0.125 * np.array([0.70710678118, 0.70710678118, 0]),       # Rotor 1 position
+            'r2': 0.125 * np.array([0.70710678118, -0.70710678118, 0]),       # Rotor 2 position
+            'r3': 0.125 * np.array([-0.70710678118, -0.70710678118, 0]),      # Rotor 3 position
+            'r4': 0.125 * np.array([-0.70710678118, 0.70710678118, 0]),      # Rotor 4 position
+        },
+
+        # Rotor coefficients for the T-Motor Velox V2207 V2 1750KV turning a
+        # Gemfan Hulkie 5055S-3 on 6S. Anchored on T-Motor's bench figures for
+        # this motor: 1681 g (16.5 N) at 22.3 V, 36.6 A, 816 W.
+        #   thrust = k_eta * omega^2 -> 16.5 N at the 2950 rad/s cap
+        #   torque = k_m   * omega^2, k_m = 0.0125 * k_eta (5" prop moment ratio)
+        # Cross-check: k_m * omega_max^3 = 610 W of shaft power, i.e. 75% motor
+        # + ESC efficiency against the published 816 W input -- consistent.
+        # Four rotors give 66.1 N against 19.6 N of weight -> T/W ~ 3.4, and
+        # hover sits at ~1606 rad/s (54% of max).
+        'k_eta' : 1.90e-6,
+        'k_m' : 2.38e-8,
+
+        'rotor_directions': np.array([1, -1, 1, -1]),  # Rotor spin directions (+1 for CW, -1 for CCW)
+        'rotor_speed_min': 0,      # minimum rotor speed, rad/s
+        # 1750KV * 22.3 V = 39.0k RPM unloaded; a 5" prop pulls that down to
+        # ~72%, i.e. ~28.2k RPM. For the 1950KV variant of the same motor only
+        # this line changes (~3200 rad/s) -- k_eta belongs to the prop, not the
+        # motor -- along with the matching caps in agents.py and vehicle.py.
+        'rotor_speed_max': 2950.0, # maximum rotor speed, rad/s (~28.2k RPM on 6S)
+
+        # Same two fixes the X500 needed: Izz here is even smaller (0.0150), so
+        # the raw yaw moment over-drives yaw unless it is scaled by Izz, and the
+        # cmd_pos_yaw yaw loop must be decoupled from the attitude stiffness.
+        'scale_yaw_by_inertia': True,
+        'pos_yaw_decoupled': True,
+        # cmd_pos_yaw heading governor: slew large yaw commands through small,
+        # stable yaw errors.
+        'yaw_slew_max': 0.4,
+
+        # Frame aerodynamic properties. Smaller span than the X500 but the cage
+        # and the eight motor mounts add side area, and the caged top/bottom
+        # make the vertical axis the bluffest.
+        'c_Dx': 0.1,            # parasitic drag coefficient in body x-axis, N/(m/s)^2
+        'c_Dy': 0.1,            # parasitic drag coefficient in body y-axis, N/(m/s)^2
+        'c_Dz': 0.18,           # parasitic drag coefficient in body z-axis, N/(m/s)^2
+
+        # Lower level controller properties (for higher level control abstractions).
+        # Tuned against the Competition/CompetionMap engine at 30 Hz (2026-09-03),
+        # measured with tests/tune_kopisx8.py --engine. Step-response score went
+        # from 52.6 to 6.8; every maneuver now settles with no overshoot:
+        #   climb 1 m/s  2.13 s      fwd 2 m/s  1.00 s  (was 25% overshoot, never settled)
+        #   yaw 90 deg   1.03 s      goto x=5   1.77 s  (was 10.9 s)
+        #
+        # kp_att above ~50 buys nothing (the score plateaus at 7.44 all the way to
+        # kp_att=100), so this is the least gain that reaches full performance --
+        # the rest is margin against noise, disturbance and payload.
+        #
+        # k_v stays at 2.0 on purpose. Raising it speeds the climb up (2.13 -> 1.17 s)
+        # but wrecks horizontal tracking (fwd overshoot 0% -> 16-24%): vertical error
+        # becomes thrust directly, while horizontal error has to go through the
+        # attitude loop, and a faster k_v destroys the timescale separation between
+        # them. Splitting it into k_vxy / k_vz the way the UUV models do would fix
+        # the climb, but that means changing uav.QuadCopterX, shared with the
+        # HolybroX500 and the DjiMatrice.
+        'k_v': 2.0,             # The *world* velocity P gain (for cmd_vel)
+        'kp_att': 50.0,         # The attitude P gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
+        'kd_att': 10.0,         # The attitude D gain (for cmd_vel, cmd_vel_yaw and cmd_pos_yaw)
+
+        'kp_yaw': 2.0,          # The yaw P gain (for cmd_vel_yaw / cmd_pos_yaw)
+        'kd_yaw': 2.0,          # The yaw D gain (yaw moment is Izz-scaled, so ~O(1) gains)
+
+        'kp_pos': 3.5,          # The position P gain (for cmd_pos_yaw)
+        'kd_pos': 3.0,          # The position D gain (for cmd_pos_yaw, well damped)
+
+    }
+
+    _scheme = 1
+
+    def __init__(self, batch_size=1, device='cpu', control_abstraction='cmd_motor_speeds', params= None):
+        super().__init__(
+                        batch_size,
+                        params= params or KopisX8._params,
+                        device=device,
+                        control_abstraction=control_abstraction)
+
+        self._params = params or KopisX8._params
+
+    @property
+    def params(self) -> dict:
+        return self._params
+
 class ModelsFactory:
     _types = {
         'BlueBoat' : BlueBoat,
@@ -456,7 +570,8 @@ class ModelsFactory:
         'BlueROVHeavy' : BlueROVHeavy,
         'DjiMatrice' : DjiMatrice,
         'TorpedoAUV' : TorpedoAUV,
-        "HolybroX500": HolybroX500
+        "HolybroX500": HolybroX500,
+        "KopisX8" : KopisX8
 }
 
     @classmethod

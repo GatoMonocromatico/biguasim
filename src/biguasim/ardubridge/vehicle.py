@@ -183,6 +183,28 @@ VEHICLE_REGISTRY: dict[str, VehicleProfile] = {
         warmup_frames=500,
     ),
 
+    "KopisX8": VehicleProfile(
+        name="KopisX8",
+        num_motors=4,
+        # Quad build (top rotors only) of the Kopis X8. BiguaSim body frame is
+        # NWU (+x fwd, +y left), ArduPilot's is NED, so sim r1..r4 (FL, FR, RR,
+        # RL) land on AP quad-X MOT3, MOT1, MOT4, MOT2 -- same geometry and the
+        # same [1,-1,1,-1] spin directions as the X500, hence the same mapping.
+        motor_mapping=[2, 0, 3, 1],
+        motor_signs=[1, 1, 1, 1],
+        # Cap must match this agent's rotor_speed_max (2950 rad/s); a mismatch
+        # here silently limits thrust-to-weight (see the X500 note above).
+        pwm_converters=[_unipolar_pwm(2950.0)] * 4,
+        control_abstraction="cmd_motor_speeds",
+        ardupilot_vehicle="ArduCopter",
+        sitl_args=(
+            "sim_vehicle.py -v ArduCopter -L RATBeach --console --map "
+            "-f quadx --model JSON:127.0.0.1 --no-mavproxy"
+        ),
+        include_depth_sensor=False,
+        warmup_frames=500,
+    ),
+
     "TorpedoAUV": VehicleProfile(
         name="TorpedoAUV",
         num_motors=5,
